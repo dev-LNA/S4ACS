@@ -24,6 +24,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
             obj = cls(dict_header_jsons, log_file)
             obj.fix_keywords()
             hdr = obj.hdr
+        obj.reset_header()
         data = fix_image_orientation(hdr["CHANNEL"], hdr["EMMODE"], data)
         file = verify_file_already_exists(file)
         hdu = fits.PrimaryHDU(data, hdr)

@@ -210,7 +210,7 @@ s4gui_json = {
     "CTRLINTE": "S4GUI",
     "PROJID": "CCC",
     "SYNCMODE": "SYNC",
-    "INSTMODE": "POL",
+    "INSTMODE": "PHOT",
     "FILTER": "CLEAR",
     "OBSTYPE": "ZERO",
     "CHANNEL 1": True,
@@ -227,8 +227,10 @@ general_kw = {
     "SEQINDEX": 0,
     "NCYCLES": 1,
     "NSEQ": 1,
+    "CHANNEL": 1,
     "CYCLIND": 1,
     "ACSVRSN": "v1.46.14",
+    "ACQERROR": False,
     "ACSMODE": False,
 }
 ccd_kw = {
@@ -256,13 +258,12 @@ ccd_kw = {
     "NFRAMES": 1,
     "TGTEMP": 20,
     "COOLER": 0,
-    "CHANNEL": 1,
-    "DATE-OBS": "2024-04-26T17:35:31.001",
-    "UTTIME": "17:35:31.001",
+    "DATE-OBS": "2024-04-26T17:35:31.000001",
+    "UTTIME": "17:35:31.000001",
     "UTDATE": "2024-04-26",
 }
 ics_kw = """WPROT SIMULATED NONE 0.000 NONE -1, WPSEL SIMULATED READY 80.000 OFF 2, CALW SIMULATED READY 216.000 SHUTTER 4, ASEL SIMULATED READY 0.000 OFF 1, GMIR SIMULATED READY 0.000 TARGET 1, GFOC SIMULATED READY 0.000 TARGET 1
-{"broker":"S4ICS","version":"1.0.5","comment":"Removed unused VIs and Classes. Improvements on LOG, PUB 0MQ, and motor status reading.","tcpServerSocket":"192.168.1.170:5564","tcpServerEnabled":true,"timestamp":"2025-06-05T14:47:56.051","mechanisms":[{"name":"WPROT","status":{"mode":"SIMULATED","condition":"NONE","position":"0.000","pos_name":"NONE","pos_id":"1"}},{"name":"WPSEL","status":{"mode":"SIMULATED","condition":"READY","position":"80.000","pos_name":"OFF","pos_id":"2"}},{"name":"CALW","status":{"mode":"SIMULATED","condition":"READY","position":"216.000","pos_name":"SHUTTER","pos_id":"4"}},{"name":"ASEL","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"OFF","pos_id":"1"}},{"name":"GMIR","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"TARGET","pos_id":"1"}},{"name":"GFOC","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"TARGET","pos_id":"1"}}]}"""
+{"broker":"S4ICS","version":"v1.0.5","comment":"Removed unused VIs and Classes. Improvements on LOG, PUB 0MQ, and motor status reading.","tcpServerSocket":"192.168.1.170:5564","tcpServerEnabled":true,"timestamp":"2025-06-05T14:47:56.051","mechanisms":[{"name":"WPROT","status":{"mode":"SIMULATED","condition":"NONE","position":"0.000","pos_name":"NONE","pos_id":"-1"}},{"name":"WPSEL","status":{"mode":"SIMULATED","condition":"READY","position":"80.000","pos_name":"OFF","pos_id":"2"}},{"name":"CALW","status":{"mode":"SIMULATED","condition":"READY","position":"216.000","pos_name":"SHUTTER","pos_id":"4"}},{"name":"ASEL","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"OFF","pos_id":"1"}},{"name":"GMIR","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"TARGET","pos_id":"1"}},{"name":"GFOC","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"TARGET","pos_id":"1"}}]}"""
 
 everthing_json = {
     "CYCLIND": 0,
