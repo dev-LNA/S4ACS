@@ -452,7 +452,7 @@ class S4ICS(Header):
             inst_mode = s4gui_json["INSTMODE"]
             if wppos == -1 and inst_mode == "PHOT":
                 self.original_json[kw] = 0
-            elif 1 <= wppos <= 16 and inst_mode == "POL":
+            elif 1 <= wppos <= 16 and inst_mode == "POLAR":
                 self.original_json[kw] = wppos
             else:
                 self._write_log_file(f"The unexpected value {wppos} was found.", kw)
