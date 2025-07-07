@@ -801,7 +801,7 @@
 				<Property Name="INST_buildSpecName" Type="Str">S4ACS installer</Property>
 				<Property Name="INST_defaultDir" Type="Str">{DFB3C9F9-D8CF-471A-A467-D6C6311DBDB9}</Property>
 				<Property Name="INST_productName" Type="Str">S4ACS</Property>
-				<Property Name="INST_productVersion" Type="Str">1.0.1</Property>
+				<Property Name="INST_productVersion" Type="Str">1.0.2</Property>
 				<Property Name="InstSpecBitness" Type="Str">64-bit</Property>
 				<Property Name="InstSpecVersion" Type="Str">18008007</Property>
 				<Property Name="MSI_autoselectDrivers" Type="Bool">true</Property>
