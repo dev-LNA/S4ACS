@@ -111,10 +111,31 @@ class Header(ABC):
                         f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_value}",
                         kw,
                     )
+                    self._fix_regex_keyword(kw)
                 else:
                     self.hdr[kw] = self.new_json[kw]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
+
+    def _fix_regex_keyword(self, kw):
+        try:
+            kw_value = self.new_json[kw]
+            regex_expr, _ = self.kw_dataclass.regex_str[kw]
+            if kw not in self.how_to_fix_regex.keys():
+                self._write_log_file(
+                    f"The method to fix this keyword was not found.", kw
+                )
+                return
+            new_value = self.how_to_fix_regex[kw](kw_value)
+            if re.match(regex_expr, new_value) == None:
+                self._write_log_file(
+                    f"The provided value {kw_value} could not be fixed.", kw
+                )
+                return
+            self.hdr[kw] = new_value
+        except Exception as e:
+            self._write_log_file(repr(e), kw)
+        return
 
     def _delete_str(self):
         for kw, _str in self.kw_dataclass.delete_str.items():
@@ -303,6 +324,7 @@ class S4ICS(Header):
     sub_system = "S4ICS"
 
     def __init__(self, dict_header_jsons, log_file):
+        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.log_file = log_file
         self.dict_header_jsons = dict_header_jsons
         try:
@@ -460,6 +482,10 @@ class S4ICS(Header):
             self._write_log_file(repr(e), kw)
         return
 
+    @staticmethod
+    def _fix_ICSVRSN(kw_value):
+        return "v" + kw_value
+
 
 class TCS(Header):
 
@@ -468,6 +494,9 @@ class TCS(Header):
     def __init__(self, _json, night_dir) -> None:
         super().__init__(_json, night_dir)
         self.new_json["TCSDATE"] = self._write_TCSDATE()
+        self.how_to_fix_regex = {
+            k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
+        }
 
     def _initialize_kw_dataclass(self):
         keywords = ["RA", "DEC", "TCSHA", "INSTROT", "AIRMASS"]
@@ -515,6 +544,18 @@ class TCS(Header):
             return tcsdate
         except Exception as e:
             self._write_log_file(repr(e), "TCSDATE")
+
+    @staticmethod
+    def _fix_coordinates(kw_value):
+        kw_value = kw_value.strip()
+        kw_value = re.sub(r"^([+-]?\d{1,2})$", r"\1:00:00", kw_value)
+        kw_value = re.sub(r"^([+-]?\d{1,2}):(\d{1,2})$", r"\1:\2:00", kw_value)
+        h, m, s = kw_value.split(":")
+        n_digits = 2
+        if "-" in h:
+            n_digits += 1
+        kw_value = f"{int(h):0{n_digits}}:{int(m):02}:{int(s):02}"
+        return kw_value
 
 
 class S4GUI(Header):
