@@ -739,7 +739,7 @@ class CCD(Header):
         return _list[_json["READRATE"]]
 
     def _fix_EXPTIME(self):
-        if 1e-5 > self.hdr["EXPTIME"] > 9.9999997e-6:
+        if 1e-5 > self.hdr["EXPTIME"] > 9.999999e-6:
             self.hdr["EXPTIME"] = 10e-6
         return
 
