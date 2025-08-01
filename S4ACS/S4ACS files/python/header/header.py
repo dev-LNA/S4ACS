@@ -551,10 +551,11 @@ class TCS(Header):
         kw_value = re.sub(r"^([+-]?\d{1,2})$", r"\1:00:00", kw_value)
         kw_value = re.sub(r"^([+-]?\d{1,2}):(\d{1,2})$", r"\1:\2:00", kw_value)
         h, m, s = kw_value.split(":")
+
         n_digits = 2
         if "-" in h:
             n_digits += 1
-        kw_value = f"{int(h):0{n_digits}}:{int(m):02}:{int(s):02}"
+        kw_value = f"{int(h):0{n_digits}}:{int(m):02}:{float(s):05.2f}"
         return kw_value
 
 
