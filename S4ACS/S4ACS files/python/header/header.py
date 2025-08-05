@@ -5,7 +5,10 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 import astropy.io.fits as fits
+import astropy.units as u
+from astropy.coordinates import Angle
 from astropy.time import Time
+from numpy import abs
 
 from .utils import (
     allowed_kw_values,
@@ -547,16 +550,17 @@ class TCS(Header):
 
     @staticmethod
     def _fix_coordinates(kw_value):
-        kw_value = kw_value.strip()
-        kw_value = re.sub(r"^([+-]?\d{1,2})$", r"\1:00:00", kw_value)
-        kw_value = re.sub(r"^([+-]?\d{1,2}):(\d{1,2})$", r"\1:\2:00", kw_value)
-        h, m, s = kw_value.split(":")
+        new_value = kw_value.strip()
+        new_value = re.sub(r"^([+-]?\d{1,2})$", r"\1:00:00", new_value)
+        new_value = re.sub(r"^([+-]?\d{1,2}):(\d{1,2})$", r"\1:\2:00", new_value)
+        h, m, s = new_value.split(":")
+        h, m, s = abs(int(h)), abs(int(m)), abs(float(s))
+        new_value = f"{h:02}:{m:02}:{s:05.2f}"
 
-        n_digits = 2
-        if "-" in h:
-            n_digits += 1
-        kw_value = f"{int(h):0{n_digits}}:{int(m):02}:{float(s):05.2f}"
-        return kw_value
+        if Angle(kw_value, unit=u.deg) < 0:
+            new_value = "-" + new_value
+
+        return new_value
 
 
 class S4GUI(Header):

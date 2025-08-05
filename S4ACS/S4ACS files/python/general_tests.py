@@ -35,7 +35,7 @@ log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
 for cls in [TCS]:
     tcs = cls(dicts, log_file)
     tcs.fix_keywords()
-print(repr(tcs.hdr))
+# print(repr(tcs.hdr))
 
 # image = np.zeros((100, 100), dtype=np.int16)
 # file = os.path.join("C:\\", "images", "today", "test.fits")
