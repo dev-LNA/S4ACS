@@ -557,9 +557,10 @@ class TCS(Header):
         h, m, s = abs(int(h)), abs(int(m)), abs(float(s))
         new_value = f"{h:02}:{m:02}:{s:05.2f}"
 
-        if Angle(kw_value, unit=u.deg) < 0:
+        # if Angle(kw_value, unit=u.deg) < 0:
+        #     new_value = "-" + new_value
+        if "-" in kw_value:
             new_value = "-" + new_value
-
         return new_value
 
 
