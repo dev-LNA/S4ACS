@@ -115,8 +115,8 @@ class Header(ABC):
                         kw,
                     )
                     self._fix_regex_keyword(kw)
-                else:
-                    self.hdr[kw] = self.new_json[kw]
+                    continue
+                self.hdr[kw] = self.new_json[kw]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -527,6 +527,7 @@ class TCS(Header):
         self._write_any_value()
         self._replace_comma()
         self._verify_regex()
+        self.fix_RA_DEC()
         return
 
     def _write_TCSDATE(self):
@@ -557,11 +558,21 @@ class TCS(Header):
         h, m, s = abs(int(h)), abs(int(m)), abs(float(s))
         new_value = f"{h:02}:{m:02}:{s:05.2f}"
 
-        # if Angle(kw_value, unit=u.deg) < 0:
-        #     new_value = "-" + new_value
         if "-" in kw_value:
             new_value = "-" + new_value
         return new_value
+
+    def fix_RA_DEC(self):
+        for kw in ["RA", "DEC"]:
+            obstype = json.loads(self.dict_header_jsons["S4GUI"])["OBSTYPE"]
+            kw_value = self.new_json[kw]
+            if kw_value == "" and obstype in ["ZERO", "FLAT", "DARK"]:
+                new_value = "00:00:00.00"
+                self._write_log_file(
+                    f"An empty string was found for the keyword {kw}. As OBSTYPE={obstype}, the keyword value was changed to {new_value}",
+                    kw,
+                )
+                self.hdr[kw] = new_value
 
 
 class S4GUI(Header):
