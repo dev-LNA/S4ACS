@@ -564,15 +564,18 @@ class TCS(Header):
 
     def fix_RA_DEC(self):
         for kw in ["RA", "DEC"]:
-            obstype = json.loads(self.dict_header_jsons["S4GUI"])["OBSTYPE"]
-            kw_value = self.new_json[kw]
-            if kw_value == "" and obstype in ["ZERO", "FLAT", "DARK"]:
-                new_value = "00:00:00.00"
-                self._write_log_file(
-                    f"An empty string was found for the keyword {kw}. As OBSTYPE={obstype}, the keyword value was changed to {new_value}",
-                    kw,
-                )
-                self.hdr[kw] = new_value
+            try:
+                obstype = json.loads(self.dict_header_jsons["S4GUI"])["OBSTYPE"]
+                kw_value = self.new_json[kw]
+                if kw_value == "" and obstype in ["ZERO", "FLAT", "DARK"]:
+                    new_value = "00:00:00.00"
+                    self._write_log_file(
+                        f"An empty string was found for the keyword {kw}. As OBSTYPE={obstype}, the keyword value was changed to {new_value}",
+                        kw,
+                    )
+                    self.hdr[kw] = new_value
+            except Exception as e:
+                self._write_log_file(repr(e), kw)
 
 
 class S4GUI(Header):
