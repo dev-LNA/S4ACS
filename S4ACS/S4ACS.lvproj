@@ -656,7 +656,7 @@
 				<Property Name="Destination[3].destName" Type="Str">root</Property>
 				<Property Name="Destination[3].path" Type="Path">../builds/NI_AB_PROJECTNAME</Property>
 				<Property Name="DestinationCount" Type="Int">4</Property>
-				<Property Name="Source[0].itemID" Type="Str">{5A02A1B5-2DC9-4CB1-B85F-D609C3520DCF}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{52FB8678-CA6C-4E67-81D0-AFAE3BDC57B6}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/S4ACS.vi</Property>
