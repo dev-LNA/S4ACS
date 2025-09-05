@@ -455,13 +455,12 @@ class S4ICS(Header):
             for mechanism in mechanisms_list:
                 mechanism_st = mechanism["status"]
                 mechanism_name = mechanism["name"]
-                pos_id = mechanism_st["pos_id"]
-                if int(mechanism_st["pos_id"]) == -1 and mechanism_name != "WPROT":
+                pos_id = int(mechanism_st["pos_id"])
+                if pos_id == -1 and mechanism_name != "WPROT":
                     self._write_log_file(
                         f"There was an error related to the {mechanism_name} position: {mechanism_st}.",
                         "",
                     )
-                    continue
                 mechanisms[mechanism_name] = mechanism_st
 
             return mechanisms
