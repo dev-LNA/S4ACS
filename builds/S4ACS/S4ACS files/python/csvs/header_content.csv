@@ -2,12 +2,12 @@ Keyword;Expected name;Type;Allowed values;Comment
 SIMPLE;;boolean;true,false;conforms to FITS standard
 BSCALE;;integer;1,inf;Linear factor in scaling equation
 BZERO;;integer;1,inf;Zero point in scaling equation
-BITPIX;;integer;-64,-32,8,16,32;array data type
-NAXIS;;integer;2,2;number of array dimensions
+BITPIX;;integer;8,16,32,64,-32,-64;array data type
+NAXIS;;integer;1,inf;number of array dimensions
 NAXIS1;;integer;1,1024;Number of columns
 NAXIS2;;integer;1,1024;Number of rows
 PROJID;;string;;Project identification code
-OBSERVER;;string;;Name(s) of observer(s)
+OBSERVER;;string;;Observer(s)
 OBJECT;;string;;Object name
 OBSLONG;;float;-180,180;Observatory East Longitude (DEG, -180 to 180)
 OBSLAT;;float;-90,90;Observatory North Latitude (DEG, -90 to 90)
@@ -57,8 +57,8 @@ FRAMETRF;;boolean;true,false;Frame transfer on: T or F
 VCLKAMP;;string;Normal,+1,+2,+3,+4;Clock amplitude: Normal, +1, +2, +3, +4
 GAIN;;float;0,inf;Gain (e-/ADU)
 RDNOISE;;float;0,inf;Read noise (e-)
-RA;RAACQUIS;string;;Right ascension: HH:MM:SS
-DEC;DECACQUIS;string;;Declination: +- DD:MM:SS
+RA;RAACQUIS;string;;Right ascension: HH:MM:SS.ss
+DEC;DECACQUIS;string;;Declination: +-DD:MM:SS.ss
 EQUINOX;;float;0,inf;Equinox of coordinates
 TELFOCUS;POSITION;integer;0,inf;Telescope focus position (arbitrary units)
 TCSHA;HOURANGLE;string;;TCS hour angle: HH:MM:SS
@@ -82,11 +82,11 @@ GMIRMODE;;boolean;true,false;Guiding mirror: real (T) or simulated (F)
 GFOCMODE;;boolean;true,false;Guiding focuser: real (T) or simulated (F)
 TCSMODE;;boolean;true,false;TCS: real (T) or simulated (F)
 WPSEL;;string;None,L2,L4;Waveplate: half-wave (L2), quarter-wave (L4)
-WPSELPO;;float;0,inf;Waveplate selector position (mm)
+WPSELPO;;float;-5,165;Waveplate selector position (mm)
 WPPOS;;integer;0,16;Waveplate idx position from 1 to 16, 0 if none
 WPANG;;float;0,360;Waveplate position angle (deg)
 CALW;;string;POLARIZER,DEPOLARIZER,CLEAR,SPARE,CLOSED;Selected element in calibration wheel
 CALWANG;;float;0,360;Calibration wheel position angle (deg)
 ASEL;;boolean;true,false;Savart prism analyzer selected
 ANALANG;;float;0,360;Analyzer position angle (deg)
-ACQERROR;;boolean;true,false;Error occurred during the acquisition - see comments
+ACQERROR;;boolean;true,false;Acquisition error - see comments

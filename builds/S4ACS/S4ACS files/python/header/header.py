@@ -5,7 +5,10 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 import astropy.io.fits as fits
+import astropy.units as u
+from astropy.coordinates import Angle
 from astropy.time import Time
+from numpy import abs
 
 from .utils import (
     allowed_kw_values,
@@ -112,8 +115,8 @@ class Header(ABC):
                         kw,
                     )
                     self._fix_regex_keyword(kw)
-                else:
-                    self.hdr[kw] = self.new_json[kw]
+                    continue
+                self.hdr[kw] = self.new_json[kw]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -452,13 +455,12 @@ class S4ICS(Header):
             for mechanism in mechanisms_list:
                 mechanism_st = mechanism["status"]
                 mechanism_name = mechanism["name"]
-                pos_id = mechanism_st["pos_id"]
-                if int(mechanism_st["pos_id"]) == -1 and mechanism_name != "WPROT":
+                pos_id = int(mechanism_st["pos_id"])
+                if pos_id == -1 and mechanism_name != "WPROT":
                     self._write_log_file(
                         f"There was an error related to the {mechanism_name} position: {mechanism_st}.",
                         "",
                     )
-                    continue
                 mechanisms[mechanism_name] = mechanism_st
 
             return mechanisms
@@ -524,6 +526,7 @@ class TCS(Header):
         self._write_any_value()
         self._replace_comma()
         self._verify_regex()
+        self.fix_RA_DEC()
         return
 
     def _write_TCSDATE(self):
@@ -547,15 +550,31 @@ class TCS(Header):
 
     @staticmethod
     def _fix_coordinates(kw_value):
-        kw_value = kw_value.strip()
-        kw_value = re.sub(r"^([+-]?\d{1,2})$", r"\1:00:00", kw_value)
-        kw_value = re.sub(r"^([+-]?\d{1,2}):(\d{1,2})$", r"\1:\2:00", kw_value)
-        h, m, s = kw_value.split(":")
-        n_digits = 2
-        if "-" in h:
-            n_digits += 1
-        kw_value = f"{int(h):0{n_digits}}:{int(m):02}:{int(s):02}"
-        return kw_value
+        new_value = kw_value.strip()
+        new_value = re.sub(r"^([+-]?\d{1,2})$", r"\1:00:00", new_value)
+        new_value = re.sub(r"^([+-]?\d{1,2}):(\d{1,2})$", r"\1:\2:00", new_value)
+        h, m, s = new_value.split(":")
+        h, m, s = abs(int(h)), abs(int(m)), abs(float(s))
+        new_value = f"{h:02}:{m:02}:{s:05.2f}"
+
+        if "-" in kw_value:
+            new_value = "-" + new_value
+        return new_value
+
+    def fix_RA_DEC(self):
+        for kw in ["RA", "DEC"]:
+            try:
+                obstype = json.loads(self.dict_header_jsons["S4GUI"])["OBSTYPE"]
+                kw_value = self.new_json[kw]
+                if kw_value == "" and obstype in ["ZERO", "FLAT", "DARK"]:
+                    new_value = "00:00:00.00"
+                    self._write_log_file(
+                        f"An empty string was found for the keyword {kw}. As OBSTYPE={obstype}, the keyword value was changed to {new_value}",
+                        kw,
+                    )
+                    self.hdr[kw] = new_value
+            except Exception as e:
+                self._write_log_file(repr(e), kw)
 
 
 class S4GUI(Header):
