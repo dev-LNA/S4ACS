@@ -39,3 +39,4 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
         error_json["code"] = 1
         error_json["source"] = repr(e)
         return json.dumps(error_json)
+    minha mudança
