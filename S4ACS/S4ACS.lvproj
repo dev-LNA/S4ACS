@@ -112,6 +112,7 @@
 			<Item Name="get machine path.vi" Type="VI" URL="../General VIs/get machine path.vi"/>
 			<Item Name="night time stamp.vi" Type="VI" URL="../General VIs/night time stamp.vi"/>
 			<Item Name="split string.vi" Type="VI" URL="../General VIs/split string.vi"/>
+			<Item Name="IO pins.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/IO pins.vi"/>
 		</Item>
 		<Item Name="python" Type="Folder">
 			<Item Name="csvs" Type="Folder">
@@ -519,6 +520,9 @@
 				<Item Name="AndorCapabilities typedef.ctl" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/AndorCapabilities typedef.ctl"/>
 				<Item Name="U16 Array To SYSTEMTIME.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d_internal.llb/U16 Array To SYSTEMTIME.vi"/>
 				<Item Name="SYSTEMTIME structure typedef.ctl" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SYSTEMTIME structure typedef.ctl"/>
+				<Item Name="GetIOLevel.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/GetIOLevel.vi"/>
+				<Item Name="SetIOLevel.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetIOLevel.vi"/>
+				<Item Name="SetIODirection.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetIODirection.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
@@ -642,7 +646,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">28</Property>
+				<Property Name="Bld_version.build" Type="Int">29</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
