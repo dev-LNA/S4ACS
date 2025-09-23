@@ -523,6 +523,7 @@
 				<Item Name="GetIOLevel.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/GetIOLevel.vi"/>
 				<Item Name="SetIOLevel.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetIOLevel.vi"/>
 				<Item Name="SetIODirection.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetIODirection.vi"/>
+				<Item Name="Join Strings.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d_internal.llb/Join Strings.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
@@ -625,13 +626,11 @@
 				<Item Name="Epoch_NotationLocale.vi" Type="VI" URL="/&lt;vilib&gt;/LabVIEW Open Source Project/Epoch Date &amp; Time/formatter.iso8601/Epoch_NotationLocale.vi"/>
 				<Item Name="Locale -- enum.ctl" Type="VI" URL="/&lt;vilib&gt;/LabVIEW Open Source Project/Epoch Date &amp; Time/formatter.iso8601/Locale -- enum.ctl"/>
 				<Item Name="Seconds Units -- enum.ctl" Type="VI" URL="/&lt;vilib&gt;/LabVIEW Open Source Project/Epoch Date &amp; Time/formatter.iso8601/Seconds Units -- enum.ctl"/>
-				<Item Name="Join Strings.vi" Type="VI" URL="/&lt;vilib&gt;/AdvancedString/Join Strings.vi"/>
 			</Item>
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="Write Channel ID.vi" Type="VI" URL="../Log File/Write Channel ID.vi"/>
-			<Item Name="get time stamp.vi" Type="VI" URL="../Log File/get time stamp.vi"/>
 			<Item Name="pad string.vi" Type="VI" URL="../Log File/pad string.vi"/>
 			<Item Name="Read Channel ID.vi" Type="VI" URL="../Log File/Read Channel ID.vi"/>
 		</Item>
