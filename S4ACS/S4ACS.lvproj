@@ -176,8 +176,8 @@
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
 		<Item Name="Error log.lvclass" Type="LVClass" URL="../Error log/Error log.lvclass"/>
 		<Item Name="Keywords Log File.lvclass" Type="LVClass" URL="../Keywords Log File/Keywords Log File.lvclass"/>
-		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
 		<Item Name="Events Log File.lvclass" Type="LVClass" URL="../Events log file/Events Log File Folder/Events Log File.lvclass"/>
+		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
