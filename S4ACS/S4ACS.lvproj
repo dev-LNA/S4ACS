@@ -170,13 +170,9 @@
 		<Item Name="State Machine.lvclass" Type="LVClass" URL="../State Machine/State Machine.lvclass"/>
 		<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
 		<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
-		<Item Name="Header content.lvclass" Type="LVClass" URL="../Header content/Header content.lvclass"/>
 		<Item Name="RxTx.lvclass" Type="LVClass" URL="../RxTx/RxTx.lvclass"/>
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
-		<Item Name="Error log.lvclass" Type="LVClass" URL="../Error log/Error log.lvclass"/>
-		<Item Name="Keywords Log File.lvclass" Type="LVClass" URL="../Keywords Log File/Keywords Log File.lvclass"/>
-		<Item Name="Events Log File.lvclass" Type="LVClass" URL="../Events log file/Events Log File Folder/Events Log File.lvclass"/>
 		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
@@ -633,6 +629,8 @@
 			<Item Name="Write Channel ID.vi" Type="VI" URL="../Log File/Write Channel ID.vi"/>
 			<Item Name="pad string.vi" Type="VI" URL="../Log File/pad string.vi"/>
 			<Item Name="Read Channel ID.vi" Type="VI" URL="../Log File/Read Channel ID.vi"/>
+			<Item Name="Error log.lvclass" Type="LVClass" URL="../Error log/Error log.lvclass"/>
+			<Item Name="Keywords Log File.lvclass" Type="LVClass" URL="../Keywords Log File/Keywords Log File.lvclass"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
