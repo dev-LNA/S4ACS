@@ -23,7 +23,7 @@ CHANNEL1;CHANNEL 1;boolean;true,false;Channel 1 is on (T) or off (F)
 CHANNEL2;CHANNEL 2;boolean;true,false;Channel 2 is on (T) or off (F)
 CHANNEL3;CHANNEL 3;boolean;true,false;Channel 3 is on (T) or off (F)
 CHANNEL4;CHANNEL 4;boolean;true,false;Channel 4 is on (T) or off (F)
-CCDSERN;;integer;9914,9917;CCD serial number
+CCDSERN;;integer;9914,14500;CCD serial number
 FILENAME;;string;;File name
 DATE-OBS;;string;;UTC at start of observation (isot)
 UTTIME;;string;;UTC time at start of observation
