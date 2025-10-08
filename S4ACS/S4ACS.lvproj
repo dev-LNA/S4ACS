@@ -71,28 +71,16 @@
 			<Item Name="communication manager.vi" Type="VI" URL="../General VIs/communication manager.vi"/>
 		</Item>
 		<Item Name="Unit Tests" Type="Folder">
-			<Item Name="caraya" Type="Folder">
-				<Item Name="RW VIs" Type="Folder">
-					<Item Name="RW Error Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Error Log File.vi"/>
-					<Item Name="RW Keywords Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Keywords Log File.vi"/>
-					<Item Name="RW Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Log File.vi"/>
-					<Item Name="RW RxTx.vi" Type="VI" URL="../Unit tests/caraya/RW RxTx.vi"/>
-					<Item Name="RW State Machine.vi" Type="VI" URL="../Unit tests/caraya/RW State Machine.vi"/>
-					<Item Name="RxTx.vi" Type="VI" URL="../Unit tests/caraya/RxTx.vi"/>
-				</Item>
-				<Item Name="Error log.vi" Type="VI" URL="../Unit tests/caraya/Error log.vi"/>
-				<Item Name="Keywords Log file.vi" Type="VI" URL="../Unit tests/caraya/Keywords Log file.vi"/>
-				<Item Name="Log file.vi" Type="VI" URL="../Unit tests/caraya/Log file.vi"/>
-				<Item Name="State Machine.vi" Type="VI" URL="../Unit tests/caraya/State Machine.vi"/>
-				<Item Name="Test all.vi" Type="VI" URL="../Unit tests/caraya/Test all.vi"/>
+			<Item Name="RW VIs" Type="Folder">
+				<Item Name="RW Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Log File.vi"/>
+				<Item Name="RW RxTx.vi" Type="VI" URL="../Unit tests/caraya/RW RxTx.vi"/>
+				<Item Name="RW State Machine.vi" Type="VI" URL="../Unit tests/caraya/RW State Machine.vi"/>
 			</Item>
-			<Item Name="unit test framework" Type="Folder">
-				<Item Name="State Machine" Type="Folder">
-					<Item Name="write counter.vi" Type="VI" URL="../Unit tests/unit test framework/State Machine/write counter.vi"/>
-					<Item Name="decrement counter.vi" Type="VI" URL="../Unit tests/unit test framework/State Machine/decrement counter.vi"/>
-					<Item Name="restart state machine.vi" Type="VI" URL="../Unit tests/unit test framework/State Machine/restart state machine.vi"/>
-				</Item>
-			</Item>
+			<Item Name="Log file.vi" Type="VI" URL="../Unit tests/caraya/Log file.vi"/>
+			<Item Name="RxTx.vi" Type="VI" URL="../Unit tests/caraya/RxTx.vi"/>
+			<Item Name="State Machine.vi" Type="VI" URL="../Unit tests/caraya/State Machine.vi"/>
+			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/caraya/Test all.vi"/>
+			<Item Name="Error log.vi" Type="VI" URL="../Unit tests/caraya/Error log.vi"/>
 		</Item>
 		<Item Name="General VIs" Type="Folder">
 			<Item Name="TESTE.vi" Type="VI" URL="../General VIs/TESTE.vi"/>
@@ -619,6 +607,9 @@
 			<Item Name="Read Channel ID.vi" Type="VI" URL="../Log File/Read Channel ID.vi"/>
 			<Item Name="Error log.lvclass" Type="LVClass" URL="../Error log/Error log.lvclass"/>
 			<Item Name="Keywords Log File.lvclass" Type="LVClass" URL="../Keywords Log File/Keywords Log File.lvclass"/>
+			<Item Name="Keywords Log file.vi" Type="VI" URL="../Unit tests/caraya/Keywords Log file.vi"/>
+			<Item Name="RW Error Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Error Log File.vi"/>
+			<Item Name="RW Keywords Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Keywords Log File.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
