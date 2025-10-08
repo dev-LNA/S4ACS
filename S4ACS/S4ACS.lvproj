@@ -81,6 +81,7 @@
 			<Item Name="State Machine.vi" Type="VI" URL="../Unit tests/caraya/State Machine.vi"/>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/caraya/Test all.vi"/>
 			<Item Name="Error log.vi" Type="VI" URL="../Unit tests/caraya/Error log.vi"/>
+			<Item Name="test_coverage.csv" Type="Document" URL="../Unit tests/test_coverage.csv"/>
 		</Item>
 		<Item Name="General VIs" Type="Folder">
 			<Item Name="TESTE.vi" Type="VI" URL="../General VIs/TESTE.vi"/>
