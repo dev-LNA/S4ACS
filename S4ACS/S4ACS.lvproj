@@ -149,7 +149,6 @@
 			<Item Name="msvcr120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcr120.dll"/>
 			<Item Name="zmq.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/zmq.h"/>
 		</Item>
-		<Item Name="ATMCD32D.dll" Type="Document" URL="../../../../../../Program Files (x86)/National Instruments/LabVIEW 2018/ATMCD32D.dll"/>
 		<Item Name="atmcd64d.dll" Type="Document" URL="../../../../../../Program Files/Andor SDK/atmcd64d.dll"/>
 		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/socket_TEMPLATE.cfg"/>
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/acs_config_TEMPLATE.cfg"/>
@@ -687,7 +686,7 @@
 				<Property Name="Source[15].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[15].type" Type="Str">Container</Property>
 				<Property Name="Source[2].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[2].itemID" Type="Ref">/My Computer/ATMCD32D.dll</Property>
+				<Property Name="Source[2].itemID" Type="Ref"></Property>
 				<Property Name="Source[2].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[3].destinationIndex" Type="Int">3</Property>
 				<Property Name="Source[3].itemID" Type="Ref">/My Computer/socket_TEMPLATE.cfg</Property>
