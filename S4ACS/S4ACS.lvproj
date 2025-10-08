@@ -67,18 +67,7 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Comm" Type="Folder">
-			<Item Name="ZeroMQ" Type="Folder">
-				<Item Name="ZEROMQ_FOCUSER.vi" Type="VI" URL="../Comm VIs/ZEROMQ_FOCUSER.vi"/>
-				<Item Name="ZEROMQ_S4GUI.vi" Type="VI" URL="../Comm VIs/ZEROMQ_S4GUI.vi"/>
-				<Item Name="ZEROMQ_S4ICS.vi" Type="VI" URL="../Comm VIs/ZEROMQ_S4ICS.vi"/>
-				<Item Name="ZEROMQ_TCS.vi" Type="VI" URL="../Comm VIs/ZEROMQ_TCS.vi"/>
-				<Item Name="ZEROMQ_WS.vi" Type="VI" URL="../Comm VIs/ZEROMQ_WS.vi"/>
-				<Item Name="ZEROMQ_PULL.vi" Type="VI" URL="../Comm VIs/ZEROMQ_PULL.vi"/>
-				<Item Name="ZEROMQ_REP.vi" Type="VI" URL="../Comm VIs/ZEROMQ_REP.vi"/>
-				<Item Name="PUB_STATUS.vi" Type="VI" URL="../Comm VIs/PUB_STATUS.vi"/>
-			</Item>
 			<Item Name="Save_Header.vi" Type="VI" URL="../Comm VIs/Save_Header.vi"/>
-			<Item Name="TCPIP.vi" Type="VI" URL="../Comm VIs/TCPIP.vi"/>
 			<Item Name="communication manager.vi" Type="VI" URL="../General VIs/communication manager.vi"/>
 		</Item>
 		<Item Name="Unit Tests" Type="Folder">
@@ -725,7 +714,7 @@
 				<Property Name="Source[7].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[7].type" Type="Str">VI</Property>
 				<Property Name="Source[8].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[8].itemID" Type="Ref">/My Computer/Comm/TCPIP.vi</Property>
+				<Property Name="Source[8].itemID" Type="Ref"></Property>
 				<Property Name="Source[8].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[8].type" Type="Str">VI</Property>
 				<Property Name="Source[9].destinationIndex" Type="Int">0</Property>
