@@ -62,7 +62,6 @@ Write Rx Message.vi
 Assert.vi
 Read Rx Message.vi
 Assert.vi
-Read Rx Message.vi
 Erase Tx.vi
 Write Tx Message.vi
 Create Rx.vi
@@ -85,12 +84,10 @@ Get Queue Status
 Assert.vi
 Create Rx.vi
 Send RX Message.vi
-Write Rx Message.vi
 Obtain Queue
 Dequeue Element
 Assert.vi
 Create Tx.vi
-Write Tx Message.vi
 Send TX Message.vi
 Obtain Queue
 Dequeue Element
@@ -114,6 +111,32 @@ Write Tx Message.vi
 Read Rx Message.vi
 Read Tx Message.vi
 Assert.vi
+Write new rx message.vi
+Write new tx message.vi
+Read new tx message.vi
+Read new rx message.vi
+Assert.vi
+Assert.vi
+Read Tx queue.vi
+Read Rx queue.vi
+Assert.vi
+Obtain Queue
+Assert.vi
+Write Rx.vi
+Write Tx.vi
+Read Tx Message.vi
+dequeue rx.vi
+Obtain Queue
+Enqueue Element
+Write Rx.vi
+Read Rx Message.vi
+Assert.vi
+dequeue tx.vi
+Write Tx.vi
+Obtain Queue
+Enqueue Element
+Assert.vi
+Read Tx Message.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
