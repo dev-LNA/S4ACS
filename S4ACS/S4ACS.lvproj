@@ -608,10 +608,6 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="Handle error.vi" Type="VI" URL="../RxTx/Handle error.vi"/>
-			<Item Name="Read Channel ID.vi" Type="VI" URL="../Log File/Read Channel ID.vi"/>
-			<Item Name="RW Log File.vi" Type="VI" URL="../Unit tests/caraya/RW Log File.vi"/>
-			<Item Name="pad string.vi" Type="VI" URL="../Log File/pad string.vi"/>
-			<Item Name="Write Channel ID.vi" Type="VI" URL="../Log File/Write Channel ID.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
