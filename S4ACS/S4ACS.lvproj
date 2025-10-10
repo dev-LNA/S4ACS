@@ -72,7 +72,7 @@
 		</Item>
 		<Item Name="Unit Tests" Type="Folder">
 			<Item Name="coverage" Type="Folder">
-				<Item Name="generate coverage.vi" Type="VI" URL="../RxTx/generate coverage.vi"/>
+				<Item Name="generate coverage.vi" Type="VI" URL="../Unit tests/coverage/generate coverage.vi"/>
 				<Item Name="test_coverage.csv" Type="Document" URL="../Unit tests/coverage/test_coverage.csv"/>
 				<Item Name="utils.ipynb" Type="Document" URL="../Unit tests/coverage/utils.ipynb"/>
 			</Item>
@@ -80,6 +80,7 @@
 				<Item Name="Log file.vi" Type="VI" URL="../Unit tests/tests/Log file.vi"/>
 				<Item Name="RxTx.vi" Type="VI" URL="../Unit tests/tests/RxTx.vi"/>
 				<Item Name="State Machine.vi" Type="VI" URL="../Unit tests/tests/State Machine.vi"/>
+				<Item Name="servers.vi" Type="VI" URL="../Unit tests/tests/servers.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>
