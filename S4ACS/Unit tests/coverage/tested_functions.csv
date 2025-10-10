@@ -3,8 +3,6 @@ Define Test.vi
 Merge Errors
 Write directory.vi
 create file name.vi
-Application Directory.vi
-Build Path
 Delete
 Assert.vi
 Close File
@@ -14,27 +12,18 @@ Write directory.vi
 create file name.vi
 create file.vi
 write header.vi
-Read file refnum.vi
 Read from Text File
-Build Path
 Pick Line
 Assert.vi
 Delete
-Close File
 log message.vi
 create file name.vi
 create file.vi
 write header.vi
 Write directory.vi
 Read from Text File
-Build Path
-Delete
-Close File
 Assert.vi
 Match Pattern
-Read file refnum.vi
-Pick Line
-Space Constant.vi
 write header.vi
 Merge Errors
 read header.vi
@@ -106,6 +95,27 @@ Assert.vi
 Read file already exists.vi
 Assert.vi
 Delete
+close file.vi
+Application Directory.vi
+Build Path
+Build Path
+Build Path
+Write file name suffix.vi
+Write file refnum.vi
+Write file name suffix.vi
+Write file name suffix.vi
+Read file name.vi
+Read directory.vi
+Build Path
+Delete
+Write file name suffix.vi
+write file header.vi
+Read file name.vi
+Read directory.vi
+Build Path
+close file.vi
+Assert.vi
+Pick Line
 close file.vi
 Define Test.vi
 Merge Errors
