@@ -81,7 +81,7 @@
 				<Item Name="RxTx.vi" Type="VI" URL="../Unit tests/tests/RxTx.vi"/>
 				<Item Name="State Machine.vi" Type="VI" URL="../Unit tests/tests/State Machine.vi"/>
 				<Item Name="servers.vi" Type="VI" URL="../Unit tests/tests/servers.vi"/>
-				<Item Name="Python toolkit.vi" Type="VI" URL="../Server/Python toolkit.vi"/>
+				<Item Name="Python toolkit.vi" Type="VI" URL="../Unit tests/tests/Python toolkit.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>
@@ -609,7 +609,6 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Handle error.vi" Type="VI" URL="../RxTx/Handle error.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">

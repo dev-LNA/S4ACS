@@ -118,6 +118,29 @@ Assert.vi
 Pick Line
 close file.vi
 Define Test.vi
+Assert.vi
+Read File path.vi
+Read error.vi
+Read session ref.vi
+Write error.vi
+Write File path.vi
+Write session ref.vi
+Assert.vi
+Assert.vi
+Merge Errors
+Initialize Session.vi
+Assert.vi
+Merge Errors
+Close session.vi
+Initialize Session.vi
+Call function.vi
+Close session.vi
+Assert.vi
+Read error.vi
+Write File path.vi
+Build Path
+Application Directory.vi
+Define Test.vi
 Merge Errors
 Erase Rx.vi
 Write Rx Message.vi
