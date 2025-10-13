@@ -81,6 +81,7 @@
 				<Item Name="RxTx.vi" Type="VI" URL="../Unit tests/tests/RxTx.vi"/>
 				<Item Name="State Machine.vi" Type="VI" URL="../Unit tests/tests/State Machine.vi"/>
 				<Item Name="servers.vi" Type="VI" URL="../Unit tests/tests/servers.vi"/>
+				<Item Name="Python toolkit.vi" Type="VI" URL="../Server/Python toolkit.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>
