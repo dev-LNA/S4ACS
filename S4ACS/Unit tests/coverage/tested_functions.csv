@@ -533,6 +533,35 @@ Read Camera Status.vi
 Assert.vi
 Unbundle By Name
 Assert.vi
+Abort Acquisition.vi
+Assert.vi
+calc exptime diff.vi
+Write Time Acq Started.vi
+Write Time acq finished.vi
+Tick Count (ms)
+Add
+Read effective exptime.vi
+Write effective exptime.vi
+Assert.vi
+Assert.vi
+calculate #pixels.vi
+Write Prev CCD Config.vi
+Assert.vi
+Create image name.vi
+Read Camera Status.vi
+Unbundle By Name
+Assert.vi
+night time stamp.vi
+Unbundle By Name
+Format Into String
+Write initial configuration.vi
+Assert.vi
+Start Acquisition.vi
+Assert.vi
+Shutdown Camera.vi
+Assert.vi
+Initialize Camera.vi
+Assert.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
