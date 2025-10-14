@@ -83,6 +83,7 @@
 				<Item Name="servers.vi" Type="VI" URL="../Unit tests/tests/servers.vi"/>
 				<Item Name="Python toolkit.vi" Type="VI" URL="../Unit tests/tests/Python toolkit.vi"/>
 				<Item Name="Save Image.vi" Type="VI" URL="../Unit tests/tests/Save Image.vi"/>
+				<Item Name="simulated camera.vi" Type="VI" URL="../Unit tests/tests/simulated camera.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>

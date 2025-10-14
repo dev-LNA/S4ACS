@@ -321,6 +321,17 @@ Prepare header content.vi
 Assert.vi
 Run.vi
 Assert.vi
+initialize python session.vi
+Write Python Toolkit.lvclass.vi
+Read Python Toolkit.lvclass.vi
+Write File path.vi
+Build Path
+Application Directory.vi
+Save Image.vi
+Assert.vi
+Read Python Toolkit.lvclass.vi
+Read error.vi
+end.vi
 Define Test.vi
 Merge Errors
 Write loss of comm.vi
@@ -419,6 +430,57 @@ verify communication.vi
 Assert.vi
 Write communication.vi
 Read comm restablished.vi
+Define Test.vi
+Merge Errors
+Read WRITE SETUP errors.vi
+Read Camera Status.vi
+Read CCD Config.vi
+Read Image Graph.vi
+Read SET parameters.vi
+Read Prev CCD Config.vi
+Read Prev SET parameters.vi
+Read Index of the image name.vi
+Read Image Date.vi
+Write Camera Configuration.vi
+Write Image Graph.vi
+Write Camera Status.vi
+Write SET parameters.vi
+Write Prev SET parameters.vi
+Write WRITE SETUP errors.vi
+Write Index of the image name.vi
+Write Prev CCD Config.vi
+Write Image Date.vi
+Merge Errors
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Read Image delay.vi
+Read Last update - CCD config.vi
+Read Time acq finished.vi
+Read SET errors.vi
+Write Image delay.vi
+Write Last update - CCD config.vi
+Write Time acq finished.vi
+Write SET errors.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Read Readout time.vi
+Read Waveplate positions.vi
+Write Time Acq Started.vi
+Read Time Acq Started.vi
+Assert.vi
+Write Waveplate positions.vi
+Write Readout time.vi
+Assert.vi
+Assert.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
