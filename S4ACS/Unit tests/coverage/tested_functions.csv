@@ -481,6 +481,58 @@ Write Waveplate positions.vi
 Write Readout time.vi
 Assert.vi
 Assert.vi
+Set SET parameters.vi
+Write SET parameters.vi
+Read Prev SET parameters.vi
+Assert.vi
+Set Camera Configuration.vi
+Write Camera Configuration.vi
+Read Prev CCD Config.vi
+Assert.vi
+Set Acquisition Configuration.vi
+Write SET parameters.vi
+Read Prev SET parameters.vi
+Assert.vi
+get used disk space.vi
+Application Directory.vi
+Build Path
+Read Camera Status.vi
+Assert.vi
+Unbundle By Name
+Get Volume Info
+Divide
+Subtract
+Multiply
+To Unsigned Word Integer
+get initial information.vi
+Assert.vi
+Read Camera Status.vi
+Unbundle By Name
+Assert.vi
+Assert.vi
+Get image delay.vi
+Read Image delay.vi
+Assert.vi
+Get image date.vi
+Get Date/Time In Seconds
+Seconds To Date/Time
+Read Image Date.vi
+Assert.vi
+Date/Time To Seconds
+To Double Precision Float
+Date/Time To Seconds
+To Double Precision Float
+Get Acquired Data.vi
+Write Prev CCD Config.vi
+Read Image Graph.vi
+Assert.vi
+Initialize Array
+Get Cooler Status.vi
+Write SET parameters.vi
+Read Camera Status.vi
+Assert.vi
+Unbundle By Name
+Assert.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
