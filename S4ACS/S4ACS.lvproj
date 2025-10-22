@@ -147,7 +147,7 @@
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/acs_config_TEMPLATE.cfg"/>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
 		<Item Name="Simulated Camera.lvclass" Type="LVClass" URL="../Simulated_CCD_Camera/Simulated Camera.lvclass"/>
-		<Item Name="Real Camera.lvclass" Type="LVClass" URL="../CCDCamera/Real Camera.lvclass"/>
+		<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
 		<Item Name="State Machine.lvclass" Type="LVClass" URL="../State Machine/State Machine.lvclass"/>
 		<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
 		<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
@@ -611,6 +611,7 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="Real Camera.lvclass" Type="LVClass" URL="../CCDCamera/Real Camera.lvclass"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
