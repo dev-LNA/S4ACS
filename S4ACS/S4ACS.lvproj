@@ -611,8 +611,6 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Real Camera.lvclass" Type="LVClass" URL="../CCDCamera/Real Camera.lvclass"/>
-			<Item Name="process waveplate string.vi" Type="VI" URL="../Simulated_CCD_Camera/process waveplate string.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
