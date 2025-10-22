@@ -611,6 +611,9 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="Write Time Acq Started.vi" Type="VI" URL="../Simulated_CCD_Camera/Write Time Acq Started.vi"/>
+			<Item Name="Write Time acq finished.vi" Type="VI" URL="../Simulated_CCD_Camera/Write Time acq finished.vi"/>
+			<Item Name="Read Time acq finished.vi" Type="VI" URL="../Simulated_CCD_Camera/Read Time acq finished.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
