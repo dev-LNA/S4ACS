@@ -615,6 +615,8 @@
 			<Item Name="Write Time Acq Started.vi" Type="VI" URL="../Simulated_CCD_Camera/Write Time Acq Started.vi"/>
 			<Item Name="Write Time acq finished.vi" Type="VI" URL="../Simulated_CCD_Camera/Write Time acq finished.vi"/>
 			<Item Name="Read Time acq finished.vi" Type="VI" URL="../Simulated_CCD_Camera/Read Time acq finished.vi"/>
+			<Item Name="Create image name.vi" Type="VI" URL="../Simulated_CCD_Camera/Create image name.vi"/>
+			<Item Name="get used disk space.vi" Type="VI" URL="../Simulated_CCD_Camera/get used disk space.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
