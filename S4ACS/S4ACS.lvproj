@@ -621,7 +621,6 @@
 			<Item Name="write acquisition config errors.vi" Type="VI" URL="../Simulated_CCD_Camera/write acquisition config errors.vi"/>
 			<Item Name="find row in string array.vi" Type="VI" URL="../Simulated_CCD_Camera/find row in string array.vi"/>
 			<Item Name="Write class timings.vi" Type="VI" URL="../Simulated_CCD_Camera/Write class timings.vi"/>
-			<Item Name="Simulated Camera.ctl" Type="VI" URL="../Simulated_CCD_Camera/Simulated Camera.lvclass/Simulated Camera.ctl"/>
 			<Item Name="read operation mode errors.vi" Type="VI" URL="../Simulated_CCD_Camera/read operation mode errors.vi"/>
 			<Item Name="Read Camera Status.vi" Type="VI" URL="../Simulated_CCD_Camera/Read Camera Status.vi"/>
 			<Item Name="write operation mode errors.vi" Type="VI" URL="../Simulated_CCD_Camera/write operation mode errors.vi"/>
@@ -634,6 +633,7 @@
 			<Item Name="read image.vi" Type="VI" URL="../Simulated_CCD_Camera/read image.vi"/>
 			<Item Name="find idx smaller than.vi" Type="VI" URL="../Simulated_CCD_Camera/find idx smaller than.vi"/>
 			<Item Name="calculate #pixels.vi" Type="VI" URL="../Simulated_CCD_Camera/calculate #pixels.vi"/>
+			<Item Name="Simulated Camera.ctl" Type="VI" URL="../Simulated_CCD_Camera/Simulated Camera.lvclass/Simulated Camera.ctl"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
