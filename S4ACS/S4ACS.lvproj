@@ -146,7 +146,7 @@
 		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/socket_TEMPLATE.cfg"/>
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/acs_config_TEMPLATE.cfg"/>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
-		<Item Name="Simulated Camera.lvclass" Type="LVClass" URL="../Simulated_CCD_Camera/Simulated Camera.lvclass"/>
+		<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
 		<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
 		<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
 		<Item Name="State Machine.lvclass" Type="LVClass" URL="../State Machine/State Machine.lvclass"/>
@@ -612,6 +612,28 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="read prev operation mode.vi" Type="VI" URL="../Simulated_CCD_Camera/read prev operation mode.vi"/>
+			<Item Name="read new operation mode.vi" Type="VI" URL="../Simulated_CCD_Camera/read new operation mode.vi"/>
+			<Item Name="write new operation mode.vi" Type="VI" URL="../Simulated_CCD_Camera/write new operation mode.vi"/>
+			<Item Name="Read class timings.vi" Type="VI" URL="../Simulated_CCD_Camera/Read class timings.vi"/>
+			<Item Name="read prev acquisition config.vi" Type="VI" URL="../Simulated_CCD_Camera/read prev acquisition config.vi"/>
+			<Item Name="read acquisition config errors.vi" Type="VI" URL="../Simulated_CCD_Camera/read acquisition config errors.vi"/>
+			<Item Name="write acquisition config errors.vi" Type="VI" URL="../Simulated_CCD_Camera/write acquisition config errors.vi"/>
+			<Item Name="find row in string array.vi" Type="VI" URL="../Simulated_CCD_Camera/find row in string array.vi"/>
+			<Item Name="Write class timings.vi" Type="VI" URL="../Simulated_CCD_Camera/Write class timings.vi"/>
+			<Item Name="Simulated Camera.ctl" Type="VI" URL="../Simulated_CCD_Camera/Simulated Camera.lvclass/Simulated Camera.ctl"/>
+			<Item Name="read operation mode errors.vi" Type="VI" URL="../Simulated_CCD_Camera/read operation mode errors.vi"/>
+			<Item Name="Read Camera Status.vi" Type="VI" URL="../Simulated_CCD_Camera/Read Camera Status.vi"/>
+			<Item Name="write operation mode errors.vi" Type="VI" URL="../Simulated_CCD_Camera/write operation mode errors.vi"/>
+			<Item Name="read new acquisition config.vi" Type="VI" URL="../Simulated_CCD_Camera/read new acquisition config.vi"/>
+			<Item Name="write prev acquisition config.vi" Type="VI" URL="../Simulated_CCD_Camera/write prev acquisition config.vi"/>
+			<Item Name="write image.vi" Type="VI" URL="../Simulated_CCD_Camera/write image.vi"/>
+			<Item Name="Write Camera Status.vi" Type="VI" URL="../Simulated_CCD_Camera/Write Camera Status.vi"/>
+			<Item Name="End.vi" Type="VI" URL="../Simulated_CCD_Camera/End.vi"/>
+			<Item Name="write new acquisition config.vi" Type="VI" URL="../Simulated_CCD_Camera/write new acquisition config.vi"/>
+			<Item Name="read image.vi" Type="VI" URL="../Simulated_CCD_Camera/read image.vi"/>
+			<Item Name="find idx smaller than.vi" Type="VI" URL="../Simulated_CCD_Camera/find idx smaller than.vi"/>
+			<Item Name="calculate #pixels.vi" Type="VI" URL="../Simulated_CCD_Camera/calculate #pixels.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
