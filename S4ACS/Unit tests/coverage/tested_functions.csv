@@ -264,7 +264,7 @@ Assert.vi
 Write Channel.lvclass.vi
 Write acquisition error.vi
 Write ACSVRSN.vi
-Write Sim_Ixon_Ultra class.vi
+Write Sim_CCD class.vi
 Write Configuration to initialize ACS.vi
 Write Camera Status.vi
 Bundle By Name
@@ -277,11 +277,11 @@ Assert.vi
 Unbundle By Name
 write image timmings.vi
 Write Channel.lvclass.vi
-Write Sim_Ixon_Ultra class.vi
+Write Sim_CCD class.vi
 Assert.vi
 join array jsons.vi
 Assert.vi
-Write Sim_Ixon_Ultra class.vi
+Write Sim_CCD class.vi
 Write Camera Status.vi
 Build Array
 write image timmings.vi

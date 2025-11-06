@@ -634,6 +634,22 @@
 			<Item Name="read image.vi" Type="VI" URL="../Simulated_CCD_Camera/read image.vi"/>
 			<Item Name="find idx smaller than.vi" Type="VI" URL="../Simulated_CCD_Camera/find idx smaller than.vi"/>
 			<Item Name="calculate #pixels.vi" Type="VI" URL="../Simulated_CCD_Camera/calculate #pixels.vi"/>
+			<Item Name="log acq config errors.vi" Type="VI" URL="../SPARC4_Channel/log acq config errors.vi"/>
+			<Item Name="update camera op mode error.vi" Type="VI" URL="../SPARC4_Channel/update camera op mode error.vi"/>
+			<Item Name="Create RxTx.vi" Type="VI" URL="../SPARC4_Channel/Create RxTx.vi"/>
+			<Item Name="Init log file.vi" Type="VI" URL="../SPARC4_Channel/Init log file.vi"/>
+			<Item Name="initialize servers.vi" Type="VI" URL="../SPARC4_Channel/initialize servers.vi"/>
+			<Item Name="Initialize VIs Communication.vi" Type="VI" URL="../SPARC4_Channel/Initialize VIs Communication.vi"/>
+			<Item Name="Log debbug message.vi" Type="VI" URL="../SPARC4_Channel/Log debbug message.vi"/>
+			<Item Name="Log error message.vi" Type="VI" URL="../SPARC4_Channel/Log error message.vi"/>
+			<Item Name="Log info message.vi" Type="VI" URL="../SPARC4_Channel/Log info message.vi"/>
+			<Item Name="Log status message.vi" Type="VI" URL="../SPARC4_Channel/Log status message.vi"/>
+			<Item Name="Log warning message.vi" Type="VI" URL="../SPARC4_Channel/Log warning message.vi"/>
+			<Item Name="Write ACSVRSN.vi" Type="VI" URL="../SPARC4_Channel/Write ACSVRSN.vi"/>
+			<Item Name="Write setup configuration.vi" Type="VI" URL="../SPARC4_Channel/Write setup configuration.vi"/>
+			<Item Name="write state.vi" Type="VI" URL="../SPARC4_Channel/write state.vi"/>
+			<Item Name="find index of the image name.vi" Type="VI" URL="../SPARC4_Channel/find index of the image name.vi"/>
+			<Item Name="Verify image path.vi" Type="VI" URL="../SPARC4_Channel/Verify image path.vi"/>
 			<Item Name="Simulated Camera.ctl" Type="VI" URL="../Simulated_CCD_Camera/Simulated Camera.lvclass/Simulated Camera.ctl"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
