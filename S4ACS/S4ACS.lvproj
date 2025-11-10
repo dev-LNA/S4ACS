@@ -143,8 +143,8 @@
 			<Item Name="zmq.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/zmq.h"/>
 		</Item>
 		<Item Name="atmcd64d.dll" Type="Document" URL="../../../../../../Program Files/Andor SDK/atmcd64d.dll"/>
-		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/socket_TEMPLATE.cfg"/>
-		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../S4ACS files/acs_config_TEMPLATE.cfg"/>
+		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../ACS files/acs_config_TEMPLATE.cfg"/>
+		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../ACS files/socket_TEMPLATE.cfg"/>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
 		<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
 		<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
@@ -692,10 +692,10 @@
 				<Property Name="Source[2].itemID" Type="Ref"></Property>
 				<Property Name="Source[2].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[3].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[3].itemID" Type="Ref">/My Computer/socket_TEMPLATE.cfg</Property>
+				<Property Name="Source[3].itemID" Type="Ref"></Property>
 				<Property Name="Source[3].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[4].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[4].itemID" Type="Ref">/My Computer/acs_config_TEMPLATE.cfg</Property>
+				<Property Name="Source[4].itemID" Type="Ref"></Property>
 				<Property Name="Source[4].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[5].Container.applyDestination" Type="Bool">true</Property>
 				<Property Name="Source[5].Container.applyInclusion" Type="Bool">true</Property>
