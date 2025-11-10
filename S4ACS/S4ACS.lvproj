@@ -640,7 +640,6 @@
 			<Item Name="initialize servers.vi" Type="VI" URL="../SPARC4_Channel/initialize servers.vi"/>
 			<Item Name="Initialize VIs Communication.vi" Type="VI" URL="../SPARC4_Channel/Initialize VIs Communication.vi"/>
 			<Item Name="Log error message.vi" Type="VI" URL="../SPARC4_Channel/Log error message.vi"/>
-			<Item Name="Log warning message.vi" Type="VI" URL="../SPARC4_Channel/Log warning message.vi"/>
 			<Item Name="Write ACSVRSN.vi" Type="VI" URL="../SPARC4_Channel/Write ACSVRSN.vi"/>
 			<Item Name="find index of the image name.vi" Type="VI" URL="../SPARC4_Channel/find index of the image name.vi"/>
 			<Item Name="Verify image path.vi" Type="VI" URL="../SPARC4_Channel/Verify image path.vi"/>
