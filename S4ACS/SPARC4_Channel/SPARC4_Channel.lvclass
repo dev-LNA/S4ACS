@@ -66,15 +66,6 @@
 			<Property Name="NI.ClassItem.Priority" Type="Int">1</Property>
 			<Property Name="NI.ClassItem.State" Type="Int">34078736</Property>
 		</Item>
-		<Item Name="read Sim_iXon Class.vi" Type="VI" URL="../read Sim_iXon Class.vi">
-			<Property Name="NI.ClassItem.ConnectorPane" Type="Bin">'!#!!!!!!!)!"1!&amp;!!!-!%!!!@````]!!!!"!!%!!!&amp;O!!!!#A!-1#%'=X2B&gt;(6T!!!,1!-!"'.P:'5!!""!-0````]'=W^V=G.F!!!71&amp;!!!Q!!!!%!!AFF=H*P=C"P&gt;81!"!!!!$J!=!!?!!!9&amp;F.J&lt;6^*?'^O8V6M&gt;(*B,GRW9WRB=X-!!":4;7V@38BP&lt;F^6&lt;(2S93ZM&gt;G.M98.T!!!W1(!!(A!!'":45%&amp;31T2@1WBB&lt;GZF&lt;#ZM&gt;G.M98.T!!!35V""5E-U8U.I97ZO:7QA&lt;X6U!!!A1&amp;!!!Q!!!!%!!B.F=H*P=C"J&lt;C!I&lt;G]A:8*S&lt;X)J!$2!=!!?!!!9&amp;F.116*$.&amp;^$;'&amp;O&lt;G6M,GRW9WRB=X-!!"&amp;45%&amp;31T2@1WBB&lt;GZF&lt;#"J&lt;A"B!0!!$!!$!!1!"1!'!!1!"!!%!!1!"Q!%!!1!#!-!!(A!!!U)!!!!!!!!#1!!!!U,!!!!!!!!!!!!!!!!!!!!!!!!#A!!!!!!!!!!!!!!%!!!$1!!!!Q!!!!!!!!!!!!!!1!*!!!!!!</Property>
-			<Property Name="NI.ClassItem.ExecutionSystem" Type="Int">-1</Property>
-			<Property Name="NI.ClassItem.Flags" Type="Int">0</Property>
-			<Property Name="NI.ClassItem.IsStaticMethod" Type="Bool">true</Property>
-			<Property Name="NI.ClassItem.MethodScope" Type="UInt">1</Property>
-			<Property Name="NI.ClassItem.Priority" Type="Int">1</Property>
-			<Property Name="NI.ClassItem.State" Type="Int">1342710288</Property>
-		</Item>
 	</Item>
 	<Item Name="verify" Type="Folder">
 		<Item Name="verify acquisition progress.vi" Type="VI" URL="../verify acquisition progress.vi">

@@ -622,6 +622,7 @@
 			<Item Name="Write ACSVRSN.vi" Type="VI" URL="../SPARC4_Channel/Write ACSVRSN.vi"/>
 			<Item Name="find index of the image name.vi" Type="VI" URL="../SPARC4_Channel/find index of the image name.vi"/>
 			<Item Name="Verify image path.vi" Type="VI" URL="../SPARC4_Channel/Verify image path.vi"/>
+			<Item Name="read Sim_iXon Class.vi" Type="VI" URL="../SPARC4_Channel/read Sim_iXon Class.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
