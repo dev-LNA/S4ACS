@@ -113,9 +113,9 @@
 			<Item Name="general_tests.py" Type="Document" URL="../S4ACS files/python/general_tests.py"/>
 		</Item>
 		<Item Name="cam_parameters" Type="Folder">
-			<Item Name="limit_values_parameters.csv" Type="Document" URL="../S4ACS files/cam_parameters/limit_values_parameters.csv"/>
-			<Item Name="readout_times.csv" Type="Document" URL="../S4ACS files/cam_parameters/readout_times.csv"/>
-			<Item Name="max_#frames.csv" Type="Document" URL="../S4ACS files/cam_parameters/max_#frames.csv"/>
+			<Item Name="limit_values_parameters.csv" Type="Document" URL="../ACS files/cam_parameters/limit_values_parameters.csv"/>
+			<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/cam_parameters/max_#frames.csv"/>
+			<Item Name="readout_times.csv" Type="Document" URL="../ACS files/cam_parameters/readout_times.csv"/>
 		</Item>
 		<Item Name="comm man classes" Type="Folder">
 			<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../communication-manager/Log File/CM_Log File.lvclass"/>
