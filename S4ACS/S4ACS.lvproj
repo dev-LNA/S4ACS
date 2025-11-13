@@ -90,10 +90,6 @@
 		<Item Name="General VIs" Type="Folder">
 			<Item Name="TESTE.vi" Type="VI" URL="../General VIs/TESTE.vi"/>
 			<Item Name="old tests.vi" Type="VI" URL="../General VIs/old tests.vi"/>
-			<Item Name="fix_ICS_msg.vi" Type="VI" URL="../General VIs/fix_ICS_msg.vi"/>
-			<Item Name="get machine path.vi" Type="VI" URL="../General VIs/get machine path.vi"/>
-			<Item Name="night time stamp.vi" Type="VI" URL="../General VIs/night time stamp.vi"/>
-			<Item Name="split string.vi" Type="VI" URL="../General VIs/split string.vi"/>
 			<Item Name="IO pins.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/IO pins.vi"/>
 		</Item>
 		<Item Name="python" Type="Folder">
@@ -141,6 +137,17 @@
 			<Item Name="msvcp120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcp120.dll"/>
 			<Item Name="msvcr120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcr120.dll"/>
 			<Item Name="zmq.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/zmq.h"/>
+		</Item>
+		<Item Name="utils" Type="Folder">
+			<Item Name="verify parameter in range.vi" Type="VI" URL="../utils/verify parameter in range.vi"/>
+			<Item Name="verify parameter in list.vi" Type="VI" URL="../utils/verify parameter in list.vi"/>
+			<Item Name="fix_ICS_msg.vi" Type="VI" URL="../utils/fix_ICS_msg.vi"/>
+			<Item Name="get machine path.vi" Type="VI" URL="../utils/get machine path.vi"/>
+			<Item Name="night time stamp.vi" Type="VI" URL="../utils/night time stamp.vi"/>
+			<Item Name="split string.vi" Type="VI" URL="../utils/split string.vi"/>
+			<Item Name="find row in array.vi" Type="VI" URL="../utils/find row in array.vi"/>
+			<Item Name="get parameter min and max.vi" Type="VI" URL="../utils/get parameter min and max.vi"/>
+			<Item Name="read csv file.vi" Type="VI" URL="../utils/read csv file.vi"/>
 		</Item>
 		<Item Name="atmcd64d.dll" Type="Document" URL="../../../../../../Program Files/Andor SDK/atmcd64d.dll"/>
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../ACS files/acs_config_TEMPLATE.cfg"/>
@@ -661,15 +668,15 @@
 				<Property Name="Source[1].sourceInclusion" Type="Str">TopLevel</Property>
 				<Property Name="Source[1].type" Type="Str">VI</Property>
 				<Property Name="Source[10].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[10].itemID" Type="Ref">/My Computer/General VIs/night time stamp.vi</Property>
+				<Property Name="Source[10].itemID" Type="Ref"></Property>
 				<Property Name="Source[10].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[10].type" Type="Str">VI</Property>
 				<Property Name="Source[11].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[11].itemID" Type="Ref">/My Computer/General VIs/split string.vi</Property>
+				<Property Name="Source[11].itemID" Type="Ref">/My Computer/Dependencies/Items in Memory/split string.vi</Property>
 				<Property Name="Source[11].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[11].type" Type="Str">VI</Property>
 				<Property Name="Source[12].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[12].itemID" Type="Ref">/My Computer/General VIs/fix_ICS_msg.vi</Property>
+				<Property Name="Source[12].itemID" Type="Ref"></Property>
 				<Property Name="Source[12].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[12].type" Type="Str">VI</Property>
 				<Property Name="Source[13].destinationIndex" Type="Int">3</Property>
@@ -718,7 +725,7 @@
 				<Property Name="Source[8].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[8].type" Type="Str">VI</Property>
 				<Property Name="Source[9].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[9].itemID" Type="Ref">/My Computer/General VIs/get machine path.vi</Property>
+				<Property Name="Source[9].itemID" Type="Ref"></Property>
 				<Property Name="Source[9].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[9].type" Type="Str">VI</Property>
 				<Property Name="SourceCount" Type="Int">16</Property>
