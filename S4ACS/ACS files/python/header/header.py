@@ -788,6 +788,7 @@ class CCD(Header):
         _json["PREAMP"] = self.preamp_modes[_json["PREAMP"]]
         _json["VSHIFT"] = self.vshift_modes[_json["VSHIFT"]]
         _json["COOLER"] = _json["COOLER"] == 1
+        _json["FRAMEIND"] += 1
         _json["EXPTIME"] = float(_json["EXPTIME"])
         self.original_json = _json
 
