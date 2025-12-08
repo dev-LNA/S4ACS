@@ -58,7 +58,7 @@ VCLKAMP;;string;Normal,+1,+2,+3,+4;Clock amplitude: Normal, +1, +2, +3, +4
 GAIN;;float;0,inf;Gain (e-/ADU)
 RDNOISE;;float;0,inf;Read noise (e-)
 RA;RAACQUIS;string;;Right ascension: HH:MM:SS.ss
-DEC;DECACQUIS;string;;Declination: +-DD:MM:SS.ss
+DEC;DECACQUIS;string;;Declination: DD:MM:SS.ss
 EQUINOX;;float;0,inf;Equinox of coordinates
 TELFOCUS;POSITION;integer;0,inf;Telescope focus position (arbitrary units)
 TCSHA;HOURANGLE;string;;TCS hour angle: HH:MM:SS

@@ -504,15 +504,15 @@ class TCS(Header):
         keywords = ["RA", "DEC", "TCSHA", "INSTROT", "AIRMASS"]
         to_float_kws = ["AIRMASS", "INSTROT"]
         regex_str = {
-            "RA": (r"[\+-]?\d{2}:\d{2}:\d{2}(\.\d+)?", "HH:MM:SS.ss"),
-            "DEC": (r"[\+-]?\d{2}:\d{2}:\d{2}(\.\d+)?", "HH:MM:SS.ss"),
-            "TCSHA": (r"[\+-]?\d{2}:\d{2}:\d{2}(\.\d+)?", "HH:MM:SS.ss"),
+            "RA": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d+", "HH:MM:SS.ss"),
+            "DEC": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d+", "HH:MM:SS.ss"),
+            "TCSHA": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d+", "HH:MM:SS.ss"),
             "TCSDATE": (
                 r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}",
                 "YYY-MM-DDTHH:MM:SS.sss",
             ),
         }
-        comma_kws = ["TCSHA"]
+        comma_kws = ["TCSHA", "RA", "DEC"]
 
         return Keywords_Dataclass(
             keywords=keywords,
@@ -788,6 +788,7 @@ class CCD(Header):
         _json["PREAMP"] = self.preamp_modes[_json["PREAMP"]]
         _json["VSHIFT"] = self.vshift_modes[_json["VSHIFT"]]
         _json["COOLER"] = _json["COOLER"] == 1
+        _json["FRAMEIND"] += 1
         _json["EXPTIME"] = float(_json["EXPTIME"])
         self.original_json = _json
 

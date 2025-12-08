@@ -93,25 +93,26 @@
 			<Item Name="IO pins.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/IO pins.vi"/>
 		</Item>
 		<Item Name="python" Type="Folder">
-			<Item Name="csvs" Type="Folder">
-				<Item Name="header_content.csv" Type="Document" URL="../S4ACS files/python/csvs/header_content.csv"/>
-				<Item Name="preamp_gains.csv" Type="Document" URL="../S4ACS files/python/csvs/preamp_gains.csv"/>
-				<Item Name="read_noises.csv" Type="Document" URL="../S4ACS files/python/csvs/read_noises.csv"/>
+			<Item Name="csv" Type="Folder">
+				<Item Name="header_content.csv" Type="Document" URL="../ACS files/python/csvs/header_content.csv"/>
+				<Item Name="preamp_gains.csv" Type="Document" URL="../ACS files/python/csvs/preamp_gains.csv"/>
+				<Item Name="read_noises.csv" Type="Document" URL="../ACS files/python/csvs/read_noises.csv"/>
 			</Item>
 			<Item Name="header" Type="Folder">
-				<Item Name="__init__.py" Type="Document" URL="../S4ACS files/python/header/__init__.py"/>
-				<Item Name="header.py" Type="Document" URL="../S4ACS files/python/header/header.py"/>
-				<Item Name="utils.py" Type="Document" URL="../S4ACS files/python/header/utils.py"/>
+				<Item Name="__init__.py" Type="Document" URL="../ACS files/python/header/__init__.py"/>
+				<Item Name="header.py" Type="Document" URL="../ACS files/python/header/header.py"/>
+				<Item Name="utils.py" Type="Document" URL="../ACS files/python/header/utils.py"/>
 			</Item>
-			<Item Name="main.py" Type="Document" URL="../S4ACS files/python/main.py"/>
-			<Item Name="temp.py" Type="Document" URL="../S4ACS files/python/temp.py"/>
-			<Item Name="utils.py" Type="Document" URL="../S4ACS files/python/utils.py"/>
-			<Item Name="general_tests.py" Type="Document" URL="../S4ACS files/python/general_tests.py"/>
+			<Item Name="general_tests.py" Type="Document" URL="../ACS files/python/general_tests.py"/>
+			<Item Name="main.py" Type="Document" URL="../ACS files/python/main.py"/>
+			<Item Name="temp.py" Type="Document" URL="../ACS files/python/temp.py"/>
+			<Item Name="utils.py" Type="Document" URL="../ACS files/python/utils.py"/>
 		</Item>
 		<Item Name="cam_parameters" Type="Folder">
-			<Item Name="limit_values_parameters.csv" Type="Document" URL="../ACS files/cam_parameters/limit_values_parameters.csv"/>
 			<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/cam_parameters/max_#frames.csv"/>
 			<Item Name="readout_times.csv" Type="Document" URL="../ACS files/cam_parameters/readout_times.csv"/>
+			<Item Name="s4ch_parameters_limit_values.csv" Type="Document" URL="../ACS files/s4ch_parameters_limit_values.csv"/>
+			<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/cam_parameters/cam_parameters_limit_values.csv"/>
 		</Item>
 		<Item Name="comm man classes" Type="Folder">
 			<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../communication-manager/Log File/CM_Log File.lvclass"/>
@@ -622,14 +623,14 @@
 			</Item>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
-			<Item Name="S4ACS" Type="EXE">
+			<Item Name="ACS" Type="EXE">
 				<Property Name="App_copyErrors" Type="Bool">true</Property>
 				<Property Name="App_INI_aliasGUID" Type="Str">{5ADE022D-8E10-4FD3-B918-9CCB5BBDA3D1}</Property>
 				<Property Name="App_INI_GUID" Type="Str">{76FB2D52-4F12-4B99-A1C1-C384EB8F3D40}</Property>
 				<Property Name="App_serverConfig.httpPort" Type="Int">8002</Property>
 				<Property Name="Bld_autoIncrement" Type="Bool">true</Property>
 				<Property Name="Bld_buildCacheID" Type="Str">{B2388A00-72D2-4541-8F38-36E796A90EA1}</Property>
-				<Property Name="Bld_buildSpecName" Type="Str">S4ACS</Property>
+				<Property Name="Bld_buildSpecName" Type="Str">ACS</Property>
 				<Property Name="Bld_excludeInlineSubVIs" Type="Bool">true</Property>
 				<Property Name="Bld_excludeLibraryItems" Type="Bool">true</Property>
 				<Property Name="Bld_excludePolymorphicVIs" Type="Bool">true</Property>
@@ -637,7 +638,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">34</Property>
+				<Property Name="Bld_version.build" Type="Int">35</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
@@ -645,13 +646,13 @@
 				<Property Name="Destination[0].type" Type="Str">App</Property>
 				<Property Name="Destination[1].destName" Type="Str">Support Directory</Property>
 				<Property Name="Destination[1].path" Type="Path">../builds/NI_AB_PROJECTNAME/data</Property>
-				<Property Name="Destination[2].destName" Type="Str">S4ACS files</Property>
-				<Property Name="Destination[2].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS files</Property>
+				<Property Name="Destination[2].destName" Type="Str">ACS files</Property>
+				<Property Name="Destination[2].path" Type="Path">../builds/NI_AB_PROJECTNAME/ACS files</Property>
 				<Property Name="Destination[2].preserveHierarchy" Type="Bool">true</Property>
 				<Property Name="Destination[3].destName" Type="Str">root</Property>
 				<Property Name="Destination[3].path" Type="Path">../builds/NI_AB_PROJECTNAME</Property>
 				<Property Name="DestinationCount" Type="Int">4</Property>
-				<Property Name="Source[0].itemID" Type="Str">{4C8B2966-B6A3-45EE-B552-BB83A2A927B7}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{F56AC78F-E550-4DAA-A527-2461BDCE3B83}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/S4ACS.vi</Property>
@@ -660,72 +661,43 @@
 				<Property Name="Source[1].propertiesCount" Type="Int">1</Property>
 				<Property Name="Source[1].sourceInclusion" Type="Str">TopLevel</Property>
 				<Property Name="Source[1].type" Type="Str">VI</Property>
-				<Property Name="Source[10].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[10].itemID" Type="Ref"></Property>
-				<Property Name="Source[10].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[10].type" Type="Str">VI</Property>
-				<Property Name="Source[11].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[11].itemID" Type="Ref">/My Computer/Dependencies/Items in Memory/split string.vi</Property>
-				<Property Name="Source[11].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[11].type" Type="Str">VI</Property>
-				<Property Name="Source[12].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[12].itemID" Type="Ref"></Property>
-				<Property Name="Source[12].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[12].type" Type="Str">VI</Property>
-				<Property Name="Source[13].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[13].itemID" Type="Ref">/My Computer/atmcd64d.dll</Property>
-				<Property Name="Source[13].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[14].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[14].itemID" Type="Ref">/My Computer/Comm/communication manager.vi</Property>
-				<Property Name="Source[14].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[14].type" Type="Str">VI</Property>
-				<Property Name="Source[15].Container.applyDestination" Type="Bool">true</Property>
-				<Property Name="Source[15].Container.applyInclusion" Type="Bool">true</Property>
-				<Property Name="Source[15].Container.depDestIndex" Type="Int">0</Property>
-				<Property Name="Source[15].destinationIndex" Type="Int">1</Property>
-				<Property Name="Source[15].itemID" Type="Ref">/My Computer/zeromq64</Property>
-				<Property Name="Source[15].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[15].type" Type="Str">Container</Property>
-				<Property Name="Source[2].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[2].itemID" Type="Ref"></Property>
+				<Property Name="Source[2].Container.applyDestination" Type="Bool">true</Property>
+				<Property Name="Source[2].Container.applyInclusion" Type="Bool">true</Property>
+				<Property Name="Source[2].Container.depDestIndex" Type="Int">0</Property>
+				<Property Name="Source[2].destinationIndex" Type="Int">2</Property>
+				<Property Name="Source[2].itemID" Type="Ref">/My Computer/cam_parameters</Property>
 				<Property Name="Source[2].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[3].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[3].itemID" Type="Ref"></Property>
+				<Property Name="Source[2].type" Type="Str">Container</Property>
+				<Property Name="Source[3].Container.applyDestination" Type="Bool">true</Property>
+				<Property Name="Source[3].Container.applyInclusion" Type="Bool">true</Property>
+				<Property Name="Source[3].Container.depDestIndex" Type="Int">0</Property>
+				<Property Name="Source[3].destinationIndex" Type="Int">2</Property>
+				<Property Name="Source[3].itemID" Type="Ref">/My Computer/python</Property>
 				<Property Name="Source[3].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[4].destinationIndex" Type="Int">3</Property>
-				<Property Name="Source[4].itemID" Type="Ref"></Property>
+				<Property Name="Source[3].type" Type="Str">Container</Property>
+				<Property Name="Source[4].destinationIndex" Type="Int">0</Property>
+				<Property Name="Source[4].itemID" Type="Ref">/My Computer/Comm/Save_Header.vi</Property>
 				<Property Name="Source[4].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[5].Container.applyDestination" Type="Bool">true</Property>
-				<Property Name="Source[5].Container.applyInclusion" Type="Bool">true</Property>
-				<Property Name="Source[5].Container.depDestIndex" Type="Int">0</Property>
-				<Property Name="Source[5].destinationIndex" Type="Int">2</Property>
-				<Property Name="Source[5].itemID" Type="Ref">/My Computer/cam_parameters</Property>
+				<Property Name="Source[4].type" Type="Str">VI</Property>
+				<Property Name="Source[5].destinationIndex" Type="Int">3</Property>
+				<Property Name="Source[5].itemID" Type="Ref">/My Computer/atmcd64d.dll</Property>
 				<Property Name="Source[5].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[5].type" Type="Str">Container</Property>
-				<Property Name="Source[6].Container.applyDestination" Type="Bool">true</Property>
-				<Property Name="Source[6].Container.applyInclusion" Type="Bool">true</Property>
-				<Property Name="Source[6].Container.depDestIndex" Type="Int">0</Property>
-				<Property Name="Source[6].destinationIndex" Type="Int">2</Property>
-				<Property Name="Source[6].itemID" Type="Ref">/My Computer/python</Property>
+				<Property Name="Source[6].destinationIndex" Type="Int">0</Property>
+				<Property Name="Source[6].itemID" Type="Ref">/My Computer/Comm/communication manager.vi</Property>
 				<Property Name="Source[6].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[6].type" Type="Str">Container</Property>
-				<Property Name="Source[7].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[7].itemID" Type="Ref">/My Computer/Comm/Save_Header.vi</Property>
+				<Property Name="Source[6].type" Type="Str">VI</Property>
+				<Property Name="Source[7].Container.applyDestination" Type="Bool">true</Property>
+				<Property Name="Source[7].Container.applyInclusion" Type="Bool">true</Property>
+				<Property Name="Source[7].Container.depDestIndex" Type="Int">0</Property>
+				<Property Name="Source[7].destinationIndex" Type="Int">1</Property>
+				<Property Name="Source[7].itemID" Type="Ref">/My Computer/zeromq64</Property>
 				<Property Name="Source[7].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[7].type" Type="Str">VI</Property>
-				<Property Name="Source[8].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[8].itemID" Type="Ref"></Property>
-				<Property Name="Source[8].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[8].type" Type="Str">VI</Property>
-				<Property Name="Source[9].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[9].itemID" Type="Ref"></Property>
-				<Property Name="Source[9].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[9].type" Type="Str">VI</Property>
-				<Property Name="SourceCount" Type="Int">16</Property>
-				<Property Name="TgtF_fileDescription" Type="Str">S4ACS</Property>
-				<Property Name="TgtF_internalName" Type="Str">S4ACS</Property>
+				<Property Name="Source[7].type" Type="Str">Container</Property>
+				<Property Name="SourceCount" Type="Int">8</Property>
+				<Property Name="TgtF_fileDescription" Type="Str">ACS</Property>
+				<Property Name="TgtF_internalName" Type="Str">ACS</Property>
 				<Property Name="TgtF_legalCopyright" Type="Str">Copyright © 2025 </Property>
-				<Property Name="TgtF_productName" Type="Str">S4ACS</Property>
+				<Property Name="TgtF_productName" Type="Str">ACS</Property>
 				<Property Name="TgtF_targetfileGUID" Type="Str">{7A9F2368-63D2-40D9-BC55-F4EC253FA504}</Property>
 				<Property Name="TgtF_targetfileName" Type="Str">S4ACS.exe</Property>
 				<Property Name="TgtF_versionIndependent" Type="Bool">true</Property>
@@ -738,7 +710,7 @@
 				<Property Name="DestinationItemCount" Type="Int">1</Property>
 				<Property Name="DestinationName[0]" Type="Str">Destination Directory</Property>
 				<Property Name="IncludedItemCount" Type="Int">1</Property>
-				<Property Name="IncludedItems[0]" Type="Ref">/My Computer/Build Specifications/S4ACS</Property>
+				<Property Name="IncludedItems[0]" Type="Ref">/My Computer/Build Specifications/ACS</Property>
 				<Property Name="IncludeProject" Type="Bool">false</Property>
 				<Property Name="Path[0]" Type="Path">../../builds/S4ACS.zip</Property>
 				<Property Name="ZipBase" Type="Str">NI_zipbasedefault</Property>
@@ -819,7 +791,7 @@
 				<Property Name="Source[0].File[0].tag" Type="Str">{7A9F2368-63D2-40D9-BC55-F4EC253FA504}</Property>
 				<Property Name="Source[0].FileCount" Type="Int">1</Property>
 				<Property Name="Source[0].name" Type="Str">S4ACS</Property>
-				<Property Name="Source[0].tag" Type="Ref">/My Computer/Build Specifications/S4ACS</Property>
+				<Property Name="Source[0].tag" Type="Ref">/My Computer/Build Specifications/ACS</Property>
 				<Property Name="Source[0].type" Type="Str">EXE</Property>
 				<Property Name="SourceCount" Type="Int">1</Property>
 			</Item>
