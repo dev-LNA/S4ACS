@@ -620,13 +620,6 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Create RxTx.vi" Type="VI" URL="../SPARC4_Channel/Create RxTx.vi"/>
-			<Item Name="Init log file.vi" Type="VI" URL="../SPARC4_Channel/Init log file.vi"/>
-			<Item Name="initialize servers.vi" Type="VI" URL="../SPARC4_Channel/initialize servers.vi"/>
-			<Item Name="Initialize VIs Communication.vi" Type="VI" URL="../SPARC4_Channel/Initialize VIs Communication.vi"/>
-			<Item Name="Write ACSVRSN.vi" Type="VI" URL="../SPARC4_Channel/Write ACSVRSN.vi"/>
-			<Item Name="find index of the image name.vi" Type="VI" URL="../SPARC4_Channel/find index of the image name.vi"/>
-			<Item Name="Verify image path.vi" Type="VI" URL="../SPARC4_Channel/Verify image path.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="S4ACS" Type="EXE">
