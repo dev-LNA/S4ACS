@@ -157,15 +157,17 @@
 		<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
 		<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
 		<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
+		<Item Name="iKon-L.lvclass" Type="LVClass" URL="../iKon-L/iKon-L.lvclass"/>
 		<Item Name="State Machine.lvclass" Type="LVClass" URL="../State Machine/State Machine.lvclass"/>
 		<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
 		<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
+		<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
 		<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
 		<Item Name="RxTx.lvclass" Type="LVClass" URL="../RxTx/RxTx.lvclass"/>
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
 		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
-		<Item Name="iKon-L.lvclass" Type="LVClass" URL="../iKon-L/iKon-L.lvclass"/>
+		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
@@ -623,6 +625,12 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="Read s4 acq config errors.vi" Type="VI" URL="../ECHARPE_Channel/Read s4 acq config errors.vi"/>
+			<Item Name="Read s4 channel status.vi" Type="VI" URL="../ECHARPE_Channel/Read s4 channel status.vi"/>
+			<Item Name="Write s4 acq config errors.vi" Type="VI" URL="../ECHARPE_Channel/Write s4 acq config errors.vi"/>
+			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
+			<Item Name="get waveplate status.vi" Type="VI" URL="../ECHARPE_Channel/get waveplate status.vi"/>
+			<Item Name="verify waveplate_pos.vi" Type="VI" URL="../ECHARPE_Channel/verify waveplate_pos.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
