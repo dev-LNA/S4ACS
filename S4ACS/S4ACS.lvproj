@@ -625,12 +625,7 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="Read s4 acq config errors.vi" Type="VI" URL="../ECHARPE_Channel/Read s4 acq config errors.vi"/>
-			<Item Name="Read s4 channel status.vi" Type="VI" URL="../ECHARPE_Channel/Read s4 channel status.vi"/>
-			<Item Name="Write s4 acq config errors.vi" Type="VI" URL="../ECHARPE_Channel/Write s4 acq config errors.vi"/>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
-			<Item Name="get waveplate status.vi" Type="VI" URL="../ECHARPE_Channel/get waveplate status.vi"/>
-			<Item Name="verify waveplate_pos.vi" Type="VI" URL="../ECHARPE_Channel/verify waveplate_pos.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
