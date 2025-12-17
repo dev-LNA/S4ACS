@@ -764,8 +764,7 @@ class CCD(Header):
             self._write_log_file(repr(e), "GAIN")
 
     @abstractmethod
-    def _find_index_tab(self):
-        self.idx_tab = 1
+    def _find_index_tab(self): ...
 
     def extract_info(self):
         super().extract_info()
@@ -788,6 +787,11 @@ class CCD(Header):
     def _write_READRATE(self):
         return self.readout_rates[self.original_json["READRATE"]]
 
+    def _fix_EXPTIME(self):
+        if 1e-5 > self.hdr["EXPTIME"] > 9.999999e-6:
+            self.hdr["EXPTIME"] = 10e-6
+        return
+
 
 class iXon_Ultra(CCD):
 
@@ -809,10 +813,11 @@ class iXon_Ultra(CCD):
         _json = self.original_json
         em_mode = _json["EMMODE"]
         index = 8 * em_mode
-        readout_rates = self.readout_rates[em_mode]
+        # readout_rates = self.readout_rates[em_mode]
 
-        index += 2 * readout_rates.index(_json["READRATE"])
-        index += float(_json["PREAMP"][-1])
+        # index += 2 * readout_rates.index(_json["READRATE"])
+        index += 2 * _json["READRATE"]
+        index += _json["PREAMP"]
         self.idx_tab = index
 
     def _fix_ccd_parameters(self):
