@@ -43,7 +43,7 @@ class Header(ABC):
         try:
             _json = json.loads(self.json_string)
             self.original_json = {k.upper(): v for k, v in _json.items()}
-        except Exception as e:
+        except Exception as e:  # ! Isto deveria ir para log de erros!
             self._write_log_file(
                 f"{self.sub_system}: There was an error when loading the JSON data --> {self.json_string}."
                 + repr(e),
@@ -234,8 +234,8 @@ class Header(ABC):
         a_values = allowed_kw_values[hdr_kw]
         min, *max = a_values
         if not isinstance(val, (int, float)):
-            return
-        if val < min or val > max[-1]:
+            return  # ! deveria ser um erro?
+        if not min < val < max[-1]:
             self._write_log_file(
                 f'The provided keyword value is out of range {a_values}. "{val}" was found.',
                 hdr_kw,
@@ -246,7 +246,7 @@ class Header(ABC):
         val = self.new_json[hdr_kw]
         a_values = allowed_kw_values[hdr_kw]
         if not isinstance(val, str):
-            return
+            return  # ! deveria ser um erro?
         if val not in a_values and a_values != "":
             self._write_log_file(
                 f'The expected values for this keyword are {a_values}. "{val}" was found.',
@@ -262,7 +262,7 @@ class Header(ABC):
     def _write_log_file(self, message, keyword):
         with open(self.log_file, "a") as file:
             now = str(datetime.now())
-            file.write(
+            file.write(  # ! add file name?
                 now
                 + " - "
                 + f"SUB-SYTEM={self.sub_system}, KEYWORD={keyword} - "
@@ -651,15 +651,20 @@ class CCD(Header):
     sub_system = "CCD"
     trigger_modes = {0: "Internal", 6: "External"}
     acq_modes = {1: "Single Scan", 3: "Kinetics"}
-    em_modes = ["Electron Multiplying", "Conventional"]
     shutter_modes = ["Auto", "Open", "Closed"]
     vclock_modes = ["Normal", "+1", "+2", "+3", "+4"]
-    preamp_modes = ["Gain 1", "Gain 2"]
-    vshift_modes = [0.6, 1.13, 2.2, 4.33]
 
-    def _load_json(self, dict_header_jsons):
-        super()._load_json(dict_header_jsons)
-        self._fix_ccd_parameters()
+    vshift_modes = []
+    preamp_modes = []
+    readout_rates = []
+
+    def __init__(self, dict_header_jsons, log_file):
+        super().__init__(dict_header_jsons, log_file)
+        self._find_index_tab()
+
+    # def _load_json(self, dict_header_jsons):
+    #     super()._load_json(dict_header_jsons)
+    #     self._fix_ccd_parameters()
 
     def _initialize_kw_dataclass(self):
         keywords = [
@@ -669,12 +674,9 @@ class CCD(Header):
             "CCDSERN",
             "PREAMP",
             "READRATE",
-            "EMGAIN",
             "VSHIFT",
-            "FRAMETRF",
             "VCLKAMP",
             "ACQMODE",
-            "EMMODE",
             "SHUTTER",
             "TRIGGER",
             "VBIN",
@@ -692,7 +694,7 @@ class CCD(Header):
             "UTDATE",
         ]
 
-        to_bool_kws = ["COOLER", "FRAMETRF"]
+        to_bool_kws = ["COOLER"]
         to_float_kws = ["EXPTIME"]
         to_int_kws = [
             "VBIN",
@@ -703,7 +705,6 @@ class CCD(Header):
             "INITLIN",
             "FRAMEIND",
             "CCDSERN",
-            "EMGAIN",
             "NFRAMES",
             "CCDTEMP",
             "TGTEMP",
@@ -712,7 +713,6 @@ class CCD(Header):
             "TEMPST",
             "TRIGGER",
             "ACQMODE",
-            "EMMODE",
             "SHUTTER",
             "VSHIFT",
             "READRATE",
@@ -753,36 +753,29 @@ class CCD(Header):
 
     def _write_read_noise(self):
         try:
-            idx = self.find_index_tab()
-            self.hdr["RDNOISE"] = read_noise[f"{self.hdr['CCDSERN']}"][idx]
+            self.hdr["RDNOISE"] = read_noise[f"{self.hdr['CCDSERN']}"][self.idx_tab]
         except Exception as e:
             self._write_log_file(repr(e), "RDNOISE")
 
     def _write_ccd_gain(self):
         try:
-            idx = self.find_index_tab()
-            self.hdr["GAIN"] = gains[f"{self.hdr['CCDSERN']}"][idx]
+            self.hdr["GAIN"] = gains[f"{self.hdr['CCDSERN']}"][self.idx_tab]
         except Exception as e:
             self._write_log_file(repr(e), "GAIN")
 
-    def find_index_tab(self):
-        _json = self.new_json
-        index = 0
-        if _json["EMMODE"] == "Conventional":
-            index += 8
-            readout_modes = [1.0, 0.1]
-        else:
-            readout_modes = [30.0, 20.0, 10.0, 1.0]
-        index += 2 * readout_modes.index(_json["READRATE"])
-        index += float(_json["PREAMP"][-1]) - 1
-        return index
+    @abstractmethod
+    def _find_index_tab(self):
+        self.idx_tab = 1
+
+    def extract_info(self):
+        super().extract_info()
+        self._fix_ccd_parameters()
 
     def _fix_ccd_parameters(self):
-        _json = self.original_json
-        _json["READRATE"] = self._write_READRATE(_json)
+        _json = self.new_json
+        _json["READRATE"] = self._write_READRATE()
         _json["TRIGGER"] = self.trigger_modes[_json["TRIGGER"]]
         _json["ACQMODE"] = self.acq_modes[_json["ACQMODE"]]
-        _json["EMMODE"] = self.em_modes[_json["EMMODE"]]
         _json["SHUTTER"] = self.shutter_modes[_json["SHUTTER"]]
         _json["VCLKAMP"] = self.vclock_modes[_json["VCLKAMP"]]
         _json["PREAMP"] = self.preamp_modes[_json["PREAMP"]]
@@ -790,19 +783,48 @@ class CCD(Header):
         _json["COOLER"] = _json["COOLER"] == 1
         _json["FRAMEIND"] += 1
         _json["EXPTIME"] = float(_json["EXPTIME"])
-        self.original_json = _json
+        self.new_json = _json
 
-    @staticmethod
-    def _write_READRATE(_json):
-        _list = [30.0, 20.0, 10.0, 1.0]
-        if _json["EMMODE"] == 1:
-            _list = [1.0, 0.1]
-        return _list[_json["READRATE"]]
+    def _write_READRATE(self):
+        return self.readout_rates[self.original_json["READRATE"]]
 
-    def _fix_EXPTIME(self):
-        if 1e-5 > self.hdr["EXPTIME"] > 9.999999e-6:
-            self.hdr["EXPTIME"] = 10e-6
-        return
+
+class iXon_Ultra(CCD):
+
+    em_modes = ["Electron Multiplying", "Conventional"]
+    vshift_modes = [0.6, 1.13, 2.2, 4.33]
+    preamp_modes = ["Gain 1", "Gain 2"]
+    readout_rates = {0: [30.0, 20.0, 10.0, 1.0], 1: [1.0, 0.1]}
+
+    def _initialize_kw_dataclass(self):
+        keywords_dataclass = super()._initialize_kw_dataclass()
+        keywords_dataclass.keywords += ["EMGAIN", "FRAMETRF", "EMMODE"]
+        keywords_dataclass.to_int_kws += ["EMGAIN"]
+        keywords_dataclass.to_bool_kws += ["FRAMETRF"]
+        keywords_dataclass.write_predefined_value += ["EMMODE"]
+
+        return keywords_dataclass
+
+    def _find_index_tab(self):
+        _json = self.original_json
+        em_mode = _json["EMMODE"]
+        index = 8 * em_mode
+        readout_rates = self.readout_rates[em_mode]
+
+        index += 2 * readout_rates.index(_json["READRATE"])
+        index += float(_json["PREAMP"][-1])
+        self.idx_tab = index
+
+    def _fix_ccd_parameters(self):
+        super()._fix_ccd_parameters()
+        self.new_json["EMMODE"] = self.em_modes[self.original_json["EMMODE"]]
+
+    def _write_READRATE(self):
+        _json = self.original_json
+        try:
+            return self.readout_rates[_json["EMMODE"]][_json["READRATE"]]
+        except ValueError as e:
+            self._write_log_file(repr(e), "EMMODE")
 
 
 class General_KWs(Header):

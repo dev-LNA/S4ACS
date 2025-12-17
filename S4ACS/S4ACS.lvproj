@@ -154,6 +154,7 @@
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../ACS files/acs_config_TEMPLATE.cfg"/>
 		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../ACS files/socket_TEMPLATE.cfg"/>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
+		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
 		<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
 		<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
 		<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
@@ -167,7 +168,6 @@
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
 		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
-		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>

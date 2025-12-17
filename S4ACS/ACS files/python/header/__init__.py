@@ -1,4 +1,4 @@
-from .header import CCD, S4GUI, S4ICS, TCS, Focuser, General_KWs, Weather_Station
+from .header import S4GUI, S4ICS, TCS, Focuser, General_KWs, Weather_Station, iXon_Ultra
 from .utils import (
     allowed_kw_values,
     cards,
