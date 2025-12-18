@@ -43,7 +43,7 @@ class Header(ABC):
         try:
             _json = json.loads(self.json_string)
             self.original_json = {k.upper(): v for k, v in _json.items()}
-        except Exception as e:  # ! Isto deveria ir para log de erros!
+        except Exception as e:
             self._write_log_file(
                 f"{self.sub_system}: There was an error when loading the JSON data --> {self.json_string}."
                 + repr(e),
@@ -233,9 +233,7 @@ class Header(ABC):
         val = self.new_json[hdr_kw]
         a_values = allowed_kw_values[hdr_kw]
         min, *max = a_values
-        if not isinstance(val, (int, float)):
-            return  # ! deveria ser um erro?
-        if not min < val < max[-1]:
+        if not min <= val <= max[-1]:
             self._write_log_file(
                 f'The provided keyword value is out of range {a_values}. "{val}" was found.',
                 hdr_kw,
@@ -245,8 +243,6 @@ class Header(ABC):
     def _check_string_in_allowed_values(self, hdr_kw):
         val = self.new_json[hdr_kw]
         a_values = allowed_kw_values[hdr_kw]
-        if not isinstance(val, str):
-            return  # ! deveria ser um erro?
         if val not in a_values and a_values != "":
             self._write_log_file(
                 f'The expected values for this keyword are {a_values}. "{val}" was found.',
@@ -662,10 +658,6 @@ class CCD(Header):
         super().__init__(dict_header_jsons, log_file)
         self._find_index_tab()
 
-    # def _load_json(self, dict_header_jsons):
-    #     super()._load_json(dict_header_jsons)
-    #     self._fix_ccd_parameters()
-
     def _initialize_kw_dataclass(self):
         keywords = [
             "FRAMEIND",
@@ -811,13 +803,7 @@ class iXon_Ultra(CCD):
 
     def _find_index_tab(self):
         _json = self.original_json
-        em_mode = _json["EMMODE"]
-        index = 8 * em_mode
-        # readout_rates = self.readout_rates[em_mode]
-
-        # index += 2 * readout_rates.index(_json["READRATE"])
-        index += 2 * _json["READRATE"]
-        index += _json["PREAMP"]
+        index = 8 * _json["EMMODE"] + 2 * _json["READRATE"] + _json["PREAMP"]
         self.idx_tab = index
 
     def _fix_ccd_parameters(self):
