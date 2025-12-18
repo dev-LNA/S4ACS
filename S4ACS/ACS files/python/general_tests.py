@@ -6,7 +6,7 @@ import astropy.io.fits as fits
 import numpy as np
 import pandas as pd
 from astropy.time import Time
-from header import CCD, S4GUI, S4ICS, TCS, Focuser, General_KWs, Weather_Station
+from header import S4GUI, S4ICS, TCS, Focuser, General_KWs, Weather_Station, iXon_Ultra
 from utils import (
     WS_json,
     ccd_kw,
@@ -30,7 +30,7 @@ dicts = {
 }
 
 dicts = {k: json.dumps(v) for (k, v) in dicts.items()}
-dicts["S4ICS"] = ics_kw
+dicts["ICS"] = ics_kw
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
 for cls in [TCS]:
     tcs = cls(dicts, log_file)

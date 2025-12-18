@@ -320,7 +320,7 @@ class Weather_Station(Header):
 
 class S4ICS(Header):
 
-    sub_system = "S4ICS"
+    sub_system = "ICS"
 
     def __init__(self, dict_header_jsons, log_file):
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
@@ -575,7 +575,7 @@ class TCS(Header):
 
 class S4GUI(Header):
 
-    sub_system = "S4GUI"
+    sub_system = "GUI"
 
     def _initialize_kw_dataclass(self):
         keywords = [
@@ -815,7 +815,39 @@ class iXon_Ultra(CCD):
         try:
             return self.readout_rates[_json["EMMODE"]][_json["READRATE"]]
         except ValueError as e:
-            self._write_log_file(repr(e), "EMMODE")
+            self._write_log_file(repr(e), "READRATE")
+
+
+class iKon_L(CCD):
+
+    vshift_modes = [1, 2]
+    preamp_modes = ["Gain 1", "Gain 2"]
+    readout_rates = [1, 2, 3, 4]
+
+    # def _initialize_kw_dataclass(self):
+    #     keywords_dataclass = super()._initialize_kw_dataclass()
+    #     keywords_dataclass.keywords += ["EMGAIN", "FRAMETRF", "EMMODE"]
+    #     keywords_dataclass.to_int_kws += ["EMGAIN"]
+    #     keywords_dataclass.to_bool_kws += ["FRAMETRF"]
+    #     keywords_dataclass.write_predefined_value += ["EMMODE"]
+
+    #     return keywords_dataclass
+
+    def _find_index_tab(self):
+        _json = self.original_json
+        index = 2 * _json["READRATE"] + _json["PREAMP"]
+        self.idx_tab = index
+
+    # def _fix_ccd_parameters(self):
+    #     super()._fix_ccd_parameters()
+    #     self.new_json["EMMODE"] = self.em_modes[self.original_json["EMMODE"]]
+
+    def _write_READRATE(self):
+        _json = self.original_json
+        try:
+            return self.readout_rates[_json["READRATE"]]
+        except ValueError as e:
+            self._write_log_file(repr(e), "READRATE")
 
 
 class General_KWs(Header):

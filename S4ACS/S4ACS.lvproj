@@ -164,6 +164,7 @@
 		<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
 		<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
 		<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
+		<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../Save SPARC4 image/Save SPARC4 image.lvclass"/>
 		<Item Name="RxTx.lvclass" Type="LVClass" URL="../RxTx/RxTx.lvclass"/>
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
@@ -626,6 +627,7 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
+			<Item Name="initialize python session.vi" Type="VI" URL="../Save Image/initialize python session.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">

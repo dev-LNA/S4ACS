@@ -42,7 +42,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
         hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
         hdu.writeto(file, output_verify="ignore")
         return json.dumps(error_json)
-    except Exception as e:
+    except Exception:
         error_json["status"] = True
         error_json["code"] = 1
         error_json["source"] = traceback.format_exc()
