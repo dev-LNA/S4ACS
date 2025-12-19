@@ -5,24 +5,18 @@ from dataclasses import dataclass, field
 from datetime import datetime
 
 import astropy.io.fits as fits
-import astropy.units as u
-from astropy.coordinates import Angle
 from astropy.time import Time
 from numpy import abs
 
-from .utils import (
-    allowed_kw_values,
-    cards,
-    expected_kw_names,
-    gains,
-    keyword_types,
-    read_noise,
-)
+from .utils import Header_Parameters
+
+# class SPARC4_Header:
+#     hdr = fits.Header(sparc4_hdr_data_class.cards)
+#     hdr_params = sparc4_hdr_data_class
 
 
 class Header(ABC):
 
-    hdr = fits.Header(cards)
     kw_types = {"integer": int, "boolean": bool, "float": float, "string": str}
     sub_system = "HEADER"
 
@@ -31,9 +25,6 @@ class Header(ABC):
         self.dict_header_jsons = dict_header_jsons
         self._load_json(dict_header_jsons)
         self.kw_dataclass = self._initialize_kw_dataclass()
-        self.extract_info()
-        self._check_type()
-        self._check_allowed_values()
         return
 
     def _load_json(self, dict_header_jsons):
@@ -53,6 +44,80 @@ class Header(ABC):
     @abstractmethod
     def _initialize_kw_dataclass(self):
         return Keywords_Dataclass()
+
+    def _extract_info(self):
+        new_json = {}
+        for hdr_kw in self.kw_dataclass.keywords:
+            try:
+                json_kw = hdr_kw
+                expected_name = self.hdr_params.expected_kw_names[hdr_kw]
+                if expected_name != "":
+                    json_kw = expected_name
+                new_json[hdr_kw] = self.original_json[json_kw]
+            except Exception as e:
+                self._write_log_file(repr(e), hdr_kw)
+        self.new_json = new_json
+
+    def _check_type(self):
+        for hdr_kw in self.kw_dataclass.keywords:
+            try:
+                val = self.new_json[hdr_kw]
+                _type = self.hdr_params.keyword_types[hdr_kw]
+                if not isinstance(val, self.kw_types[_type]):
+                    self._write_log_file(
+                        f'Keyword value "{val}" is not an instance of {repr(_type)}.',
+                        hdr_kw,
+                    )
+            except Exception as e:
+                self._write_log_file(repr(e), hdr_kw)
+
+    def _check_allowed_values(self):
+        for hdr_kw in self.kw_dataclass.keywords:
+            try:
+                _type = self.hdr_params.keyword_types[hdr_kw]
+                if _type in ["integer", "float"]:
+                    self._check_number_in_range(hdr_kw)
+                elif _type == "string":
+                    self._check_string_in_allowed_values(hdr_kw)
+            except Exception as e:
+                self._write_log_file(repr(e), hdr_kw)
+
+        return
+
+    def _check_number_in_range(self, hdr_kw):
+        val = self.new_json[hdr_kw]
+        a_values = self.hdr_params.allowed_kw_values[hdr_kw]
+        min, *max = a_values
+        if not min <= val <= max[-1]:
+            self._write_log_file(
+                f'The provided keyword value is out of range {a_values}. "{val}" was found.',
+                hdr_kw,
+            )
+        return
+
+    def _check_string_in_allowed_values(self, hdr_kw):
+        val = self.new_json[hdr_kw]
+        a_values = self.hdr_params.allowed_kw_values[hdr_kw]
+        if val not in a_values and a_values != "":
+            self._write_log_file(
+                f'The expected values for this keyword are {a_values}. "{val}" was found.',
+                hdr_kw,
+            )
+        return
+
+    def extract_and_validate_hdr(self) -> None:
+        self._extract_info()
+        self._check_type()
+        self._check_allowed_values()
+        return
+
+    def write_header_content(self, hdr: fits.Header) -> None:
+        self.hdr = hdr
+        return
+
+    def write_hdr_param_dataclass(self, dataclass: Header_Parameters) -> None:
+        self.hdr_params = dataclass
+        return
 
     def _convert_to_float(self):
         for kw in self.kw_dataclass.to_float_kws:
@@ -167,7 +232,7 @@ class Header(ABC):
         for kw in self.kw_dataclass.write_predefined_value:
             try:
                 val = self.new_json[kw]
-                _list = allowed_kw_values[kw]
+                _list = self.hdr_params.self.hdr_params.allowed_kw_values[kw]
                 if val in _list:
                     self.hdr[kw] = val
             except Exception as e:
@@ -184,71 +249,11 @@ class Header(ABC):
     def _subs_idx_in_list(self):
         for kw in self.kw_dataclass.idx_in_list:
             try:
-                _list = allowed_kw_values[kw]
+                _list = self.hdr_params.allowed_kw_values[kw]
                 val = self.new_json[kw]
                 self.hdr[kw] = _list[val]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
-
-    def extract_info(self):
-        new_json = {}
-        for hdr_kw in self.kw_dataclass.keywords:
-            try:
-                json_kw = hdr_kw
-                expected_name = expected_kw_names[hdr_kw]
-                if expected_name != "":
-                    json_kw = expected_name
-                new_json[hdr_kw] = self.original_json[json_kw]
-            except Exception as e:
-                self._write_log_file(repr(e), hdr_kw)
-        self.new_json = new_json
-
-    def _check_type(self):
-        for hdr_kw in self.kw_dataclass.keywords:
-            try:
-                val = self.new_json[hdr_kw]
-                _type = keyword_types[hdr_kw]
-                if not isinstance(val, self.kw_types[_type]):
-                    self._write_log_file(
-                        f'Keyword value "{val}" is not an instance of {repr(_type)}.',
-                        hdr_kw,
-                    )
-            except Exception as e:
-                self._write_log_file(repr(e), hdr_kw)
-
-    def _check_allowed_values(self):
-        for hdr_kw in self.kw_dataclass.keywords:
-            try:
-                _type = keyword_types[hdr_kw]
-                if _type in ["integer", "float"]:
-                    self._check_number_in_range(hdr_kw)
-                elif _type == "string":
-                    self._check_string_in_allowed_values(hdr_kw)
-            except Exception as e:
-                self._write_log_file(repr(e), hdr_kw)
-
-        return
-
-    def _check_number_in_range(self, hdr_kw):
-        val = self.new_json[hdr_kw]
-        a_values = allowed_kw_values[hdr_kw]
-        min, *max = a_values
-        if not min <= val <= max[-1]:
-            self._write_log_file(
-                f'The provided keyword value is out of range {a_values}. "{val}" was found.',
-                hdr_kw,
-            )
-        return
-
-    def _check_string_in_allowed_values(self, hdr_kw):
-        val = self.new_json[hdr_kw]
-        a_values = allowed_kw_values[hdr_kw]
-        if val not in a_values and a_values != "":
-            self._write_log_file(
-                f'The expected values for this keyword are {a_values}. "{val}" was found.',
-                hdr_kw,
-            )
-        return
 
     @abstractmethod
     def fix_keywords(self):
@@ -273,10 +278,10 @@ class Header(ABC):
             )
 
     def reset_header(self):
-        Header.hdr = fits.Header(cards)
+        Header.hdr = fits.Header(self.hdr_params.cards)
 
     def return_empty_header(self):
-        return fits.Header(cards)
+        return fits.Header(self.hdr_params.cards)
 
 
 class Focuser(Header):
@@ -334,7 +339,7 @@ class S4ICS(Header):
         except Exception as e:
             self._write_log_file(repr(e), "")
         self.kw_dataclass = self._initialize_kw_dataclass()
-        self.extract_info()
+        self._extract_info()
         self._check_type()
         self._check_allowed_values()
         return
@@ -491,10 +496,14 @@ class TCS(Header):
 
     def __init__(self, _json, night_dir) -> None:
         super().__init__(_json, night_dir)
-        self.new_json["TCSDATE"] = self._write_TCSDATE()
         self.how_to_fix_regex = {
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
         }
+
+    def _extract_info(self):
+        super()._extract_info()
+        self.new_json["TCSDATE"] = self._write_TCSDATE()
+        return
 
     def _initialize_kw_dataclass(self):
         keywords = ["RA", "DEC", "TCSHA", "INSTROT", "AIRMASS"]
@@ -758,8 +767,8 @@ class CCD(Header):
     @abstractmethod
     def _find_index_tab(self): ...
 
-    def extract_info(self):
-        super().extract_info()
+    def _extract_info(self):
+        super()._extract_info()
         self._fix_ccd_parameters()
 
     def _fix_ccd_parameters(self):
@@ -894,8 +903,8 @@ class General_KWs(Header):
             regex_str=regex_str,
         )
 
-    def extract_info(self):
-        super().extract_info()
+    def _extract_info(self):
+        super()._extract_info()
         self._fix_parameters()
 
     def _fix_parameters(self):
