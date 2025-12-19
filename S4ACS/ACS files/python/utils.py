@@ -86,8 +86,8 @@ def write_error_log(message, log_file):
 
 sub_systems = [
     "CCD",
-    "S4GUI",
-    "S4ICS",
+    "GUI",
+    "ICS",
     "TCS",
     "FOCUSER",
     "WSTATION",
