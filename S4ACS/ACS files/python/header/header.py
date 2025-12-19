@@ -857,9 +857,7 @@ class General_KWs(Header):
     def _initialize_kw_dataclass(self):
         keywords = [
             "FILENAME",
-            "SEQINDEX",
             "NCYCLES",
-            "NSEQ",
             "CYCLIND",
             "ACSVRSN",
             "ACSMODE",
@@ -868,18 +866,13 @@ class General_KWs(Header):
         ]
 
         to_int_kws = [
-            "NSEQ",
             "NCYCLES",
             "CHANNEL",
-            "SEQINDEX",
             "CYCLIND",
         ]
         regex_str = {
             "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
-            "FILENAME": (
-                r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
-                "YYYYMMDD_s4c1_000000.fits",
-            ),
+            "FILENAME": (r"", ""),
         }
 
         to_bool_kw = ["ACSMODE", "ACQERROR"]
@@ -889,9 +882,9 @@ class General_KWs(Header):
             "OBSLAT": -22.534,
             "OBSALT": 1864.0,
             "EQUINOX": 2000.0,
-            "INSTRUME": "SPARC4",
             "SIMPLE": True,
             "BITPIX": 16,
+            "INSTRUME": "",
         }
         return Keywords_Dataclass(
             keywords=keywords,
@@ -901,19 +894,50 @@ class General_KWs(Header):
             regex_str=regex_str,
         )
 
-    def _load_json(self, dict_header_jsons):
-        super()._load_json(dict_header_jsons)
+    def extract_info(self):
+        super().extract_info()
         self._fix_parameters()
 
     def _fix_parameters(self):
-        self.original_json["SEQINDEX"] = self.original_json["SEQINDEX"] + 1
-        self.original_json["CYCLIND"] = self.original_json["CYCLIND"] + 1
+        self.new_json["CYCLIND"] = self.new_json["CYCLIND"] + 1
 
     def fix_keywords(self):
         self._replace_empty_str()
         self._convert_to_int()
         self._verify_regex()
         self._convert_to_boolean()
+
+
+class General_SPARC4_KWs(General_KWs):
+
+    def _initialize_kw_dataclass(self):
+        kws_data_class = super()._initialize_kw_dataclass()
+        kws_data_class.keywords += ["SEQINDEX", "NSEQ"]
+        kws_data_class.to_int_kws += ["NSEQ", "SEQINDEX"]
+        kws_data_class.regex_str["FILENAME"] = (
+            r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
+            "YYYYMMDD_s4c1_000000.fits",
+        )
+        kws_data_class.replace_empty_kws["INSTRUME"] = "SPARC4"
+
+        return kws_data_class
+
+    def _fix_parameters(self):
+        super()._fix_parameters()
+        self.new_json["SEQINDEX"] = self.new_json["SEQINDEX"] + 1
+
+
+class General_ECHARPE_KWs(General_KWs):
+
+    def _initialize_kw_dataclass(self):
+        kws_data_class = super()._initialize_kw_dataclass()
+        kws_data_class.regex_str["FILENAME"] = (
+            r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
+            "YYYYMMDD_s4c1_000000.fits",
+        )
+        kws_data_class.replace_empty_kws["INSTRUME"] = "ECHARPE"
+
+        return kws_data_class
 
 
 @dataclass
