@@ -67,7 +67,7 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Comm" Type="Folder">
-			<Item Name="Save_Header.vi" Type="VI" URL="../Comm VIs/Save_Header.vi"/>
+			<Item Name="save sparc4 image.vi" Type="VI" URL="../Comm VIs/save sparc4 image.vi"/>
 			<Item Name="communication manager.vi" Type="VI" URL="../General VIs/communication manager.vi"/>
 		</Item>
 		<Item Name="Unit Tests" Type="Folder">
@@ -150,25 +150,32 @@
 			<Item Name="get parameter min and max.vi" Type="VI" URL="../utils/get parameter min and max.vi"/>
 			<Item Name="read csv file.vi" Type="VI" URL="../utils/read csv file.vi"/>
 		</Item>
+		<Item Name="SPARC4 clsses" Type="Folder">
+			<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
+			<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
+			<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
+			<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../Save SPARC4 image/Save SPARC4 image.lvclass"/>
+		</Item>
+		<Item Name="ECHARPE classes" Type="Folder">
+			<Item Name="iKon-L.lvclass" Type="LVClass" URL="../iKon-L/iKon-L.lvclass"/>
+			<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
+		</Item>
+		<Item Name="abstract classes" Type="Folder">
+			<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
+			<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
+			<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
+		</Item>
 		<Item Name="atmcd64d.dll" Type="Document" URL="../../../../../../Program Files/Andor SDK/atmcd64d.dll"/>
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../ACS files/acs_config_TEMPLATE.cfg"/>
 		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../ACS files/socket_TEMPLATE.cfg"/>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
 		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
-		<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
-		<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
-		<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
-		<Item Name="iKon-L.lvclass" Type="LVClass" URL="../iKon-L/iKon-L.lvclass"/>
 		<Item Name="State Machine.lvclass" Type="LVClass" URL="../State Machine/State Machine.lvclass"/>
-		<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
-		<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
-		<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
-		<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
-		<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../Save SPARC4 image/Save SPARC4 image.lvclass"/>
 		<Item Name="RxTx.lvclass" Type="LVClass" URL="../RxTx/RxTx.lvclass"/>
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
 		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
+		<Item Name="save echarpe image.vi" Type="VI" URL="../Comm VIs/save echarpe image.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
@@ -684,7 +691,7 @@
 				<Property Name="Source[3].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[3].type" Type="Str">Container</Property>
 				<Property Name="Source[4].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[4].itemID" Type="Ref">/My Computer/Comm/Save_Header.vi</Property>
+				<Property Name="Source[4].itemID" Type="Ref">/My Computer/Comm/save sparc4 image.vi</Property>
 				<Property Name="Source[4].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[4].type" Type="Str">VI</Property>
 				<Property Name="Source[5].destinationIndex" Type="Int">3</Property>
