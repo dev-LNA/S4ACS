@@ -68,6 +68,7 @@
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Comm" Type="Folder">
 			<Item Name="save sparc4 image.vi" Type="VI" URL="../Comm VIs/save sparc4 image.vi"/>
+			<Item Name="save echarpe image.vi" Type="VI" URL="../Comm VIs/save echarpe image.vi"/>
 			<Item Name="communication manager.vi" Type="VI" URL="../General VIs/communication manager.vi"/>
 		</Item>
 		<Item Name="Unit Tests" Type="Folder">
@@ -175,7 +176,6 @@
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
 		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
-		<Item Name="save echarpe image.vi" Type="VI" URL="../Comm VIs/save echarpe image.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
