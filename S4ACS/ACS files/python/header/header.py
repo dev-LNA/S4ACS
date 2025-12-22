@@ -25,6 +25,7 @@ class Header(ABC):
         self.to_int_kws = None
         self.to_float_kws = None
         self.to_bool_kws = None
+        self.to_bool_w_cond_kws = None
         self.idx_in_dict = None
         self.regex_strings = None
         self.new_json = None
@@ -34,7 +35,7 @@ class Header(ABC):
 
         self.original_json = self._load_json()
         self._read_kws_config()
-        # self.kw_dataclass = self._initialize_kw_dataclass()
+
         return
 
     def _load_json(self) -> dict | None:
@@ -60,18 +61,18 @@ class Header(ABC):
             self.to_float_kws = [
                 val for val in kws_config["to float"].values if val != ""
             ]
-        self.to_bool_kws = self._get_bool_kws(kws_config)
+        self.to_bool_w_cond_kws = self._get_bool_w_cond_kws(kws_config)
         self.idx_in_dict = self._get_idx_to_dict_kws(kws_config)
         self.regex_strings = self._get_regex_strings_kws(kws_config)
         return
 
     @staticmethod
-    def _get_bool_kws(kws_config) -> dict | None:
-        if "to bool" in kws_config.keys():
+    def _get_bool_w_cond_kws(kws_config) -> dict | None:
+        if "to bool w cond" in kws_config.keys():
             return {
                 kw: condition.split(";")
                 for (kw, condition) in zip(
-                    kws_config["to bool"], kws_config["to bool condition"]
+                    kws_config["to bool w cond"], kws_config["to bool condition"]
                 )
                 if kw != ""
             }
@@ -170,9 +171,14 @@ class Header(ABC):
         self.hdr = hdr
         return
 
-    @abstractmethod
     def fix_keywords(self):
-        """Fix header keywords."""
+        for func in [
+            self._convert_to_float,
+            self._convert_to_int,
+            self._convert_to_bool_with_condition,
+            self._verify_regex,
+        ]:
+            func()
         return
 
     def _write_log_file(self, message, keyword):
@@ -192,38 +198,43 @@ class Header(ABC):
     # def return_empty_header(self):
     #     return fits.Header(self.hdr_params.cards)
 
-    # ---------------------------------------------------------------------------------------
+    # ----------------------------------------------------------------------------------
 
-    def _convert_to_float(self):
-        for kw in self.kw_dataclass.to_float_kws:
+    def _convert_to_float(self) -> None:
+        if self.to_float_kws == None:
+            return
+        for kw in self.to_float_kws:
             try:
-                self.hdr[kw] = float(self.new_json[kw])
+                self.new_json[kw] = float(self.new_json[kw])
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _convert_to_int(self):
-        for kw in self.kw_dataclass.to_int_kws:
+    def _convert_to_int(self) -> None:
+        if self.to_int_kws == None:
+            return
+        for kw in self.to_int_kws:
             try:
-                self.hdr[kw] = int(self.new_json[kw])
+                self.new_json[kw] = int(self.new_json[kw])
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _convert_to_boolean(self):
-        for kw in self.kw_dataclass.to_bool_kws:
+    def _convert_to_boolean(self) -> None:  # * olhar melhor esta função
+        if self.to_bool_kws == None:
+            return
+        for kw in self.to_bool_kws:
             try:
-                val = self.new_json[kw]
-                self.hdr[kw] = bool(val)
+                self.new_json[kw] = bool(self.new_json[kw])
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_bool_with_condition(self):
-        for kw, (off, on) in self.kw_dataclass.to_bool_with_condition.items():
+        for kw, (off, on) in self.to_bool_w_cond_kws:
             try:
                 val = self.new_json[kw]
                 if val == off:
-                    self.hdr[kw] = False
+                    self.new_json[kw] = False
                 elif val == on:
-                    self.hdr[kw] = True
+                    self.new_json[kw] = True
                 else:
                     pass
             except Exception as e:
@@ -245,8 +256,10 @@ class Header(ABC):
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _verify_regex(self):
-        for kw, (regex_expr, ex_value) in self.kw_dataclass.regex_str.items():
+    def _verify_regex(self) -> None:
+        if self.regex_strings == None:
+            return
+        for kw, (regex_expr, ex_value) in self.regex_strings.items():
             try:
                 kw_value = self.new_json[kw]
                 if re.match(regex_expr, kw_value) == None:
@@ -256,7 +269,7 @@ class Header(ABC):
                     )
                     self._fix_regex_keyword(kw)
                     continue
-                self.hdr[kw] = self.new_json[kw]
+                self.new_json[kw] = self.new_json[kw]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -381,19 +394,25 @@ class S4ICS(Header):
     sub_system = "ICS"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params):
-        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
+        self.header_keywords = None
+        self.to_int_kws = None
+        self.to_float_kws = None
+        self.to_bool_kws = None
+        self.idx_in_dict = None
+        self.regex_strings = None
+        self.new_json = None
         self.log_file = log_file
         self.hdr_params = hdr_params
+        self.json_string = dict_header_jsons[self.sub_system]
+        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
+
         try:
             self.json_string = dict_header_jsons[self.sub_system].split("\n")[1]
             self.original_json = self._load_json()
             self._create_s4ics_kws()
+            self._read_kws_config()
         except Exception as e:
             self._write_log_file(repr(e), "")
-        self._read_kws_config()
-        # self.kw_dataclass = self._initialize_kw_dataclass()
-        # self._check_type()
-        # self._check_allowed_values()
         return
 
     def _initialize_kw_dataclass(self):
