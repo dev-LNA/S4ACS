@@ -1,6 +1,6 @@
-Header Keywords,to int,to float,to bool w cond,to bool condition,idx in dict,idx in dict condition,regex strings,regex condition
-WPANG,WPPOS,GMIR,WPROMODE,SIMULATED;ACTIVE,WPSEL,"{""OFF"": ""None"", ""L/2"": ""L2"", ""L/4"": ""L4""}",ICSVRSN,"v\d+\.\d+\.\d+;v0.0.0"
-WPPOS,,GFOC,WPSEMODE,SIMULATED;ACTIVE,CALW,"{""POLARIZER"": ""POLARIZER"", ""DEPOLARIZER"": ""DEPOLARIZER"", ""CLEAR"": ""CLEAR"", ""OFF"": ""CLEAR"", ""PINHOLE"": ""SPARE"", ""SPARE"": ""SPARE"", ""SHUTTER"": ""CLOSED"", ""CLOSED"": ""CLOSED""}",,
+Header Keywords,to int,to float,to bool w cond,to bool condition,regex strings,regex condition,idx in dict,idx in dict condition
+WPANG,WPPOS,GMIR,WPROMODE,SIMULATED;ACTIVE,ICSVRSN,v\d+\.\d+\.\d+;v0.0.0,WPSEL,"{""OFF"": ""None"", ""L/2"": ""L2"", ""L/4"": ""L4""}"
+WPPOS,,GFOC,WPSEMODE,SIMULATED;ACTIVE,,,CALW,"{""POLARIZER"": ""POLARIZER"", ""DEPOLARIZER"": ""DEPOLARIZER"", ""CLEAR"": ""CLEAR"", ""OFF"": ""CLEAR"", ""PINHOLE"": ""SPARE"", ""SPARE"": ""SPARE"", ""SHUTTER"": ""CLOSED"", ""CLOSED"": ""CLOSED""}"
 WPROMODE,,WPANG,ANMODE,SIMULATED;ACTIVE,,,,
 WPSEL,,WPSELPO,CALWMODE,SIMULATED;ACTIVE,,,,
 WPSELPO,,CALWANG,GMIRMODE,SIMULATED;ACTIVE,,,,

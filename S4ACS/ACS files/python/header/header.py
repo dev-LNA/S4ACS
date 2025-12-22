@@ -27,8 +27,10 @@ class Header(ABC):
         self.to_bool_kws = None
         self.to_bool_w_cond_kws = None
         self.idx_in_dict = None
+        self.replace_comma_kws = None
         self.regex_strings = None
         self.new_json = None
+        self.how_to_fix_regex = None
         self.log_file = log_file
         self.hdr_params = hdr_params
         self.json_string = dict_header_jsons[self.sub_system]
@@ -60,6 +62,10 @@ class Header(ABC):
         if "to float" in kws_config.keys():
             self.to_float_kws = [
                 val for val in kws_config["to float"].values if val != ""
+            ]
+        if "replace comma" in kws_config.keys():
+            self.replace_comma_kws = [
+                val for val in kws_config["replace comma"].values if val != ""
             ]
         self.to_bool_w_cond_kws = self._get_bool_w_cond_kws(kws_config)
         self.idx_in_dict = self._get_idx_to_dict_kws(kws_config)
@@ -173,6 +179,7 @@ class Header(ABC):
 
     def fix_keywords(self):
         for func in [
+            self._replace_comma,
             self._convert_to_float,
             self._convert_to_int,
             self._convert_to_bool_with_condition,
@@ -227,7 +234,9 @@ class Header(ABC):
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _convert_to_bool_with_condition(self):
+    def _convert_to_bool_with_condition(self) -> None:
+        if self.to_bool_w_cond_kws == None:
+            return
         for kw, (off, on) in self.to_bool_w_cond_kws:
             try:
                 val = self.new_json[kw]
@@ -240,8 +249,10 @@ class Header(ABC):
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _replace_comma(self):
-        for kw in self.kw_dataclass.comma_kws:
+    def _replace_comma(self) -> None:
+        if self.replace_comma_kws == None:
+            return
+        for kw in self.replace_comma_kws:
             try:
                 self._search_unwanted_kw(kw, ",")
                 self.new_json[kw] = self.new_json[kw].replace(",", ".")
@@ -268,15 +279,13 @@ class Header(ABC):
                         kw,
                     )
                     self._fix_regex_keyword(kw)
-                    continue
-                self.new_json[kw] = self.new_json[kw]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _fix_regex_keyword(self, kw):
+    def _fix_regex_keyword(self, kw) -> None:
         try:
             kw_value = self.new_json[kw]
-            regex_expr, _ = self.kw_dataclass.regex_str[kw]
+            regex_expr, _ = self.regex_strings[kw]
             if kw not in self.how_to_fix_regex.keys():
                 self._write_log_file(
                     f"The method to fix this keyword was not found.", kw
@@ -288,7 +297,7 @@ class Header(ABC):
                     f"The provided value {kw_value} could not be fixed.", kw
                 )
                 return
-            self.hdr[kw] = new_value
+            self.new_json[kw] = new_value
         except Exception as e:
             self._write_log_file(repr(e), kw)
         return
@@ -368,12 +377,12 @@ class Weather_Station(Header):
 
     sub_system = "WSTATION"
 
-    def __init__(self, dict_header_jsons, log_file):
+    def __init__(self, dict_header_jsons, log_file, hdr_params):
         json_string = dict_header_jsons[self.sub_system]
         if "Weather" in json_string[:7]:
             json_string = json_string.replace("Weather", "")
         dict_header_jsons[self.sub_system] = json_string
-        super().__init__(dict_header_jsons, log_file)
+        super().__init__(dict_header_jsons, log_file, hdr_params)
 
     def _initialize_kw_dataclass(self):
         keywords = ["HUMIDITY", "EXTTEMP", "PRESSURE"]
@@ -383,10 +392,10 @@ class Weather_Station(Header):
             keywords=keywords, to_float_kws=to_float_kws, comma_kws=comma_kws
         )
 
-    def fix_keywords(self):
-        self._replace_comma()
-        self._convert_to_float()
-        return
+    # def fix_keywords(self):
+    #     self._replace_comma()
+    #     self._convert_to_float()
+    #     return
 
 
 class S4ICS(Header):
