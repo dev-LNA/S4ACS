@@ -17,8 +17,8 @@ from header import (
 from utils import (
     SUB_SYSTEMS,
     fix_image_orientation,
+    fix_standard_keywords,
     verify_file_already_exists,
-    write_error_log,
 )
 
 
@@ -52,10 +52,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
         data = fix_image_orientation(hdr["CHANNEL"], hdr["EMMODE"], data)
         file = verify_file_already_exists(file)
         hdu = fits.PrimaryHDU(data, hdr)
-        hdu.header["BZERO"] = (32768, "Zero point in scaling equation")
-        hdu.header["BSCALE"] = (1, "Linear factor in scaling equation")
-        hdu.header["NAXIS1"] = (hdu.header["NAXIS1"], "Number of columns")
-        hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
+        hdu = fix_standard_keywords(hdu)
         hdu.writeto(file, output_verify="ignore")
         return json.dumps(error_json)
     except Exception:

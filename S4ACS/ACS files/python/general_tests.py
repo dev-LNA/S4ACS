@@ -6,7 +6,15 @@ import astropy.io.fits as fits
 import numpy as np
 import pandas as pd
 from astropy.time import Time
-from header import S4GUI, S4ICS, TCS, Focuser, General_KWs, Weather_Station, iXon_Ultra
+from header import (
+    S4GUI,
+    S4ICS,
+    TCS,
+    Focuser,
+    General_SPARC4_KWs,
+    Weather_Station,
+    iXon_Ultra,
+)
 from utils import (
     WS_json,
     ccd_kw,
@@ -32,10 +40,10 @@ dicts = {
 dicts = {k: json.dumps(v) for (k, v) in dicts.items()}
 dicts["ICS"] = ics_kw
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
-for cls in [TCS]:
+for cls in [S4ICS]:
     tcs = cls(dicts, log_file)
-    tcs.fix_keywords()
-print(repr(tcs.hdr))
+    # tcs.fix_keywords()
+print(repr(tcs.regex_strings))
 
 # image = np.zeros((100, 100), dtype=np.int16)
 # file = os.path.join("C:\\", "images", "today", "test.fits")

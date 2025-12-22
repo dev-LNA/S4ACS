@@ -1,13 +1,10 @@
 """This file has all the functions needed to save the acquired images and to edit the image headers"""
 
-import json
 import os
-import warnings
 from datetime import datetime, timezone
 
 import astropy.io.fits as fits
 import numpy as np
-import pandas as pd
 
 
 def rotate_image(img_data, invert_x=False, invert_y=False, nrot90deg=0):
@@ -80,6 +77,14 @@ def write_error_log(message, log_file):
     with open(log_file, "a") as file:
         now = str(datetime.now())
         file.write(now + " - " + message + "\n")
+
+
+def fix_standard_keywords(hdu: fits.PrimaryHDU) -> fits.PrimaryHDU:
+    hdu.header["BZERO"] = (32768, "Zero point in scaling equation")
+    hdu.header["BSCALE"] = (1, "Linear factor in scaling equation")
+    hdu.header["NAXIS1"] = (hdu.header["NAXIS1"], "Number of columns")
+    hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
+    return hdu
 
 
 # --------------------------------------------------------------------------------------------------------------------------

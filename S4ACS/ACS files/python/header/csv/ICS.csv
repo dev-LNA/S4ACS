@@ -1,0 +1,18 @@
+Header Keywords,to int,to float,to bool,to bool condition,idx in dict,idx in dict condition,regex strings,regex condition
+WPANG,WPPOS,GMIR,WPROMODE,SIMULATED;ACTIVE,WPSEL,"{""OFF"": ""None"", ""L/2"": ""L2"", ""L/4"": ""L4""}",ICSVRSN,"v\d+\.\d+\.\d+;v0.0.0"
+WPPOS,,GFOC,WPSEMODE,SIMULATED;ACTIVE,CALW,"{""POLARIZER"": ""POLARIZER"", ""DEPOLARIZER"": ""DEPOLARIZER"", ""CLEAR"": ""CLEAR"", ""OFF"": ""CLEAR"", ""PINHOLE"": ""SPARE"", ""SPARE"": ""SPARE"", ""SHUTTER"": ""CLOSED"", ""CLOSED"": ""CLOSED""}",,
+WPROMODE,,WPANG,ANMODE,SIMULATED;ACTIVE,,,,
+WPSEL,,WPSELPO,CALWMODE,SIMULATED;ACTIVE,,,,
+WPSELPO,,CALWANG,GMIRMODE,SIMULATED;ACTIVE,,,,
+WPSEMODE,,ANALANG,GFOCMODE,SIMULATED;ACTIVE,,,,
+CALW,,,ASEL,OFF;ON,,,,
+CALWMODE,,,,,,,,
+CALWANG,,,,,,,,
+ASEL,,,,,,,,
+ANMODE,,,,,,,,
+ANALANG,,,,,,,,
+GMIR,,,,,,,,
+GMIRMODE,,,,,,,,
+GFOC,,,,,,,,
+GFOCMODE,,,,,,,,
+ICSVRSN,,,,,,,,

@@ -3,16 +3,14 @@ import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from datetime import datetime
+from os.path import join
 
 import astropy.io.fits as fits
+import pandas as pd
 from astropy.time import Time
 from numpy import abs
 
 from .utils import Header_Parameters
-
-# class SPARC4_Header:
-#     hdr = fits.Header(sparc4_hdr_data_class.cards)
-#     hdr_params = sparc4_hdr_data_class
 
 
 class Header(ABC):
@@ -21,9 +19,16 @@ class Header(ABC):
     sub_system = "HEADER"
 
     def __init__(self, dict_header_jsons, log_file) -> None:
+        self.header_keywords = None
+        self.to_int_kws = None
+        self.to_float_kws = None
+        self.to_bool_kws = None
+        self.idx_in_dict = None
         self.log_file = log_file
         self.dict_header_jsons = dict_header_jsons
+
         self._load_json(dict_header_jsons)
+        self._read_kws_config()
         self.kw_dataclass = self._initialize_kw_dataclass()
         return
 
@@ -40,6 +45,58 @@ class Header(ABC):
                 + repr(e),
                 "",
             )
+
+    def _read_kws_config(self) -> None:
+        csv_file_path = join("header", "csv", self.sub_system + ".csv")
+        kws_config = pd.read_csv(csv_file_path).fillna("")
+        self.header_keywords = kws_config["Header Keywords"]
+        if "to int" in kws_config.keys():
+            self.to_int_kws = [val for val in kws_config["to int"].values if val != ""]
+        if "to float" in kws_config.keys():
+            self.to_float_kws = [
+                val for val in kws_config["to float"].values if val != ""
+            ]
+        self.to_bool_kws = self._get_bool_kws(kws_config)
+        self.idx_in_dict = self._get_idx_to_dict_kws(kws_config)
+        self.regex_strings = self._get_regex_strings_kws(kws_config)
+
+        return
+
+    @staticmethod
+    def _get_bool_kws(kws_config) -> dict | None:
+        if "to bool" in kws_config.keys():
+            return {
+                kw: condition.split(";")
+                for (kw, condition) in zip(
+                    kws_config["to bool"], kws_config["to bool condition"]
+                )
+                if kw != ""
+            }
+        return
+
+    @staticmethod
+    def _get_idx_to_dict_kws(kws_config) -> dict | None:
+        if "idx in dict" in kws_config.keys():
+            return {
+                kw: json.loads(condition)
+                for (kw, condition) in zip(
+                    kws_config["idx in dict"], kws_config["idx in dict condition"]
+                )
+                if kw != ""
+            }
+        return
+
+    @staticmethod
+    def _get_regex_strings_kws(kws_config) -> dict | None:
+        if "regex strings" in kws_config.keys():
+            return {
+                kw: condition.split(";")
+                for (kw, condition) in zip(
+                    kws_config["regex strings"], kws_config["regex condition"]
+                )
+                if kw != ""
+            }
+        return
 
     @abstractmethod
     def _initialize_kw_dataclass(self):
@@ -338,6 +395,7 @@ class S4ICS(Header):
             self._create_s4ics_kws()
         except Exception as e:
             self._write_log_file(repr(e), "")
+        self._read_kws_config()
         self.kw_dataclass = self._initialize_kw_dataclass()
         self._extract_info()
         self._check_type()
