@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+from os.path import dirname, join, realpath
 
 import astropy.io.fits as fits
 import numpy as np
@@ -12,6 +13,7 @@ from header import (
     TCS,
     Focuser,
     General_SPARC4_KWs,
+    Header_Parameters,
     Weather_Station,
     iXon_Ultra,
 )
@@ -40,10 +42,13 @@ dicts = {
 dicts = {k: json.dumps(v) for (k, v) in dicts.items()}
 dicts["ICS"] = ics_kw
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
+csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
+hdr_params = Header_Parameters(csv_folder)
 for cls in [S4ICS]:
-    tcs = cls(dicts, log_file)
-    # tcs.fix_keywords()
-print(repr(tcs.regex_strings))
+    tcs = cls(dicts, log_file, hdr_params)
+    tcs.extract_info()
+    tcs.validate_info()
+print(repr(tcs.new_json))
 
 # image = np.zeros((100, 100), dtype=np.int16)
 # file = os.path.join("C:\\", "images", "today", "test.fits")

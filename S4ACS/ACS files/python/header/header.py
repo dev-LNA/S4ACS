@@ -18,27 +18,31 @@ class Header(ABC):
     kw_types = {"integer": int, "boolean": bool, "float": float, "string": str}
     sub_system = "HEADER"
 
-    def __init__(self, dict_header_jsons, log_file) -> None:
+    def __init__(
+        self, dict_header_jsons: dict, log_file: str, hdr_params: Header_Parameters
+    ) -> None:
         self.header_keywords = None
         self.to_int_kws = None
         self.to_float_kws = None
         self.to_bool_kws = None
         self.idx_in_dict = None
+        self.regex_strings = None
+        self.new_json = None
         self.log_file = log_file
-        self.dict_header_jsons = dict_header_jsons
+        self.hdr_params = hdr_params
+        self.json_string = dict_header_jsons[self.sub_system]
 
-        self._load_json(dict_header_jsons)
+        self.original_json = self._load_json()
         self._read_kws_config()
-        self.kw_dataclass = self._initialize_kw_dataclass()
+        # self.kw_dataclass = self._initialize_kw_dataclass()
         return
 
-    def _load_json(self, dict_header_jsons):
-        self.json_string = dict_header_jsons[self.sub_system]
-        if self.json_string == "":
-            self.original_json = {}
+    def _load_json(self) -> dict | None:
         try:
+            if self.json_string == "":
+                return
             _json = json.loads(self.json_string)
-            self.original_json = {k.upper(): v for k, v in _json.items()}
+            return {k.upper(): v for k, v in _json.items()}
         except Exception as e:
             self._write_log_file(
                 f"{self.sub_system}: There was an error when loading the JSON data --> {self.json_string}."
@@ -59,7 +63,6 @@ class Header(ABC):
         self.to_bool_kws = self._get_bool_kws(kws_config)
         self.idx_in_dict = self._get_idx_to_dict_kws(kws_config)
         self.regex_strings = self._get_regex_strings_kws(kws_config)
-
         return
 
     @staticmethod
@@ -98,13 +101,9 @@ class Header(ABC):
             }
         return
 
-    @abstractmethod
-    def _initialize_kw_dataclass(self):
-        return Keywords_Dataclass()
-
-    def _extract_info(self):
+    def extract_info(self) -> None:
         new_json = {}
-        for hdr_kw in self.kw_dataclass.keywords:
+        for hdr_kw in self.header_keywords:
             try:
                 json_kw = hdr_kw
                 expected_name = self.hdr_params.expected_kw_names[hdr_kw]
@@ -115,8 +114,13 @@ class Header(ABC):
                 self._write_log_file(repr(e), hdr_kw)
         self.new_json = new_json
 
+    def validate_info(self) -> None:
+        self._check_type()
+        self._check_allowed_values()
+        return
+
     def _check_type(self):
-        for hdr_kw in self.kw_dataclass.keywords:
+        for hdr_kw in self.header_keywords:
             try:
                 val = self.new_json[hdr_kw]
                 _type = self.hdr_params.keyword_types[hdr_kw]
@@ -129,7 +133,7 @@ class Header(ABC):
                 self._write_log_file(repr(e), hdr_kw)
 
     def _check_allowed_values(self):
-        for hdr_kw in self.kw_dataclass.keywords:
+        for hdr_kw in self.header_keywords:
             try:
                 _type = self.hdr_params.keyword_types[hdr_kw]
                 if _type in ["integer", "float"]:
@@ -162,19 +166,33 @@ class Header(ABC):
             )
         return
 
-    def extract_and_validate_hdr(self) -> None:
-        self._extract_info()
-        self._check_type()
-        self._check_allowed_values()
-        return
-
     def write_header_content(self, hdr: fits.Header) -> None:
         self.hdr = hdr
         return
 
-    def write_hdr_param_dataclass(self, dataclass: Header_Parameters) -> None:
-        self.hdr_params = dataclass
+    @abstractmethod
+    def fix_keywords(self):
+        """Fix header keywords."""
         return
+
+    def _write_log_file(self, message, keyword):
+        with open(self.log_file, "a") as file:
+            now = str(datetime.now())
+            file.write(  # ! add file name?
+                now
+                + " - "
+                + f"SUB-SYTEM={self.sub_system}, KEYWORD={keyword} - "
+                + message
+                + "\n"
+            )
+
+    # def reset_header(self):
+    #     Header.hdr = fits.Header(self.hdr_params.cards)
+
+    # def return_empty_header(self):
+    #     return fits.Header(self.hdr_params.cards)
+
+    # ---------------------------------------------------------------------------------------
 
     def _convert_to_float(self):
         for kw in self.kw_dataclass.to_float_kws:
@@ -312,33 +330,11 @@ class Header(ABC):
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    @abstractmethod
-    def fix_keywords(self):
-        """Fix header keywords."""
-        return
-
-    def _write_log_file(self, message, keyword):
-        with open(self.log_file, "a") as file:
-            now = str(datetime.now())
-            file.write(  # ! add file name?
-                now
-                + " - "
-                + f"SUB-SYTEM={self.sub_system}, KEYWORD={keyword} - "
-                + message
-                + "\n"
-            )
-
     def _search_unwanted_kw(self, kw, _str):
         if _str in self.new_json[kw]:
             self._write_log_file(
                 f"An unexpected string was found in the keyword value: {_str}", kw
             )
-
-    def reset_header(self):
-        Header.hdr = fits.Header(self.hdr_params.cards)
-
-    def return_empty_header(self):
-        return fits.Header(self.hdr_params.cards)
 
 
 class Focuser(Header):
@@ -384,22 +380,20 @@ class S4ICS(Header):
 
     sub_system = "ICS"
 
-    def __init__(self, dict_header_jsons, log_file):
+    def __init__(self, dict_header_jsons, log_file, hdr_params):
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.log_file = log_file
-        self.dict_header_jsons = dict_header_jsons
+        self.hdr_params = hdr_params
         try:
-            json_string = dict_header_jsons[self.sub_system].split("\n")[1]
-            dict_header_jsons[self.sub_system] = json_string
-            self._load_json(dict_header_jsons)
+            self.json_string = dict_header_jsons[self.sub_system].split("\n")[1]
+            self.original_json = self._load_json()
             self._create_s4ics_kws()
         except Exception as e:
             self._write_log_file(repr(e), "")
         self._read_kws_config()
-        self.kw_dataclass = self._initialize_kw_dataclass()
-        self._extract_info()
-        self._check_type()
-        self._check_allowed_values()
+        # self.kw_dataclass = self._initialize_kw_dataclass()
+        # self._check_type()
+        # self._check_allowed_values()
         return
 
     def _initialize_kw_dataclass(self):
@@ -558,8 +552,8 @@ class TCS(Header):
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
         }
 
-    def _extract_info(self):
-        super()._extract_info()
+    def extract_info(self):
+        super().extract_info()
         self.new_json["TCSDATE"] = self._write_TCSDATE()
         return
 
@@ -825,8 +819,8 @@ class CCD(Header):
     @abstractmethod
     def _find_index_tab(self): ...
 
-    def _extract_info(self):
-        super()._extract_info()
+    def extract_info(self):
+        super().extract_info()
         self._fix_ccd_parameters()
 
     def _fix_ccd_parameters(self):
@@ -961,8 +955,8 @@ class General_KWs(Header):
             regex_str=regex_str,
         )
 
-    def _extract_info(self):
-        super()._extract_info()
+    def extract_info(self):
+        super().extract_info()
         self._fix_parameters()
 
     def _fix_parameters(self):

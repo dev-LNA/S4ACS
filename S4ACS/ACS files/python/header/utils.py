@@ -11,7 +11,8 @@ class Header_Parameters:
     def __init__(self, csv_folder: str) -> None:
         self.csv_folder = csv_folder
         self.read_hdr_ctnt_csv()
-        self.create_cards()
+        self.keywords = [kw for kw in self.hdr_cnt["Keyword"]]
+        self.comments = [comment for comment in self.hdr_cnt["Comment"]]
         self.get_gain_values()
         self.get_read_noise_values()
         self.get_expected_kw_names()
@@ -46,14 +47,6 @@ class Header_Parameters:
             k: v
             for (k, v) in zip(self.hdr_cnt["Keyword"], self.hdr_cnt["Expected name"])
         }
-
-    def create_cards(self) -> None:
-        self.cards = [
-            (keyword, "", comment)
-            for keyword, comment in zip(
-                self.hdr_cnt["Keyword"], self.hdr_cnt["Comment"]
-            )
-        ]
 
     def get_allowed_kw_vals(self) -> None:
         allowed_kw_values = {
