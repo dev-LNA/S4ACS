@@ -15,6 +15,7 @@ from header import (
     General_SPARC4_KWs,
     Header_Parameters,
     Weather_Station,
+    iKon_L,
     iXon_Ultra,
 )
 from utils import (
@@ -35,7 +36,7 @@ dicts = {
     "FOCUSER": focuser_json,
     "GENERAL KW": general_kw,
     "TCS": tcs_json,
-    "S4GUI": s4gui_json,
+    "GUI": s4gui_json,
     "GENERAL KW": general_kw,
 }
 
@@ -44,11 +45,11 @@ dicts["ICS"] = ics_kw
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
 csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
 hdr_params = Header_Parameters(csv_folder)
-for cls in [Weather_Station]:
+for cls in [iXon_Ultra]:
     tcs = cls(dicts, log_file, hdr_params)
     tcs.extract_info()
-    tcs.validate_info()
     tcs.fix_keywords()
+    tcs.validate_info()
 print(repr(tcs.new_json))
 
 # image = np.zeros((100, 100), dtype=np.int16)
