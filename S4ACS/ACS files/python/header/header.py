@@ -1,9 +1,8 @@
 import json
 import re
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
 from datetime import datetime
-from os.path import join
+from os.path import dirname, join, realpath
 
 import astropy.io.fits as fits
 import pandas as pd
@@ -45,7 +44,7 @@ class Header(ABC):
 
         return
 
-    def _load_json(self) -> dict | None:
+    def _load_json(self) -> dict:
         try:
             if self.json_string == "":
                 return
@@ -59,9 +58,10 @@ class Header(ABC):
             )
 
     def _read_kws_config(self) -> None:
-        csv_file_path = join("header", "csv", self.sub_system + ".csv")
+        csv_file_path = join(
+            dirname(realpath(__file__)), "csv", self.sub_system + ".csv"
+        )
         kws_config = pd.read_csv(csv_file_path).fillna("")
-        print(kws_config["empty kw vals"].values)
         self.header_keywords = kws_config["Header Keywords"]
         if "to bool" in kws_config.keys():
             self.to_bool_kws = [
@@ -98,7 +98,7 @@ class Header(ABC):
         return
 
     @staticmethod
-    def _get_bool_w_cond_kws(kws_config) -> dict | None:
+    def _get_bool_w_cond_kws(kws_config) -> dict:
         if "to bool w cond" in kws_config.keys():
             return {
                 kw: condition.split(";")
@@ -174,9 +174,13 @@ class Header(ABC):
             )
         return
 
-    def write_header_content(self, hdr: fits.Header) -> None:
-        self.hdr = hdr
-        return
+    def fill_image_header(self, hdr: fits.Header) -> fits.Header:
+        for kw in self.new_json:
+            try:
+                hdr[kw] = self.new_json[kw]
+            except Exception as e:
+                self._write_log_file(repr(e), kw)
+        return hdr
 
     def fix_keywords(self):
         for func in [
@@ -312,6 +316,8 @@ class Header(ABC):
                 self._write_log_file(repr(e), kw)
 
     def _replace_empty_kws(self) -> None:
+        if self.empty_kws == None:
+            return
         for kw, val in self.empty_kws.items():
             try:
                 self.new_json[kw] = val
@@ -629,6 +635,8 @@ class CCD(Header):
         self._write_ccd_gain()
         self._write_read_noise()
         self._fix_EXPTIME()
+        self.calc_NAXIS1()
+        self.calc_NAXIS2()
 
         return
 
@@ -656,6 +664,18 @@ class CCD(Header):
     def _fix_EXPTIME(self):
         if 1e-5 > self.new_json["EXPTIME"] > 9.999999e-6:
             self.new_json["EXPTIME"] = 10e-6
+        return
+
+    def calc_NAXIS1(self) -> None:
+        self.new_json["NAXIS1"] = (
+            self.new_json["FINALLIN"] - self.new_json["INITLIN"]
+        ) // self.new_json["VBIN"] + 1
+        return
+
+    def calc_NAXIS2(self) -> None:
+        self.new_json["NAXIS2"] = (
+            self.new_json["FINALCOL"] - self.new_json["INITCOL"]
+        ) // self.new_json["HBIN"] + 1
         return
 
 
@@ -712,6 +732,8 @@ class General_KWs(Header):
             "EQUINOX": 2000.0,
             "SIMPLE": True,
             "BITPIX": 16,
+            "BZERO": 1,
+            "BSCALE": 32768,
         }
 
     def fix_keywords(self):

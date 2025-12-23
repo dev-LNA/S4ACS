@@ -42,13 +42,11 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
             General_SPARC4_KWs,
             iXon_Ultra,
         ]:
-            obj = cls(dict_header_jsons, log_file)
-            obj.write_hdr_param_dataclass(hdr_params)
-            obj.write_header_content(hdr)
-            obj.extract_and_validate_hdr()
+            obj = cls(dict_header_jsons, log_file, hdr_params)
+            obj.extract_info()
             obj.fix_keywords()
-            hdr = obj.hdr
-        # obj.reset_header()
+            obj.validate_info()
+            hdr = obj.fill_image_header(hdr)
         data = fix_image_orientation(hdr["CHANNEL"], hdr["EMMODE"], data)
         file = verify_file_already_exists(file)
         hdu = fits.PrimaryHDU(data, hdr)

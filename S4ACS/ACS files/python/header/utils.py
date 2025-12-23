@@ -13,6 +13,9 @@ class Header_Parameters:
         self.read_hdr_ctnt_csv()
         self.keywords = [kw for kw in self.hdr_cnt["Keyword"]]
         self.comments = [comment for comment in self.hdr_cnt["Comment"]]
+        self.cards = [
+            (kw, "", comment) for (kw, comment) in zip(self.keywords, self.comments)
+        ]
         self.get_gain_values()
         self.get_read_noise_values()
         self.get_expected_kw_names()

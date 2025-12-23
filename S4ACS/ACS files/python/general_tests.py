@@ -12,6 +12,7 @@ from header import (
     S4ICS,
     TCS,
     Focuser,
+    General_ECHARPE_KWs,
     General_SPARC4_KWs,
     Header_Parameters,
     Weather_Station,
@@ -45,12 +46,22 @@ dicts["ICS"] = ics_kw
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
 csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
 hdr_params = Header_Parameters(csv_folder)
-for cls in [General_SPARC4_KWs]:
+hdr = fits.Header(hdr_params.cards)
+for cls in [
+    General_SPARC4_KWs,
+    iXon_Ultra,
+    S4ICS,
+    S4GUI,
+    TCS,
+    Weather_Station,
+    Focuser,
+]:
     tcs = cls(dicts, log_file, hdr_params)
     tcs.extract_info()
     tcs.fix_keywords()
-    # tcs.validate_info()
-print(repr(tcs.new_json))
+    tcs.validate_info()
+    hdr = tcs.fill_image_header(hdr)
+print(repr(hdr))
 
 # image = np.zeros((100, 100), dtype=np.int16)
 # file = os.path.join("C:\\", "images", "today", "test.fits")
