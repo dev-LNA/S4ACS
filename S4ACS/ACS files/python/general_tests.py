@@ -45,11 +45,11 @@ dicts["ICS"] = ics_kw
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
 csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
 hdr_params = Header_Parameters(csv_folder)
-for cls in [iXon_Ultra]:
+for cls in [General_SPARC4_KWs]:
     tcs = cls(dicts, log_file, hdr_params)
     tcs.extract_info()
     tcs.fix_keywords()
-    tcs.validate_info()
+    # tcs.validate_info()
 print(repr(tcs.new_json))
 
 # image = np.zeros((100, 100), dtype=np.int16)

@@ -29,11 +29,13 @@ class Header(ABC):
         self.kws_in_dict = None
         self.dict_w_kws = None
         self.replace_comma_kws = None
+        self.empty_kws = None
         self.write_any_val = None
         self.write_predefined_val = None
         self.regex_strings = None
         self.new_json = None
         self.how_to_fix_regex = None
+        self.regex_expressions = None
         self.log_file = log_file
         self.hdr_params = hdr_params
         self.json_string = dict_header_jsons[self.sub_system]
@@ -59,6 +61,7 @@ class Header(ABC):
     def _read_kws_config(self) -> None:
         csv_file_path = join("header", "csv", self.sub_system + ".csv")
         kws_config = pd.read_csv(csv_file_path).fillna("")
+        print(kws_config["empty kw vals"].values)
         self.header_keywords = kws_config["Header Keywords"]
         if "to bool" in kws_config.keys():
             self.to_bool_kws = [
@@ -86,8 +89,12 @@ class Header(ABC):
             self.kws_in_dict = [
                 val for val in kws_config["kws in dict"].values if val != ""
             ]
+        if "regex strings" in kws_config.keys():
+            self.regex_strings = [
+                val for val in kws_config["regex strings"].values if val != ""
+            ]
         self.to_bool_w_cond_kws = self._get_bool_w_cond_kws(kws_config)
-        self.regex_strings = self._get_regex_strings_kws(kws_config)
+
         return
 
     @staticmethod
@@ -97,18 +104,6 @@ class Header(ABC):
                 kw: condition.split(";")
                 for (kw, condition) in zip(
                     kws_config["to bool w cond"], kws_config["to bool condition"]
-                )
-                if kw != ""
-            }
-        return
-
-    @staticmethod
-    def _get_regex_strings_kws(kws_config) -> dict | None:
-        if "regex strings" in kws_config.keys():
-            return {
-                kw: condition.split(";")
-                for (kw, condition) in zip(
-                    kws_config["regex strings"], kws_config["regex condition"]
                 )
                 if kw != ""
             }
@@ -194,6 +189,7 @@ class Header(ABC):
             self._write_predefined_value,
             self._verify_regex,
             self._kw_in_dict,
+            self._replace_empty_kws,
         ]:
             func()
         return
@@ -274,12 +270,13 @@ class Header(ABC):
     def _verify_regex(self) -> None:
         if self.regex_strings == None:
             return
-        for kw, (regex_expr, ex_value) in self.regex_strings.items():
+        for kw in self.regex_strings:
             try:
                 kw_value = self.new_json[kw]
+                regex_expr, ex_val = self.regex_expressions[kw]
                 if re.match(regex_expr, kw_value) == None:
                     self._write_log_file(
-                        f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_value}. Trying to fix...",
+                        f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_val}. Trying to fix...",
                         kw,
                     )
                     self._fix_regex_keyword(kw)
@@ -289,7 +286,7 @@ class Header(ABC):
     def _fix_regex_keyword(self, kw) -> None:
         try:
             kw_value = self.new_json[kw]
-            regex_expr, _ = self.regex_strings[kw]
+            regex_expr, _ = self.regex_expressions[kw]
             if kw not in self.how_to_fix_regex.keys():
                 self._write_log_file(
                     f"The method to fix this keyword was not found.", kw
@@ -314,11 +311,10 @@ class Header(ABC):
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _replace_empty_str(self):
-        for kw, val in self.kw_dataclass.replace_empty_kws.items():
+    def _replace_empty_kws(self) -> None:
+        for kw, val in self.empty_kws.items():
             try:
-                if self.hdr[kw] == "":
-                    self.hdr[kw] = val
+                self.new_json[kw] = val
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -392,6 +388,7 @@ class S4ICS(Header):
         self.to_bool_kws = None
         self.kws_in_dict = None
         self.regex_strings = None
+        self.empty_kws = None
         self.replace_comma_kws = None
         self.write_any_val = None
         self.write_predefined_val = None
@@ -413,6 +410,7 @@ class S4ICS(Header):
                 "CLOSED": "CLOSED",
             },
         }
+        self.regex_expressions = {"ICSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
 
         try:
             self.json_string = dict_header_jsons[self.sub_system].split("\n")[1]
@@ -617,6 +615,14 @@ class CCD(Header):
             "PREAMP": [],
             "READRATE": [],
         }
+        self.regex_expressions = {
+            "DATE-OBS": (
+                r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}",
+                "YYYY-MM-DDTHH:MM:SS.ssssss",
+            ),
+            "UTTIME": (r"\d{2}:\d{2}:\d{2}\.\d{6}", "HH:MM:SS.ssssss"),
+            "UTDATE": (r"\d{4}-\d{2}-\d{2}", "YYYY-MM-DD"),
+        }
 
     def fix_keywords(self):
         super().fix_keywords()
@@ -662,10 +668,9 @@ class iXon_Ultra(CCD):
         self.dict_w_kws["EMMODE"] = ["Electron Multiplying", "Conventional"]
         self.dict_w_kws["READRATE"] = {0: [30.0, 20.0, 10.0, 1.0], 1: [1.0, 0.1]}
 
-    def _find_index_tab(self):
+    def _find_index_tab(self) -> int:
         _json = self.original_json
-        index = 8 * _json["EMMODE"] + 2 * _json["READRATE"] + _json["PREAMP"]
-        self.idx_tab = index
+        return 8 * _json["EMMODE"] + 2 * _json["READRATE"] + _json["PREAMP"]
 
     def fix_keywords(self):
         super().fix_keywords()
@@ -694,29 +699,12 @@ class General_KWs(Header):
 
     sub_system = "GENERAL KW"
 
-    def _initialize_kw_dataclass(self):
-        keywords = [
-            "FILENAME",
-            "NCYCLES",
-            "CYCLIND",
-            "ACSVRSN",
-            "ACSMODE",
-            "CHANNEL",
-            "ACQERROR",
-        ]
-
-        to_int_kws = [
-            "NCYCLES",
-            "CHANNEL",
-            "CYCLIND",
-        ]
-        regex_str = {
+    def __init__(self, dict_header_jsons, log_file, hdr_params):
+        super().__init__(dict_header_jsons, log_file, hdr_params)
+        self.regex_expressions = {
             "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
-            "FILENAME": (r"", ""),
         }
-
-        to_bool_kw = ["ACSMODE", "ACQERROR"]
-        replace_empty_kws = {
+        self.empty_kws = {
             "NAXIS": 2,
             "OBSLONG": -45.5825,
             "OBSLAT": -22.534,
@@ -724,79 +712,35 @@ class General_KWs(Header):
             "EQUINOX": 2000.0,
             "SIMPLE": True,
             "BITPIX": 16,
-            "INSTRUME": "",
         }
-        return Keywords_Dataclass(
-            keywords=keywords,
-            replace_empty_kws=replace_empty_kws,
-            to_bool_kws=to_bool_kw,
-            to_int_kws=to_int_kws,
-            regex_str=regex_str,
-        )
-
-    def extract_info(self):
-        super().extract_info()
-        self._fix_parameters()
-
-    def _fix_parameters(self):
-        self.new_json["CYCLIND"] = self.new_json["CYCLIND"] + 1
 
     def fix_keywords(self):
-        self._replace_empty_str()
-        self._convert_to_int()
-        self._verify_regex()
-        self._convert_to_boolean()
+        super().fix_keywords()
+        self.new_json["CYCLIND"] = self.new_json["CYCLIND"] + 1
 
 
 class General_SPARC4_KWs(General_KWs):
 
-    def _initialize_kw_dataclass(self):
-        kws_data_class = super()._initialize_kw_dataclass()
-        kws_data_class.keywords += ["SEQINDEX", "NSEQ"]
-        kws_data_class.to_int_kws += ["NSEQ", "SEQINDEX"]
-        kws_data_class.regex_str["FILENAME"] = (
+    def __init__(self, dict_header_jsons, log_file, hdr_params):
+        super().__init__(dict_header_jsons, log_file, hdr_params)
+        self.regex_expressions["FILENAME"] = (
             r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
         )
-        kws_data_class.replace_empty_kws["INSTRUME"] = "SPARC4"
+        self.empty_kws["INSTRUME"] = "SPARC4"
 
-        return kws_data_class
-
-    def _fix_parameters(self):
-        super()._fix_parameters()
+    def fix_keywords(self):
+        super().fix_keywords()
         self.new_json["SEQINDEX"] = self.new_json["SEQINDEX"] + 1
 
 
 class General_ECHARPE_KWs(General_KWs):
-
-    def _initialize_kw_dataclass(self):
-        kws_data_class = super()._initialize_kw_dataclass()
-        kws_data_class.regex_str["FILENAME"] = (
+    def __init__(self, dict_header_jsons, log_file, hdr_params):
+        super().__init__(dict_header_jsons, log_file, hdr_params)
+        self.regex_expressions["FILENAME"] = (
             r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
         )
-        kws_data_class.replace_empty_kws["INSTRUME"] = "ECHARPE"
+        self.empty_kws["INSTRUME"] = "ECHARPE"
 
-        return kws_data_class
-
-
-@dataclass
-class Keywords_Dataclass:
-    keywords: list = field(default_factory=list)
-
-    to_float_kws: list = field(default_factory=list)
-    to_int_kws: list = field(default_factory=list)
-    to_bool_kws: list = field(default_factory=list)
-    to_bool_with_condition: dict = field(default_factory=dict)
-
-    comma_kws: list = field(default_factory=list)
-    replace_str: dict = field(default_factory=dict)
-    delete_str: dict = field(default_factory=dict)
-    regex_str: dict = field(default_factory=dict)
-
-    write_any_val: list = field(default_factory=list)
-    write_predefined_value: dict = field(default_factory=dict)
-
-    idx_in_dict: dict = field(default_factory=dict)
-    idx_in_list: dict = field(default_factory=dict)
-    replace_empty_kws: dict = field(default_factory=dict)
+        return
