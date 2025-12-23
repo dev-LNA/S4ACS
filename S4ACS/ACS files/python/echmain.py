@@ -1,6 +1,6 @@
 import json
-import os
 import traceback
+from os.path import dirname, join, realpath
 
 import astropy.io.fits as fits
 import numpy as np
@@ -10,12 +10,13 @@ from header import (
     TCS,
     Focuser,
     General_ECHARPE_KWs,
+    Header_Parameters,
     Weather_Station,
     iKon_L,
 )
 from utils import (
-    fix_image_orientation,
-    sub_systems,
+    SUB_SYSTEMS,
+    fix_standard_keywords,
     verify_file_already_exists,
     write_error_log,
 )
@@ -24,9 +25,13 @@ from utils import (
 def main(night_dir, file, data, tuple_header_jsons, log_file):
     error_json = {"status": False, "code": 0, "source": ""}
     try:
-        dict_header_jsons = {k: v for (k, v) in zip(sub_systems, tuple_header_jsons)}
+        dict_header_jsons = {k: v for (k, v) in zip(SUB_SYSTEMS, tuple_header_jsons)}
         data = np.asarray(data, dtype=np.uint16)
-        file = os.path.join(night_dir, file)
+        file = join(night_dir, file)
+
+        csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
+        hdr_params = Header_Parameters(csv_folder)
+        hdr = fits.Header(hdr_params.cards)
 
         for cls in [
             Focuser,
@@ -37,16 +42,14 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
             General_ECHARPE_KWs,
             iKon_L,
         ]:
-            obj = cls(dict_header_jsons, log_file)
+            obj = cls(dict_header_jsons, log_file, hdr_params)
+            obj.extract_info()
             obj.fix_keywords()
-            hdr = obj.hdr
-        obj.reset_header()
+            obj.validate_info()
+            hdr = obj.fill_image_header(hdr)
         file = verify_file_already_exists(file)
         hdu = fits.PrimaryHDU(data, hdr)
-        hdu.header["BZERO"] = (32768, "Zero point in scaling equation")
-        hdu.header["BSCALE"] = (1, "Linear factor in scaling equation")
-        hdu.header["NAXIS1"] = (hdu.header["NAXIS1"], "Number of columns")
-        hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
+        # hdu = fix_standard_keywords(hdr)
         hdu.writeto(file, output_verify="ignore")
         return json.dumps(error_json)
     except Exception:
