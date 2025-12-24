@@ -35,7 +35,6 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
 
         for cls in [
             Focuser,
-            S4ICS,
             S4GUI,
             TCS,
             Weather_Station,
