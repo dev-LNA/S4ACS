@@ -1,6 +1,6 @@
-Header Keywords,to float,regex strings,regex condition,replace comma
-RA,AIRMASS,RA,[\+-]?\d{2}:\d{2}:\d{2}\.\d+;HH:MM:SS.ss,RA
-DEC,INSTROT,DEC,[\+-]?\d{2}:\d{2}:\d{2}\.\d+;HH:MM:SS.ss,DEC
-TCSHA,,TCSHA,[\+-]?\d{2}:\d{2}:\d{2}\.\d+;HH:MM:SS.ss,TCSHA
-INSTROT,,,,
-AIRMASS,,,,
+Header Keywords,to float,regex strings,replace comma
+RA,AIRMASS,RA,RA
+DEC,INSTROT,DEC,DEC
+TCSHA,,TCSHA,TCSHA
+INSTROT,,,
+AIRMASS,,,

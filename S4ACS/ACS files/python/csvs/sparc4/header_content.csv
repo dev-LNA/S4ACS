@@ -61,7 +61,7 @@ RA;RAACQUIS;string;;Right ascension: HH:MM:SS.ss
 DEC;DECACQUIS;string;;Declination: DD:MM:SS.ss
 EQUINOX;;float;0,inf;Equinox of coordinates
 TELFOCUS;POSITION;integer;0,inf;Telescope focus position (arbitrary units)
-TCSHA;HOURANGLE;string;;TCS hour angle: HH:MM:SS
+TCSHA;HOURANGLE;string;;TCS hour angle: HH:MM:SS.ss
 TCSDATE;;string;;TCS local date (isot)
 GFOC;;float;0,inf;Guiding focus position (mm)
 GMIR;;float;0,360;Rotation angle of the guiding mirror (deg)

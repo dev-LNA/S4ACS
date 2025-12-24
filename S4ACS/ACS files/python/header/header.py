@@ -38,6 +38,7 @@ class Header(ABC):
         self.log_file = log_file
         self.hdr_params = hdr_params
         self.json_string = dict_header_jsons[self.sub_system]
+        self.filename = json.loads(dict_header_jsons["CCD"])["FILENAME"]
 
         self.original_json = self._load_json()
         self._read_kws_config()
@@ -133,6 +134,7 @@ class Header(ABC):
                 val = self.new_json[hdr_kw]
                 _type = self.hdr_params.keyword_types[hdr_kw]
                 if not isinstance(val, self.kw_types[_type]):
+                    self.new_json[hdr_kw] = ""
                     self._write_log_file(
                         f'Keyword value "{val}" is not an instance of {repr(_type)}.',
                         hdr_kw,
@@ -158,6 +160,7 @@ class Header(ABC):
         a_values = self.hdr_params.allowed_kw_values[hdr_kw]
         min, *max = a_values
         if not min <= val <= max[-1]:
+            self.new_json[hdr_kw] = ""
             self._write_log_file(
                 f'The provided keyword value is out of range {a_values}. "{val}" was found.',
                 hdr_kw,
@@ -168,6 +171,7 @@ class Header(ABC):
         val = self.new_json[hdr_kw]
         a_values = self.hdr_params.allowed_kw_values[hdr_kw]
         if val not in a_values and a_values != "":
+            self.new_json[hdr_kw] = ""
             self._write_log_file(
                 f'The expected values for this keyword are {a_values}. "{val}" was found.',
                 hdr_kw,
@@ -201,9 +205,10 @@ class Header(ABC):
     def _write_log_file(self, message, keyword):
         with open(self.log_file, "a") as file:
             now = str(datetime.now())
-            file.write(  # ! add file name?
+            file.write(
                 now
                 + " - "
+                + f"FILENAME= {self.filename}, "
                 + f"SUB-SYTEM={self.sub_system}, KEYWORD={keyword} - "
                 + message
                 + "\n"
@@ -502,6 +507,11 @@ class TCS(Header):
         self.how_to_fix_regex = {
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
         }
+        self.regex_expressions = {
+            "RA": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d{2}", "HH:MM:SS.ss"),
+            "DEC": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d{2}", "HH:MM:SS.ss"),
+            "TCSHA": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d{2}", "HH:MM:SS.ss"),
+        }
 
     def fix_keywords(self):
         super().fix_keywords()
@@ -562,6 +572,13 @@ class S4GUI(Header):
 
     sub_system = "GUI"
 
+    def __init__(self, dict_header_jsons, log_file, hdr_params) -> None:
+        super().__init__(dict_header_jsons, log_file, hdr_params)
+        self.regex_expressions = {
+            "GUIVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
+        }
+        return
+
     def _write_COMMENT(self):
         kw = "COMMENT"
         try:
@@ -572,7 +589,6 @@ class S4GUI(Header):
                 )
                 return
             if self.original_json[kw] == "":
-                self._write_log_file(f"An empty string was found.", kw)
                 return
             self.new_json[kw] = val
         except Exception as e:
@@ -617,6 +633,7 @@ class CCD(Header):
         self._fix_EXPTIME()
         self.calc_NAXIS1()
         self.calc_NAXIS2()
+        self.new_json["FRAMEIND"] += 1
 
         return
 
@@ -741,7 +758,7 @@ class General_ECHARPE_KWs(General_KWs):
     def __init__(self, dict_header_jsons, log_file, hdr_params):
         super().__init__(dict_header_jsons, log_file, hdr_params)
         self.regex_expressions["FILENAME"] = (
-            r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
+            r"\d{8}_ECH_(BLUE|RED)_\d{6}[ozdfts](_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
         )
         self.empty_kws["INSTRUME"] = "ECHARPE"

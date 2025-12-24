@@ -634,7 +634,6 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
-			<Item Name="initialize python session.vi" Type="VI" URL="../Save Image/initialize python session.vi"/>
 			<Item Name="join array jsons.vi" Type="VI" URL="../Save SPARC4 image/join array jsons.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
