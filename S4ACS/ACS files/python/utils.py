@@ -270,8 +270,76 @@ ccd_kw = {
     "FRAMETRF": True,
     "EMMODE": 1,
 }
-ics_kw = """WPROT SIMULATED READY 0.000 NONE -1, WPSEL SIMULATED READY 80.000 OFF 2, CALW SIMULATED READY 216.000 SHUTTER 4, ASEL SIMULATED READY 0.000 OFF 1, GMIR SIMULATED READY 0.000 TARGET 1, GFOC SIMULATED READY 0.000 TARGET 1
-{"broker":"S4ICS","version":"v0.0.0","comment":"this is a comment","tcpServerSocket":"192.168.1.170","tcpServerEnabled":"True","timestamp":"0000-00-00T00:0:000.0","mechanisms":[{"name":"WPROT","status":{"mode":"ACTIVE","condition":"READY","position":"0","pos_name":"HOME","pos_id":"-1"}},{"name":"WPSEL","status":{"mode":"ACTIVE","condition":"READY","position":"50","pos_name":"OFF","pos_id":"2"}},{"name":"CALW","status":{"mode":"ACTIVE","condition":"READY","position":"144","pos_name":"OFF","pos_id":"3"}},{"name":"ASEL","status":{"mode":"ACTIVE","condition":"READY","position":"0","pos_name":"OFF","pos_id":"1"}},{"name":"GMIR","status":{"mode":"ACTIVE","condition":"READY","position":"0","pos_name":"HOME","pos_id":"0"}},{"name":"GFOC","status":{"mode":"ACTIVE","condition":"READY","position":"0","pos_name":"HOME","pos_id":"0"}}]}"""
+ics_kw = {
+    "broker": "S4ICS",
+    "version": "v0.0.0",
+    "comment": "this is a comment",
+    "tcpServerSocket": "192.168.1.170",
+    "tcpServerEnabled": "True",
+    "timestamp": "0000-00-00T00:0:000.0",
+    "mechanisms": [
+        {
+            "name": "WPROT",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "HOME",
+                "pos_id": "-1",
+            },
+        },
+        {
+            "name": "WPSEL",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "50",
+                "pos_name": "OFF",
+                "pos_id": "2",
+            },
+        },
+        {
+            "name": "CALW",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "144",
+                "pos_name": "OFF",
+                "pos_id": "3",
+            },
+        },
+        {
+            "name": "ASEL",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "OFF",
+                "pos_id": "1",
+            },
+        },
+        {
+            "name": "GMIR",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "HOME",
+                "pos_id": "0",
+            },
+        },
+        {
+            "name": "GFOC",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "HOME",
+                "pos_id": "0",
+            },
+        },
+    ],
+}
 
 everthing_json = {
     "CYCLIND": 0,

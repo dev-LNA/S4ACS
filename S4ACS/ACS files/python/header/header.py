@@ -387,21 +387,8 @@ class S4ICS(Header):
 
     sub_system = "ICS"
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        self.header_keywords = None
-        self.to_int_kws = None
-        self.to_float_kws = None
-        self.to_bool_kws = None
-        self.kws_in_dict = None
-        self.regex_strings = None
-        self.empty_kws = None
-        self.replace_comma_kws = None
-        self.write_any_val = None
-        self.write_predefined_val = None
-        self.new_json = None
-        self.log_file = log_file
-        self.hdr_params = hdr_params
-        self.json_string = dict_header_jsons[self.sub_system]
+    def __init__(self, dict_header_jsons, log_file, hdr_params) -> None:
+        super().__init__(dict_header_jsons, log_file, hdr_params)
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.dict_w_kws = {
             "WPSEL": {"OFF": "None", "L/2": "L2", "L/4": "L4"},
@@ -417,14 +404,7 @@ class S4ICS(Header):
             },
         }
         self.regex_expressions = {"ICSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
-
-        try:
-            self.json_string = dict_header_jsons[self.sub_system].split("\n")[1]
-            self.original_json = self._load_json()
-            self._read_kws_config()
-            self.inst_mode = json.loads(dict_header_jsons["GUI"])["INSTMODE"]
-        except Exception as e:
-            self._write_log_file(repr(e), "")
+        self.inst_mode = json.loads(dict_header_jsons["GUI"])["INSTMODE"]
         return
 
     def _create_s4ics_kws(self):
@@ -469,27 +449,27 @@ class S4ICS(Header):
             except Exception as e:
                 self._write_log_file(repr(e), comp)
 
-    def _treat_s4ics_json(self):
+    def _treat_s4ics_json(self) -> dict:
         try:
             mechanisms_list = self.original_json["MECHANISMS"]
             mechanisms = {}
             for mechanism in mechanisms_list:
-                mechanism_st = mechanism["status"]
-                mechanism_name = mechanism["name"]
-                pos_id = int(mechanism_st["pos_id"])
-                if pos_id == -1 and mechanism_name != "WPROT":
+                status = mechanism["status"]
+                name = mechanism["name"]
+                pos_id = int(status["pos_id"])
+                if pos_id == -1 and name != "WPROT":
                     self._write_log_file(
-                        f"There was an error related to the {mechanism_name} position: {mechanism_st}.",
+                        f"There was an error related to the {name} position: {status}.",
                         "",
                     )
-                mechanisms[mechanism_name] = mechanism_st
+                mechanisms[name] = status
 
             return mechanisms
         except Exception as e:
             self._write_log_file(repr(e), "")
             return {}
 
-    def _write_WPPOS(self, wppos):
+    def _write_WPPOS(self, wppos) -> None:
         try:
             kw = "WPPOS"
             wppos = int(wppos)
@@ -724,6 +704,7 @@ class General_KWs(Header):
         self.regex_expressions = {
             "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
         }
+        # O pandas trata tudo como uma string
         self.empty_kws = {
             "NAXIS": 2,
             "OBSLONG": -45.5825,
