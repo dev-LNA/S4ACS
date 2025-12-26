@@ -68,8 +68,3 @@ class Header_Parameters:
                 allowed_kw_values[kw] = val
         self.allowed_kw_values = allowed_kw_values
         return
-
-
-# base_folder = join(dirname(realpath(__file__)), "..", "csvs")
-# csv_folder = join(dirname(realpath(__file__)), "..", "csvs", "sparc4")
-# sparc4_hdr_data_class = Header_Parameters(csv_folder)

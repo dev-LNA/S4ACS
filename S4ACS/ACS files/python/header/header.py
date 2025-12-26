@@ -3,6 +3,7 @@ import re
 from abc import ABC, abstractmethod
 from datetime import datetime
 from os.path import dirname, join, realpath
+from pathlib import Path
 
 import astropy.io.fits as fits
 import pandas as pd
@@ -18,7 +19,11 @@ class Header(ABC):
     sub_system = "HEADER"
 
     def __init__(
-        self, dict_header_jsons: dict, log_file: str, hdr_params: Header_Parameters
+        self,
+        dict_header_jsons: dict,
+        log_file: str,
+        hdr_params: Header_Parameters,
+        csv_folder: Path,
     ) -> None:
         self.header_keywords = None
         self.to_int_kws = None
@@ -38,6 +43,7 @@ class Header(ABC):
         self.log_file = log_file
         self.hdr_params = hdr_params
         self.json_string = dict_header_jsons[self.sub_system]
+        self.csv_folder = csv_folder
         self.filename = json.loads(dict_header_jsons["CCD"])["FILENAME"]
 
         self.original_json = self._load_json()
@@ -60,7 +66,7 @@ class Header(ABC):
 
     def _read_kws_config(self) -> None:
         csv_file_path = join(
-            dirname(realpath(__file__)), "csv", self.sub_system + ".csv"
+            self.csv_folder, "keywords config", self.sub_system + ".csv"
         )
         kws_config = pd.read_csv(csv_file_path).fillna("")
         self.header_keywords = kws_config["Header Keywords"]
@@ -380,20 +386,20 @@ class Weather_Station(Header):
 
     sub_system = "WSTATION"
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
         json_string = dict_header_jsons[self.sub_system]
         if "Weather" in json_string[:7]:
             json_string = json_string.replace("Weather", "")
         dict_header_jsons[self.sub_system] = json_string
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
 
 
 class S4ICS(Header):
 
     sub_system = "ICS"
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params) -> None:
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.dict_w_kws = {
             "WPSEL": {"OFF": "None", "L/2": "L2", "L/4": "L4"},
@@ -501,8 +507,8 @@ class TCS(Header):
 
     sub_system = "TCS"
 
-    def __init__(self, dict_header_jsons, night_dir, hdr_params) -> None:
-        super().__init__(dict_header_jsons, night_dir, hdr_params)
+    def __init__(self, dict_header_jsons, night_dir, hdr_params, csv_folder) -> None:
+        super().__init__(dict_header_jsons, night_dir, hdr_params, csv_folder)
         self.obstype = json.loads(dict_header_jsons["GUI"])["OBSTYPE"]
         self.how_to_fix_regex = {
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
@@ -572,8 +578,8 @@ class S4GUI(Header):
 
     sub_system = "GUI"
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params) -> None:
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions = {
             "GUIVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
         }
@@ -605,8 +611,8 @@ class CCD(Header):
 
     sub_system = "CCD"
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.idx_tab = self._find_index_tab()
         self.dict_w_kws = {
             "TRIGGER": {0: "Internal", 6: "External"},
@@ -678,8 +684,8 @@ class CCD(Header):
 
 class iXon_Ultra(CCD):
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.dict_w_kws["VSHIFT"] = [0.6, 1.13, 2.2, 4.33]
         self.dict_w_kws["PREAMP"] = ["Gain 1", "Gain 2"]
         self.dict_w_kws["EMMODE"] = ["Electron Multiplying", "Conventional"]
@@ -705,8 +711,8 @@ class iXon_Ultra(CCD):
 
 class iKon_L(CCD):
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.dict_w_kws["VSHIFT"] = [38.55, 76.95]
         self.dict_w_kws["PREAMP"] = ["Gain 1", "Gain 2", "Gain 4"]
         self.dict_w_kws["READRATE"] = [0.05, 1, 3, 5]
@@ -716,8 +722,8 @@ class General_KWs(Header):
 
     sub_system = "GENERAL KW"
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions = {
             "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
         }
@@ -741,8 +747,8 @@ class General_KWs(Header):
 
 class General_SPARC4_KWs(General_KWs):
 
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions["FILENAME"] = (
             r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
@@ -755,8 +761,8 @@ class General_SPARC4_KWs(General_KWs):
 
 
 class General_ECHARPE_KWs(General_KWs):
-    def __init__(self, dict_header_jsons, log_file, hdr_params):
-        super().__init__(dict_header_jsons, log_file, hdr_params)
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions["FILENAME"] = (
             r"\d{8}_ECH_(BLUE|RED)_\d{6}[ozdfts](_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
