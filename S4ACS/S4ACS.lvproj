@@ -110,7 +110,20 @@
 			<Item Name="echmain.py" Type="Document" URL="../ACS files/python/echmain.py"/>
 			<Item Name="s4main.py" Type="Document" URL="../ACS files/python/s4main.py"/>
 		</Item>
-		<Item Name="cam_parameters" Type="Folder"/>
+		<Item Name="csvs" Type="Folder">
+			<Item Name="sparc4" Type="Folder">
+				<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/sparc4/cam_parameters_limit_values.csv"/>
+				<Item Name="channel_parameters_limit_values.csv" Type="Document" URL="../ACS files/sparc4/channel_parameters_limit_values.csv"/>
+				<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/sparc4/max_#frames.csv"/>
+				<Item Name="readout_times.csv" Type="Document" URL="../ACS files/sparc4/readout_times.csv"/>
+			</Item>
+			<Item Name="echarpe" Type="Folder">
+				<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/echarpe/cam_parameters_limit_values.csv"/>
+				<Item Name="channel_parameters_limit_values.csv" Type="Document" URL="../ACS files/echarpe/channel_parameters_limit_values.csv"/>
+				<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/echarpe/max_#frames.csv"/>
+				<Item Name="readout_times.csv" Type="Document" URL="../ACS files/echarpe/readout_times.csv"/>
+			</Item>
+		</Item>
 		<Item Name="comm man classes" Type="Folder">
 			<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../communication-manager/Log File/CM_Log File.lvclass"/>
 			<Item Name="CM_RxTx.lvclass" Type="LVClass" URL="../communication-manager/RxTx/CM_RxTx.lvclass"/>
@@ -675,7 +688,7 @@
 				<Property Name="Source[2].Container.applyInclusion" Type="Bool">true</Property>
 				<Property Name="Source[2].Container.depDestIndex" Type="Int">0</Property>
 				<Property Name="Source[2].destinationIndex" Type="Int">2</Property>
-				<Property Name="Source[2].itemID" Type="Ref">/My Computer/cam_parameters</Property>
+				<Property Name="Source[2].itemID" Type="Ref">/My Computer/csvs</Property>
 				<Property Name="Source[2].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[2].type" Type="Str">Container</Property>
 				<Property Name="Source[3].Container.applyDestination" Type="Bool">true</Property>
