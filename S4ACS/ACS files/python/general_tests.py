@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 from astropy.time import Time
 from header import (
+    ICS,
     S4GUI,
-    S4ICS,
     TCS,
     Focuser,
     General_ECHARPE_KWs,
@@ -44,11 +44,11 @@ dicts = {
 dicts = {k: json.dumps(v) for (k, v) in dicts.items()}
 
 log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
-csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
+csv_folder = join(dirname(realpath(__file__)), "csvs", "echarpe")
 hdr_params = Header_Parameters(csv_folder)
 hdr = fits.Header(hdr_params.cards)
-for cls in [S4ICS]:
-    tcs = cls(dicts, log_file, hdr_params)
+for cls in [ICS]:
+    tcs = cls(dicts, log_file, hdr_params, csv_folder)
     tcs.extract_info()
     tcs.fix_keywords()
     tcs.validate_info()

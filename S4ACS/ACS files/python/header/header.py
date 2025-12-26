@@ -409,11 +409,10 @@ class ICS(Header):
         return "v" + kw_value
 
 
-class S4ICS(Header):
+class S4ICS(ICS):
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
-        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.dict_w_kws = {
             "WPSEL": {"OFF": "None", "L/2": "L2", "L/4": "L4"},
             "CALW": {
@@ -427,7 +426,6 @@ class S4ICS(Header):
                 "CLOSED": "CLOSED",
             },
         }
-        self.regex_expressions = {"ICSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
         self.inst_mode = json.loads(dict_header_jsons["GUI"])["INSTMODE"]
         return
 
@@ -510,10 +508,6 @@ class S4ICS(Header):
     def extract_info(self):
         self._create_s4ics_kws()
         super().extract_info()
-
-    @staticmethod
-    def _fix_ICSVRSN(kw_value):
-        return "v" + kw_value
 
 
 class TCS(Header):

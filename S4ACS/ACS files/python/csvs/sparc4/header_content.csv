@@ -70,7 +70,7 @@ AIRMASS;;float;1,inf;Airmass at start of observation
 PRESSURE;;float;0,inf;Barometric pressure (mb), weather tower
 HUMIDITY;OUTHUMIDITY;float;0,100;Relative humidity (%), weather tower
 ACSVRSN;;string;;S4ACS software version
-ICSVRSN;;string;;S4ICS software version
+ICSVRSN;VERSION;string;;S4ICS software version
 GUIVRSN;;string;;S4GUI software version
 CTRLINTE;;string;S4GUI,S4GEI;Graphical control interface of ACS
 ACSMODE;;boolean;true,false;ACS: real (T) or simulated (F)

@@ -5,8 +5,8 @@ from os.path import dirname, join, realpath
 import astropy.io.fits as fits
 import numpy as np
 from header import (
+    ICS,
     S4GUI,
-    S4ICS,
     TCS,
     Focuser,
     General_ECHARPE_KWs,
@@ -40,7 +40,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
             Weather_Station,
             General_ECHARPE_KWs,
             iKon_L,
-            S4ICS,
+            ICS,
         ]:
             obj = cls(dict_header_jsons, log_file, hdr_params, csv_folder)
             obj.extract_info()
