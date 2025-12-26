@@ -29,7 +29,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
         data = np.asarray(data, dtype=np.uint16)
         file = join(night_dir, file)
 
-        csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
+        csv_folder = join(dirname(realpath(__file__)), "csvs", "echarpe")
         hdr_params = Header_Parameters(csv_folder)
         hdr = fits.Header(hdr_params.cards)
 
