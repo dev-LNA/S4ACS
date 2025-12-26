@@ -105,16 +105,12 @@
 				<Item Name="utils.py" Type="Document" URL="../ACS files/python/header/utils.py"/>
 			</Item>
 			<Item Name="general_tests.py" Type="Document" URL="../ACS files/python/general_tests.py"/>
-			<Item Name="main.py" Type="Document" URL="../ACS files/python/main.py"/>
 			<Item Name="temp.py" Type="Document" URL="../ACS files/python/temp.py"/>
 			<Item Name="utils.py" Type="Document" URL="../ACS files/python/utils.py"/>
+			<Item Name="echmain.py" Type="Document" URL="../ACS files/python/echmain.py"/>
+			<Item Name="s4main.py" Type="Document" URL="../ACS files/python/s4main.py"/>
 		</Item>
-		<Item Name="cam_parameters" Type="Folder">
-			<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/cam_parameters/max_#frames.csv"/>
-			<Item Name="readout_times.csv" Type="Document" URL="../ACS files/cam_parameters/readout_times.csv"/>
-			<Item Name="s4ch_parameters_limit_values.csv" Type="Document" URL="../ACS files/s4ch_parameters_limit_values.csv"/>
-			<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/cam_parameters/cam_parameters_limit_values.csv"/>
-		</Item>
+		<Item Name="cam_parameters" Type="Folder"/>
 		<Item Name="comm man classes" Type="Folder">
 			<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../communication-manager/Log File/CM_Log File.lvclass"/>
 			<Item Name="CM_RxTx.lvclass" Type="LVClass" URL="../communication-manager/RxTx/CM_RxTx.lvclass"/>
