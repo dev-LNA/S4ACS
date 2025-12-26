@@ -394,9 +394,22 @@ class Weather_Station(Header):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
 
 
-class S4ICS(Header):
+class ICS(Header):
 
     sub_system = "ICS"
+
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
+        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
+        self.regex_expressions = {"ICSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
+        return
+
+    @staticmethod
+    def _fix_ICSVRSN(kw_value):
+        return "v" + kw_value
+
+
+class S4ICS(Header):
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)

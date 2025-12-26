@@ -40,6 +40,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
             Weather_Station,
             General_ECHARPE_KWs,
             iKon_L,
+            S4ICS,
         ]:
             obj = cls(dict_header_jsons, log_file, hdr_params, csv_folder)
             obj.extract_info()
