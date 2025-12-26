@@ -722,7 +722,7 @@ class iKon_L(CCD):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.dict_w_kws["VSHIFT"] = [38.55, 76.95]
         self.dict_w_kws["PREAMP"] = ["Gain 1", "Gain 2", "Gain 4"]
-        self.dict_w_kws["READRATE"] = [0.05, 1, 3, 5]
+        self.dict_w_kws["READRATE"] = [0.05, 1.0, 3.0, 5.0]
 
 
 class General_KWs(Header):
