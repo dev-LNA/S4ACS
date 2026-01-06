@@ -42,7 +42,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
             General_SPARC4_KWs,
             iXon_Ultra,
         ]:
-            obj = cls(dict_header_jsons, log_file, hdr_params)
+            obj = cls(dict_header_jsons, log_file, hdr_params, csv_folder)
             obj.extract_info()
             obj.fix_keywords()
             obj.validate_info()
