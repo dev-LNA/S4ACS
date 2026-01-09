@@ -6,6 +6,7 @@ from .header import (
     Focuser,
     General_ECHARPE_KWs,
     General_SPARC4_KWs,
+    Header_Tester,
     Weather_Station,
     iKon_L,
     iXon_Ultra,

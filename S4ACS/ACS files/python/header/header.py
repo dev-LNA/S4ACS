@@ -69,7 +69,7 @@ class Header(ABC):
             self.csv_folder, "keywords config", self.sub_system + ".csv"
         )
         kws_config = pd.read_csv(csv_file_path).fillna("")
-        self.header_keywords = kws_config["Header Keywords"]
+        self.header_keywords = kws_config["Header Keywords"].values
         if "to bool" in kws_config.keys():
             self.to_bool_kws = [
                 val for val in kws_config["to bool"].values if val != ""
@@ -274,14 +274,6 @@ class Header(ABC):
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
-    def _replace_str(self) -> None:
-        for kw, (prev, new) in self.kw_dataclass.replace_str.items():
-            try:
-                self._search_unwanted_kw(kw, prev)
-                self.hdr[kw] = self.new_json[kw].replace(prev, new)
-            except Exception as e:
-                self._write_log_file(repr(e), kw)
-
     def _verify_regex(self) -> None:
         if self.regex_strings == None:
             return
@@ -317,14 +309,6 @@ class Header(ABC):
         except Exception as e:
             self._write_log_file(repr(e), kw)
         return
-
-    def _delete_str(self):
-        for kw, _str in self.kw_dataclass.delete_str.items():
-            try:
-                self._search_unwanted_kw(kw, _str)
-                self.hdr[kw] = self.hdr[kw].replace(_str, "")
-            except Exception as e:
-                self._write_log_file(repr(e), kw)
 
     def _replace_empty_kws(self) -> None:
         if self.empty_kws == None:
@@ -777,3 +761,19 @@ class General_ECHARPE_KWs(General_KWs):
         self.empty_kws["INSTRUME"] = "ECHARPE"
 
         return
+
+
+class Header_Tester(Header):
+
+    sub_system = "TESTER"
+
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+        super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
+        self.dict_w_kws = {"VSHIFT": [0.6, 1.13, 2.2, 4.33]}
+        self.regex_expressions = {"GUIVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
+        self.how_to_fix_regex = {"GUIVRSN": self._fix_soft_version}
+        self.empty_kws = {"BITPIX": 16}
+
+    @staticmethod
+    def _fix_soft_version(kw_value):
+        return "v" + kw_value

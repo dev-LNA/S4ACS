@@ -7,5 +7,10 @@
     "python-envs.defaultPackageManager": "ms-python.python:poetry",
     "python-envs.pythonProjects": [],
     "python.analysis.typeCheckingMode": "off",
-    "python.analysis.autoImportCompletions": true
+    "python.analysis.autoImportCompletions": true,
+    "python.testing.pytestArgs": [
+        "S4ACS"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
