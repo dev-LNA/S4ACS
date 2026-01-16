@@ -5,6 +5,7 @@ from .header import (
     TCS,
     Focuser,
     General_ECHARPE_KWs,
+    General_KWs,
     General_SPARC4_KWs,
     Header_Tester,
     Weather_Station,

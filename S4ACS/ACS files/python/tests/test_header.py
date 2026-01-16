@@ -9,14 +9,12 @@ import pandas as pd
 from header import (
     ICS,
     S4GUI,
-    S4ICS,
-    TCS,
     General_ECHARPE_KWs,
+    General_KWs,
     General_SPARC4_KWs,
     Header_Parameters,
     Header_Tester,
-    iKon_L,
-    iXon_Ultra,
+    Weather_Station,
 )
 
 
@@ -62,7 +60,10 @@ class Test_Header(unittest.TestCase):
 
     def test_init_header_json(self):
         tester = Header_Tester(
-            self.dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
+            self.dict_header_jsons.copy(),
+            self.log_file,
+            self.hdr_params,
+            self.csv_folder,
         )
         assert (
             tester.header_keywords
@@ -91,7 +92,10 @@ class Test_Header(unittest.TestCase):
 
     def test_extract_info(self):
         self.tester = Header_Tester(
-            self.dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
+            self.dict_header_jsons.copy(),
+            self.log_file,
+            self.hdr_params,
+            self.csv_folder,
         )
         self.tester.extract_info()
         assert self.tester.new_json == self.tester_hdr_content
@@ -114,9 +118,9 @@ class Test_Header(unittest.TestCase):
         assert self.tester.new_json["WPROMODE"] == True
 
     def test_replace_comma(self):
-        tester_hdr_content = self.tester_hdr_content
+        tester_hdr_content = self.tester_hdr_content.copy()
         tester_hdr_content["PRESSURE"] = "10,1"
-        dict_header_jsons = self.dict_header_jsons
+        dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
         tester = Header_Tester(
             dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
@@ -126,9 +130,9 @@ class Test_Header(unittest.TestCase):
         assert tester.new_json["PRESSURE"] == "10.1"
 
     def test_search_unwanted_kw(self):
-        tester_hdr_content = self.tester_hdr_content
+        tester_hdr_content = self.tester_hdr_content.copy()
         tester_hdr_content["PRESSURE"] = "10,1"
-        dict_header_jsons = self.dict_header_jsons
+        dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
         tester = Header_Tester(
             dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
@@ -141,9 +145,9 @@ class Test_Header(unittest.TestCase):
         assert self.tester.new_json["GUIVRSN"] == "v0.0.0"
 
     def test_verify_broken_regex(self):
-        tester_hdr_content = self.tester_hdr_content
+        tester_hdr_content = self.tester_hdr_content.copy()
         tester_hdr_content["GUIVRSN"] = "0.0.0"
-        dict_header_jsons = self.dict_header_jsons
+        dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
         tester = Header_Tester(
             dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
@@ -179,9 +183,9 @@ class Test_Header(unittest.TestCase):
         assert self.fixed_tester.new_json["INSTMODE"] == "PHOT"
 
     def test_check_str_not_in_allowed_values(self):
-        tester_hdr_content = self.tester_hdr_content
+        tester_hdr_content = self.tester_hdr_content.copy()
         tester_hdr_content["INSTMODE"] = "AAA"
-        dict_header_jsons = self.dict_header_jsons
+        dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
         tester = Header_Tester(
             dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
@@ -192,9 +196,9 @@ class Test_Header(unittest.TestCase):
         assert tester.new_json["INSTMODE"] == ""
 
     def test_check_number_not_in_range(self):
-        tester_hdr_content = self.tester_hdr_content
+        tester_hdr_content = self.tester_hdr_content.copy()
         tester_hdr_content["EMGAIN"] = 1
-        dict_header_jsons = self.dict_header_jsons
+        dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
         tester = Header_Tester(
             dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
@@ -216,7 +220,10 @@ class Test_Header(unittest.TestCase):
 
     def test_check_wrong_type(self):
         tester = tester = Header_Tester(
-            self.dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
+            self.dict_header_jsons.copy(),
+            self.log_file,
+            self.hdr_params,
+            self.csv_folder,
         )
         tester.extract_info()
         tester.fix_keywords()
@@ -227,12 +234,45 @@ class Test_Header(unittest.TestCase):
     def test_validate_info(self):
         self.fixed_tester.validate_info()
 
-    # def test_ICS(self):
-    #     tester_hdr_content = self.tester_hdr_content
-    #     tester_hdr_content["ICSVRSN"] = "0.0.0"
-    #     dict_header_jsons = self.dict_header_jsons
-    #     dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
-    #     tester = ICS(dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder)
-    #     tester.extract_info()
-    #     tester.fix_keywords()
-    #     assert tester.new_json["ICSVRSN"] == "v0.0.0"
+    def test_ICS(self):
+        tester_hdr_content = self.tester_hdr_content.copy()
+        tester_hdr_content["VERSION"] = "0.0.0"
+        dict_header_jsons = self.dict_header_jsons.copy()
+        dict_header_jsons["ICS"] = json.dumps(tester_hdr_content)
+        tester = ICS(dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder)
+        tester.extract_info()
+        tester.fix_keywords()
+        assert tester.new_json["ICSVRSN"] == "v0.0.0"
+
+    def test_Weather_Station(self):
+        dict_header_jsons = self.dict_header_jsons.copy()
+        dict_header_jsons["WSTATION"] = json.dumps(self.tester_hdr_content)
+        tester = Weather_Station(
+            dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
+        )
+        tester.extract_info()
+        tester.fix_keywords()
+        assert tester.new_json["PRESSURE"] == 10.1
+
+    def test_General_KWs(self):
+        tester_hdr_content = self.tester_hdr_content.copy()
+        tester_hdr_content["CYCLIND"] = 0
+        dict_header_jsons = self.dict_header_jsons.copy()
+        dict_header_jsons["GENERAL KW"] = json.dumps(tester_hdr_content)
+        tester = General_KWs(
+            dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
+        )
+        tester.extract_info()
+        tester.fix_keywords()
+        assert tester.new_json == {
+            "CYCLIND": 1,
+            "NAXIS": 2,
+            "OBSLONG": -45.5825,
+            "OBSLAT": -22.534,
+            "OBSALT": 1864.0,
+            "EQUINOX": 2000.0,
+            "SIMPLE": True,
+            "BITPIX": 16,
+            "BZERO": 1,
+            "BSCALE": 32768,
+        }
