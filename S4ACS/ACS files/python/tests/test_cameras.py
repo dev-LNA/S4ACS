@@ -40,6 +40,14 @@ class Test_Camera(unittest.TestCase):
         "ACQMODE": 3,
         "SHUTTER": 2,
         "VCLKAMP": 0,
+        "NFRAMES": 1,
+        "DATE-OBS": "0000-00-00T00:00:00.000000",
+        "UTDATE": "0000-00-00",
+        "UTTIME": "00:00:00.000000",
+        "CCDTEMP": -30,
+        "TEMPST": "TEMPERATURE_STABILIZED",
+        "TGTEMP": -30,
+        "COOLER": True,
     }
 
     @classmethod
@@ -87,3 +95,27 @@ class Test_Camera(unittest.TestCase):
 
     def test_VCLKAMP(self):
         assert self.fixed_tester.new_json["VCLKAMP"] == "Normal"
+
+    def test_NFRAMES(self):
+        assert self.fixed_tester.new_json["NFRAMES"] == 1
+
+    def test_date_obs(self):
+        assert self.fixed_tester.new_json["DATE-OBS"] == "0000-00-00T00:00:00.000000"
+
+    def test_utdate(self):
+        assert self.fixed_tester.new_json["UTDATE"] == "0000-00-00"
+
+    def test_uttime(self):
+        assert self.fixed_tester.new_json["UTTIME"] == "00:00:00.000000"
+
+    def test_ccd_temp(self):
+        assert self.fixed_tester.new_json["CCDTEMP"] == -30
+
+    def test_temp_status(self):
+        assert self.fixed_tester.new_json["TEMPST"] == "TEMPERATURE_STABILIZED"
+
+    def test_target_temp(self):
+        assert self.fixed_tester.new_json["TGTEMP"] == -30
+
+    def test_cooler(self):
+        assert self.fixed_tester.new_json["COOLER"] == True
