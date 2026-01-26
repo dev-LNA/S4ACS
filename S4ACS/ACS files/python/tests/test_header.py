@@ -257,6 +257,7 @@ class Test_Header(unittest.TestCase):
     def test_General_KWs(self):
         tester_hdr_content = self.tester_hdr_content.copy()
         tester_hdr_content["CYCLIND"] = 0
+        tester_hdr_content["ACSVRSN"] = "v0.0.0"
         dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["GENERAL KW"] = json.dumps(tester_hdr_content)
         tester = General_KWs(
@@ -275,4 +276,35 @@ class Test_Header(unittest.TestCase):
             "BITPIX": 16,
             "BZERO": 1,
             "BSCALE": 32768,
+            "ACSVRSN": "v0.0.0",
+        }
+
+    def test_General_SPARC4_KWs(self):
+        tester_hdr_content = self.tester_hdr_content.copy()
+        tester_hdr_content["CYCLIND"] = 0
+        tester_hdr_content["SEQINDEX"] = 0
+        tester_hdr_content["ACSVRSN"] = "v0.0.0"
+        tester_hdr_content["FILENAME"] = "00000000_s4c1_000000.fits"
+        dict_header_jsons = self.dict_header_jsons.copy()
+        dict_header_jsons["GENERAL KW"] = json.dumps(tester_hdr_content)
+        tester = General_SPARC4_KWs(
+            dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
+        )
+        tester.extract_info()
+        tester.fix_keywords()
+        assert tester.new_json == {
+            "CYCLIND": 1,
+            "NAXIS": 2,
+            "OBSLONG": -45.5825,
+            "OBSLAT": -22.534,
+            "OBSALT": 1864.0,
+            "EQUINOX": 2000.0,
+            "SIMPLE": True,
+            "BITPIX": 16,
+            "BZERO": 1,
+            "BSCALE": 32768,
+            "ACSVRSN": "v0.0.0",
+            "SEQINDEX": 1,
+            "INSTRUME": "SPARC4",
+            "FILENAME": "00000000_s4c1_000000.fits",
         }

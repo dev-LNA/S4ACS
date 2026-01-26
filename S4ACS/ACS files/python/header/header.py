@@ -281,12 +281,20 @@ class Header(ABC):
             try:
                 kw_value = self.new_json[kw]
                 regex_expr, ex_val = self.regex_expressions[kw]
-                if re.match(regex_expr, kw_value) == None:
+                if re.match(regex_expr, kw_value) != None:
+                    continue
+                self._write_log_file(
+                    f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_val}.",
+                    kw,
+                )
+                if self.how_to_fix_regex == None:
                     self._write_log_file(
-                        f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_val}. Trying to fix...",
-                        kw,
+                        f"The method to fix this keyword was not implemented.", kw
                     )
-                    self._fix_regex_keyword(kw)
+                    self.new_json[kw] = ""
+                    continue
+                self._write_log_file(f"Trying to fix...", kw)
+                self._fix_regex_keyword(kw)
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -295,6 +303,7 @@ class Header(ABC):
             kw_value = self.new_json[kw]
             regex_expr, _ = self.regex_expressions[kw]
             if kw not in self.how_to_fix_regex.keys():
+                self.new_json[kw] = ""
                 self._write_log_file(
                     f"The method to fix this keyword was not found.", kw
                 )
@@ -304,7 +313,6 @@ class Header(ABC):
                 self._write_log_file(
                     f"The provided value {kw_value} could not be fixed.", kw
                 )
-                return
             self.new_json[kw] = new_value
         except Exception as e:
             self._write_log_file(repr(e), kw)
