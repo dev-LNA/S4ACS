@@ -764,7 +764,7 @@ class General_ECHARPE_KWs(General_KWs):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions["FILENAME"] = (
             r"\d{8}_ECH_(BLUE|RED)_\d{6}[ozdfts](_[a-z0-9]+)?\.fits",
-            "YYYYMMDD_s4c1_000000.fits",
+            "YYYYMMDD_ECH_BLUE_000000o.fits",
         )
         self.empty_kws["INSTRUME"] = "ECHARPE"
 
