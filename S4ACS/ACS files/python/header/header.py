@@ -665,7 +665,7 @@ class CCD(Header):
 
     def _fix_EXPTIME(self):
         if 1e-5 > self.new_json["EXPTIME"] > 9.999999e-6:
-            self.new_json["EXPTIME"] = 10e-6
+            self.new_json["EXPTIME"] = 1e-5
         return
 
     def calc_NAXIS1(self) -> None:

@@ -1,4 +1,5 @@
 from .header import (
+    CCD,
     ICS,
     S4GUI,
     S4ICS,

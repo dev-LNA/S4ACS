@@ -1,1 +1,1 @@
-from . import test_general_kws, test_header
+from . import test_cameras, test_general_kws, test_header

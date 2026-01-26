@@ -18,9 +18,12 @@ from header import (
 )
 
 
-class Test_Header(unittest.TestCase):
+class Test_General_Kws(unittest.TestCase):
 
-    dict_header_jsons: dict = {"TESTER": "", "CCD": '{"FILENAME":"s4acs1_000001.fits"}'}
+    dict_header_jsons: dict = {
+        "GENERAL KW": "",
+        "CCD": '{"FILENAME":"s4acs1_000001.fits"}',
+    }
     log_file = join("tests", "files", "log.log")
     tester_hdr_content = {
         "FRAMETRF": True,
