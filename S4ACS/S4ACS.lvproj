@@ -84,7 +84,8 @@
 				<Item Name="servers.vi" Type="VI" URL="../Unit tests/tests/servers.vi"/>
 				<Item Name="Python toolkit.vi" Type="VI" URL="../Unit tests/tests/Python toolkit.vi"/>
 				<Item Name="Save Image.vi" Type="VI" URL="../Unit tests/tests/Save Image.vi"/>
-				<Item Name="simulated camera.vi" Type="VI" URL="../Unit tests/tests/simulated camera.vi"/>
+				<Item Name="simulated CCD.vi" Type="VI" URL="../Unit tests/tests/simulated CCD.vi"/>
+				<Item Name="simulated ixon.vi" Type="VI" URL="../Unit tests/tests/simulated ixon.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>
@@ -639,6 +640,16 @@
 				<Item Name="Write Delimited Spreadsheet (I64).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet (I64).vi"/>
 				<Item Name="Write Delimited Spreadsheet (DBL).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet (DBL).vi"/>
 				<Item Name="Write Delimited Spreadsheet.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet.vi"/>
+			</Item>
+			<Item Name="instr.lib" Type="Folder">
+				<Item Name="Error Code Handler.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Error Code Handler.vi"/>
+				<Item Name="Error Code Enum typedef.ctl" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d/Error Code Enum typedef.ctl"/>
+				<Item Name="Add ECO For DLL.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Add ECO For DLL.vi"/>
+				<Item Name="Error Code Offset global.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Error Code Offset global.vi"/>
+				<Item Name="Get Error Source.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Get Error Source.vi"/>
+				<Item Name="Join Strings.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Join Strings.vi"/>
+				<Item Name="Subtract ECO For DLL.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Subtract ECO For DLL.vi"/>
+				<Item Name="Add ECO For LabVIEW.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Add ECO For LabVIEW.vi"/>
 			</Item>
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>

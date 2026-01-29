@@ -235,7 +235,6 @@ Read cluster of jsons.vi
 Assert.vi
 Assert.vi
 Write File path.vi
-initialize python session.vi
 Read Python Toolkit.lvclass.vi
 Close session.vi
 Read File path.vi
@@ -256,17 +255,13 @@ Write Python Toolkit.lvclass.vi
 Write error.vi
 Get error.vi
 Assert.vi
-initialize python session.vi
 end.vi
 Read Python Toolkit.lvclass.vi
 Close session.vi
 Assert.vi
 Write Channel.lvclass.vi
-Write acquisition error.vi
 Write ACSVRSN.vi
 Write Sim_CCD class.vi
-Write Configuration to initialize ACS.vi
-Write Camera Status.vi
 Bundle By Name
 Flatten To JSON
 Unbundle By Name
@@ -282,7 +277,6 @@ Assert.vi
 join array jsons.vi
 Assert.vi
 Write Sim_CCD class.vi
-Write Camera Status.vi
 Build Array
 write image timmings.vi
 Write Channel.lvclass.vi
@@ -295,8 +289,6 @@ Unbundle By Name
 Bundle By Name
 Unbundle By Name
 Bundle By Name
-Bundle By Name
-Unbundle By Name
 Flatten To JSON
 Flatten To JSON
 Flatten To JSON
@@ -314,31 +306,51 @@ Prepare header content.vi
 Assert.vi
 Run.vi
 Assert.vi
-initialize python session.vi
-Write Python Toolkit.lvclass.vi
-Read Python Toolkit.lvclass.vi
-Write File path.vi
-Build Path
-Application Directory.vi
 Save Image.vi
 Assert.vi
 Read Python Toolkit.lvclass.vi
 Read error.vi
 end.vi
-write prev acquisition config.vi
-Write channel status.vi
 Unbundle By Name
-Write prev SET parameters.vi
 Unbundle By Name
+Bundle By Name
+Unbundle By Name
+Unbundle By Name
+Write Camera Status.vi
+Write s4 channel status.vi
 Read class timings.vi
 Write class timings.vi
-Bundle By Name
+Write s4acs init config.vi
+Write Camera Status.vi
 write prev acquisition config.vi
-Write prev ixon op mode.vi
-Unbundle By Name
-Unbundle By Name
+Read Classes.vi
+Write Classes.vi
+Bundle By Name
+Read Channel.lvclass.vi
+Write Channel.lvclass.vi
+write prev acquisition config.vi
+Initialize Session.vi
+Write File path.vi
+Application Directory.vi
+Build Path
+Read Python Toolkit.lvclass.vi
+Write Python Toolkit.lvclass.vi
+Initialize Session.vi
+Write File path.vi
+Application Directory.vi
+Build Path
+Read Python Toolkit.lvclass.vi
+Write Python Toolkit.lvclass.vi
+Initialize Session.vi
+Write File path.vi
+Application Directory.vi
+Build Path
+Read Python Toolkit.lvclass.vi
+Write Python Toolkit.lvclass.vi
+Write prev acq config.vi
 Write channel status.vi
-Unbundle By Name
+write prev operation mode.vi
+Replace Array Subset
 Define Test.vi
 Merge Errors
 Write loss of comm.vi
@@ -439,11 +451,6 @@ Write communication.vi
 Read comm restablished.vi
 Define Test.vi
 Merge Errors
-read operation mode errors.vi
-Read Camera Status.vi
-read image.vi
-Write Camera Status.vi
-write operation mode errors.vi
 Merge Errors
 Assert.vi
 Assert.vi
@@ -457,7 +464,6 @@ Assert.vi
 Set Acquisition Configuration.vi
 Assert.vi
 get initial information.vi
-Read Camera Status.vi
 Unbundle By Name
 Assert.vi
 Assert.vi
@@ -472,11 +478,9 @@ To Double Precision Float
 Date/Time To Seconds
 To Double Precision Float
 Get Acquired Data.vi
-read image.vi
 Assert.vi
 Initialize Array
 Get Cooler Status.vi
-Read Camera Status.vi
 Assert.vi
 Unbundle By Name
 Assert.vi
@@ -487,8 +491,6 @@ Tick Count (ms)
 Add
 Assert.vi
 Assert.vi
-calculate #pixels.vi
-Assert.vi
 Assert.vi
 Start Acquisition.vi
 Assert.vi
@@ -497,55 +499,64 @@ Assert.vi
 Initialize Camera.vi
 Assert.vi
 Assert.vi
-End.vi
 Bundle By Name
 Assert.vi
 Unbundle By Name
-read new operation mode.vi
 Unbundle By Name
 Assert.vi
 Merge Errors
-find idx smaller than.vi
 Assert.vi
-find row in string array.vi
-Assert.vi
-read new operation mode.vi
-write new operation mode.vi
-read prev operation mode.vi
 calculate current exp time.vi
-set initial operation mode.vi
 Write prev ixon op mode.vi
 Write prev ixon op mode.vi
-Write prev ixon op mode.vi
-Read class timings.vi
-Write class timings.vi
-read acquisition config errors.vi
-write acquisition config errors.vi
 Read prev ixon op mode.vi
 Write prev ixon op mode.vi
 Assert.vi
-write image.vi
-read new acquisition config.vi
-write new acquisition config.vi
 Read new ixon op mode.vi
 Write new ixon op mode.vi
 Assert.vi
-read prev acquisition config.vi
-write prev acquisition config.vi
 Write new ixon op mode.vi
 set operation mode.vi
-Read class timings.vi
 Unbundle By Name
-write new acquisition config.vi
-read prev acquisition config.vi
 Assert.vi
-Read class timings.vi
 Unbundle By Name
-Write class timings.vi
-Read class timings.vi
 Bundle By Name
 Read prev ixon op mode.vi
 Assert.vi
+Read class timings.vi
+read image.vi
+Read class timings.vi
+Read Camera Status.vi
+write new acquisition config.vi
+read new acquisition config.vi
+write prev acquisition config.vi
+read prev acquisition config.vi
+write new acquisition config.vi
+read new acquisition config.vi
+Read Camera Status.vi
+Read class timings.vi
+Write class timings.vi
+calculate #pixels.vi
+read new operation mode.vi
+write new operation mode.vi
+End.vi
+read prev operation mode.vi
+find idx smaller than.vi
+Write class timings.vi
+Read class timings.vi
+write acquisition config errors.vi
+read acquisition config errors.vi
+Write Camera Status.vi
+Read Camera Status.vi
+write image.vi
+read image.vi
+write operation mode errors.vi
+read operation mode errors.vi
+read new acquisition config.vi
+write new acquisition config.vi
+Bundle By Name
+read new acquisition config.vi
+write prev acquisition config.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
