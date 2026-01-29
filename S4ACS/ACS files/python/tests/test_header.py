@@ -234,16 +234,6 @@ class Test_Header(unittest.TestCase):
     def test_validate_info(self):
         self.fixed_tester.validate_info()
 
-    def test_ICS(self):
-        tester_hdr_content = self.tester_hdr_content.copy()
-        tester_hdr_content["VERSION"] = "0.0.0"
-        dict_header_jsons = self.dict_header_jsons.copy()
-        dict_header_jsons["ICS"] = json.dumps(tester_hdr_content)
-        tester = ICS(dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder)
-        tester.extract_info()
-        tester.fix_keywords()
-        assert tester.new_json["ICSVRSN"] == "v0.0.0"
-
     def test_Weather_Station(self):
         dict_header_jsons = self.dict_header_jsons.copy()
         dict_header_jsons["WSTATION"] = json.dumps(self.tester_hdr_content)
@@ -253,86 +243,3 @@ class Test_Header(unittest.TestCase):
         tester.extract_info()
         tester.fix_keywords()
         assert tester.new_json["PRESSURE"] == 10.1
-
-    def test_General_KWs(self):
-        tester_hdr_content = self.tester_hdr_content.copy()
-        tester_hdr_content["CYCLIND"] = 0
-        tester_hdr_content["ACSVRSN"] = "v0.0.0"
-        dict_header_jsons = self.dict_header_jsons.copy()
-        dict_header_jsons["GENERAL KW"] = json.dumps(tester_hdr_content)
-        tester = General_KWs(
-            dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
-        )
-        tester.extract_info()
-        tester.fix_keywords()
-        assert tester.new_json == {
-            "CYCLIND": 1,
-            "NAXIS": 2,
-            "OBSLONG": -45.5825,
-            "OBSLAT": -22.534,
-            "OBSALT": 1864.0,
-            "EQUINOX": 2000.0,
-            "SIMPLE": True,
-            "BITPIX": 16,
-            "BZERO": 1,
-            "BSCALE": 32768,
-            "ACSVRSN": "v0.0.0",
-        }
-
-    def test_General_SPARC4_KWs(self):
-        tester_hdr_content = self.tester_hdr_content.copy()
-        tester_hdr_content["CYCLIND"] = 0
-        tester_hdr_content["SEQINDEX"] = 0
-        tester_hdr_content["ACSVRSN"] = "v0.0.0"
-        tester_hdr_content["FILENAME"] = "00000000_s4c1_000000.fits"
-        dict_header_jsons = self.dict_header_jsons.copy()
-        dict_header_jsons["GENERAL KW"] = json.dumps(tester_hdr_content)
-        tester = General_SPARC4_KWs(
-            dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
-        )
-        tester.extract_info()
-        tester.fix_keywords()
-        assert tester.new_json == {
-            "CYCLIND": 1,
-            "NAXIS": 2,
-            "OBSLONG": -45.5825,
-            "OBSLAT": -22.534,
-            "OBSALT": 1864.0,
-            "EQUINOX": 2000.0,
-            "SIMPLE": True,
-            "BITPIX": 16,
-            "BZERO": 1,
-            "BSCALE": 32768,
-            "ACSVRSN": "v0.0.0",
-            "SEQINDEX": 1,
-            "INSTRUME": "SPARC4",
-            "FILENAME": "00000000_s4c1_000000.fits",
-        }
-
-    def test_General_ECHARPE_KWs(self):
-        tester_hdr_content = self.tester_hdr_content.copy()
-        tester_hdr_content["CYCLIND"] = 0
-        tester_hdr_content["ACSVRSN"] = "v0.0.0"
-        tester_hdr_content["FILENAME"] = "00000000_ECH_BLUE_000000o.fits"
-        dict_header_jsons = self.dict_header_jsons.copy()
-        dict_header_jsons["GENERAL KW"] = json.dumps(tester_hdr_content)
-        tester = General_ECHARPE_KWs(
-            dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
-        )
-        tester.extract_info()
-        tester.fix_keywords()
-        assert tester.new_json == {
-            "CYCLIND": 1,
-            "NAXIS": 2,
-            "OBSLONG": -45.5825,
-            "OBSLAT": -22.534,
-            "OBSALT": 1864.0,
-            "EQUINOX": 2000.0,
-            "SIMPLE": True,
-            "BITPIX": 16,
-            "BZERO": 1,
-            "BSCALE": 32768,
-            "ACSVRSN": "v0.0.0",
-            "INSTRUME": "ECHARPE",
-            "FILENAME": "00000000_ECH_BLUE_000000o.fits",
-        }

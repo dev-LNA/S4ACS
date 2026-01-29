@@ -45,11 +45,11 @@ class Test_General_Kws(unittest.TestCase):
         cls.hdr_params = Header_Parameters(cls.csv_folder)
 
         cls.dict_header_jsons["GENERAL KW"] = json.dumps(cls.tester_hdr_content)
-        cls.tester = Header_Tester(
+        cls.tester = General_KWs(
             cls.dict_header_jsons, cls.log_file, cls.hdr_params, cls.csv_folder
         )
         cls.tester.extract_info()
-        cls.fixed_tester = Header_Tester(
+        cls.fixed_tester = General_KWs(
             cls.dict_header_jsons, cls.log_file, cls.hdr_params, cls.csv_folder
         )
         cls.fixed_tester.extract_info()
