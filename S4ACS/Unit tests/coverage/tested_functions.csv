@@ -458,9 +458,6 @@ Assert.vi
 Assert.vi
 Assert.vi
 Assert.vi
-Assert.vi
-Assert.vi
-Assert.vi
 Set Acquisition Configuration.vi
 Assert.vi
 get initial information.vi
@@ -477,9 +474,6 @@ Date/Time To Seconds
 To Double Precision Float
 Date/Time To Seconds
 To Double Precision Float
-Get Acquired Data.vi
-Assert.vi
-Initialize Array
 Get Cooler Status.vi
 Assert.vi
 Unbundle By Name
@@ -489,7 +483,6 @@ Assert.vi
 calc exptime diff.vi
 Tick Count (ms)
 Add
-Assert.vi
 Assert.vi
 Assert.vi
 Start Acquisition.vi
@@ -507,24 +500,11 @@ Assert.vi
 Merge Errors
 Assert.vi
 calculate current exp time.vi
-Write prev ixon op mode.vi
-Write prev ixon op mode.vi
-Read prev ixon op mode.vi
-Write prev ixon op mode.vi
-Assert.vi
-Read new ixon op mode.vi
-Write new ixon op mode.vi
-Assert.vi
-Write new ixon op mode.vi
-set operation mode.vi
 Unbundle By Name
 Assert.vi
 Unbundle By Name
 Bundle By Name
-Read prev ixon op mode.vi
-Assert.vi
 Read class timings.vi
-read image.vi
 Read class timings.vi
 Read Camera Status.vi
 write new acquisition config.vi
@@ -536,7 +516,6 @@ read new acquisition config.vi
 Read Camera Status.vi
 Read class timings.vi
 Write class timings.vi
-calculate #pixels.vi
 read new operation mode.vi
 write new operation mode.vi
 End.vi
@@ -557,6 +536,97 @@ write new acquisition config.vi
 Bundle By Name
 read new acquisition config.vi
 write prev acquisition config.vi
+verify #frames.vi
+read new operation mode.vi
+write new operation mode.vi
+Bundle By Name
+read new acquisition config.vi
+write new acquisition config.vi
+Bundle By Name
+read acquisition config errors.vi
+Assert.vi
+Unbundle By Name
+Write csvs path.vi
+Verify Acquisition.vi
+Bundle By Name
+Read Camera Status.vi
+Write Camera Status.vi
+Bundle By Name
+Read Camera Status.vi
+Unbundle By Name
+Assert.vi
+Assert.vi
+read prev acquisition config.vi
+write prev acquisition config.vi
+verify cooler.vi
+write new acquisition config.vi
+read acquisition config errors.vi
+Assert.vi
+Unbundle By Name
+verify expouse time.vi
+write new acquisition config.vi
+read acquisition config errors.vi
+Assert.vi
+Unbundle By Name
+Verify new image.vi
+Bundle By Name
+Read Camera Status.vi
+Write Camera Status.vi
+Bundle By Name
+read prev acquisition config.vi
+write prev acquisition config.vi
+Assert.vi
+verify parameters in a list.vi
+Assert.vi
+verify parameters in range.vi
+write new operation mode.vi
+read operation mode errors.vi
+Assert.vi
+Merge Errors
+verify related shutter parameters.vi
+write new operation mode.vi
+read operation mode errors.vi
+Index Array
+Assert.vi
+verify related subimage parameters.vi
+write new operation mode.vi
+read operation mode errors.vi
+Merge Errors
+Assert.vi
+verify temperature.vi
+write new acquisition config.vi
+Assert.vi
+read acquisition config errors.vi
+Unbundle By Name
+verify unique parameter in range - SET.vi
+Assert.vi
+read acquisition config errors.vi
+Unbundle By Name
+Read csvs path.vi
+Assert.vi
+Define Test.vi
+Merge Errors
+Assert.vi
+Assert.vi
+Assert.vi
+Get Acquired Data.vi
+Assert.vi
+Initialize Array
+Assert.vi
+Write prev ixon op mode.vi
+Write prev ixon op mode.vi
+Read prev ixon op mode.vi
+Write prev ixon op mode.vi
+Assert.vi
+Read new ixon op mode.vi
+Write new ixon op mode.vi
+Assert.vi
+Write new ixon op mode.vi
+set operation mode.vi
+Read prev ixon op mode.vi
+Assert.vi
+read image.vi
+calculate #pixels.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
