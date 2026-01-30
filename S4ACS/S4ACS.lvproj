@@ -86,6 +86,7 @@
 				<Item Name="Save Image.vi" Type="VI" URL="../Unit tests/tests/Save Image.vi"/>
 				<Item Name="simulated CCD.vi" Type="VI" URL="../Unit tests/tests/simulated CCD.vi"/>
 				<Item Name="simulated ixon.vi" Type="VI" URL="../Unit tests/tests/simulated ixon.vi"/>
+				<Item Name="channel.vi" Type="VI" URL="../Unit tests/tests/channel.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>
