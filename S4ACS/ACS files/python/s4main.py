@@ -22,7 +22,7 @@ from utils import (
 )
 
 
-def main(night_dir, file, data, tuple_header_jsons, log_file):
+def main(night_dir, file, data, tuple_header_jsons, log_file) -> str:
     error_json = {"status": False, "code": 0, "source": ""}
     try:
         dict_header_jsons = {k: v for (k, v) in zip(SUB_SYSTEMS, tuple_header_jsons)}
@@ -51,8 +51,6 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
         file = verify_file_already_exists(file)
         hdu = fits.PrimaryHDU(data, hdr)
         hdu = fix_standard_keywords(hdu)
-        hdu.add_checksum(when="HDU checksum")
-        hdu.add_datasum(when="Data unit checksum")
         hdu.writeto(file, output_verify="ignore")
         return json.dumps(error_json)
     except Exception:

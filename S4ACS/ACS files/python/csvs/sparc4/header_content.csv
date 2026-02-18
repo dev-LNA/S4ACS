@@ -6,7 +6,7 @@ BITPIX;;integer;8,16,32,64,-32,-64;array data type
 NAXIS;;integer;1,inf;number of array dimensions
 NAXIS1;;integer;1,1024;Number of columns
 NAXIS2;;integer;1,1024;Number of rows
-PROPID;;string;;The identification code assigned to each observing run by the Science Committee
+PROPID;PROJID;string;;The ID code assigned by the Science Committee
 TELESCOP;;string;;Telescope name
 SITEID;;string;;Observatory/Site
 OBSERVER;;string;;Observer(s)
