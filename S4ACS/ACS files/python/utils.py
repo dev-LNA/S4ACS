@@ -295,7 +295,7 @@ ics_kw = {
             "name": "WPSEL",
             "status": {
                 "mode": "ACTIVE",
-                "condition": "READY",
+                "condition": "BUSY",
                 "position": "50",
                 "pos_name": "OFF",
                 "pos_id": "2",
@@ -305,7 +305,7 @@ ics_kw = {
             "name": "CALW",
             "status": {
                 "mode": "ACTIVE",
-                "condition": "READY",
+                "condition": "TIMEOUT",
                 "position": "144",
                 "pos_name": "OFF",
                 "pos_id": "3",
@@ -315,7 +315,7 @@ ics_kw = {
             "name": "ASEL",
             "status": {
                 "mode": "ACTIVE",
-                "condition": "READY",
+                "condition": "NONE",
                 "position": "0",
                 "pos_name": "OFF",
                 "pos_id": "1",
