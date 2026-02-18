@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from os.path import dirname, join, realpath
+from os.path import join
 
 import numpy as np
 import pandas as pd
@@ -7,7 +7,6 @@ import pandas as pd
 
 @dataclass
 class Header_Parameters:
-
     def __init__(self, csv_folder: str) -> None:
         self.csv_folder = csv_folder
         self.read_hdr_ctnt_csv()

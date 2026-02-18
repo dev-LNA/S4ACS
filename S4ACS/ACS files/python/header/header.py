@@ -1,8 +1,8 @@
 import json
 import re
-from abc import ABC, abstractmethod
+from abc import ABC
 from datetime import datetime
-from os.path import dirname, join, realpath
+from os.path import join
 from pathlib import Path
 
 import astropy.io.fits as fits
@@ -14,7 +14,6 @@ from .utils import Header_Parameters
 
 
 class Header(ABC):
-
     kw_types = {"integer": int, "boolean": bool, "float": float, "string": str}
     sub_system = "HEADER"
 
@@ -370,12 +369,10 @@ class Header(ABC):
 
 
 class Focuser(Header):
-
     sub_system = "FOCUSER"
 
 
 class Weather_Station(Header):
-
     sub_system = "WSTATION"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
@@ -387,7 +384,6 @@ class Weather_Station(Header):
 
 
 class ICS(Header):
-
     sub_system = "ICS"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
@@ -402,7 +398,6 @@ class ICS(Header):
 
 
 class S4ICS(ICS):
-
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.dict_w_kws = {
@@ -503,7 +498,6 @@ class S4ICS(ICS):
 
 
 class TCS(Header):
-
     sub_system = "TCS"
 
     def __init__(self, dict_header_jsons, night_dir, hdr_params, csv_folder) -> None:
@@ -574,7 +568,6 @@ class TCS(Header):
 
 
 class S4GUI(Header):
-
     sub_system = "GUI"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
@@ -607,7 +600,6 @@ class S4GUI(Header):
 
 
 class CCD(Header):
-
     sub_system = "CCD"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
@@ -682,7 +674,6 @@ class CCD(Header):
 
 
 class iXon_Ultra(CCD):
-
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.dict_w_kws["VSHIFT"] = [0.6, 1.13, 2.2, 4.33]
@@ -709,7 +700,6 @@ class iXon_Ultra(CCD):
 
 
 class iKon_L(CCD):
-
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.dict_w_kws["VSHIFT"] = [38.55, 76.95]
@@ -718,7 +708,6 @@ class iKon_L(CCD):
 
 
 class General_KWs(Header):
-
     sub_system = "GENERAL KW"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
@@ -745,7 +734,6 @@ class General_KWs(Header):
 
 
 class General_SPARC4_KWs(General_KWs):
-
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions["FILENAME"] = (
@@ -772,7 +760,6 @@ class General_ECHARPE_KWs(General_KWs):
 
 
 class Header_Tester(Header):
-
     sub_system = "TESTER"
 
     def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
