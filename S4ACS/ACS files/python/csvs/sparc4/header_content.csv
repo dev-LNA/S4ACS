@@ -6,7 +6,9 @@ BITPIX;;integer;8,16,32,64,-32,-64;array data type
 NAXIS;;integer;1,inf;number of array dimensions
 NAXIS1;;integer;1,1024;Number of columns
 NAXIS2;;integer;1,1024;Number of rows
-PROJID;;string;;Project identification code
+PROPID;;string;;The identification code assigned to each observing run by the Science Committee
+TELESCOP;;string;;Telescope name
+SITEID;;string;;Observatory/Site
 OBSERVER;;string;;Observer(s)
 OBJECT;;string;;Object name
 OBSLONG;;float;-180,180;Observatory East Longitude (DEG, -180 to 180)
@@ -23,7 +25,7 @@ CHANNEL1;CHANNEL 1;boolean;true,false;Channel 1 is on (T) or off (F)
 CHANNEL2;CHANNEL 2;boolean;true,false;Channel 2 is on (T) or off (F)
 CHANNEL3;CHANNEL 3;boolean;true,false;Channel 3 is on (T) or off (F)
 CHANNEL4;CHANNEL 4;boolean;true,false;Channel 4 is on (T) or off (F)
-CCDSERN;;integer;9914,14500;CCD serial number
+CCDSERN;;integer;9914,9917;CCD serial number
 FILENAME;;string;;File name
 DATE-OBS;;string;;UTC at start of observation (isot)
 UTTIME;;string;;UTC time at start of observation
@@ -70,7 +72,7 @@ AIRMASS;;float;1,inf;Airmass at start of observation
 PRESSURE;;float;0,inf;Barometric pressure (mb), weather tower
 HUMIDITY;OUTHUMIDITY;float;0,100;Relative humidity (%), weather tower
 ACSVRSN;;string;;S4ACS software version
-ICSVRSN;VERSION;string;;S4ICS software version
+ICSVRSN;;string;;S4ICS software version
 GUIVRSN;;string;;S4GUI software version
 CTRLINTE;;string;S4GUI,S4GEI;Graphical control interface of ACS
 ACSMODE;;boolean;true,false;ACS: real (T) or simulated (F)
@@ -81,6 +83,13 @@ CALWMODE;;boolean;true,false;Calibration wheel: real (T) or simulated (F)
 GMIRMODE;;boolean;true,false;Guiding mirror: real (T) or simulated (F)
 GFOCMODE;;boolean;true,false;Guiding focuser: real (T) or simulated (F)
 TCSMODE;;boolean;true,false;TCS: real (T) or simulated (F)
+WPROSTAT;;string;READY,BUSY,TIMEOUT,NONE;Waveplate rotator status
+WPSESTAT;;string;READY,BUSY,TIMEOUT,NONE;Waveplate selector status
+ANSTAT;;string;READY,BUSY,TIMEOUT,NONE;Analyzer status
+CALWSTAT;;string;READY,BUSY,TIMEOUT,NONE;Calibration wheel status
+GMIRSTAT;;string;READY,BUSY,TIMEOUT,NONE;Guiduing mirror status
+GFOCSTAT;;string;READY,BUSY,TIMEOUT,NONE;Guiding focuser status
+TFOCSTAT;;string;READY,BUSY,TIMEOUT,NONE;Telescope focus status
 WPSEL;;string;None,L2,L4;Waveplate: half-wave (L2), quarter-wave (L4)
 WPSELPO;;float;-5,165;Waveplate selector position (mm)
 WPPOS;;integer;0,16;Waveplate idx position from 1 to 16, 0 if none
@@ -90,3 +99,6 @@ CALWANG;;float;0,360;Calibration wheel position angle (deg)
 ASEL;;boolean;true,false;Savart prism analyzer selected
 ANALANG;;float;0,360;Analyzer position angle (deg)
 ACQERROR;;boolean;true,false;Acquisition error - see comments
+DATEFILE;;string;;File creation date
+CHECKSUM;;string;;HDU checksum
+DATASUM;;string;;Data unit checksum

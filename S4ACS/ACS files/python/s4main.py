@@ -51,6 +51,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file):
         file = verify_file_already_exists(file)
         hdu = fits.PrimaryHDU(data, hdr)
         hdu = fix_standard_keywords(hdu)
+        hdu.add_checksum()
         hdu.writeto(file, output_verify="ignore")
         return json.dumps(error_json)
     except Exception:
