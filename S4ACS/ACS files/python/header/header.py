@@ -726,23 +726,25 @@ class General_KWs(Header):
             "BITPIX": 16,
             "BZERO": 1,
             "BSCALE": 32768,
+            "SITEID": "OPD",
         }
 
-    def fix_keywords(self):
+    def fix_keywords(self) -> None:
         super().fix_keywords()
         self.new_json["CYCLIND"] = self.new_json["CYCLIND"] + 1
 
 
 class General_SPARC4_KWs(General_KWs):
-    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder):
+    def __init__(self, dict_header_jsons, log_file, hdr_params, csv_folder) -> None:
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions["FILENAME"] = (
             r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
         )
         self.empty_kws["INSTRUME"] = "SPARC4"
+        self.empty_kws["TELESCOP"] = "PE160"
 
-    def fix_keywords(self):
+    def fix_keywords(self) -> None:
         super().fix_keywords()
         self.new_json["SEQINDEX"] = self.new_json["SEQINDEX"] + 1
 
@@ -754,6 +756,7 @@ class General_ECHARPE_KWs(General_KWs):
             r"\d{8}_ECH_(BLUE|RED)_\d{6}[ozdfts](_[a-z0-9]+)?\.fits",
             "YYYYMMDD_ECH_BLUE_000000o.fits",
         )
+        self.empty_kws["TELESCOP"] = "PE160"
         self.empty_kws["INSTRUME"] = "ECHARPE"
 
         return
