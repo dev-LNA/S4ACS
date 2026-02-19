@@ -163,7 +163,6 @@ focuser_json = {
     "temperature": 0,
     "timestamp": "2024-02-27T10:15:48.255",
     "version": "1.0.0",
-    "telfocus": 5000,
 }
 
 WS_json = {

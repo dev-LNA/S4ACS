@@ -371,6 +371,26 @@ class Header(ABC):
 class Focuser(Header):
     sub_system = "FOCUSER"
 
+    def _fix_tfocstat(self) -> None:
+        try:
+            if not self.original_json["INITIALIZED"]:
+                self.new_json["TFOCSTAT"] = "NONE"
+                return
+            elif self.original_json["ISMOVING"] is True:
+                self.new_json["TFOCSTAT"] = "BUSY"
+            elif self.original_json["ISMOVING"] is False:
+                self.new_json["TFOCSTAT"] = "READY"
+            else:
+                self.new_json["TFOCSTAT"] = ""
+        except Exception as e:
+            self._write_log_file(repr(e), "TFOCSTAT")
+        return
+
+    def fix_keywords(self) -> None:
+        super().fix_keywords()
+        self._fix_tfocstat()
+        return
+
 
 class Weather_Station(Header):
     sub_system = "WSTATION"
