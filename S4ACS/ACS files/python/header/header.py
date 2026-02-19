@@ -373,7 +373,7 @@ class Focuser(Header):
 
     def _fix_tfocstat(self) -> None:
         try:
-            if not self.original_json["INITIALIZED"]:
+            if self.original_json["INITIALIZED"] is False:
                 self.new_json["TFOCSTAT"] = "NONE"
                 return
             elif self.original_json["ISMOVING"] is True:
