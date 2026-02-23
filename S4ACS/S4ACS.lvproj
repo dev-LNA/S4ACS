@@ -67,7 +67,8 @@
 		<Property Name="server.vi.propertiesEnabled" Type="Bool">true</Property>
 		<Property Name="specify.custom.address" Type="Bool">false</Property>
 		<Item Name="Comm" Type="Folder">
-			<Item Name="Save_Header.vi" Type="VI" URL="../Comm VIs/Save_Header.vi"/>
+			<Item Name="save sparc4 image.vi" Type="VI" URL="../Comm VIs/save sparc4 image.vi"/>
+			<Item Name="save echarpe image.vi" Type="VI" URL="../Comm VIs/save echarpe image.vi"/>
 			<Item Name="communication manager.vi" Type="VI" URL="../General VIs/communication manager.vi"/>
 		</Item>
 		<Item Name="Unit Tests" Type="Folder">
@@ -83,7 +84,9 @@
 				<Item Name="servers.vi" Type="VI" URL="../Unit tests/tests/servers.vi"/>
 				<Item Name="Python toolkit.vi" Type="VI" URL="../Unit tests/tests/Python toolkit.vi"/>
 				<Item Name="Save Image.vi" Type="VI" URL="../Unit tests/tests/Save Image.vi"/>
-				<Item Name="simulated camera.vi" Type="VI" URL="../Unit tests/tests/simulated camera.vi"/>
+				<Item Name="simulated CCD.vi" Type="VI" URL="../Unit tests/tests/simulated CCD.vi"/>
+				<Item Name="simulated ixon.vi" Type="VI" URL="../Unit tests/tests/simulated ixon.vi"/>
+				<Item Name="channel.vi" Type="VI" URL="../Unit tests/tests/channel.vi"/>
 			</Item>
 			<Item Name="Test all.vi" Type="VI" URL="../Unit tests/Test all.vi"/>
 		</Item>
@@ -104,15 +107,24 @@
 				<Item Name="utils.py" Type="Document" URL="../ACS files/python/header/utils.py"/>
 			</Item>
 			<Item Name="general_tests.py" Type="Document" URL="../ACS files/python/general_tests.py"/>
-			<Item Name="main.py" Type="Document" URL="../ACS files/python/main.py"/>
 			<Item Name="temp.py" Type="Document" URL="../ACS files/python/temp.py"/>
 			<Item Name="utils.py" Type="Document" URL="../ACS files/python/utils.py"/>
+			<Item Name="echmain.py" Type="Document" URL="../ACS files/python/echmain.py"/>
+			<Item Name="s4main.py" Type="Document" URL="../ACS files/python/s4main.py"/>
 		</Item>
-		<Item Name="cam_parameters" Type="Folder">
-			<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/cam_parameters/max_#frames.csv"/>
-			<Item Name="readout_times.csv" Type="Document" URL="../ACS files/cam_parameters/readout_times.csv"/>
-			<Item Name="s4ch_parameters_limit_values.csv" Type="Document" URL="../ACS files/s4ch_parameters_limit_values.csv"/>
-			<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/cam_parameters/cam_parameters_limit_values.csv"/>
+		<Item Name="csvs" Type="Folder">
+			<Item Name="sparc4" Type="Folder">
+				<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/sparc4/cam_parameters_limit_values.csv"/>
+				<Item Name="channel_parameters_limit_values.csv" Type="Document" URL="../ACS files/sparc4/channel_parameters_limit_values.csv"/>
+				<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/sparc4/max_#frames.csv"/>
+				<Item Name="readout_times.csv" Type="Document" URL="../ACS files/sparc4/readout_times.csv"/>
+			</Item>
+			<Item Name="echarpe" Type="Folder">
+				<Item Name="cam_parameters_limit_values.csv" Type="Document" URL="../ACS files/echarpe/cam_parameters_limit_values.csv"/>
+				<Item Name="channel_parameters_limit_values.csv" Type="Document" URL="../ACS files/echarpe/channel_parameters_limit_values.csv"/>
+				<Item Name="max_#frames.csv" Type="Document" URL="../ACS files/echarpe/max_#frames.csv"/>
+				<Item Name="readout_times.csv" Type="Document" URL="../ACS files/echarpe/readout_times.csv"/>
+			</Item>
 		</Item>
 		<Item Name="comm man classes" Type="Folder">
 			<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../communication-manager/Log File/CM_Log File.lvclass"/>
@@ -150,21 +162,32 @@
 			<Item Name="get parameter min and max.vi" Type="VI" URL="../utils/get parameter min and max.vi"/>
 			<Item Name="read csv file.vi" Type="VI" URL="../utils/read csv file.vi"/>
 		</Item>
+		<Item Name="SPARC4 clsses" Type="Folder">
+			<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
+			<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
+			<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
+			<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../Save SPARC4 image/Save SPARC4 image.lvclass"/>
+		</Item>
+		<Item Name="ECHARPE classes" Type="Folder">
+			<Item Name="iKon-L.lvclass" Type="LVClass" URL="../iKon-L/iKon-L.lvclass"/>
+			<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
+		</Item>
+		<Item Name="abstract classes" Type="Folder">
+			<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
+			<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
+			<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
+		</Item>
 		<Item Name="atmcd64d.dll" Type="Document" URL="../../../../../../Program Files/Andor SDK/atmcd64d.dll"/>
 		<Item Name="acs_config_TEMPLATE.cfg" Type="Document" URL="../ACS files/acs_config_TEMPLATE.cfg"/>
 		<Item Name="socket_TEMPLATE.cfg" Type="Document" URL="../ACS files/socket_TEMPLATE.cfg"/>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
-		<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../Sim_CCD/Sim_CCD.lvclass"/>
-		<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
-		<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
+		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
 		<Item Name="State Machine.lvclass" Type="LVClass" URL="../State Machine/State Machine.lvclass"/>
-		<Item Name="Channel.lvclass" Type="LVClass" URL="../Channel/Channel.lvclass"/>
-		<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
-		<Item Name="Save Image.lvclass" Type="LVClass" URL="../Save Image/Save Image.lvclass"/>
 		<Item Name="RxTx.lvclass" Type="LVClass" URL="../RxTx/RxTx.lvclass"/>
 		<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../Python Toolkit/Python Toolkit.lvclass"/>
 		<Item Name="Log File.lvclass" Type="LVClass" URL="../Log File/Log File.lvclass"/>
 		<Item Name="Server.lvclass" Type="LVClass" URL="../Server/Server.lvclass"/>
+		<Item Name="SetMetaData.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d.llb/SetMetaData.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
@@ -511,6 +534,7 @@
 				<Item Name="Empty 2D Array (U64)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Empty 2D Array (U64)__ogtk.vi"/>
 				<Item Name="Empty 1D Array (LVObject)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Empty 1D Array (LVObject)__ogtk.vi"/>
 				<Item Name="Empty 2D Array (LVObject)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Empty 2D Array (LVObject)__ogtk.vi"/>
+				<Item Name="SetHorizontalSpeed.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetHorizontalSpeed.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
@@ -618,9 +642,21 @@
 				<Item Name="Write Delimited Spreadsheet (DBL).vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet (DBL).vi"/>
 				<Item Name="Write Delimited Spreadsheet.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Write Delimited Spreadsheet.vi"/>
 			</Item>
+			<Item Name="instr.lib" Type="Folder">
+				<Item Name="Error Code Handler.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Error Code Handler.vi"/>
+				<Item Name="Error Code Enum typedef.ctl" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d/Error Code Enum typedef.ctl"/>
+				<Item Name="Add ECO For DLL.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Add ECO For DLL.vi"/>
+				<Item Name="Error Code Offset global.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Error Code Offset global.vi"/>
+				<Item Name="Get Error Source.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Get Error Source.vi"/>
+				<Item Name="Join Strings.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Join Strings.vi"/>
+				<Item Name="Subtract ECO For DLL.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Subtract ECO For DLL.vi"/>
+				<Item Name="Add ECO For LabVIEW.vi" Type="VI" URL="/&lt;instrlib&gt;/Andor/AndorSDK2/atmcd64d_internal.llb/Add ECO For LabVIEW.vi"/>
+			</Item>
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
+			<Item Name="join array jsons.vi" Type="VI" URL="../Save SPARC4 image/join array jsons.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
@@ -638,7 +674,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">41</Property>
+				<Property Name="Bld_version.build" Type="Int">40</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
@@ -665,7 +701,7 @@
 				<Property Name="Source[2].Container.applyInclusion" Type="Bool">true</Property>
 				<Property Name="Source[2].Container.depDestIndex" Type="Int">0</Property>
 				<Property Name="Source[2].destinationIndex" Type="Int">2</Property>
-				<Property Name="Source[2].itemID" Type="Ref">/My Computer/cam_parameters</Property>
+				<Property Name="Source[2].itemID" Type="Ref">/My Computer/csvs</Property>
 				<Property Name="Source[2].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[2].type" Type="Str">Container</Property>
 				<Property Name="Source[3].Container.applyDestination" Type="Bool">true</Property>
@@ -676,7 +712,7 @@
 				<Property Name="Source[3].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[3].type" Type="Str">Container</Property>
 				<Property Name="Source[4].destinationIndex" Type="Int">0</Property>
-				<Property Name="Source[4].itemID" Type="Ref">/My Computer/Comm/Save_Header.vi</Property>
+				<Property Name="Source[4].itemID" Type="Ref">/My Computer/Comm/save sparc4 image.vi</Property>
 				<Property Name="Source[4].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[4].type" Type="Str">VI</Property>
 				<Property Name="Source[5].destinationIndex" Type="Int">3</Property>

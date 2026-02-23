@@ -1,9 +1,29 @@
 {
     "workbench.colorCustomizations": {
-        "titleBar.activeBackground":"#a31111",
+        "titleBar.activeBackground": "#a31111",
         "titleBar.inactiveBackground": "#a31111",
     },
-    "python-envs.defaultEnvManager": "ms-python.python:poetry",
-    "python-envs.defaultPackageManager": "ms-python.python:poetry",
-    "python-envs.pythonProjects": []
+    "python-envs.defaultEnvManager": "ms-python.python:venv",
+    "python-envs.defaultPackageManager": "ms-python.python:pip",
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.autoImportCompletions": true,
+    "python.testing.pytestArgs": [
+        "S4ACS"
+    ],
+    "python.analysis.extraPaths": [
+        "${workSpaceFolder}\\S4ACS\\ACS files\\python"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell",
+            "args": [
+                "-NoExit",
+                "-Command",
+                ".\\.venv\\Scripts\\activate "
+            ]
+        },
+    },
 }

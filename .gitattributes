@@ -1,2 +1,66 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Normalize line endings
+# Store all text files as LF in repository
+* text=auto eol=lf
+# Python source files
+*.py      text eol=lf
+*.pyi     text eol=lf
+*.pyx     text eol=lf
+*.pxd     text eol=lf
+# Project configuration (uv / pytest / coverage)
+pyproject.toml   text eol=lf
+uv.lock          text eol=lf
+*.toml           text eol=lf
+*.cfg            text eol=lf
+*.ini            text eol=lf
+pytest.ini       text eol=lf
+.coveragerc      text eol=lf
+tox.ini          text eol=lf
+# Documentation
+*.md      text eol=lf
+*.rst     text eol=lf
+*.txt     text eol=lf
+# Jupyter Notebooks
+*.ipynb   text eol=lf
+# Shell scripts (CI/Linux compatibility)
+*.sh      text eol=lf
+# Windows scripts
+*.bat     text eol=crlf
+*.ps1     text eol=crlf
+# LabVIEW files (binary – NEVER normalize)
+*.vi filter=lfs diff=lfs merge=lfs -text
+*.ctl filter=lfs diff=lfs merge=lfs -text
+*.lvclass filter=lfs diff=lfs merge=lfs -text
+*.lvlib   binary
+*.lvproj  binary
+*.aliases binary
+*.lvsc    binary
+*.lvtest  binary
+*.lvbitx  binary
+# Coverage and test artifacts
+.coverage        binary
+coverage.xml     text eol=lf
+htmlcov/**       binary
+.pytest_cache/** binary
+# Python build artifacts
+dist/**          binary
+build/**         binary
+*.egg-info/**    binary
+__pycache__/**   binary
+*.pyc            binary
+*.pyo            binary
+*.pyd            binary
+# Virtual environments
+.venv/**         binary
+venv/**          binary
+# Common binary assets
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
+*.zip    binary
+*.tar    binary
+*.gz     binary
+*.exe    binary
+*.dll    binary
+*.so     binary
