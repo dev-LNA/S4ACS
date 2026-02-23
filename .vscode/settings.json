@@ -14,5 +14,16 @@
         "${workSpaceFolder}\\S4ACS\\ACS files\\python"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell",
+            "args": [
+                "-NoExit",
+                "-Command",
+                ".\\.venv\\Scripts\\activate "
+            ]
+        },
+    },
 }
