@@ -38,7 +38,6 @@ dicts = {
     "GENERAL KW": general_kw,
     "TCS": tcs_json,
     "GUI": s4gui_json,
-    "GENERAL KW": general_kw,
     "ICS": ics_kw,
 }
 dicts = {k: json.dumps(v) for (k, v) in dicts.items()}
@@ -47,7 +46,7 @@ log_file = "C:\\Users\\Denis\\SPARC4\\ACS\\20250429\\acs_ch1_keywords.log"
 csv_folder = join(dirname(realpath(__file__)), "csvs", "echarpe")
 hdr_params = Header_Parameters(csv_folder)
 hdr = fits.Header(hdr_params.cards)
-for cls in [ICS]:
+for cls in [Focuser]:
     tcs = cls(dicts, log_file, hdr_params, csv_folder)
     tcs.extract_info()
     tcs.fix_keywords()
