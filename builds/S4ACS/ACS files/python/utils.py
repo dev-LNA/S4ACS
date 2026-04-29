@@ -1,13 +1,10 @@
 """This file has all the functions needed to save the acquired images and to edit the image headers"""
 
-import json
 import os
-import warnings
 from datetime import datetime, timezone
 
 import astropy.io.fits as fits
 import numpy as np
-import pandas as pd
 
 
 def rotate_image(img_data, invert_x=False, invert_y=False, nrot90deg=0):
@@ -82,12 +79,23 @@ def write_error_log(message, log_file):
         file.write(now + " - " + message + "\n")
 
 
+def fix_standard_keywords(hdu: fits.PrimaryHDU) -> fits.PrimaryHDU:
+    hdu.header["BZERO"] = (32768, "Zero point in scaling equation")
+    hdu.header["BSCALE"] = (1, "Linear factor in scaling equation")
+    hdu.header["NAXIS1"] = (hdu.header["NAXIS1"], "Number of columns")
+    hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
+    hdu.header["DATEFILE"] = datetime.now().isoformat()
+    hdu.add_datasum(when="Data unit checksum")
+    hdu.add_checksum(when="HDU checksum", override_datasum=True)
+    return hdu
+
+
 # --------------------------------------------------------------------------------------------------------------------------
 
-sub_systems = [
+SUB_SYSTEMS = [
     "CCD",
-    "S4GUI",
-    "S4ICS",
+    "GUI",
+    "ICS",
     "TCS",
     "FOCUSER",
     "WSTATION",
@@ -102,13 +110,13 @@ tcs_json = {
     "version": "20240131",
     "cmd": "",
     "objectName": "NO_OBJ",
-    "raAcquis": "1",
-    "decAcquis": "",
+    "raAcquis": "02:25:32,1",
+    "decAcquis": "+03:22:12,1",
     "epochAcquis": "2000.0",
     "airMass": "1.000",
     "julianDate": "2460368.05207",
     "sideralTime": "20:40:07",
-    "hourAngle": "-0:0:0.01",
+    "hourAngle": "00:00:00",
     "date": "27/02/24",
     "time": "10:14:59",
     "rightAscention": "20 40 07",
@@ -139,7 +147,7 @@ focuser_json = {
     "absolute": True,
     "alarm": 0,
     "broker": "Focuser160",
-    "cmd": {"clientId": 0, "clientTransactionId": 0, "clientName": "", "action": ""},
+    "cmd": "",
     "connected": True,
     "controller": "Focuser160",
     "device": "2ndMirror",
@@ -155,97 +163,96 @@ focuser_json = {
     "temperature": 0,
     "timestamp": "2024-02-27T10:15:48.255",
     "version": "1.0.0",
-    "telfocus": 5000,
 }
 
 WS_json = {
     "broker": "Weather160",
     "version": "1.0.0",
-    "date": "21/02/24",
-    "hour": "10:50",
-    "outTemp": "17.1",
-    "hiTemp": "17.1",
-    "lowTemp": "16.7",
-    "outHumidity": "97",
-    "dewOut": "16.6",
-    "windSpeed": "12.9",
-    "windDirection": "WNW",
-    "windRun": "1.07",
-    "hiSpeed": "22.5",
-    "hiDir": "WNW",
-    "windChill": "16.6",
-    "heatIndex": "17.8",
-    "THWIndex": "17.3",
+    "date": "19/11/25",
+    "hour": "15:15",
+    "outTemp": "15.8",
+    "hiTemp": "15.9",
+    "lowTemp": "15.8",
+    "outHumidity": "72",
+    "dewOut": "10.8",
+    "windSpeed": "11.3",
+    "windDirection": "ENE",
+    "windRun": "0.19",
+    "hiSpeed": "19.3",
+    "hiDir": "ENE",
+    "windChill": "15.4",
+    "heatIndex": "15.5",
+    "THWIndex": "15.1",
     "THSWIndex": "---",
-    "pressure": "753,8",
+    "pressure": "755.6",
     "rain": "0.00",
     "rainRate": "0.0",
-    "solarRad": "1120",
-    "solarEnergy": "8.03",
-    "hiSolarRad": "1120",
-    "UVIndex": "8.3",
-    "UVDose": "0.30",
-    "hiUV": "9.7",
-    "headDD": "0.004",
+    "solarRad": "679",
+    "solarEnergy": "0.97",
+    "hiSolarRad": "679",
+    "UVIndex": "3.8",
+    "UVDose": "0.03",
+    "hiUV": "3.8",
+    "headDD": "0.002",
     "coolDD": "0.000",
-    "inTemp": "22.2",
-    "inHumidity": "69",
-    "dewIn": "16.3",
-    "inHeat": "22.5",
-    "inEMC": "12.81",
-    "inAirDensity": "1.1642",
-    "2ndTemp": "19.4",
-    "2ndHumidity": "73",
+    "inTemp": "18.8",
+    "inHumidity": "63",
+    "dewIn": "11.6",
+    "inHeat": "18.4",
+    "inEMC": "11.63",
+    "inAirDensity": "1.1865",
+    "2ndTemp": "20.0",
+    "2ndHumidity": "50",
     "ET": "0.00",
     "leaf": "0",
-    "windSamp": "115",
+    "windSamp": "22",
     "windTx": "1",
-    "ISSRecept": "100.0",
-    "arcInt": "5",
+    "ISSRecept": "95.7",
+    "arcInt": "1",
 }
 
 s4gui_json = {
-    "OBSERVER": "AAA",
-    "OBJECT": "BBB",
-    "CTRLINTE": "S4GUI",
-    "PROJID": "CCC",
-    "SYNCMODE": "SYNC",
+    "OBJECT": "Test",
+    "OBSERVER": "Denis",
+    "CTRLINTE": "S4GEI",
+    "PROJID": "ENG",
+    "SYNCMODE": "ASYNC",
     "INSTMODE": "PHOT",
     "FILTER": "CLEAR",
-    "OBSTYPE": "ZERO",
+    "OBSTYPE": "OBJECT",
+    "GUIVRSN": "v0.0.0",
+    "COMMENT": "",
+    "broker": "S4GEI",
+    "timestamp": "0000-00-00T00:00:00.0",
     "CHANNEL 1": True,
     "CHANNEL 2": False,
     "CHANNEL 3": False,
     "CHANNEL 4": False,
     "TCSMODE": True,
-    "COMMENT": "FGH",
-    "BROKER": "S4GUI",
-    "GUIVRSN": "v0.0.0",
 }
+
 general_kw = {
-    "FILENAME": "20240426_s4c1_000003.fits",
-    "SEQINDEX": 0,
-    "NCYCLES": 1,
-    "NSEQ": 1,
-    "CHANNEL": 1,
-    "CYCLIND": 1,
-    "ACSVRSN": "v1.46.14",
-    "ACQERROR": False,
+    "ACSVRSN": "v1.56.0",
     "ACSMODE": False,
+    "filename": "20251223_s4c1_20251221.fits",
+    "ncycles": 1,
+    "cyclind": 0,
+    "channel": 1,
+    "ACQERROR": False,
+    "seqindex": 0,
+    "nseq": 1,
 }
 ccd_kw = {
-    "FRAMEIND": 1,
-    "CCDTEMP": 20,
+    "FILENAME": "20251223_s4c1_20251221.fits",
+    "FRAMEIND": 0,
+    "CCDTEMP": 0,
     "TEMPST": "TEMPERATURE_OFF",
     "CCDSERN": 9914,
     "PREAMP": 0,
     "READRATE": 0,
-    "EMGAIN": 2,
     "VSHIFT": 3,
-    "FRAMETRF": True,
     "VCLKAMP": 0,
     "ACQMODE": 3,
-    "EMMODE": 1,
     "SHUTTER": 2,
     "TRIGGER": 0,
     "VBIN": 1,
@@ -256,14 +263,85 @@ ccd_kw = {
     "HBIN": 1,
     "EXPTIME": 1.5,
     "NFRAMES": 1,
-    "TGTEMP": 20,
     "COOLER": 0,
-    "DATE-OBS": "2024-04-26T17:35:31.000001",
-    "UTTIME": "17:35:31.000001",
-    "UTDATE": "2024-04-26",
+    "TGTEMP": 0,
+    "date-obs": "2025-12-23T18:35:10.271484",
+    "utdate": "2025-12-23",
+    "uttime": "18:35:10.271484",
+    "EMGAIN": 2,
+    "FRAMETRF": True,
+    "EMMODE": 1,
 }
-ics_kw = """WPROT SIMULATED NONE 0.000 NONE -1, WPSEL SIMULATED READY 80.000 OFF 2, CALW SIMULATED READY 216.000 SHUTTER 4, ASEL SIMULATED READY 0.000 OFF 1, GMIR SIMULATED READY 0.000 TARGET 1, GFOC SIMULATED READY 0.000 TARGET 1
-{"broker":"S4ICS","version":"1.0.5","comment":"Removed unused VIs and Classes. Improvements on LOG, PUB 0MQ, and motor status reading.","tcpServerSocket":"192.168.1.170:5564","tcpServerEnabled":true,"timestamp":"2025-06-05T14:47:56.051","mechanisms":[{"name":"WPROT","status":{"mode":"SIMULATED","condition":"NONE","position":"0.000","pos_name":"NONE","pos_id":"-1"}},{"name":"WPSEL","status":{"mode":"SIMULATED","condition":"READY","position":"80.000","pos_name":"OFF","pos_id":"2"}},{"name":"CALW","status":{"mode":"SIMULATED","condition":"READY","position":"216.000","pos_name":"SHUTTER","pos_id":"4"}},{"name":"ASEL","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"OFF","pos_id":"1"}},{"name":"GMIR","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"TARGET","pos_id":"1"}},{"name":"GFOC","status":{"mode":"SIMULATED","condition":"READY","position":"0.000","pos_name":"TARGET","pos_id":"1"}}]}"""
+ics_kw = {
+    "broker": "S4ICS",
+    "version": "v0.0.0",
+    "comment": "this is a comment",
+    "tcpServerSocket": "192.168.1.170",
+    "tcpServerEnabled": "True",
+    "timestamp": "0000-00-00T00:0:000.0",
+    "mechanisms": [
+        {
+            "name": "WPROT",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "HOME",
+                "pos_id": "-1",
+            },
+        },
+        {
+            "name": "WPSEL",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "BUSY",
+                "position": "50",
+                "pos_name": "OFF",
+                "pos_id": "2",
+            },
+        },
+        {
+            "name": "CALW",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "TIMEOUT",
+                "position": "144",
+                "pos_name": "OFF",
+                "pos_id": "3",
+            },
+        },
+        {
+            "name": "ASEL",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "NONE",
+                "position": "0",
+                "pos_name": "OFF",
+                "pos_id": "1",
+            },
+        },
+        {
+            "name": "GMIR",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "HOME",
+                "pos_id": "0",
+            },
+        },
+        {
+            "name": "GFOC",
+            "status": {
+                "mode": "ACTIVE",
+                "condition": "READY",
+                "position": "0",
+                "pos_name": "HOME",
+                "pos_id": "0",
+            },
+        },
+    ],
+}
 
 everthing_json = {
     "CYCLIND": 0,

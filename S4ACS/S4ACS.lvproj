@@ -97,9 +97,35 @@
 		</Item>
 		<Item Name="python" Type="Folder">
 			<Item Name="csv" Type="Folder">
-				<Item Name="header_content.csv" Type="Document" URL="../ACS files/python/csvs/header_content.csv"/>
-				<Item Name="preamp_gains.csv" Type="Document" URL="../ACS files/python/csvs/preamp_gains.csv"/>
-				<Item Name="read_noises.csv" Type="Document" URL="../ACS files/python/csvs/read_noises.csv"/>
+				<Item Name="echarpe" Type="Folder">
+					<Item Name="keywords config" Type="Folder">
+						<Item Name="CCD.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/CCD.csv"/>
+						<Item Name="FOCUSER.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/FOCUSER.csv"/>
+						<Item Name="GENERAL KW.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/GENERAL KW.csv"/>
+						<Item Name="GUI.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/GUI.csv"/>
+						<Item Name="ICS.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/ICS.csv"/>
+						<Item Name="TCS.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/TCS.csv"/>
+						<Item Name="WSTATION.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/keywords config/WSTATION.csv"/>
+					</Item>
+					<Item Name="header_content.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/header_content.csv"/>
+					<Item Name="preamp_gains.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/preamp_gains.csv"/>
+					<Item Name="read_noises.csv" Type="Document" URL="../ACS files/python/csvs/echarpe/read_noises.csv"/>
+				</Item>
+				<Item Name="sparc4" Type="Folder">
+					<Item Name="keywords config" Type="Folder">
+						<Item Name="CCD.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/CCD.csv"/>
+						<Item Name="FOCUSER.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/FOCUSER.csv"/>
+						<Item Name="GENERAL KW.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/GENERAL KW.csv"/>
+						<Item Name="GUI.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/GUI.csv"/>
+						<Item Name="ICS.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/ICS.csv"/>
+						<Item Name="TCS.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/TCS.csv"/>
+						<Item Name="TESTER.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/TESTER.csv"/>
+						<Item Name="WSTATION.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/keywords config/WSTATION.csv"/>
+					</Item>
+					<Item Name="header_content.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/header_content.csv"/>
+					<Item Name="preamp_gains.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/preamp_gains.csv"/>
+					<Item Name="read_noises.csv" Type="Document" URL="../ACS files/python/csvs/sparc4/read_noises.csv"/>
+				</Item>
 			</Item>
 			<Item Name="header" Type="Folder">
 				<Item Name="__init__.py" Type="Document" URL="../ACS files/python/header/__init__.py"/>
@@ -674,7 +700,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">40</Property>
+				<Property Name="Bld_version.build" Type="Int">41</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
@@ -688,7 +714,7 @@
 				<Property Name="Destination[3].destName" Type="Str">root</Property>
 				<Property Name="Destination[3].path" Type="Path">../builds/NI_AB_PROJECTNAME</Property>
 				<Property Name="DestinationCount" Type="Int">4</Property>
-				<Property Name="Source[0].itemID" Type="Str">{F56AC78F-E550-4DAA-A527-2461BDCE3B83}</Property>
+				<Property Name="Source[0].itemID" Type="Str">{F98C4BC9-70C3-4413-AA34-E7366AC5486E}</Property>
 				<Property Name="Source[0].type" Type="Str">Container</Property>
 				<Property Name="Source[1].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[1].itemID" Type="Ref">/My Computer/S4ACS.vi</Property>
