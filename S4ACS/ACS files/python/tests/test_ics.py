@@ -6,35 +6,32 @@ from header import ICS, S4ICS, Header_Parameters
 
 
 class Test_ICS(unittest.TestCase):
-
     dict_header_jsons: dict = {
         "CCD": '{"FILENAME":"s4acs1_000001.fits"}',
     }
     log_file = join("tests", "files", "log.log")
     tester_hdr_content = {"VERSION": "0.0.0"}
 
-    @classmethod
-    def setUpClass(cls):
-        cls.csv_folder = join(dirname(realpath(__file__)), "..", "csvs", "sparc4")
-        cls.hdr_params = Header_Parameters(cls.csv_folder)
+    def setUp(self) -> None:
+        self.csv_folder = join(dirname(realpath(__file__)), "..", "csvs", "sparc4")
+        self.hdr_params = Header_Parameters(self.csv_folder)
 
-        cls.dict_header_jsons["ICS"] = json.dumps(cls.tester_hdr_content)
-        cls.tester = ICS(
-            cls.dict_header_jsons, cls.log_file, cls.hdr_params, cls.csv_folder
+        self.dict_header_jsons["ICS"] = json.dumps(self.tester_hdr_content)
+        self.tester = ICS(
+            self.dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
         )
-        cls.tester.extract_info()
-        cls.fixed_tester = ICS(
-            cls.dict_header_jsons, cls.log_file, cls.hdr_params, cls.csv_folder
+        self.tester.extract_info()
+        self.fixed_tester = ICS(
+            self.dict_header_jsons, self.log_file, self.hdr_params, self.csv_folder
         )
-        cls.fixed_tester.extract_info()
-        cls.fixed_tester.fix_keywords()
+        self.fixed_tester.extract_info()
+        self.fixed_tester.fix_keywords()
 
-    def test_ICS(self):
+    def test_ICS(self) -> None:
         assert self.fixed_tester.new_json["ICSVRSN"] == "v0.0.0"
 
 
 class Test_S4ICS(unittest.TestCase):
-
     dict_header_jsons: dict = {
         "CCD": '{"FILENAME":"s4acs1_000001.fits"}',
         "GUI": '{"INSTMODE":"POLAR"}',

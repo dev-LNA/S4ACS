@@ -19,7 +19,6 @@ from header import (
 
 
 class Test_General_Kws(unittest.TestCase):
-
     dict_header_jsons: dict = {
         "GENERAL KW": "",
         "CCD": '{"FILENAME":"s4acs1_000001.fits"}',
@@ -73,6 +72,7 @@ class Test_General_Kws(unittest.TestCase):
             "BZERO": 1,
             "BSCALE": 32768,
             "ACSVRSN": "v0.0.0",
+            "SITEID": "OPD",
         }
 
     def test_General_SPARC4_KWs(self):
@@ -101,6 +101,8 @@ class Test_General_Kws(unittest.TestCase):
             "SEQINDEX": 1,
             "INSTRUME": "SPARC4",
             "FILENAME": "00000000_s4c1_000000.fits",
+            "SITEID": "OPD",
+            "TELESCOP": "PE160",
         }
 
     def test_General_ECHARPE_KWs(self):
@@ -127,4 +129,6 @@ class Test_General_Kws(unittest.TestCase):
             "ACSVRSN": "v0.0.0",
             "INSTRUME": "ECHARPE",
             "FILENAME": "00000000_ECH_BLUE_000000o.fits",
+            "SITEID": "OPD",
+            "TELESCOP": "PE160",
         }
