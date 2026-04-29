@@ -84,9 +84,9 @@ def fix_standard_keywords(hdu: fits.PrimaryHDU) -> fits.PrimaryHDU:
     hdu.header["BSCALE"] = (1, "Linear factor in scaling equation")
     hdu.header["NAXIS1"] = (hdu.header["NAXIS1"], "Number of columns")
     hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
-    hdu.add_checksum(when="HDU checksum")
-    hdu.add_datasum(when="Data unit checksum")
     hdu.header["DATEFILE"] = datetime.now().isoformat()
+    hdu.add_datasum(when="Data unit checksum")
+    hdu.add_checksum(when="HDU checksum", override_datasum=True)
     return hdu
 
 
