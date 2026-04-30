@@ -1,0 +1,134 @@
+// VERSÃO 20260430
+// EDITOR: https://sequencediagram.org/
+// INSTRUÇÕES DE USO: https://sequencediagram.org/instructions.html
+// NOÇÕES  DE DIAGRAMA DE SEQUÊNCIA: https://www.youtube.com/watch?v=UVkj3ed0ZuM
+//
+// DESCRIÇÃO DO CASO DE USO DO AVANÇO DA LÂMINA COMANDADO POR HARDWARE
+// -------------------------------------------------------------------
+//
+//A> OPERAÇÃO
+//A1) O USUÁRIO SELECIONA O MODO DE AVANÇO DA WP [SOFTWARE/HARDWARE]
+//A2) O USUÁRIO CONFIGURA OS PARÂMETROS DA AQUISIÇÃO
+//A3) O USUÁRIO INICIA A AQUISIÇÃO [START], INIBINDO A SELEÇÃO DO MODO //DE AVANÇO DA WP
+//A4) O USUÁRIO PODE PAUSAR/RETOMAR [PAUSE/RESUME] A AQUISIÇÃO A //QUALQUER MOMENTO (AQM)
+//A5) O USUÁRIO PODE ABORTAR [ABORT] A AQUISIÇÃO AQM, HABILITANDO A //SELEÇÃO DO MODO DE AVANÇO 
+//
+//B> CONFIGURAÇÃO
+//B1) ON [START] GUI ENVIA [ENABLED-WP] PARA ACS/ICS E AGUARDA STATUS [READY]
+//B2) ON [ENABLED-WP] ICS INTERROMPE ROTINA HW-ADV DO S4DMX, MOVE WP PARA
+//       A ÚLTIMA [ENABLED-WP] E REPASSA [ENABLED-WP] A S4DMX
+//B3) ON [ENABLED-WP] S4DMX RESETA [DONE]
+//B4) ACS SETA [ADV]
+//
+//C> INÍCIO DA AQUISIÇÃO
+//C1) GUI ENVIA [EXPOSE] PARA ICS E ACS
+//C2) ACS AGUARDA [DONE]
+//C3) ICS DISPARA ROTINA HW-ADV NO S4DMX.
+//
+//D> LOOP DA AQUISIÇÃO
+//D1) ACS, ICS E GUI ATUALIZAM STATUS CONTINUAMENTE
+//D2) GUI REPASSA A ACS E ICS (E ESTE A S4DMX) [PAUSE/RESUME/ABORT] 
+//D3) ENQUANTO [NOT PAUSE] OU [NOT ABORT] S4DMX AVANÇA WP SE [ADV] ESTIVER SETADO
+//D4) S4DMX SETA [DONE] APÓS AVANÇAR WP
+//D5) ACS RESETA [ADV] AO LER [DONE] SETADO E INICIA EXPOSIÇÃO
+//D6) S4DMX RESETA [DONE] COM [ADV] RESETADO
+//D7) ACS SETA [ADV] AO FINAL DA EXPOSIÇÃO
+//
+//E> PAUSA / ENCERRAMENTO
+//E1) ACS CHECA [ABORT] AO FINAL DE CADA EXPOSIÇÃO
+//E2) ACS CHECA [STOP] E [PAUSE] AO FINAL DE CADA SEQUENCIA
+//E3) ACS CHECA [RESUME], [STOP] E [ABORT] DURANTE [PAUSE]
+//
+// SCRIPT PARA GERAÇÃO DO DIAGRAMA NO SITE sequencediagram.org
+// -----------------------------------------------------------
+//
+title SPARC4 HWADV - Hardware Waveplate Advance
+
+group seq
+actor User
+participant GUI
+participant ICS
+control DMX
+participant ACS
+
+
+// Operation
+User->>GUI: Set mode H/S
+User->>GUI: Config acquistion
+User->>GUI: [START]
+alt HARD MODE
+activate GUI
+GUI->>ICS: [HW-ON, WPn]
+GUI->>ACS: [FRAMEn],[WPn],[CYCLEn]
+note over DMX:PRG1 may be running
+activate DMX
+ICS->>DMX: Stop PRG1()
+deactivate DMX
+ICS->>DMX: Move to lastWP
+ICS->>DMX: [WPn]
+ICS->>GUI: ICS-PUB (RDY)
+alt DONE ON
+activate ACS
+ACS->ACS: Wait()
+DMX->ACS: [DONE OFF]
+else DONE OFF
+ACS->DMX: [ADV ON]
+deactivate ACS
+end // ALT done
+ACS->>GUI: ACS-PUB (RDY)
+loop !RDY
+GUI->GUI: Wait()
+end // loop !RDY
+GUI->>ACS: [EXPOSE]
+GUI->>ICS: [EXPOSE]
+ICS->>DMX: PRG1()
+loop CYCLEn > 0. ABORT OFF
+activate ICS
+activate DMX
+activate ACS
+ICS->DMX: GET STAT
+DMX-->>ICS: [WP]
+ICS->>GUI: ICS JSON
+ACS->>GUI: ACS JSON
+GUI->>ACS: PAUSE,RESUME,STOP,ABORT
+ACS->ACS: SEQ = WPn
+loop SEQ > 0, STOP OFF, ABORT OFF
+activate ACS
+loop ADV ON
+alt DONE OFF
+activate DMX
+DMX->DMX: NEXT WP
+deactivate DMX
+DMX->>ACS: DONE ON
+else DONE ON
+ACS->DMX: ADV OFF
+DMX-->ACS: DONE OFF
+end // alt ADV OFF
+end // loop ADV ON
+ACS->ACS: EXP=FRAMEn
+loop EXP>0, ABORT OFF
+activate ACS
+ACS->ACS: GET IMAGE
+activate ACS
+space
+deactivate ACS
+ACS->DMX: EXP - = 1
+space
+deactivate ACS
+end // loop EXP>0
+GUI->>ACS: [PAUSE] -> PAUSE_FLAG(ON)
+GUI->>ACS: [RESUME] -> PAUSE_FLAG(OFF)
+GUI->>ACS: [STOP]
+GUI->>ACS: [ABORT]
+loop PAUSE_FLAG ON, STOP OFF, ABORT OFF
+ACS->>ACS: Wait()
+end // loop PAUSE_FLAG ON
+alt PAUSE_FLAG OFF, STOP OFF, ABORT OFF
+ACS->DMX: ADV ON
+end // PAUSE
+end // loop SEQ >0
+deactivate ICS
+end // loop CYCLEn
+else SOFT MODE
+end // alt HARD MODE
+end // group seq
