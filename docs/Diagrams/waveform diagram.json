@@ -1,0 +1,9 @@
+	
+{ signal: [
+  { name: "DMX_MOVING", wave: "0.1..0....." },
+  { name: "DONE", wave: "0....1.0..." },
+  { name: "ADV", wave: "01....0...." },
+  { name: "EXPOSURE", wave: "0.....1...0" }
+]
+ 
+}
