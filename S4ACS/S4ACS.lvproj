@@ -700,7 +700,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">50</Property>
+				<Property Name="Bld_version.build" Type="Int">51</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
@@ -730,10 +730,10 @@
 				<Property Name="Source[10].itemID" Type="Ref">/My Computer/utils</Property>
 				<Property Name="Source[10].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[10].type" Type="Str">Container</Property>
-				<Property Name="Source[11].destinationIndex" Type="Int">0</Property>
+				<Property Name="Source[11].destinationIndex" Type="Int">3</Property>
 				<Property Name="Source[11].itemID" Type="Ref">/My Computer/acs_config_TEMPLATE.cfg</Property>
 				<Property Name="Source[11].sourceInclusion" Type="Str">Include</Property>
-				<Property Name="Source[12].destinationIndex" Type="Int">0</Property>
+				<Property Name="Source[12].destinationIndex" Type="Int">3</Property>
 				<Property Name="Source[12].itemID" Type="Ref">/My Computer/socket_TEMPLATE.cfg</Property>
 				<Property Name="Source[12].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[2].Container.applyDestination" Type="Bool">true</Property>
