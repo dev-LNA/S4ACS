@@ -1,54 +1,233 @@
-title SPARC4 HWADV - Hardware Advance Mode
-
-
+// VERSÃO 20260512-final
+// EDITOR: https://sequencediagram.org/
+// INSTRUÇÕES DE USO: https://sequencediagram.org/instructions.html
+// NOÇÕES  DE DIAGRAMA DE SEQUÊNCIA: 
+// - https://www.youtube.com/watch?v=UVkj3ed0ZuM
+// - https://www.youtube.com/watch?v=qvC8GsqogBo
+// - https://www.youtube.com/watch?v=Wp_ds19DQX4
+// - https://docentes.ifrn.edu.br/diegooliveira/disciplinas/pds/aula-15-diagrama-de-sequencia
+// EVENTOS ALEATÓRIOS (Visão geral criada por IA)
+// Eventos aleatórios, como falhas de sistema, interrupções externas ou exceções inesperadas, podem ser representados em diagramas de sequência UML 
+// usando fragmentos combinados, que ajudam a detalhar fluxos alternativos ou excepcionais. Aqui estão as principais formas de representá-los:
+// 1. Fragmento Combinado alt (Alternativo)
+// Utilizado quando um evento aleatório pode desviar o fluxo normal para um cenário de erro ou tratamento. 
+// Como usar: Crie uma caixa alt. Na parte superior, coloque o fluxo normal (ex: [sucesso]). Na parte inferior, coloque o cenário de erro, 
+// descrevendo o evento aleatório (ex: [falha de rede] ou [timeout]).
+// 2. Fragmento Combinado par (Paralelo)
+// Utilizado quando um evento aleatório pode ocorrer simultaneamente com o fluxo principal, sem necessariamente pará-lo, 
+// como um sistema de monitoramento registrando um evento. 
+// Como usar: Coloque a interação principal de um lado e o evento aleatório/assíncrono do outro, dentro de uma caixa par.
+// 3. Fragmento Combinado break (Interrupção)    ----[BREAK]-----
+// Ideal para eventos que interrompem o processo atual, como uma exceção grave ou cancelamento pelo usuário. 
+// Como usar: Envolva as mensagens que podem ser "quebradas" por uma caixa break. Se o evento ocorrer, o restante do fluxo 
+// dentro do break é ignorado.
+// 4. Mensagens Assíncronas (Sinal)
+// Para eventos baseados em tempo ou ocorrências externas aleatórias, use mensagens assíncronas (seta com ponta aberta). 
+// Como usar: O evento pode vir de um "ator" externo (ex: "Sensor de Incêndio") ou do sistema operando de forma autônoma. 
+//
+// DESCRIÇÃO DO CASO DE USO DO AVANÇO DA LÂMINA COMANDADO POR HARDWARE
+// -------------------------------------------------------------------
+//
+// WPn = SET WPPOS<n> DA GUI. "n" É INT DE 16 BITS. CADA BIT SETADO INDICA POSIÇÃO HABILITADA (LSB=WP1)
+// HWADV = MODO DE AVANCO DA WP. [HWADV ON] -> AVANCO POR HARDWARE. [HWADV OFF] -> AVANCO POR SOFTWARE
+// START = BOTÃO DA GUI CLICADO PELO USUÁRIO PARA INICIAR UMA AQUISIÇÃO
+// EXPOSE = COMANDO ENVIADO PELA GUI A ACS/ICS PARA INICIAR UMA AQUISIÇÃO
+// PUB_HWADV = STATUS PUBLICADO POR ACS/ICS QUE INDICA EM QUAL MODO DE AVANCO SE ENCONTRAM
+// RDY_HWADV = STATUS PUBLICADO POR ICS INDICANDO QUE S4DMX (MOTOR) ESTÁ PRONTO PARA MODO HWADV
+// ADV  = SINAL ELETRÔNICO GERADO PELO ACS (E LIDO PELO S4DMX) PARA AVANÇAR WP PARA A PRÓXIMA POSIÇÃO HABILITADA
+// DONE = SINAL ELETRÔNICO GERADO PELO S4DMX (E LIDO PELO ACS) PARA INDICAR QUE O AVANÇO DA WP FOI CONCLUÍDO
+//
+//A> OPERAÇÕES DO USUÁRIO
+//A1) O USUÁRIO SELECIONA O MODO DE AVANÇO DA WP [HWADV ON] / [HWDADV OFF] 
+//A2) O USUÁRIO CONFIGURA OS PARÂMETROS DA AQUISIÇÃO
+//A3) O USUÁRIO DISPARA A AQUISIÇÃO [START] (GUI INIBE A SELEÇÃO DE [HWADV])
+//A4) O USUÁRIO PODE A QUALQUER MOMENTO:
+//    - PAUSAR/RETOMAR [PAUSE/RESUME] A AQUISIÇÃO 
+//    - PARAR/ABORTAR [STOP / ABORT] A AQUISIÇÃO. (GUI HABILITA A SELEÇÃO DE [HWADV]) 
+//
+//B> CONFIGURAÇÃO
+//B1) ON [START] GUI ENVIA [HWADV ON/OFF] PARA ACS/ICS SE RESPECTIVOS PUB_HWADV DIFERENTES DA SELEÇÃO
+//B2i-a) GUI ENVIA [WPn] PARA ICS (ICS IGNORA WPn SE [PUB_HWADV OFF])
+//B2i-b) ON [WPn] E [PUB_HWADV ON], ICS INTERROMPE ROTINA HW-ADV DO S4DMX, 
+//                               REPASSA [WPn] A S4DMX
+//B2i-c) ON [WPn] S4DMX RESETA [DONE], MOVE WP PARA A ÚLTIMA [WPn] E RODA PRG
+//B2i-d) ICS PUBLICA S4DMX READY [RDY_HWADV=ON]
+//B2a-a) GUI ENVIA [WPn] E PARÂMETROS DA AQUISIÇÃO PARA ACS
+//B2a-b) ON [WPn] ACS RESETA [ADV]
+//B2a-c) ACS PUBLICA (aWP=uWP, ADV=OFF, PARAMS=config_params)
+//B3) GUI AGUARDA PUB(aWP=uWP, ADV=OFF, PARAMS=config_params) DO ACS
+//B4) GUI ENVIA [EXPOSE] PARA ACS E AGUARDA [ACTIVE]
+//
+//C> LOOP DA AQUISIÇÃO
+//C1) ACS, ICS E GUI ATUALIZAM STATUS CONTINUAMENTE
+//C2) GUI REPASSA A ACS E ICS (E ESTE A S4DMX) [PAUSE/RESUME/STOP/ABORT] 
+//
+//C3) ACS AGUARDA [DONE=F]
+//C4) ACS SETA [ADV] E AGUARDA [DONE=T]
+//C5) S4DMX AVANÇA WP QUANDO LER [ADV]=ON
+//C6) S4DMX FAZ [DONE]=ON APÓS AVANÇAR WP
+//C7) ACS FAZ [ADV]=OFF AO LER [DONE]=ON E INICIA EXPOSIÇÃO
+//C8) S4DMX FAZ [DONE]=OFF AO LER [ADV]=F
+//
+//D> PAUSA / ENCERRAMENTO
+//D1) ACS CHECA [ABORT] AO FINAL DE CADA EXPOSIÇÃO
+//D2) ACS CHECA [STOP] E [PAUSE] AO FINAL DE CADA SEQUENCIA
+//D3) ACS CHECA [RESUME], [STOP] E [ABORT] DURANTE [PAUSE]
+//
+// SCRIPT PARA GERAÇÃO DO DIAGRAMA NO SITE sequencediagram.org
+// -----------------------------------------------------------
+//
+title SPARC4 HWADV - Hardware Waveplate Advance
 actor User
 participant GUI
 participant ICS
 control DMX
+
 participant ACS
+parallel on
+box over ICS: iHWADV=OFF\niWP=0
+box over DMX: DONE=OFF\nPRG=IDLE
+box over ACS: aHWADV=OFF\naWP=0
+parallel off
 
+parallel on
+opt 
+User->>GUI: hwAdv(ON/OFF)
+aboxleft right of GUI: gHWADV=ON
+parallel off
+end
 
-// Operation
-User->>GUI: set hardware mode
-GUI->>ICS: set hardware mode
-GUI->>ACS: set hardware mode
-User->>GUI: set acq config
-User->>GUI: start acquisition
+opt 
+parallel on
+User->>GUI: set_wp_en(n)
+aboxleft right of GUI: uWP=n
+parallel off
+end
 
+User->>GUI: START
 activate GUI
-GUI->>ICS: set acq config
-GUI->>ACS: set acq config
-GUI->>ICS: start acquisition
+alt HWADV=OFF
+GUI->ICS: HWADV=OFF
+ICS->>DMX: stop PRG
+ICS->>GUI: PUB HWADV=OFF
+GUI->ACS: HWADV=OFF
+ACS->>GUI: PUB HWADV=OFF
+ref over GUI,ACS: Avanço por software
+else HWADV=ON
+GUI->ICS: HWADV=ON
+ICS->>GUI: PUB HWADV=ON
+GUI->ACS: HWADV=ON
+ACS->>GUI: PUB HWADV=ON
+
+
+# =============== ICS PRESET =========================
+
+par ICS
+GUI->ICS: set WPPOS
 activate ICS
-GUI->>ACS: start acquisition
-activate ACS
-# =============== step 1 =================
-loop DONE=ON
-note over ACS:in case of fast acquisitions...
+ICS->DMX: stop PRG
 activate DMX
-DMX->>DMX: moving
-DMX->>ACS: DONE
+DMX->>DMX: DONE=OFF
+DMX->>ICS: PRG= IDLE
+
+ICS->>DMX: iWP
+DMX->>DMX: DONE=OFF
+DMX->>DMX: goto WPn
+DMX->>DMX: run PRG
+loop dWP != WPn OU PRG=IDLE
+ICS->DMX: get_status
+DMX->>ICS: dWP, PRG
+end // loop WPPOS
+ICS->>GUI: PUB READY
+else ACS
+GUI->ACS: set acq parameters
+
+ACS->>GUI: PUB  acq parameters
+end // par ICS-ACS
+
+# ==================== SIGNAL HANDSHAKE ==============
+GUI->ACS: EXPOSE
+activate ACS
+ACS->>GUI: PUB active
+loop #cycle>0
+loop #seq>0
+
+loop DONE=ON
+DMX->>ACS:send DONE
 ACS->>ACS: wait DONE=OFF
-end
-# =============== step 2 =================
+end // loop DONE=ON
+
+par ACS
+ACS->>ACS:set ADV=ON
+ACS->>DMX:send ADV
+else ICS
 loop ADV=OFF
-ACS->>ACS:turn ADV=ON
-ACS->>DMX:ADV
-DMX->>DMX:wait ADV=ON
+DMX->>DMX:wait ADV=ONE
 end
-# =============== step 3 =================
+end
+
+par ICS
+DMX->>DMX: next(WP)
+DMX->>ACS: send DONE=ON
+else ACS
 loop DONE=OFF
-DMX->>DMX: start moving
-DMX->>ACS: DONE
-ACS->>ACS: wait DONE=ON
-
+ACS->ACS: wait DONE=ON
+end // loop DONE=OFF
 end
-# =============== step 4 =================
-ACS->>ACS: turn ADV=OFF
-ACS->>ACS: start acquisition
+ACS->>DMX: ADV=OFF
+DMX->>DMX: set DONE=OFF
+
+// ============= ACQUISITION ====================
+activate ACS
+ACS->>ACS: start acq
+alt ABORT=True
+User->>GUI: abort acq
+GUI->>ACS: abort acq
+break ABORT=ON
+ACS->>ACS: abort cam exposure
+ACS->>ACS: End image series
+end //break
+else STOP=True
+User->>GUI: stop acq
+GUI->>ACS: stop acq
+break STOP=ON
+ACS->>ACS: finish current sequence
+ACS->>ACS: save images
+ACS->>ACS: End image series
+end //break
+else PAUSE=True
+User->>GUI: pause acq
+GUI->>ACS: pause acq
+ACS->>ACS: finish current sequence
 
 
+par
+alt Resume
+User->>GUI:resume acq
+GUI->>ACS:send RESUME=True
+else Abort
+User->>GUI:abort acq
+GUI->>ACS:send ABORT=True
+end
+else
+loop RESUME=False \n& ABORT=False
+ACS->>ACS:wait RESUME=True
+ACS->>ACS:wait ABORT=True
+end
+break ABORT=True
+ACS->>ACS: save images
+ACS->>ACS: end image series
+end
+end
+ACS->>ACS: save images
+deactivate ACS
 
-
-
-
+# ============ FINISH =================
+end // loop seq
+end // loop cycle
+deactivate ACS
+deactivate ICS
+deactivate DMX
+deactivate GUI
+end // gHWADV
+end
