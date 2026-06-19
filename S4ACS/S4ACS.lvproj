@@ -188,7 +188,7 @@
 			<Item Name="get parameter min and max.vi" Type="VI" URL="../utils/get parameter min and max.vi"/>
 			<Item Name="read csv file.vi" Type="VI" URL="../utils/read csv file.vi"/>
 		</Item>
-		<Item Name="SPARC4 clsses" Type="Folder">
+		<Item Name="SPARC4 classes" Type="Folder">
 			<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
 			<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../Ixon_Ultra/Ixon_Ultra.lvclass"/>
 			<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../SPARC4_Channel/SPARC4_Channel.lvclass"/>
@@ -700,7 +700,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">52</Property>
+				<Property Name="Bld_version.build" Type="Int">53</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
