@@ -1,34 +1,15 @@
-Nenhum selecionado 
+Sugestão inseridaNenhum selecionado 
 
 Pular para o conteúdo
 Como usar o E-mail de Laboratório Nacional de Astrofísica com leitores de tela
 
-1 de 2.580
-Fwd: S4GUI - Diagrama de sequencia do sincronismo por HW atualizado
-Caixa de entrada
-
-ORLANDO VERDUCCI JUNIOR
-Anexos
-15:31 (há 0 minuto)
-para mim
-
-encaminhando....
-
-O.
-
----------- Forwarded message ---------
-From: ORLANDO VERDUCCI JUNIOR <overducci@lna.br>
-Date: Tue, Jun 23, 2026 at 12:45 PM
-Subject: S4GUI - Diagrama de sequencia do sincronismo por HW atualizado
-To: FRANCISCO RODRIGUES <frodrigues@lna.br>
-
-
-Algumas alterações na ordem dos comandos...
-
-O.
- 1 anexo
-  •  Verificados pelo Gmail
-// VERSÃO 20260623 12h
+Conversas
+ 
+Regulamentos do programa
+Powered by Google
+Última atividade da conta: há 9 minutos
+Detalhes
+// VERSÃO 20260702
 // EDITOR: https://sequencediagram.org/
 // INSTRUÇÕES DE USO: https://sequencediagram.org/instructions.html
 // NOÇÕES  DE DIAGRAMA DE SEQUÊNCIA: 
@@ -147,7 +128,7 @@ GUI->ICS: (READY) GOTO 1stWP
 ICS->DMX:PRG=OFF
 ICS->GUI: PUB BUSY, PRG=OFF, curWP=inv.
 linear
-ICS->DMX: GS 1WP
+ICS->DMX: GS 1stWP
 DMX->>ICS: dWP, PRG
 ICS->>GUI: PUB curWP, PRG=OFF, READY
 linear off
@@ -176,14 +157,13 @@ GUI->ICS: (READY) set WPPOS=[1..65535]
 else POLAR=0
 GUI->ICS: (READY) set WPPOS=0
 end
-ICS->GUI: PUB BUSY
-ICS->>DMX: WPPOS
+# ver c/ Orlando:
+# ===============
+ICS->>DMX: WPPOS (V40)
 ICS->>DMX: run PRG
 activate DMX
-DMX->>ACS: send DONE=OFF
-ICS->DMX: get_status
-DMX->>ICS: dWP, PRG
-ICS->>GUI: PUB READY, PRG=ON, dWP
+DMX->>ACS: send DONE=OFF\n(DO2=1)
+ICS->>GUI: PUB HWSYNC=ON, WPPOS
 loop 
 GUI->GUI: wait ICS READY
 end
@@ -213,14 +193,10 @@ par ACS
 ACS->>ACS:set ADV=ON
 ACS->>DMX:send ADV
 else ICS
-loop ADV=OFF
-DMX->>DMX:wait ADV=ONE
+loop ADV=OFF (DI2=1)
+DMX->>DMX:wait ADV=ON
 end
 end
-linear
-DMX->>ICS: WP=invalid
-ICS->>GUI: PUB READY, PRG=ON, WP=inv.
-linear off
 par ICS
 DMX->>DMX: next(WP)
 DMX->>ACS: send DONE=ON
@@ -229,12 +205,9 @@ loop DONE=OFF
 ACS->ACS: wait DONE=ON
 end // loop DONE=OFF
 end
-linear
-DMX->>ICS: curWP
-ICS->>GUI: PUB READY, PRG=ON, curWP
-linear off
-ACS->>DMX: ADV=OFF
-DMX->>DMX: set DONE=OFF
+ICS->>GUI: PUB HWSYNC=ON, WPPOS, curWP
+ACS->>DMX: ADV=OFF (DI2=1)
+DMX->>DMX: set DONE=OFF\n(DO2=1)
 
 // ============= ACQUISITION ====================
 activate ACS
@@ -290,5 +263,5 @@ deactivate DMX
 deactivate GUI
 end // gHWSYNC
 end
-UML SeqD SPARC4 HWSYNC 20260623.txt
-Exibindo UML SeqD SPARC4 HWSYNC 20260623.txt.
+UML SeqD SPARC4 HWSYNC 20260702.txt
+Exibindo UML SeqD SPARC4 HWSYNC 20260702.txt.
