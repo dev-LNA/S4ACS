@@ -1,4 +1,34 @@
-// VERSÃO 20260512-final
+Nenhum selecionado 
+
+Pular para o conteúdo
+Como usar o E-mail de Laboratório Nacional de Astrofísica com leitores de tela
+
+1 de 2.580
+Fwd: S4GUI - Diagrama de sequencia do sincronismo por HW atualizado
+Caixa de entrada
+
+ORLANDO VERDUCCI JUNIOR
+Anexos
+15:31 (há 0 minuto)
+para mim
+
+encaminhando....
+
+O.
+
+---------- Forwarded message ---------
+From: ORLANDO VERDUCCI JUNIOR <overducci@lna.br>
+Date: Tue, Jun 23, 2026 at 12:45 PM
+Subject: S4GUI - Diagrama de sequencia do sincronismo por HW atualizado
+To: FRANCISCO RODRIGUES <frodrigues@lna.br>
+
+
+Algumas alterações na ordem dos comandos...
+
+O.
+ 1 anexo
+  •  Verificados pelo Gmail
+// VERSÃO 20260623 12h
 // EDITOR: https://sequencediagram.org/
 // INSTRUÇÕES DE USO: https://sequencediagram.org/instructions.html
 // NOÇÕES  DE DIAGRAMA DE SEQUÊNCIA: 
@@ -29,29 +59,29 @@
 // -------------------------------------------------------------------
 //
 // WPn = SET WPPOS<n> DA GUI. "n" É INT DE 16 BITS. CADA BIT SETADO INDICA POSIÇÃO HABILITADA (LSB=WP1)
-// HWADV = MODO DE AVANCO DA WP. [HWADV ON] -> AVANCO POR HARDWARE. [HWADV OFF] -> AVANCO POR SOFTWARE
+// HWSYNC = MODO DE AVANCO DA WP. [HWSYNC ON] -> AVANCO POR HARDWARE. [HWSYNC OFF] -> AVANCO POR SOFTWARE
 // START = BOTÃO DA GUI CLICADO PELO USUÁRIO PARA INICIAR UMA AQUISIÇÃO
 // EXPOSE = COMANDO ENVIADO PELA GUI A ACS/ICS PARA INICIAR UMA AQUISIÇÃO
-// PUB_HWADV = STATUS PUBLICADO POR ACS/ICS QUE INDICA EM QUAL MODO DE AVANCO SE ENCONTRAM
-// RDY_HWADV = STATUS PUBLICADO POR ICS INDICANDO QUE S4DMX (MOTOR) ESTÁ PRONTO PARA MODO HWADV
+// PUB_HWSYNC = STATUS PUBLICADO POR ACS/ICS QUE INDICA EM QUAL MODO DE AVANCO SE ENCONTRAM
+// RDY_HWSYNC = STATUS PUBLICADO POR ICS INDICANDO QUE S4DMX (MOTOR) ESTÁ PRONTO PARA MODO HWSYNC
 // ADV  = SINAL ELETRÔNICO GERADO PELO ACS (E LIDO PELO S4DMX) PARA AVANÇAR WP PARA A PRÓXIMA POSIÇÃO HABILITADA
 // DONE = SINAL ELETRÔNICO GERADO PELO S4DMX (E LIDO PELO ACS) PARA INDICAR QUE O AVANÇO DA WP FOI CONCLUÍDO
 //
 //A> OPERAÇÕES DO USUÁRIO
-//A1) O USUÁRIO SELECIONA O MODO DE AVANÇO DA WP [HWADV ON] / [HWDADV OFF] 
+//A1) O USUÁRIO SELECIONA O MODO DE AVANÇO DA WP [HWSYNC ON] / [HWDADV OFF] 
 //A2) O USUÁRIO CONFIGURA OS PARÂMETROS DA AQUISIÇÃO
-//A3) O USUÁRIO DISPARA A AQUISIÇÃO [START] (GUI INIBE A SELEÇÃO DE [HWADV])
+//A3) O USUÁRIO DISPARA A AQUISIÇÃO [START] (GUI INIBE A SELEÇÃO DE [HWSYNC])
 //A4) O USUÁRIO PODE A QUALQUER MOMENTO:
 //    - PAUSAR/RETOMAR [PAUSE/RESUME] A AQUISIÇÃO 
-//    - PARAR/ABORTAR [STOP / ABORT] A AQUISIÇÃO. (GUI HABILITA A SELEÇÃO DE [HWADV]) 
+//    - PARAR/ABORTAR [STOP / ABORT] A AQUISIÇÃO. (GUI HABILITA A SELEÇÃO DE [HWSYNC]) 
 //
 //B> CONFIGURAÇÃO
-//B1) ON [START] GUI ENVIA [HWADV ON/OFF] PARA ACS/ICS SE RESPECTIVOS PUB_HWADV DIFERENTES DA SELEÇÃO
-//B2i-a) GUI ENVIA [WPn] PARA ICS (ICS IGNORA WPn SE [PUB_HWADV OFF])
-//B2i-b) ON [WPn] E [PUB_HWADV ON], ICS INTERROMPE ROTINA HW-ADV DO S4DMX, 
+//B1) ON [START] GUI ENVIA [HWSYNC ON/OFF] PARA ACS/ICS SE RESPECTIVOS PUB_HWSYNC DIFERENTES DA SELEÇÃO
+//B2i-a) GUI ENVIA [WPn] PARA ICS (ICS IGNORA WPn SE [PUB_HWSYNC OFF])
+//B2i-b) ON [WPn] E [PUB_HWSYNC ON], ICS INTERROMPE ROTINA HW-ADV DO S4DMX, 
 //                               REPASSA [WPn] A S4DMX
 //B2i-c) ON [WPn] S4DMX RESETA [DONE], MOVE WP PARA A ÚLTIMA [WPn] E RODA PRG
-//B2i-d) ICS PUBLICA S4DMX READY [RDY_HWADV=ON]
+//B2i-d) ICS PUBLICA S4DMX READY [RDY_HWSYNC=ON]
 //B2a-a) GUI ENVIA [WPn] E PARÂMETROS DA AQUISIÇÃO PARA ACS
 //B2a-b) ON [WPn] ACS RESETA [ADV]
 //B2a-c) ACS PUBLICA (aWP=uWP, ADV=OFF, PARAMS=config_params)
@@ -77,7 +107,7 @@
 // SCRIPT PARA GERAÇÃO DO DIAGRAMA NO SITE sequencediagram.org
 // -----------------------------------------------------------
 //
-title SPARC4 HWADV - Hardware Waveplate Advance
+title SPARC4 HWSYNC - Hardware (Acquisition) Synchronisation
 actor User
 participant GUI
 participant ICS
@@ -85,15 +115,15 @@ control DMX
 
 participant ACS
 parallel on
-box over ICS: iHWADV=OFF\niWP=0
+box over ICS: iHWSYNC=OFF\niWP=0
 box over DMX: DONE=OFF\nPRG=IDLE
-box over ACS: aHWADV=OFF\naWP=0
+box over ACS: aHWSYNC=OFF\naWP=0
 parallel off
 
 parallel on
 opt 
-User->>GUI: hwAdv(ON/OFF)
-aboxleft right of GUI: gHWADV=ON
+User->>GUI: HWSYNC(ON/OFF)
+aboxleft right of GUI: gHWSYNC=ON
 parallel off
 end
 
@@ -106,49 +136,71 @@ end
 
 User->>GUI: START
 activate GUI
-alt HWADV=OFF
-GUI->ICS: HWADV=OFF
-ICS->>DMX: stop PRG
-ICS->>GUI: PUB HWADV=OFF
-GUI->ACS: HWADV=OFF
-ACS->>GUI: PUB HWADV=OFF
+alt HWSYNC=OFF
+GUI->ACS: set acq parameters
+ACS->>GUI: PUB  acq parameters
+GUI->ACS: HWSYNC=OFF
+ACS->>GUI: PUB HWSYNC=OFF
+opt POLAR=1
+linear
+GUI->ICS: (READY) GOTO 1stWP
+ICS->DMX:PRG=OFF
+ICS->GUI: PUB BUSY, PRG=OFF, curWP=inv.
+linear
+ICS->DMX: GS 1WP
+DMX->>ICS: dWP, PRG
+ICS->>GUI: PUB curWP, PRG=OFF, READY
+linear off
+end //opt POLAR=1
 ref over GUI,ACS: Avanço por software
-else HWADV=ON
-GUI->ICS: HWADV=ON
-ICS->>GUI: PUB HWADV=ON
-GUI->ACS: HWADV=ON
-ACS->>GUI: PUB HWADV=ON
+else HWSYNC=ON
+
 
 
 # =============== ICS PRESET =========================
-
 par ICS
-GUI->ICS: set WPPOS
-activate ICS
-ICS->DMX: stop PRG
+alt POLAR=1 
+opt WPn != lastWPPOS
+linear
+GUI->ICS: (READY) GOTO lastWP
+ICS->DMX: PRG = OFF
+linear off
+ICS->GUI: PUB BUSY, PRG=OFF, curWP=inv.
+ICS->DMX: GS lastWP
+linear
+DMX->>ICS: dWP, PRG
+ICS->>GUI: PUB curWP, PRG=OFF, READY
+linear off
+end
+GUI->ICS: (READY) set WPPOS=[1..65535]
+else POLAR=0
+GUI->ICS: (READY) set WPPOS=0
+end
+ICS->GUI: PUB BUSY
+ICS->>DMX: WPPOS
+ICS->>DMX: run PRG
 activate DMX
-DMX->>DMX: DONE=OFF
-DMX->>ICS: PRG= IDLE
-
-ICS->>DMX: iWP
-DMX->>DMX: DONE=OFF
-DMX->>DMX: goto WPn
-DMX->>DMX: run PRG
-loop dWP != WPn OU PRG=IDLE
+DMX->>ACS: send DONE=OFF
 ICS->DMX: get_status
 DMX->>ICS: dWP, PRG
-end // loop WPPOS
-ICS->>GUI: PUB READY
+ICS->>GUI: PUB READY, PRG=ON, dWP
+loop 
+GUI->GUI: wait ICS READY
+end
 else ACS
 GUI->ACS: set acq parameters
-
 ACS->>GUI: PUB  acq parameters
+GUI->ACS: HWSYNC=ON
+ACS->>GUI: PUB HWSYNC=ON
 end // par ICS-ACS
 
 # ==================== SIGNAL HANDSHAKE ==============
+
 GUI->ACS: EXPOSE
 activate ACS
 ACS->>GUI: PUB active
+ICS->>ICS: SYNC Update
+activate ICS
 loop #cycle>0
 loop #seq>0
 
@@ -165,7 +217,10 @@ loop ADV=OFF
 DMX->>DMX:wait ADV=ONE
 end
 end
-
+linear
+DMX->>ICS: WP=invalid
+ICS->>GUI: PUB READY, PRG=ON, WP=inv.
+linear off
 par ICS
 DMX->>DMX: next(WP)
 DMX->>ACS: send DONE=ON
@@ -174,6 +229,10 @@ loop DONE=OFF
 ACS->ACS: wait DONE=ON
 end // loop DONE=OFF
 end
+linear
+DMX->>ICS: curWP
+ICS->>GUI: PUB READY, PRG=ON, curWP
+linear off
 ACS->>DMX: ADV=OFF
 DMX->>DMX: set DONE=OFF
 
@@ -201,7 +260,7 @@ GUI->>ACS: pause acq
 ACS->>ACS: finish current sequence
 
 
-par
+par RESUME OR ABORT
 alt Resume
 User->>GUI:resume acq
 GUI->>ACS:send RESUME=True
@@ -209,7 +268,7 @@ else Abort
 User->>GUI:abort acq
 GUI->>ACS:send ABORT=True
 end
-else
+else NOT (RESUME OR ABORT)
 loop RESUME=False \n& ABORT=False
 ACS->>ACS:wait RESUME=True
 ACS->>ACS:wait ABORT=True
@@ -229,5 +288,7 @@ deactivate ACS
 deactivate ICS
 deactivate DMX
 deactivate GUI
-end // gHWADV
+end // gHWSYNC
 end
+UML SeqD SPARC4 HWSYNC 20260623.txt
+Exibindo UML SeqD SPARC4 HWSYNC 20260623.txt.
