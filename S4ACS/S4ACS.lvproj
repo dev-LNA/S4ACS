@@ -561,6 +561,7 @@
 				<Item Name="Empty 1D Array (LVObject)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Empty 1D Array (LVObject)__ogtk.vi"/>
 				<Item Name="Empty 2D Array (LVObject)__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/array/array.llb/Empty 2D Array (LVObject)__ogtk.vi"/>
 				<Item Name="SetHorizontalSpeed.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetHorizontalSpeed.vi"/>
+				<Item Name="GetSoftwareVersion.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/GetSoftwareVersion.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
@@ -683,6 +684,7 @@
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
 			<Item Name="join array jsons.vi" Type="VI" URL="../Save SPARC4 image/join array jsons.vi"/>
+			<Item Name="Write op mode error.vi" Type="VI" URL="../Channel/Write op mode error.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
