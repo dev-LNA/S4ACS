@@ -3,9 +3,6 @@
         "titleBar.activeBackground": "#b10e0e",
         "titleBar.inactiveBackground": "#b10e0e",
     },
-    // "ruff.interpreter": [
-    //     ".venv\\Scripts\\python.exe"
-    // ],
     "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python",
     "python.analysis.autoImportCompletions": true,
     // Test settings    
@@ -13,16 +10,5 @@
     "python.testing.cwd": "${workspaceFolder}\\S4ACS\\ACS files\\python\\tests",
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    // terminal
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell",
-            "args": [
-                "-NoExit",
-                "-Command",
-                ".\\.venv\\Scripts\\activate "
-            ]
-        },
-    }
+    "python.analysis.typeCheckingMode": "off",
 }

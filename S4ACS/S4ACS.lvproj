@@ -187,6 +187,7 @@
 			<Item Name="find row in array.vi" Type="VI" URL="../utils/find row in array.vi"/>
 			<Item Name="get parameter min and max.vi" Type="VI" URL="../utils/get parameter min and max.vi"/>
 			<Item Name="read csv file.vi" Type="VI" URL="../utils/read csv file.vi"/>
+			<Item Name="join array jsons.vi" Type="VI" URL="../utils/join array jsons.vi"/>
 		</Item>
 		<Item Name="SPARC4 classes" Type="Folder">
 			<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
@@ -683,8 +684,8 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../ECHARPE_Channel/choose firs acquisition state.vi"/>
-			<Item Name="join array jsons.vi" Type="VI" URL="../Save SPARC4 image/join array jsons.vi"/>
 			<Item Name="Write op mode error.vi" Type="VI" URL="../Channel/Write op mode error.vi"/>
+			<Item Name="join array jsons 2.vi" Type="VI" URL="../Save Image/join array jsons 2.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">

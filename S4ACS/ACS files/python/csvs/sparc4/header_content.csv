@@ -25,7 +25,7 @@ CHANNEL1;CHANNEL 1;boolean;true,false;Channel 1 is on (T) or off (F)
 CHANNEL2;CHANNEL 2;boolean;true,false;Channel 2 is on (T) or off (F)
 CHANNEL3;CHANNEL 3;boolean;true,false;Channel 3 is on (T) or off (F)
 CHANNEL4;CHANNEL 4;boolean;true,false;Channel 4 is on (T) or off (F)
-CCDSERN;;integer;9914,14500;CCD serial number
+CCDSERN;;integer;9914,9915,9916,9917,14364;CCD serial number
 FILENAME;;string;;File name
 DATE-OBS;;string;;UTC at start of observation (isot)
 UTTIME;;string;;UTC time at start of observation
@@ -72,8 +72,9 @@ AIRMASS;;float;1,inf;Airmass at start of observation
 PRESSURE;;float;0,inf;Barometric pressure (mb), weather tower
 HUMIDITY;OUTHUMIDITY;float;0,100;Relative humidity (%), weather tower
 ACSVRSN;;string;;S4ACS software version
-ICSVRSN;VERSION;string;;S4ICS software version
+ICSVRSN;;string;;S4ICS software version
 GUIVRSN;;string;;S4GUI software version
+SDKVRSN;;string;;Camera SDK version
 CTRLINTE;;string;S4GUI,S4GEI;Graphical control interface of ACS
 ACSMODE;;boolean;true,false;ACS: real (T) or simulated (F)
 WPROMODE;;boolean;true,false;Waveplate rotator: real (T) or simulated (F)
@@ -102,3 +103,5 @@ ACQERROR;;boolean;true,false;Acquisition error - see comments
 DATEFILE;;string;;File creation date
 CHECKSUM;;string;;HDU checksum
 DATASUM;;string;;Data unit checksum
+HWSYNC;;boolean;true,false;Acquisition synchronization by hardware
+WPPOSSEQ;;string;[None] or [1,2,3,....,16];Set of selected WP positions

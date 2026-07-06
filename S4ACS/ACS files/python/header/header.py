@@ -741,6 +741,7 @@ class General_KWs(Header):
         super().__init__(dict_header_jsons, log_file, hdr_params, csv_folder)
         self.regex_expressions = {
             "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
+            "SDKVRSN": (r"^\d[.]\d{3}[.]\d{5}[.]\d$", "0.000.00000.0"),
         }
         # O pandas trata tudo como uma string
         self.empty_kws = {
