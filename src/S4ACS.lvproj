@@ -103,18 +103,18 @@
 			</Item>
 			<Item Name="SPARC4" Type="Folder">
 				<Item Name="Camera iXon Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Camera iXon Ultra/Camera iXon Ultra.lvclass"/>
-				<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../LabVIEW/Save SPARC4 image/Save SPARC4 image.lvclass"/>
+				<Item Name="Save Image SPARC4.lvclass" Type="LVClass" URL="../LabVIEW/Save Image SPARC4/Save Image SPARC4.lvclass"/>
 				<Item Name="Camera Simulated iXon Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iXon Ultra/Camera Simulated iXon Ultra.lvclass"/>
-				<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4_Channel/SPARC4_Channel.lvclass"/>
+				<Item Name="Channel SPARC4.lvclass" Type="LVClass" URL="../LabVIEW/Channel SPARC4/Channel SPARC4.lvclass"/>
 			</Item>
 			<Item Name="ECHARPE" Type="Folder">
-				<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
+				<Item Name="Channel ECHARPE.lvclass" Type="LVClass" URL="../LabVIEW/Channel ECHARPE/Channel ECHARPE.lvclass"/>
 				<Item Name="Camera iKon L.lvclass" Type="LVClass" URL="../LabVIEW/Camera iKon L/Camera iKon L.lvclass"/>
 			</Item>
 			<Item Name="ABSTRACT" Type="Folder">
 				<Item Name="Save Image.lvclass" Type="LVClass" URL="../LabVIEW/Save Image/Save Image.lvclass"/>
 				<Item Name="Channel.lvclass" Type="LVClass" URL="../LabVIEW/Channel/Channel.lvclass"/>
-				<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../LabVIEW/Sim_CCD/Sim_CCD.lvclass"/>
+				<Item Name="Camera Simulated.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated/Camera Simulated.lvclass"/>
 			</Item>
 			<Item Name="Log File.lvclass" Type="LVClass" URL="../LabVIEW/Log File/Log File.lvclass"/>
 			<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../LabVIEW/Python Toolkit/Python Toolkit.lvclass"/>
@@ -583,6 +583,7 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
+			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../LabVIEW/Channel ECHARPE/choose firs acquisition state.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
