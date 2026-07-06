@@ -1,3 +1,4 @@
+import array
 import json
 import traceback
 from os.path import dirname, join, realpath
@@ -15,16 +16,22 @@ from python.header import (
     Weather_Station,
     iXon_Ultra,
 )
+from python.header_parameters import Header_Parameters
 from python.utils import (
     SUB_SYSTEMS,
-    Header_Parameters,
     fix_image_orientation,
     fix_standard_keywords,
     verify_file_already_exists,
 )
 
 
-def main(night_dir, file, data, tuple_header_jsons, log_file) -> str:
+def main(
+    night_dir: str,
+    file: str,
+    data: array,
+    tuple_header_jsons: tuple[str],
+    log_file: str,
+) -> str:
     error_json = {"status": False, "code": 0, "source": ""}
     try:
         dict_header_jsons = {k: v for (k, v) in zip(SUB_SYSTEMS, tuple_header_jsons)}
