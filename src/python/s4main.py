@@ -1,6 +1,7 @@
 import json
 import traceback
 from os.path import dirname, join, realpath
+from pathlib import Path
 
 import astropy.io.fits as fits
 import numpy as np
@@ -28,9 +29,9 @@ def main(night_dir, file, data, tuple_header_jsons, log_file) -> str:
     try:
         dict_header_jsons = {k: v for (k, v) in zip(SUB_SYSTEMS, tuple_header_jsons)}
         data = np.asarray(data, dtype=np.uint16)
-        file = join(night_dir, file)
+        file = Path(night_dir) / file
 
-        csv_folder = join(dirname(realpath(__file__)), "csvs", "sparc4")
+        csv_folder = join(dirname(realpath(__file__)), "..", "csv", "sparc4")
         hdr_params = Header_Parameters(csv_folder)
         hdr = fits.Header(hdr_params.cards)
 
