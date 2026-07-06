@@ -8,7 +8,7 @@ from pathlib import Path
 import astropy.io.fits as fits
 import pandas as pd
 
-from python.utils import Header_Parameters
+from python.header_parameters import Header_Parameters
 
 
 class Header(ABC):
@@ -302,7 +302,7 @@ class Header(ABC):
             if kw not in self.how_to_fix_regex.keys():
                 self.new_json[kw] = ""
                 self._write_log_file(
-                    f"The method to fix this keyword was not found.", kw
+                    "The method to fix this keyword was not found.", kw
                 )
                 return
             new_value = self.how_to_fix_regex[kw](kw_value)

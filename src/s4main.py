@@ -1,7 +1,6 @@
-import array
 import json
 import traceback
-from os.path import dirname, join, realpath
+from array import array
 from pathlib import Path
 
 import astropy.io.fits as fits
@@ -29,7 +28,7 @@ def main(
     night_dir: str,
     file: str,
     data: array,
-    tuple_header_jsons: tuple[str],
+    tuple_header_jsons: tuple,
     log_file: str,
 ) -> str:
     error_json = {"status": False, "code": 0, "source": ""}
@@ -38,7 +37,7 @@ def main(
         data = np.asarray(data, dtype=np.uint16)
         file = Path(night_dir) / file
 
-        csv_folder = join(dirname(realpath(__file__)), "csv", "sparc4")
+        csv_folder = Path(__file__).parent / "csv" / "sparc4"
         hdr_params = Header_Parameters(csv_folder)
         hdr = fits.Header(hdr_params.cards)
 
