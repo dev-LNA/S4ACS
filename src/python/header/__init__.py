@@ -1,4 +1,4 @@
-from .header import (
+from .others import (
     CCD,
     ICS,
     S4GUI,
@@ -13,4 +13,3 @@ from .header import (
     iKon_L,
     iXon_Ultra,
 )
-from .utils import Header_Parameters

@@ -5,19 +5,19 @@ from pathlib import Path
 
 import astropy.io.fits as fits
 import numpy as np
-from header import (
+
+from python.header import (
     S4GUI,
     S4ICS,
     TCS,
     Focuser,
     General_SPARC4_KWs,
-    Header_Parameters,
     Weather_Station,
     iXon_Ultra,
 )
-
-from utils import (
+from python.utils import (
     SUB_SYSTEMS,
+    Header_Parameters,
     fix_image_orientation,
     fix_standard_keywords,
     verify_file_already_exists,
@@ -31,7 +31,7 @@ def main(night_dir, file, data, tuple_header_jsons, log_file) -> str:
         data = np.asarray(data, dtype=np.uint16)
         file = Path(night_dir) / file
 
-        csv_folder = join(dirname(realpath(__file__)), "..", "csv", "sparc4")
+        csv_folder = join(dirname(realpath(__file__)), "csv", "sparc4")
         hdr_params = Header_Parameters(csv_folder)
         hdr = fits.Header(hdr_params.cards)
 
