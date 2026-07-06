@@ -89,32 +89,38 @@
 				<Property Name="NI.DISK" Type="Bool">true</Property>
 			</Item>
 			<Item Name="ECP" Type="Folder">
-				<Item Name="General VIs" Type="Folder" URL="../LabVIEW/communication-manager/General VIs">
+				<Item Name="General VIs" Type="Folder" URL="../LabVIEW/ECP/General VIs">
 					<Property Name="NI.DISK" Type="Bool">true</Property>
 				</Item>
-				<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/Log File/CM_Log File.lvclass"/>
-				<Item Name="CM_RxTx.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/RxTx/CM_RxTx.lvclass"/>
-				<Item Name="Socket.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/Socket/Socket.lvclass"/>
-				<Item Name="socket PUB.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/socket PUB/socket PUB.lvclass"/>
-				<Item Name="socket REP.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/socket REP/socket REP.lvclass"/>
-				<Item Name="socket REQ.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/socket REQ/socket REQ.lvclass"/>
-				<Item Name="socket SUB.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/socket SUB/socket SUB.lvclass"/>
-				<Item Name="CM_State Machine.lvclass" Type="LVClass" URL="../LabVIEW/communication-manager/State Machine/CM_State Machine.lvclass"/>
+				<Item Name="CM_Log File.lvclass" Type="LVClass" URL="../LabVIEW/ECP/Log File/CM_Log File.lvclass"/>
+				<Item Name="CM_RxTx.lvclass" Type="LVClass" URL="../LabVIEW/ECP/RxTx/CM_RxTx.lvclass"/>
+				<Item Name="Socket.lvclass" Type="LVClass" URL="../LabVIEW/ECP/Socket/Socket.lvclass"/>
+				<Item Name="socket PUB.lvclass" Type="LVClass" URL="../LabVIEW/ECP/socket PUB/socket PUB.lvclass"/>
+				<Item Name="socket REP.lvclass" Type="LVClass" URL="../LabVIEW/ECP/socket REP/socket REP.lvclass"/>
+				<Item Name="socket REQ.lvclass" Type="LVClass" URL="../LabVIEW/ECP/socket REQ/socket REQ.lvclass"/>
+				<Item Name="socket SUB.lvclass" Type="LVClass" URL="../LabVIEW/ECP/socket SUB/socket SUB.lvclass"/>
+				<Item Name="CM_State Machine.lvclass" Type="LVClass" URL="../LabVIEW/ECP/State Machine/CM_State Machine.lvclass"/>
 			</Item>
-			<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
-			<Item Name="iKon-L.lvclass" Type="LVClass" URL="../LabVIEW/iKon-L/iKon-L.lvclass"/>
-			<Item Name="Ixon_Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Ixon_Ultra/Ixon_Ultra.lvclass"/>
+			<Item Name="SPARC4" Type="Folder">
+				<Item Name="Camera iXon Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Camera iXon Ultra/Camera iXon Ultra.lvclass"/>
+				<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../LabVIEW/Save SPARC4 image/Save SPARC4 image.lvclass"/>
+				<Item Name="Camera Simulated iXon Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iXon Ultra/Camera Simulated iXon Ultra.lvclass"/>
+				<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4_Channel/SPARC4_Channel.lvclass"/>
+			</Item>
+			<Item Name="ECHARPE" Type="Folder">
+				<Item Name="ECHARPE_Channel.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE_Channel/ECHARPE_Channel.lvclass"/>
+				<Item Name="Camera iKon L.lvclass" Type="LVClass" URL="../LabVIEW/Camera iKon L/Camera iKon L.lvclass"/>
+			</Item>
+			<Item Name="ABSTRACT" Type="Folder">
+				<Item Name="Save Image.lvclass" Type="LVClass" URL="../LabVIEW/Save Image/Save Image.lvclass"/>
+				<Item Name="Channel.lvclass" Type="LVClass" URL="../LabVIEW/Channel/Channel.lvclass"/>
+				<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../LabVIEW/Sim_CCD/Sim_CCD.lvclass"/>
+			</Item>
 			<Item Name="Log File.lvclass" Type="LVClass" URL="../LabVIEW/Log File/Log File.lvclass"/>
 			<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../LabVIEW/Python Toolkit/Python Toolkit.lvclass"/>
 			<Item Name="RxTx.lvclass" Type="LVClass" URL="../LabVIEW/RxTx/RxTx.lvclass"/>
-			<Item Name="Save Image.lvclass" Type="LVClass" URL="../LabVIEW/Save Image/Save Image.lvclass"/>
-			<Item Name="Save SPARC4 image.lvclass" Type="LVClass" URL="../LabVIEW/Save SPARC4 image/Save SPARC4 image.lvclass"/>
 			<Item Name="Server.lvclass" Type="LVClass" URL="../LabVIEW/Server/Server.lvclass"/>
-			<Item Name="Sim_CCD.lvclass" Type="LVClass" URL="../LabVIEW/Sim_CCD/Sim_CCD.lvclass"/>
-			<Item Name="Sim_Ixon_Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Sim_Ixon_Ultra/Sim_Ixon_Ultra.lvclass"/>
-			<Item Name="SPARC4_Channel.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4_Channel/SPARC4_Channel.lvclass"/>
 			<Item Name="State Machine.lvclass" Type="LVClass" URL="../LabVIEW/State Machine/State Machine.lvclass"/>
-			<Item Name="Channel.lvclass" Type="LVClass" URL="../LabVIEW/Channel/Channel.lvclass"/>
 		</Item>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
 		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
