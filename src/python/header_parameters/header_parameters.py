@@ -1,11 +1,9 @@
-from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 
-@dataclass
 class Header_Parameters:
     def __init__(self, csv_folder: str) -> None:
         self.csv_folder = Path(csv_folder)
@@ -24,18 +22,17 @@ class Header_Parameters:
         return
 
     def read_hdr_ctnt_csv(self) -> None:
-        csv_path = self.csv_folder / "header_content.csv"
-        self.hdr_cnt = pd.read_csv(csv_path, delimiter=";", keep_default_na=False)
+        self.hdr_cnt = pd.read_csv(
+            self.csv_folder / "header_content.csv", delimiter=";", keep_default_na=False
+        )
         return
 
     def get_gain_values(self) -> None:
-        csv_path = self.csv_folder / "preamp_gains.csv"
-        self.gain_values = pd.read_csv(csv_path)
+        self.gain_values = pd.read_csv(self.csv_folder / "preamp_gains.csv")
         return
 
     def get_read_noise_values(self) -> None:
-        csv_path = self.csv_folder / "read_noises.csv"
-        self.rd_values = pd.read_csv(csv_path)
+        self.rd_values = pd.read_csv(self.csv_folder / "read_noises.csv")
         return
 
     def get_keyword_types(self) -> None:
