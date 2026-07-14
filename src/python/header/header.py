@@ -2,12 +2,13 @@ import json
 import re
 from abc import ABC
 from datetime import datetime
-from os.path import join
 from pathlib import Path
 
 import astropy.io.fits as fits
 import pandas as pd
 
+from python import data_types
+from python.data_types import Keywords_Specifications
 from python.header_parameters import Header_Parameters
 
 
@@ -23,17 +24,7 @@ class Header(ABC):
         csv_folder: Path,
     ) -> None:
         self.header_keywords = None
-        self.to_int_kws = None
-        self.to_float_kws = None
-        self.to_bool_kws = None
-        self.to_bool_w_cond_kws = None
-        self.kws_in_dict = None
-        self.dict_w_kws = None
-        self.replace_comma_kws = None
-        self.empty_kws = None
-        self.write_any_val = None
-        self.write_predefined_val = None
-        self.regex_strings = None
+        self.empty_kws: dict | None = None
         self.new_json = None
         self.how_to_fix_regex = None
         self.regex_expressions = None
@@ -44,7 +35,9 @@ class Header(ABC):
         self.filename = json.loads(dict_header_jsons["CCD"])["FILENAME"]
 
         self.original_json = self._load_json()
-        self._read_kws_config()
+        self.kws_specs: Keywords_Specifications = Keywords_Specifications().load_data(
+            csv_folder / "keywords spec" / self.sub_system + ".csv"
+        )
 
         return
 
@@ -60,58 +53,6 @@ class Header(ABC):
                 + repr(e),
                 "",
             )
-
-    def _read_kws_config(self) -> None:
-        csv_file_path = join(
-            self.csv_folder, "keywords config", self.sub_system + ".csv"
-        )
-        kws_config = pd.read_csv(csv_file_path).fillna("")
-        self.header_keywords = kws_config["Header Keywords"].values
-        if "to bool" in kws_config.keys():
-            self.to_bool_kws = [
-                val for val in kws_config["to bool"].values if val != ""
-            ]
-        if "to int" in kws_config.keys():
-            self.to_int_kws = [val for val in kws_config["to int"].values if val != ""]
-        if "to float" in kws_config.keys():
-            self.to_float_kws = [
-                val for val in kws_config["to float"].values if val != ""
-            ]
-        if "replace comma" in kws_config.keys():
-            self.replace_comma_kws = [
-                val for val in kws_config["replace comma"].values if val != ""
-            ]
-        if "write any val" in kws_config.keys():
-            self.write_any_val = [
-                val for val in kws_config["write any val"].values if val != ""
-            ]
-        if "write predefined val" in kws_config.keys():
-            self.write_predefined_val = [
-                val for val in kws_config["write predefined val"].values if val != ""
-            ]
-        if "kws in dict" in kws_config.keys():
-            self.kws_in_dict = [
-                val for val in kws_config["kws in dict"].values if val != ""
-            ]
-        if "regex strings" in kws_config.keys():
-            self.regex_strings = [
-                val for val in kws_config["regex strings"].values if val != ""
-            ]
-        self.to_bool_w_cond_kws = self._get_bool_w_cond_kws(kws_config)
-
-        return
-
-    @staticmethod
-    def _get_bool_w_cond_kws(kws_config) -> dict:
-        if "to bool w cond" in kws_config.keys():
-            return {
-                kw: condition.split(";")
-                for (kw, condition) in zip(
-                    kws_config["to bool w cond"], kws_config["to bool condition"]
-                )
-                if kw != ""
-            }
-        return
 
     def extract_info(self) -> None:
         new_json = {}
@@ -220,36 +161,36 @@ class Header(ABC):
     # ----------------------------------------------------------------------------------
 
     def _convert_to_float(self) -> None:
-        if self.to_float_kws is None:
+        if self.kws_specs.to_float is None:
             return
-        for kw in self.to_float_kws:
+        for kw in self.kws_specs.to_float:
             try:
                 self.new_json[kw] = float(self.new_json[kw])
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_int(self) -> None:
-        if self.to_int_kws is None:
+        if self.kws_specs.to_int is None:
             return
-        for kw in self.to_int_kws:
+        for kw in self.kws_specs.to_int:
             try:
                 self.new_json[kw] = int(self.new_json[kw])
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_boolean(self) -> None:
-        if self.to_bool_kws is None:
+        if self.kws_specs.to_bool is None:
             return
-        for kw in self.to_bool_kws:
+        for kw in self.kws_specs.to_bool:
             try:
                 self.new_json[kw] = bool(self.new_json[kw])
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_bool_with_condition(self) -> None:
-        if self.to_bool_w_cond_kws is None:
+        if self.kws_specs.to_bool_w_cond is None:
             return
-        for kw, (off, on) in self.to_bool_w_cond_kws.items():
+        for kw, (off, on) in self.kws_specs.to_bool_w_cond.items():
             try:
                 val = self.new_json[kw]
                 if val == off:
@@ -262,9 +203,9 @@ class Header(ABC):
                 self._write_log_file(repr(e), kw)
 
     def _replace_comma(self) -> None:
-        if self.replace_comma_kws is None:
+        if self.kws_specs.replace_comma is None:
             return
-        for kw in self.replace_comma_kws:
+        for kw in self.kws_specs.replace_comma:
             try:
                 self._search_unwanted_kw(kw, ",")
                 self.new_json[kw] = self.new_json[kw].replace(",", ".")
@@ -272,9 +213,9 @@ class Header(ABC):
                 self._write_log_file(repr(e), kw)
 
     def _verify_regex(self) -> None:
-        if self.regex_strings is None:
+        if self.kws_specs.regex is None:
             return
-        for kw in self.regex_strings:
+        for kw in self.kws_specs.regex:
             try:
                 kw_value = self.new_json[kw]
                 regex_expr, ex_val = self.regex_expressions[kw]
@@ -325,18 +266,18 @@ class Header(ABC):
                 self._write_log_file(repr(e), kw)
 
     def _write_any_value(self) -> None:
-        if self.write_any_val is None:
+        if self.kws_specs.write_any_val is None:
             return
-        for kw in self.write_any_val:
+        for kw in self.kws_specs.write_any_val:
             try:
                 self.new_json[kw] = self.new_json[kw]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
     def _write_predefined_value(self) -> None:
-        if self.write_predefined_val is None:
+        if self.kws_specs.write_predefined_vals is None:
             return
-        for kw in self.write_predefined_val:
+        for kw in self.kws_specs.write_predefined_vals:
             try:
                 _list = self.hdr_params.allowed_kw_values[kw]
                 val = self.new_json[kw]
@@ -350,9 +291,9 @@ class Header(ABC):
                 self._write_log_file(repr(e), kw)
 
     def _kw_in_dict(self) -> None:
-        if self.kws_in_dict is None:
+        if self.kws_specs.kws_in_dict is None:
             return
-        for kw in self.kws_in_dict:
+        for kw in self.kws_specs.kws_in_dict:
             try:
                 val = self.new_json[kw]
                 self.new_json[kw] = self.dict_w_kws[kw][val]

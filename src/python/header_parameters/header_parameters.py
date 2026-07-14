@@ -13,8 +13,6 @@ class Header_Parameters:
         self.cards = [
             (kw, "", comment) for (kw, comment) in zip(self.keywords, self.comments)
         ]
-        self.get_gain_values()
-        self.get_read_noise_values()
         self.get_expected_kw_names()
         self.get_keyword_types()
         self.get_allowed_kw_vals()
@@ -25,14 +23,6 @@ class Header_Parameters:
         self.hdr_cnt = pd.read_csv(
             self.csv_folder / "header_content.csv", delimiter=";", keep_default_na=False
         )
-        return
-
-    def get_gain_values(self) -> None:
-        self.gain_values = pd.read_csv(self.csv_folder / "preamp_gains.csv")
-        return
-
-    def get_read_noise_values(self) -> None:
-        self.rd_values = pd.read_csv(self.csv_folder / "read_noises.csv")
         return
 
     def get_keyword_types(self) -> None:
@@ -64,3 +54,13 @@ class Header_Parameters:
                 allowed_kw_values[kw] = val
         self.allowed_kw_values = allowed_kw_values
         return
+
+
+def get_gain_values(self) -> None:
+    self.gain_values = pd.read_csv(self.csv_folder / "preamp_gains.csv")
+    return
+
+
+def get_read_noise_values(self) -> None:
+    self.rd_values = pd.read_csv(self.csv_folder / "read_noises.csv")
+    return
