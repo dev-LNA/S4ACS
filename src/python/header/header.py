@@ -5,9 +5,7 @@ from datetime import datetime
 from pathlib import Path
 
 import astropy.io.fits as fits
-import pandas as pd
 
-from python import data_types
 from python.data_types import Keywords_Specifications
 from python.header_parameters import Header_Parameters
 

@@ -10,9 +10,6 @@ class Header_Parameters:
         self.read_hdr_ctnt_csv()
         self.keywords = [kw for kw in self.hdr_cnt["Keyword"]]
         self.comments = [comment for comment in self.hdr_cnt["Comment"]]
-        self.cards = [
-            (kw, "", comment) for (kw, comment) in zip(self.keywords, self.comments)
-        ]
         self.get_expected_kw_names()
         self.get_keyword_types()
         self.get_allowed_kw_vals()
@@ -54,6 +51,12 @@ class Header_Parameters:
                 allowed_kw_values[kw] = val
         self.allowed_kw_values = allowed_kw_values
         return
+
+    @property
+    def cards(self) -> list:
+        return [
+            (kw, "", comment) for (kw, comment) in zip(self.keywords, self.comments)
+        ]
 
 
 def get_gain_values(self) -> None:
