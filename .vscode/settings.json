@@ -3,7 +3,7 @@
         "titleBar.activeBackground": "#b10e0e",
         "titleBar.inactiveBackground": "#b10e0e",
     },
-    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python",
+    // "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python",
     "python.analysis.autoImportCompletions": true,
     // Test settings    
     "python.testing.autoTestDiscoverOnSaveEnabled": true,

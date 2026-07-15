@@ -238,3 +238,5 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+#my stuff
+.vscode

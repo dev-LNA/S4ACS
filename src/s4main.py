@@ -15,7 +15,7 @@ from python.header import (
     Weather_Station,
     iXon_Ultra,
 )
-from python.header_parameters import Header_Parameters
+from python.header_content import Header_Content
 from python.utils import (
     SUB_SYSTEMS,
     fix_image_orientation,
@@ -38,7 +38,7 @@ def main(
         file = Path(night_dir) / file
 
         csv_folder = Path(__file__).parent / "csv" / "sparc4"
-        hdr_params = Header_Parameters(csv_folder)
+        hdr_params = Header_Content(csv_folder)
         hdr = fits.Header(hdr_params.cards)
 
         for cls in [

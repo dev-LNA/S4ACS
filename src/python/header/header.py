@@ -6,8 +6,8 @@ from pathlib import Path
 
 import astropy.io.fits as fits
 
-from python.data_types import Keywords_Specifications
-from python.header_parameters import Header_Parameters
+from python.header_content import Header_Content
+from python.keywords_specs import Keywords_Specifications
 
 
 class Header(ABC):
@@ -18,7 +18,7 @@ class Header(ABC):
         self,
         dict_header_jsons: dict,
         log_file: str,
-        hdr_params: Header_Parameters,
+        hdr_cnt: Header_Content,
         csv_folder: Path,
     ) -> None:
         self.header_keywords = None
@@ -27,7 +27,7 @@ class Header(ABC):
         self.how_to_fix_regex = None
         self.regex_expressions = None
         self.log_file = log_file
-        self.hdr_params = hdr_params
+        self.hdr_cnt = hdr_cnt
         self.json_string = dict_header_jsons[self.sub_system]
         self.csv_folder = csv_folder
         self.filename = json.loads(dict_header_jsons["CCD"])["FILENAME"]
@@ -57,7 +57,7 @@ class Header(ABC):
         for hdr_kw in self.header_keywords:
             try:
                 json_kw = hdr_kw
-                expected_name = self.hdr_params.expected_kw_names[hdr_kw]
+                expected_name = self.hdr_cnt.expected_kw_names[hdr_kw]
                 if expected_name != "":
                     json_kw = expected_name
                 new_json[hdr_kw] = self.original_json[json_kw]
@@ -74,7 +74,7 @@ class Header(ABC):
         for hdr_kw in self.header_keywords:
             try:
                 val = self.new_json[hdr_kw]
-                _type = self.hdr_params.keyword_types[hdr_kw]
+                _type = self.hdr_cnt.keyword_types[hdr_kw]
                 if not isinstance(val, self.kw_types[_type]):
                     self.new_json[hdr_kw] = ""
                     self._write_log_file(
@@ -87,7 +87,7 @@ class Header(ABC):
     def _check_allowed_values(self) -> None:
         for hdr_kw in self.header_keywords:
             try:
-                _type = self.hdr_params.keyword_types[hdr_kw]
+                _type = self.hdr_cnt.keyword_types[hdr_kw]
                 if _type in ["integer", "float"]:
                     self._check_number_in_range(hdr_kw)
                 elif _type == "string":
@@ -99,7 +99,7 @@ class Header(ABC):
 
     def _check_number_in_range(self, hdr_kw) -> None:
         val = self.new_json[hdr_kw]
-        a_values = self.hdr_params.allowed_kw_values[hdr_kw]
+        a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         min, *max = a_values
         if not min <= val <= max[-1]:
             self.new_json[hdr_kw] = ""
@@ -111,7 +111,7 @@ class Header(ABC):
 
     def _check_string_in_allowed_values(self, hdr_kw) -> None:
         val = self.new_json[hdr_kw]
-        a_values = self.hdr_params.allowed_kw_values[hdr_kw]
+        a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         if val not in a_values and a_values != "":
             self.new_json[hdr_kw] = ""
             self._write_log_file(
@@ -277,7 +277,7 @@ class Header(ABC):
             return
         for kw in self.kws_specs.write_predefined_vals:
             try:
-                _list = self.hdr_params.allowed_kw_values[kw]
+                _list = self.hdr_cnt.allowed_kw_values[kw]
                 val = self.new_json[kw]
                 if val not in _list:
                     self._write_log_file(

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-class Header_Parameters:
+class Header_Content:
     def __init__(self, csv_folder: str) -> None:
         self.csv_folder = Path(csv_folder)
         self.read_hdr_ctnt_csv()
