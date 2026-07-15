@@ -6,10 +6,6 @@ class General_KWs(Header):
 
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
-        self.regex_expressions = {
-            "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
-            "SDKVRSN": (r"^\d[.]\d{3}[.]\d{5}[.]\d$", "0.000.00000.0"),
-        }
         # O pandas trata tudo como uma string
         self.empty_kws = {
             "NAXIS": 2,
@@ -32,10 +28,7 @@ class General_KWs(Header):
 class General_SPARC4_KWs(General_KWs):
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
-        self.regex_expressions["FILENAME"] = (
-            r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
-            "YYYYMMDD_s4c1_000000.fits",
-        )
+
         self.empty_kws["INSTRUME"] = "SPARC4"
         self.empty_kws["TELESCOP"] = "PE160"
 
@@ -47,10 +40,7 @@ class General_SPARC4_KWs(General_KWs):
 class General_ECHARPE_KWs(General_KWs):
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
-        self.regex_expressions["FILENAME"] = (
-            r"\d{8}_ECH_(BLUE|RED)_\d{6}[ozdfts](_[a-z0-9]+)?\.fits",
-            "YYYYMMDD_ECH_BLUE_000000o.fits",
-        )
+
         self.empty_kws["TELESCOP"] = "PE160"
         self.empty_kws["INSTRUME"] = "ECHARPE"
 

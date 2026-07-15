@@ -4,13 +4,6 @@ from .header import Header
 class S4GUI(Header):
     name = "GUI"
 
-    def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
-        super().__init__(log_file, hdr_cnt, csv_folder)
-        self.regex_expressions = {
-            "GUIVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
-        }
-        return
-
     def _write_COMMENT(self) -> None:
         kw = "COMMENT"
         try:

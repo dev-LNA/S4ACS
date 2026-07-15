@@ -9,7 +9,6 @@ class ICS(Header):
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
-        self.regex_expressions = {"ICSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
         return
 
     @staticmethod
@@ -18,23 +17,6 @@ class ICS(Header):
 
 
 class S4ICS(ICS):
-    def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
-        super().__init__(log_file, hdr_cnt, csv_folder)
-        self.dict_w_kws = {
-            "WPSEL": {"OFF": "None", "L/2": "L2", "L/4": "L4"},
-            "CALW": {
-                "POLARIZER": "POLARIZER",
-                "DEPOLARIZER": "DEPOLARIZER",
-                "CLEAR": "CLEAR",
-                "OFF": "CLEAR",
-                "PINHOLE": "SPARE",
-                "SPARE": "SPARE",
-                "SHUTTER": "CLOSED",
-                "CLOSED": "CLOSED",
-            },
-        }
-        return
-
     def write_header_all_apps(self, header_data: dict) -> None:
         super().write_header_all_apps(header_data)
         gui_header_data = header_data["GUI"]

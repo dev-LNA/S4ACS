@@ -22,22 +22,24 @@ class Header(ABC):
         csv_folder: Path,
     ) -> None:
 
+        self.kws_specs: Keywords_Specifications = Keywords_Specifications(
+            csv_folder, self.name
+        )
+        self.kws_specs.load_data()
         self.empty_kws: dict
-        self.kws_specs: Keywords_Specifications = Keywords_Specifications()
-        self.kws_specs.load_data(csv_folder / "keywords spec" / f"{self.name}.csv")
+        self.dict_w_kws: dict
 
         self.how_to_fix_regex: dict
-        self.regex_expressions: dict[str, tuple[str, str]]
         self.log_file = log_file
         self.file_name: str
         self.hdr_cnt = hdr_cnt
-        self.dict_w_kws: dict
 
         self.header_all_apps: dict
         self.original_string: str | None = None
         self.original_hdr_data: dict | None = None
         self.extracted_data: dict = {}
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
+        self.checked_data: dict = {k: "" for k in self.kws_specs.keywords}
 
         return
 
@@ -168,7 +170,7 @@ class Header(ABC):
         for kw in self.kws_specs.regex:
             try:
                 kw_value = self.extracted_data[kw]
-                regex_expr, ex_val = self.regex_expressions[kw]
+                regex_expr, ex_val = self.kws_specs.regex_expressions[kw]
                 if re.match(regex_expr, kw_value) is not None:
                     continue
                 self._write_log_file(
@@ -188,7 +190,7 @@ class Header(ABC):
     def _fix_regex_keyword(self, kw) -> None:
         try:
             kw_value = self.extracted_data[kw]
-            regex_expr, _ = self.regex_expressions[kw]
+            regex_expr, _ = self.kws_specs.regex_expressions[kw]
             if kw not in self.how_to_fix_regex.keys():
                 self._write_log_file(
                     "The method to fix this keyword was not found.", kw
@@ -246,7 +248,7 @@ class Header(ABC):
         for kw in self.kws_specs.kws_in_dict:
             try:
                 val = self.extracted_data[kw]
-                self.fixed_data[kw] = self.kws_specs.kws_in_dict[kw][val]
+                self.fixed_data[kw] = self.dict_w_kws[kw][val]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -266,14 +268,15 @@ class Header(ABC):
     def _check_type(self) -> None:
         for hdr_kw in self.kws_specs.keywords:
             try:
-                val = self.extracted_data[hdr_kw]
+                val = self.fixed_data[hdr_kw]
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
                 if not isinstance(val, self.kw_types[_type]):
-                    self.extracted_data[hdr_kw] = ""
                     self._write_log_file(
                         f'Keyword value "{val}" is not an instance of {repr(_type)}.',
                         hdr_kw,
                     )
+                    return
+                self.checked_data[hdr_kw] = val
             except Exception as e:
                 self._write_log_file(repr(e), hdr_kw)
 
@@ -291,32 +294,34 @@ class Header(ABC):
         return
 
     def _check_number_in_range(self, hdr_kw) -> None:
-        val = self.extracted_data[hdr_kw]
+        val = self.fixed_data[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         min, *max = a_values
         if not min <= val <= max[-1]:
-            self.extracted_data[hdr_kw] = ""
             self._write_log_file(
                 f'The provided keyword value is out of range {a_values}. "{val}" was found.',
                 hdr_kw,
             )
+            return
+        self.checked_data[hdr_kw] = val
         return
 
     def _check_string_in_allowed_values(self, hdr_kw) -> None:
-        val = self.extracted_data[hdr_kw]
+        val = self.fixed_data[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         if val not in a_values and a_values != "":
-            self.extracted_data[hdr_kw] = ""
             self._write_log_file(
                 f'The expected values for this keyword are {a_values}. "{val}" was found.',
                 hdr_kw,
             )
+            return
+        self.checked_data[hdr_kw] = val
         return
 
     def fill_image_header(self, hdr: fits.Header) -> fits.Header:
-        for kw in self.fixed_data:
+        for kw, val in self.checked_data.items():
             try:
-                hdr[kw] = self.fixed_data[kw]
+                hdr[kw] = val
             except Exception as e:
                 self._write_log_file(repr(e), kw)
         return hdr

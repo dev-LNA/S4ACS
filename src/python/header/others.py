@@ -51,11 +51,6 @@ class TCS(Header):
         self.how_to_fix_regex = {
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
         }
-        self.regex_expressions = {
-            "RA": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d{2}", "HH:MM:SS.ss"),
-            "DEC": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d{2}", "HH:MM:SS.ss"),
-            "TCSHA": (r"[\+-]?\d{2}:\d{2}:\d{2}\.\d{2}", "HH:MM:SS.ss"),
-        }
         self.obstype: str
 
     def write_header_all_apps(self, header_data: dict) -> None:
@@ -126,8 +121,6 @@ class Header_Tester(Header):
 
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
-        self.dict_w_kws = {"VSHIFT": [0.6, 1.13, 2.2, 4.33]}
-        self.regex_expressions = {"GUIVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0")}
         self.how_to_fix_regex = {"GUIVRSN": self._fix_soft_version}
         self.empty_kws = {"BITPIX": 16}
 

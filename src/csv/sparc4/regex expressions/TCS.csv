@@ -1,0 +1,4 @@
+keyword,expression,example
+RA,"[\\+-]?\\d{2}:\\d{2}:\\d{2}\\.\\d{2}","HH:MM:SS.ss"
+DEC,"[\\+-]?\\d{2}:\\d{2}:\\d{2}\\.\\d{2}","HH:MM:SS.ss"
+TCSHA,"[\\+-]?\\d{2}:\\d{2}:\\d{2}\\.\\d{2}","HH:MM:SS.ss"
