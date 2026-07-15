@@ -1,4 +1,4 @@
-Header Keywords,to int,to float,to bool w cond,to bool condition,regex strings,kws in dict,write predefined val
+Header Keywords,to int,to float,to bool w cond,to bool condition,regex,kws in dict,predefined val
 WPANG,WPPOS,GMIR,WPROMODE,SIMULATED;ACTIVE,ICSVRSN,WPSEL,WPROSTAT
 WPPOS,,GFOC,WPSEMODE,SIMULATED;ACTIVE,,CALW,WPSESTAT
 WPROMODE,,WPANG,ANMODE,SIMULATED;ACTIVE,,,ANSTAT

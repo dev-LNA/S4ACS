@@ -1,15 +1,10 @@
+from .camera import iKon_L, iXon_Ultra
+from .general_kws import General_ECHARPE_KWs, General_SPARC4_KWs
+from .gui import S4GUI
+from .ics import S4ICS
 from .others import (
-    CCD,
-    ICS,
-    S4GUI,
-    S4ICS,
     TCS,
     Focuser,
-    General_ECHARPE_KWs,
-    General_KWs,
-    General_SPARC4_KWs,
     Header_Tester,
     Weather_Station,
-    iKon_L,
-    iXon_Ultra,
 )

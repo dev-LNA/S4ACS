@@ -5,7 +5,7 @@ import pandas as pd
 
 
 class Header_Content:
-    def __init__(self, csv_folder: str) -> None:
+    def __init__(self, csv_folder: Path) -> None:
         self.csv_folder = Path(csv_folder)
         self.read_hdr_ctnt_csv()
         self.get_expected_kw_names()
@@ -57,13 +57,3 @@ class Header_Content:
         return [
             (kw, "", comment) for (kw, comment) in zip(self.keywords, self.comments)
         ]
-
-
-def get_gain_values(self) -> None:
-    self.gain_values = pd.read_csv(self.csv_folder / "preamp_gains.csv")
-    return
-
-
-def get_read_noise_values(self) -> None:
-    self.rd_values = pd.read_csv(self.csv_folder / "read_noises.csv")
-    return

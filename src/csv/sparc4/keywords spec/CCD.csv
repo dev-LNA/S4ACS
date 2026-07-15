@@ -1,4 +1,4 @@
-Header Keywords,to int,to float,to bool,kws in dict,write predefined val,regex strings
+Header Keywords,to int,to float,to bool,kws in dict,predefined val,regex
 FRAMEIND,VBIN,EXPTIME,COOLER,TRIGGER,TEMPST,DATE-OBS
 CCDTEMP,HBIN,,FRAMETRF,ACQMODE,CCDSERN,UTTIME
 TEMPST,FINALCOL,,,SHUTTER,,UTDATE

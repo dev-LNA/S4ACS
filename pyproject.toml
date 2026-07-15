@@ -8,6 +8,7 @@ dependencies = [
     "astropy>=7.2.0",
     "numpy>=2.4.2",
     "pandas>=3.0.1",
+    "pydantic>=2.13.4",
     "pytest>=9.0.3",
     "ruff>=0.15.6",
     "taskipy>=1.14.1",

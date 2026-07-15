@@ -1,4 +1,4 @@
-Header Keywords,to int,to bool,regex strings
+Header Keywords,to int,to bool,regex
 FILENAME,NCYCLES,ACSMODE,ACSVRSN
 NCYCLES,CHANNEL,ACQERROR,FILENAME
 CYCLIND,CYCLIND,,SDKVRSN

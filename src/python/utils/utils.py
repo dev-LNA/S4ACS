@@ -2,6 +2,7 @@
 
 import os
 from datetime import datetime, timezone
+from pathlib import Path
 
 import astropy.io.fits as fits
 import numpy as np
@@ -65,17 +66,17 @@ def fix_image_orientation(channel: int, em_mode: str, data: np.ndarray) -> np.nd
     return rotate_image(data, invert_x, invert_y, nrot)
 
 
-def verify_file_already_exists(file: str) -> str:
-    if os.path.isfile(file):
+def verify_file_already_exists(file: Path) -> Path:
+    if file.is_file:
         now = datetime.now(timezone.utc)
         date_time = now.strftime("%Y%m%dT%H%M%S%f")
-        image_name = file.split("_")
+        image_name = file.name.split("_")
         img_index = image_name.pop()
-        file = ""
+        new_file = ""
         for value in image_name:
-            file += value + "_"
-        file += f"{date_time[:-4]}" + "_" + img_index
-    return file
+            new_file += value + "_"
+        new_file += f"{date_time[:-4]}" + "_" + img_index
+    return Path(file)
 
 
 def write_error_log(message: str, log_file: str) -> None:
