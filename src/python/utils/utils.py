@@ -125,21 +125,21 @@ regex_expressions = {
         "UTTIME": (r"\d{2}:\d{2}:\d{2}\.\d{6}", "HH:MM:SS.ssssss"),
         "UTDATE": (r"\d{4}-\d{2}-\d{2}", "YYYY-MM-DD"),
     },
-    "GENERAL_KWS": {
+    "S4_GENERAL_KWS": {
         "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
         "SDKVRSN": (r"^\d[.]\d{3}[.]\d{5}[.]\d$", "0.000.00000.0"),
-    },
-    "S4_GENERAL_KWS": {
         "FILENAME": (
             r"\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits",
             "YYYYMMDD_s4c1_000000.fits",
-        )
+        ),
     },
     "ECH_GENERAL_KWS": {
+        "ACSVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
+        "SDKVRSN": (r"^\d[.]\d{3}[.]\d{5}[.]\d$", "0.000.00000.0"),
         "FILENAME": (
             r"\d{8}_ECH_(BLUE|RED)_\d{6}[ozdfts](_[a-z0-9]+)?\.fits",
             "YYYYMMDD_ECH_BLUE_000000o.fits",
-        )
+        ),
     },
     "S4GUI": {
         "GUIVRSN": (r"v\d+\.\d+\.\d+", "v0.0.0"),
@@ -189,6 +189,41 @@ keywords_in_dict = {
 }
 
 # --------------------------------------------------------------------------------------------------------------------------
+
+empty_keywords = {
+    "S4_GENERAL_KWS": {
+        "NAXIS": 2,
+        "OBSLONG": -45.5825,
+        "OBSLAT": -22.534,
+        "OBSALT": 1864.0,
+        "EQUINOX": 2000.0,
+        "SIMPLE": True,
+        "BITPIX": 16,
+        "BZERO": 1,
+        "BSCALE": 32768,
+        "SITEID": "OPD",
+        "INSTRUME": "SPARC4",
+        "TELESCOP": "PE160",
+    },
+    "ECH_GENERAL_KWS": {
+        "NAXIS": 2,
+        "OBSLONG": -45.5825,
+        "OBSLAT": -22.534,
+        "OBSALT": 1864.0,
+        "EQUINOX": 2000.0,
+        "SIMPLE": True,
+        "BITPIX": 16,
+        "BZERO": 1,
+        "BSCALE": 32768,
+        "SITEID": "OPD",
+        "INSTRUME": "ECHARPE",
+        "TELESCOP": "PE160",
+    },
+    "TESTER": {"BITPIX": 16},
+}
+
+# --------------------------------------------------------------------------------------------------------------------------
+
 
 tcs_json = {
     "broker": "TCSPD160",

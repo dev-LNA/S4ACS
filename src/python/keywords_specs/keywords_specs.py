@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -11,10 +12,16 @@ class Keywords_Specifications:
         self.replace_comma: list | None = None
         self.any_val: list | None = None
         self.predefined_vals: list | None = None
+
         self.kws_in_dict: list | None = None
         self.dict_w_kws: dict[str, dict]
+
+        self.empty_kws: list | None = None
+        self.empty_kws_vals: dict[str, str | int | float]
+
         self.regex: list | None = None
         self.regex_expressions: dict[str, tuple[str, str]]
+
         self.to_bool_w_cond: dict | None = None
         self.csv_folder = csv_folder
         self.app_name = app_name
@@ -56,6 +63,8 @@ class Keywords_Specifications:
 
         self._get_bool_w_cond_kws()
         self._get_regex_keywords()
+        self._get_keywords_in_dict()
+        self._get_empty_keywords()
 
     def _get_bool_w_cond_kws(self) -> dict | None:
         if "to bool w cond" in self.kws_specs.keys():
@@ -90,9 +99,16 @@ class Keywords_Specifications:
             df = pd.read_csv(
                 self.csv_folder / "keywords in dict" / f"{self.app_name}.csv", sep=";"
             )
-            self.dict_w_kws = (
-                df
-                .set_index("keyword")[["expression", "example"]]
-                .apply(tuple, axis=1)
-                .to_dict()
-            )  # type: ignore
+            df["dict_parsed"] = df["dict"].apply(json.loads)
+            self.dict_w_kws = dict(zip(df["keywords"], df["dict_parsed"]))
+
+    def _get_empty_keywords(self) -> None:
+        if "empty keywords" in self.kws_specs.keys():
+            self.kws_in_dict = [
+                val for val in self.kws_specs["empty keywords"].values if val != ""
+            ]
+            df = pd.read_csv(
+                self.csv_folder / "empty keywords" / f"{self.app_name}.csv"
+            )
+            df["values_parsed"] = df["values"].apply(json.loads)
+            self.empty_kws_vals = dict(zip(df["keywords"], df["values_parsed"]))

@@ -26,8 +26,6 @@ class Header(ABC):
             csv_folder, self.name
         )
         self.kws_specs.load_data()
-        self.empty_kws: dict
-        self.dict_w_kws: dict
 
         self.how_to_fix_regex: dict
         self.log_file = log_file
@@ -208,9 +206,9 @@ class Header(ABC):
         return
 
     def _replace_empty_kws(self) -> None:
-        if self.empty_kws is None:
+        if self.kws_specs.empty_kws is None:
             return
-        for kw, val in self.empty_kws.items():
+        for kw, val in self.kws_specs.empty_kws_vals.items():
             try:
                 self.fixed_data[kw] = val
             except Exception as e:
@@ -245,10 +243,10 @@ class Header(ABC):
     def _kw_in_dict(self) -> None:
         if self.kws_specs.kws_in_dict is None:
             return
-        for kw in self.kws_specs.kws_in_dict:
+        for kw, val in self.kws_specs.dict_w_kws.items():
             try:
-                val = self.extracted_data[kw]
-                self.fixed_data[kw] = self.dict_w_kws[kw][val]
+                data = self.extracted_data[kw]
+                self.fixed_data[kw] = val[data]
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
