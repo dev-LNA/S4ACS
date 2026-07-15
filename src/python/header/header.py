@@ -21,7 +21,6 @@ class Header(ABC):
         hdr_cnt: Header_Content,
         csv_folder: Path,
     ) -> None:
-        self.header_keywords = None
         self.empty_kws: dict | None = None
         self.new_json = None
         self.how_to_fix_regex = None
@@ -33,8 +32,9 @@ class Header(ABC):
         self.filename = json.loads(dict_header_jsons["CCD"])["FILENAME"]
 
         self.original_json = self._load_json()
-        self.kws_specs: Keywords_Specifications = Keywords_Specifications().load_data(
-            csv_folder / "keywords spec" / self.sub_system + ".csv"
+        self.kws_specs: Keywords_Specifications = Keywords_Specifications()
+        self.kws_specs.load_data(
+            csv_folder / "keywords spec" / f"{self.sub_system}.csv"
         )
 
         return
@@ -54,7 +54,7 @@ class Header(ABC):
 
     def extract_info(self) -> None:
         new_json = {}
-        for hdr_kw in self.header_keywords:
+        for hdr_kw in self.kws_specs.keywords:
             try:
                 json_kw = hdr_kw
                 expected_name = self.hdr_cnt.expected_kw_names[hdr_kw]
@@ -71,7 +71,7 @@ class Header(ABC):
         return
 
     def _check_type(self) -> None:
-        for hdr_kw in self.header_keywords:
+        for hdr_kw in self.kws_specs.keywords:
             try:
                 val = self.new_json[hdr_kw]
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
@@ -85,7 +85,7 @@ class Header(ABC):
                 self._write_log_file(repr(e), hdr_kw)
 
     def _check_allowed_values(self) -> None:
-        for hdr_kw in self.header_keywords:
+        for hdr_kw in self.kws_specs.keywords:
             try:
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
                 if _type in ["integer", "float"]:

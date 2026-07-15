@@ -7,7 +7,12 @@ import astropy.io.fits as fits
 import numpy as np
 
 
-def rotate_image(img_data, invert_x=False, invert_y=False, nrot90deg=0):
+def rotate_image(
+    img_data: np.ndarray,
+    invert_x: bool = False,
+    invert_y: bool = False,
+    nrot90deg: int = 0,
+) -> np.ndarray:
     """Tool to fix image orientation of an image array.
 
     Parameters
@@ -36,13 +41,13 @@ def rotate_image(img_data, invert_x=False, invert_y=False, nrot90deg=0):
     return img_data
 
 
-def format_string(string):
+def format_string(string: str) -> str:
     string = str(string)[2:-1]
     return string
 
 
-def fix_image_orientation(channel, em_mode, data):
-    setup = {
+def fix_image_orientation(channel: int, em_mode: str, data: np.ndarray) -> np.ndarray:
+    setup: dict = {
         "Conventional": {
             1: [False, True, 2],
             2: [False, False, 0],
@@ -60,7 +65,7 @@ def fix_image_orientation(channel, em_mode, data):
     return rotate_image(data, invert_x, invert_y, nrot)
 
 
-def verify_file_already_exists(file):
+def verify_file_already_exists(file: str) -> str:
     if os.path.isfile(file):
         now = datetime.now(timezone.utc)
         date_time = now.strftime("%Y%m%dT%H%M%S%f")
@@ -73,7 +78,7 @@ def verify_file_already_exists(file):
     return file
 
 
-def write_error_log(message, log_file):
+def write_error_log(message: str, log_file: str) -> None:
     with open(log_file, "a") as file:
         now = str(datetime.now())
         file.write(now + " - " + message + "\n")

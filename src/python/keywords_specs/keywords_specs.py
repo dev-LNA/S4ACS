@@ -18,7 +18,7 @@ class Keywords_Specifications:
 
     def load_data(self, csv_file: Path) -> None:
         kws_config = pd.read_csv(csv_file).fillna("")
-        self.header_keywords = kws_config["Header Keywords"].values
+        self.keywords = kws_config["Header Keywords"].values
 
         if "to bool" in kws_config.keys():
             self.to_bool = [val for val in kws_config["to bool"].values if val != ""]
@@ -55,7 +55,7 @@ class Keywords_Specifications:
         self.to_bool_w_cond = self._get_bool_w_cond_kws(kws_config)
 
     @staticmethod
-    def _get_bool_w_cond_kws(kws_config: pd.DataFrame) -> dict:
+    def _get_bool_w_cond_kws(kws_config: pd.DataFrame) -> dict | None:
         if "to bool w cond" in kws_config.keys():
             return {
                 kw: condition.split(";")

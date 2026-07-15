@@ -8,8 +8,6 @@ class Header_Content:
     def __init__(self, csv_folder: str) -> None:
         self.csv_folder = Path(csv_folder)
         self.read_hdr_ctnt_csv()
-        self.keywords = [kw for kw in self.hdr_cnt["Keyword"]]
-        self.comments = [comment for comment in self.hdr_cnt["Comment"]]
         self.get_expected_kw_names()
         self.get_keyword_types()
         self.get_allowed_kw_vals()
@@ -20,6 +18,8 @@ class Header_Content:
         self.hdr_cnt = pd.read_csv(
             self.csv_folder / "header_content.csv", delimiter=";", keep_default_na=False
         )
+        self.keywords = [kw for kw in self.hdr_cnt["Keyword"]]
+        self.comments = [comment for comment in self.hdr_cnt["Comment"]]
         return
 
     def get_keyword_types(self) -> None:
