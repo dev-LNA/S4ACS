@@ -23,12 +23,16 @@ class Keywords_Specifications:
         self.regex_expressions: dict[str, tuple[str, str]]
 
         self.to_bool_w_cond: dict | None = None
-        self.csv_folder = csv_folder
+        self._csv_folder = csv_folder
         self.app_name = app_name
         self.kws_specs = pd.read_csv(
-            self.csv_folder / "keywords spec" / f"{self.app_name}.csv"
+            self._csv_folder / "keywords spec" / f"{self.app_name}.csv"
         ).fillna("")
         return
+
+    @property
+    def csv_folder(self) -> Path:
+        return self._csv_folder
 
     def load_data(self) -> None:
 
@@ -82,7 +86,7 @@ class Keywords_Specifications:
         if "regex" in self.kws_specs.keys():
             self.regex = [val for val in self.kws_specs["regex"].values if val != ""]
             df = pd.read_csv(
-                self.csv_folder / "regex expressions" / f"{self.app_name}.csv"
+                self._csv_folder / "regex expressions" / f"{self.app_name}.csv"
             )
             self.regex_expressions = (
                 df
@@ -97,7 +101,7 @@ class Keywords_Specifications:
                 val for val in self.kws_specs["kws in dict"].values if val != ""
             ]
             df = pd.read_csv(
-                self.csv_folder / "keywords in dict" / f"{self.app_name}.csv", sep=";"
+                self._csv_folder / "keywords in dict" / f"{self.app_name}.csv", sep=";"
             )
             df["dict_parsed"] = df["dict"].apply(json.loads)
             self.dict_w_kws = dict(zip(df["keywords"], df["dict_parsed"]))
@@ -108,7 +112,7 @@ class Keywords_Specifications:
                 val for val in self.kws_specs["empty keywords"].values if val != ""
             ]
             df = pd.read_csv(
-                self.csv_folder / "empty keywords" / f"{self.app_name}.csv"
+                self._csv_folder / "empty keywords" / f"{self.app_name}.csv"
             )
             df["values_parsed"] = df["values"].apply(json.loads)
             self.empty_kws_vals = dict(zip(df["keywords"], df["values_parsed"]))

@@ -1,17 +1,8 @@
-import json
 import traceback
 
 import numpy as np
 
-from python.header import (
-    S4GUI,
-    S4ICS,
-    TCS,
-    Focuser,
-    General_SPARC4_KWs,
-    Weather_Station,
-    iXon_Ultra,
-)
+from python.data_types import Error_Json
 from python.post_processor import Post_Processor
 from python.setup import Header_Class_Setup
 
@@ -21,22 +12,14 @@ def main(
     data: np.ndarray,
     hdr_data: tuple,
 ) -> str:
-    error_json = {"status": False, "code": 0, "source": ""}
+    error_json = Error_Json.no_error()
+
     try:
         setup = Header_Class_Setup("sparc4")
         setup.create_setup(hdr_data, file_name)
         hdr = setup.hdr
 
-        for cls in [
-            Focuser,
-            S4ICS,
-            S4GUI,
-            TCS,
-            Weather_Station,
-            General_SPARC4_KWs,
-            iXon_Ultra,
-        ]:
-            obj = cls(setup)
+        for obj in setup.header_classes_list:
             obj.write_header_all_apps(setup.hdr_data)
             obj.get_app_header_data()
             obj.fix_header_data()
@@ -48,10 +31,9 @@ def main(
 
         processor = Post_Processor(setup.file_name, data, hdr)
         processor.process()
-
-        return json.dumps(error_json)
     except Exception:
-        error_json["status"] = True
-        error_json["code"] = 1
-        error_json["source"] = traceback.format_exc()
-        return json.dumps(error_json)
+        error_json.status = True
+        error_json.code = 1
+        error_json.source = traceback.format_exc()
+
+    return error_json.model_dump_json()

@@ -49,3 +49,13 @@ class Log_Level(IntEnum):
     WARNING = logging.WARNING
     ERROR = logging.ERROR
     CRITICAL = logging.CRITICAL
+
+
+class Error_Json(BaseModel):
+    status: bool = False
+    code: int = 0
+    source: str = ""
+
+    @classmethod
+    def no_error(cls) -> Error_Json:
+        return Error_Json(status=False, code=0, source="")

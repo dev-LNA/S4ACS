@@ -1,6 +1,6 @@
 import pandas as pd
 
-from python.setup import Header_Class_Setup
+from python.keywords_specs import Keywords_Specifications
 
 from .header import Header
 
@@ -8,10 +8,10 @@ from .header import Header
 class CCD(Header):
     name = "CCD"
 
-    def __init__(self, setup: Header_Class_Setup) -> None:
-        super().__init__(setup)
-        self.gain_values = pd.read_csv(setup.csv_folder / "preamp_gains.csv")
-        self.rd_values = pd.read_csv(setup.csv_folder / "read_noises.csv")
+    def __init__(self, kws_specs: Keywords_Specifications, *args, **kwargs) -> None:
+        super().__init__(kws_specs, *args, **kwargs)
+        self.gain_values = pd.read_csv(kws_specs.csv_folder / "preamp_gains.csv")
+        self.rd_values = pd.read_csv(kws_specs.csv_folder / "read_noises.csv")
         self.idx_tab = self._find_index_tab()
 
     def fix_keywords(self) -> None:

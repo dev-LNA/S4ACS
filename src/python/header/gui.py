@@ -1,7 +1,7 @@
 from .header import Header
 
 
-class S4GUI(Header):
+class GUI(Header):
     name = "GUI"
 
     def _write_COMMENT(self) -> None:

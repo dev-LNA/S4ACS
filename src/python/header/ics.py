@@ -1,15 +1,13 @@
 import json
 
-from python.setup import Header_Class_Setup
-
 from .header import Header
 
 
 class ICS(Header):
     name = "ICS"
 
-    def __init__(self, setup: Header_Class_Setup) -> None:
-        super().__init__(setup)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.inst_mode: str
         return
@@ -118,3 +116,7 @@ class S4ICS(ICS):
     def extract_data(self) -> None:
         self._create_s4ics_kws()
         super().extract_data()
+
+
+class EICS(ICS):
+    pass

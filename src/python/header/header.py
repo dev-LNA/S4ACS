@@ -7,19 +7,26 @@ from typing import Any
 
 import astropy.io.fits as fits
 
-from python.setup import Header_Class_Setup
+from python.header_content import Header_Content
+from python.keywords_specs import Keywords_Specifications
 
 
 class Header(ABC):
     kw_types = {"integer": int, "boolean": bool, "float": float, "string": str}
     name = "HEADER"
 
-    def __init__(self, setup: Header_Class_Setup) -> None:
+    def __init__(
+        self,
+        kws_specs: Keywords_Specifications,
+        hdr_cnt: Header_Content,
+        log_file: Path,
+        file_name: Path,
+    ) -> None:
 
-        self.kws_specs = setup.create_hdr_specs(self.name)
-        self.hdr_cnt = setup.hdr_cnt
-        self.log_file = setup.log_file
-        self.file_name = setup.file_name
+        self.kws_specs = kws_specs
+        self.hdr_cnt = hdr_cnt
+        self.log_file = log_file
+        self.file_name = file_name
 
         self.how_to_fix_regex: dict
 

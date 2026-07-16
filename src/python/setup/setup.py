@@ -2,9 +2,21 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import astropy.io.fits as fits
-import numpy as np
 
 from python.data_types import SPARC4_Applications
+from python.header import (
+    EICS,
+    GUI,
+    S4ICS,
+    TCS,
+    Focuser,
+    General_SPARC4_KWs,
+    Header,
+    Weather_Station,
+    iXon_Ultra,
+)
+from python.header.camera import iKon_L
+from python.header.general_kws import General_ECHARPE_KWs
 from python.header_content import Header_Content
 from python.keywords_specs import Keywords_Specifications
 from python.utils import read_config_file
@@ -73,6 +85,35 @@ class Header_Class_Setup:
     def csv_folder(self) -> Path:
         return self._csv_folder
 
+    @property
+    def header_classes_list(self) -> list[Header]:
+        _list: list[type[Header]]
+        parameters = (self.hdr_cnt, self.log_file, self.file_name)
+        if self.instrument == "sparc4":
+            _list = [
+                Focuser,
+                S4ICS,
+                GUI,
+                TCS,
+                Weather_Station,
+                General_SPARC4_KWs,
+                iXon_Ultra,
+            ]
+        elif self.instrument == "echarpe":
+            _list = [
+                Focuser,
+                EICS,
+                GUI,
+                TCS,
+                Weather_Station,
+                General_ECHARPE_KWs,
+                iKon_L,
+            ]
+        else:
+            raise ValueError(f"Unkown instrument: {self.instrument}")
+
+        return [_cls(self.create_hdr_specs(_cls.name), *parameters) for _cls in _list]
+
     @staticmethod
     def verify_file_exists(file_name: Path) -> Path:
         if file_name.exists:
@@ -88,24 +129,3 @@ class Header_Class_Setup:
         if now.hour < 12:
             now -= timedelta(1)
         return now.strftime("%Y%m%d")
-
-
-class Setup_1:
-    def __init__(
-        self, instrument: str, data: np.ndarray, hdr_data: tuple, file_name: str
-    ) -> None:
-        self.instrument = instrument
-        self.data = data
-        self.hdr_data = hdr_data
-        self.file_name = file_name
-        self.acs_config = read_config_file(instrument)
-
-    def create(self) -> dict:
-        csv_folder = Path(__file__).parent / ".." / "csv" / self.instrument
-        hdr_cnt = Header_Content(csv_folder)
-        hdr = fits.Header(hdr_cnt.cards)
-
-        hdr_data = SPARC4_Applications.from_tuple(self.hdr_data)
-        data: np.ndarray = np.asarray(self.data, dtype=np.uint16)
-        file_path = self.acs_config.image_path / self.file_name
-        return {"hdr_cnt": hdr_cnt, "hdr_data": hdr_data}
