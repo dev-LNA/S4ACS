@@ -6,13 +6,13 @@ from pathlib import Path
 import astropy.io.fits as fits
 import numpy as np
 import pandas as pd
-from header import (
+
+from python.header import (
+    GUI,
     ICS,
-    S4GUI,
     General_ECHARPE_KWs,
     General_KWs,
     General_SPARC4_KWs,
-    Header_Parameters,
     Header_Tester,
     Weather_Station,
 )

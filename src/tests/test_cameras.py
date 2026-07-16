@@ -6,11 +6,11 @@ from pathlib import Path
 import astropy.io.fits as fits
 import numpy as np
 import pandas as pd
-from header import CCD, Header_Parameters, iKon_L, iXon_Ultra
+
+from python.header import CCD, iKon_L, iXon_Ultra
 
 
 class Test_Camera(unittest.TestCase):
-
     dict_header_jsons: dict = {"CCD": '{"FILENAME":"s4acs1_000001.fits"}'}
     log_file = join("tests", "files", "log.log")
     tester_hdr_content = {
@@ -120,7 +120,6 @@ class Test_Camera(unittest.TestCase):
 
 
 class Test_iXon_Ultra(unittest.TestCase):
-
     dict_header_jsons: dict = {"CCD": '{"FILENAME":"s4acs1_000001.fits"}'}
     log_file = join("tests", "files", "log.log")
     tester_hdr_content = {

@@ -2,11 +2,10 @@ import json
 import unittest
 from os.path import dirname, join, realpath
 
-from header import TCS, Header_Parameters
+from python.header import TCS
 
 
 class Test_TCS(unittest.TestCase):
-
     dict_header_jsons: dict = {
         "CCD": '{"FILENAME":"s4acs1_000001.fits"}',
         "GUI": '{"OBSTYPE":"ZERO"}',

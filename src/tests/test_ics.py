@@ -2,7 +2,7 @@ import json
 import unittest
 from os.path import dirname, join, realpath
 
-from header import ICS, S4ICS, Header_Parameters
+from python.header import ICS, S4ICS
 
 
 class Test_ICS(unittest.TestCase):

@@ -31,7 +31,7 @@ class Header_Class_Setup:
         self._file_name: Path
         self.acs_config = read_config_file(instrument)
         self.today_str = self._create_today_str()
-        self._csv_folder = Path(__file__).parent / ".." / "csv" / self.instrument
+        self._csv_folder = Path().cwd() / "csv" / self.instrument
 
     def create_setup(self, hdr_data: tuple, file_name: str) -> None:
         """Create the instances needed by the Header class.
@@ -60,6 +60,22 @@ class Header_Class_Setup:
         kws_specs = Keywords_Specifications(self._csv_folder, hdr_name)
         kws_specs.load_data()
         return kws_specs
+
+    @staticmethod
+    def verify_file_exists(file_path: Path) -> Path:
+        if file_path.exists:
+            now = datetime.now(timezone.utc)
+            now = now.strftime("h%Hm%Ms%Sms%f")
+            date, chnl, idx = file_path.name.split("_")
+            return file_path.parent / f"{date}_{now}_{chnl}_{idx}"
+        return file_path
+
+    @staticmethod
+    def _create_today_str() -> str:
+        now = datetime.now(timezone.utc)
+        if now.hour < 12:
+            now -= timedelta(1)
+        return now.strftime("%Y%m%d")
 
     @property
     def hdr_data(self) -> dict:
@@ -113,19 +129,3 @@ class Header_Class_Setup:
             raise ValueError(f"Unkown instrument: {self.instrument}")
 
         return [_cls(self.create_hdr_specs(_cls.name), *parameters) for _cls in _list]
-
-    @staticmethod
-    def verify_file_exists(file_name: Path) -> Path:
-        if file_name.exists:
-            now = datetime.now(timezone.utc)
-            now = now.strftime("h%Hm%Ms%Sms%f")
-            date, chnl, idx = file_name.name.split("_")
-            return file_name.parent / f"{date}_{now}_{chnl}_{idx}"
-        return file_name
-
-    @staticmethod
-    def _create_today_str() -> str:
-        now = datetime.now(timezone.utc)
-        if now.hour < 12:
-            now -= timedelta(1)
-        return now.strftime("%Y%m%d")

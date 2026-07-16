@@ -2,11 +2,8 @@
 
 import configparser
 import logging
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
-
-import astropy.io.fits as fits
-import numpy as np
 
 from python.data_types import Log_Level, S4ACS_Cfg_File
 

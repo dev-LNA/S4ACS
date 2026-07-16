@@ -6,7 +6,7 @@ import pandas as pd
 
 class Header_Content:
     def __init__(self, csv_folder: Path) -> None:
-        self.csv_folder = Path(csv_folder)
+        self.csv_folder = csv_folder
         self.read_hdr_ctnt_csv()
         self.get_expected_kw_names()
         self.get_keyword_types()
