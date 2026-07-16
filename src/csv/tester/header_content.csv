@@ -1,0 +1,5 @@
+Keyword;Expected name;Type;Allowed values;Comment
+SIMPLE;NAME;boolean;true,false;conforms to FITS standard
+SIMPLE1;NAME;integer;0,100;conforms to FITS standard
+SIMPLE2;NAME;float;-1,1;conforms to FITS standard
+SIMPLE3;NAME;float;1,inf;conforms to FITS standard
