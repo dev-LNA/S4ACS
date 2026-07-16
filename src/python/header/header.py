@@ -19,18 +19,15 @@ class Header(ABC):
         self,
         log_file: str,
         hdr_cnt: Header_Content,
-        csv_folder: Path,
+        kws_specs: Keywords_Specifications,
     ) -> None:
 
-        self.kws_specs: Keywords_Specifications = Keywords_Specifications(
-            csv_folder, self.name
-        )
-        self.kws_specs.load_data()
+        self.kws_specs = kws_specs
+        self.hdr_cnt = hdr_cnt
 
         self.how_to_fix_regex: dict
         self.log_file = log_file
         self.file_name: str
-        self.hdr_cnt = hdr_cnt
 
         self.header_all_apps: dict
         self.original_string: str | None = None
@@ -43,9 +40,7 @@ class Header(ABC):
 
     def write_header_all_apps(self, header_data: dict) -> None:
         self.header_all_apps = header_data
-        ccd_header_data = header_data["CCD"]
-        if ccd_header_data != "":
-            self.file_name = json.loads(ccd_header_data)["FILENAME"]
+        self.file_name = json.loads(header_data["CCD"])["FILENAME"]
 
     def get_app_header_data(self) -> None:
         header_data = self.header_all_apps[self.name]

@@ -55,9 +55,7 @@ class TCS(Header):
 
     def write_header_all_apps(self, header_data: dict) -> None:
         super().write_header_all_apps(header_data)
-        gui_header_data = header_data["GUI"]
-        if gui_header_data != "":
-            self.obstype = json.loads(gui_header_data)["OBSTYPE"]
+        self.obstype = json.loads(header_data["GUI"])["OBSTYPE"]
 
     def fix_keywords(self) -> None:
         super().fix_keywords()
@@ -122,7 +120,6 @@ class Header_Tester(Header):
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
         self.how_to_fix_regex = {"GUIVRSN": self._fix_soft_version}
-        self.empty_kws = {"BITPIX": 16}
 
     @staticmethod
     def _fix_soft_version(kw_value: str) -> str:

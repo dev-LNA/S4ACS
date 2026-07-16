@@ -9,6 +9,7 @@ class ICS(Header):
     def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
         super().__init__(log_file, hdr_cnt, csv_folder)
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
+        self.inst_mode: str
         return
 
     @staticmethod
@@ -19,9 +20,7 @@ class ICS(Header):
 class S4ICS(ICS):
     def write_header_all_apps(self, header_data: dict) -> None:
         super().write_header_all_apps(header_data)
-        gui_header_data = header_data["GUI"]
-        if gui_header_data != "":
-            self.inst_mode = json.loads(header_data["GUI"])["INSTMODE"]
+        self.inst_mode = json.loads(header_data["GUI"])["INSTMODE"]
 
     def _create_s4ics_kws(self) -> None:
         if self.original_hdr_data is None:
