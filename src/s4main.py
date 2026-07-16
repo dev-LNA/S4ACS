@@ -17,15 +17,14 @@ from python.setup import Header_Class_Setup
 
 
 def main(
-    _file_name: str,
-    _data: np.ndarray,
-    _hdr_data: tuple,
-    log_file: str,
+    file_name: str,
+    data: np.ndarray,
+    hdr_data: tuple,
 ) -> str:
     error_json = {"status": False, "code": 0, "source": ""}
     try:
         setup = Header_Class_Setup("sparc4")
-        setup.create_setup(_hdr_data, _file_name)
+        setup.create_setup(hdr_data, file_name)
         hdr = setup.hdr
 
         for cls in [
@@ -37,8 +36,7 @@ def main(
             General_SPARC4_KWs,
             iXon_Ultra,
         ]:
-            kws_specs = setup.create_hdr_specs(cls.name)
-            obj = cls(log_file, setup.hdr_cnt, kws_specs)
+            obj = cls(setup)
             obj.write_header_all_apps(setup.hdr_data)
             obj.get_app_header_data()
             obj.fix_header_data()
@@ -48,7 +46,7 @@ def main(
             obj.validate_info()
             hdr = obj.fill_image_header(hdr)
 
-        processor = Post_Processor(setup.file_name, _data, hdr)
+        processor = Post_Processor(setup.file_name, data, hdr)
         processor.process()
 
         return json.dumps(error_json)

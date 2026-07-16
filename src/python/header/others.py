@@ -4,6 +4,8 @@ from datetime import datetime
 
 from astropy.time import Time
 
+from python.setup import Header_Class_Setup
+
 from .header import Header
 
 
@@ -46,8 +48,8 @@ class Weather_Station(Header):
 class TCS(Header):
     name = "TCS"
 
-    def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
-        super().__init__(log_file, hdr_cnt, csv_folder)
+    def __init__(self, setup) -> None:
+        super().__init__(setup)
         self.how_to_fix_regex = {
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
         }
@@ -117,8 +119,8 @@ class TCS(Header):
 class Header_Tester(Header):
     name = "TESTER"
 
-    def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
-        super().__init__(log_file, hdr_cnt, csv_folder)
+    def __init__(self, setup: Header_Class_Setup) -> None:
+        super().__init__(setup)
         self.how_to_fix_regex = {"GUIVRSN": self._fix_soft_version}
 
     @staticmethod

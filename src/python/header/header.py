@@ -7,27 +7,21 @@ from typing import Any
 
 import astropy.io.fits as fits
 
-from python.header_content import Header_Content
-from python.keywords_specs import Keywords_Specifications
+from python.setup import Header_Class_Setup
 
 
 class Header(ABC):
     kw_types = {"integer": int, "boolean": bool, "float": float, "string": str}
     name = "HEADER"
 
-    def __init__(
-        self,
-        log_file: str,
-        hdr_cnt: Header_Content,
-        kws_specs: Keywords_Specifications,
-    ) -> None:
+    def __init__(self, setup: Header_Class_Setup) -> None:
 
-        self.kws_specs = kws_specs
-        self.hdr_cnt = hdr_cnt
+        self.kws_specs = setup.create_hdr_specs(self.name)
+        self.hdr_cnt = setup.hdr_cnt
+        self.log_file = setup.log_file
+        self.file_name = setup.file_name
 
         self.how_to_fix_regex: dict
-        self.log_file = log_file
-        self.file_name: str
 
         self.header_all_apps: dict
         self.original_string: str | None = None
@@ -40,7 +34,6 @@ class Header(ABC):
 
     def write_header_all_apps(self, header_data: dict) -> None:
         self.header_all_apps = header_data
-        self.file_name = json.loads(header_data["CCD"])["FILENAME"]
 
     def get_app_header_data(self) -> None:
         header_data = self.header_all_apps[self.name]

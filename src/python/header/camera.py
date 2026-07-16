@@ -1,15 +1,17 @@
 import pandas as pd
 
+from python.setup import Header_Class_Setup
+
 from .header import Header
 
 
 class CCD(Header):
     name = "CCD"
 
-    def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
-        super().__init__(log_file, hdr_cnt, csv_folder)
-        self.gain_values = pd.read_csv(csv_folder / "preamp_gains.csv")
-        self.rd_values = pd.read_csv(csv_folder / "read_noises.csv")
+    def __init__(self, setup: Header_Class_Setup) -> None:
+        super().__init__(setup)
+        self.gain_values = pd.read_csv(setup.csv_folder / "preamp_gains.csv")
+        self.rd_values = pd.read_csv(setup.csv_folder / "read_noises.csv")
         self.idx_tab = self._find_index_tab()
 
     def fix_keywords(self) -> None:
@@ -72,9 +74,9 @@ class iXon_Ultra(CCD):
     def _write_READRATE(self) -> None:
         _json = self.extracted_data
         try:
-            self.fixed_data["READRATE"] = self.dict_w_kws["READRATE"][_json["EMMODE"]][
-                _json["READRATE"]
-            ]
+            self.fixed_data["READRATE"] = self.kws_specs.dict_w_kws["READRATE"][
+                _json["EMMODE"]
+            ][_json["READRATE"]]
         except ValueError as e:
             self._write_log_file(repr(e), "READRATE")
 

@@ -1,13 +1,15 @@
 import json
 
+from python.setup import Header_Class_Setup
+
 from .header import Header
 
 
 class ICS(Header):
     name = "ICS"
 
-    def __init__(self, log_file, hdr_cnt, csv_folder) -> None:
-        super().__init__(log_file, hdr_cnt, csv_folder)
+    def __init__(self, setup: Header_Class_Setup) -> None:
+        super().__init__(setup)
         self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
         self.inst_mode: str
         return
