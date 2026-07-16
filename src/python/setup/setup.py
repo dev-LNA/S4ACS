@@ -63,7 +63,7 @@ class Header_Class_Setup:
 
     @staticmethod
     def verify_file_exists(file_path: Path) -> Path:
-        if file_path.exists:
+        if file_path.exists():
             now = datetime.now(timezone.utc)
             now = now.strftime("h%Hm%Ms%Sms%f")
             date, chnl, idx = file_path.name.split("_")
