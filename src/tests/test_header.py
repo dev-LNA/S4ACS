@@ -2,10 +2,6 @@ import json
 import unittest
 from pathlib import Path
 
-import astropy.io.fits as fits
-import numpy as np
-import pandas as pd
-
 from python.header import (
     GUI,
     ICS,
@@ -15,7 +11,6 @@ from python.header import (
     Header_Tester,
     Weather_Station,
 )
-from python.header_content import Header_Content
 from python.setup import Header_Class_Setup
 
 
@@ -36,23 +31,23 @@ class Test_Header(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        setup = Header_Class_Setup("tester")
-        setup.create_setup()
-        cls.fixed_tester = setup.header_classes_list[0]
-        cls.fixed_tester.write_header_all_apps(setup.hdr_data)
-        cls.fixed_tester.get_app_header_data()
-        cls.fixed_tester.fix_header_data()
-        cls.fixed_tester.load_json()
-        cls.fixed_tester.extract_data()
-        cls.fixed_tester.fix_keywords()
-        cls.fixed_tester.validate_info()
-        cls.fixed_tester.fill_image_header(setup.hdr)
+        cls.empty_hdr_data = ("{}",) * 7
+        cls.setup = Header_Class_Setup("tester")
+        cls.setup.create_setup(cls.empty_hdr_data, "00000000_s4c1_000001.fits")
+        # cls.fixed_tester = setup.header_classes_list[0]
+        # cls.fixed_tester.write_header_all_apps(setup.hdr_data)
+        # cls.fixed_tester.get_app_header_data()
+        # cls.fixed_tester.fix_header_data()
+        # cls.fixed_tester.load_json()
+        # cls.fixed_tester.extract_data()
+        # cls.fixed_tester.fix_keywords()
+        # cls.fixed_tester.validate_info()
+        # cls.fixed_tester.fill_image_header(setup.hdr)
 
     def test_init_header_empty_json(self) -> None:
-        dict_header_jsons = {"TESTER": "", "CCD": '{"FILENAME":"s4acs1_000001.fits"}'}
-        tester = Header_Tester(
-            dict_header_jsons, self.log_file, self.hdr_cnt, self.csv_folder
-        )
+        self.setup.create_setup(self.empty_hdr_data, "00000000_s4c1_000001.fits")
+        tester = self.setup.header_classes_list[0]
+        tester.write_header_all_apps(self.setup.hdr_data)
         assert tester.original_hdr_data is None
 
     def test_init_header_json(self) -> None:

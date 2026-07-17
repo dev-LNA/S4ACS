@@ -5,8 +5,15 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
+# class Tester(BaseModel):
+#     TESTER: str
 
-class SPARC4_Applications(BaseModel):
+#     @classmethod
+#     def from_tuple(cls, header_data: tuple) -> Applications:
+#         return Applications()
+
+
+class External_Applications(BaseModel):
     CCD: str = Field(min_length=2)
     GUI: str = Field(min_length=2)
     ICS: str
@@ -16,15 +23,15 @@ class SPARC4_Applications(BaseModel):
     GENERAL_KWS: str
 
     @classmethod
-    def from_tuple(cls, _header_jsons: tuple) -> SPARC4_Applications:
-        return SPARC4_Applications(
-            GUI=_header_jsons[0],
-            CCD=_header_jsons[1],
-            ICS=_header_jsons[2],
-            TCS=_header_jsons[3],
-            FOCUSER=_header_jsons[4],
-            WSTATION=_header_jsons[5],
-            GENERAL_KWS=_header_jsons[6],
+    def from_tuple(cls, header_data: tuple) -> External_Applications:
+        return External_Applications(
+            GUI=header_data[0],
+            CCD=header_data[1],
+            ICS=header_data[2],
+            TCS=header_data[3],
+            FOCUSER=header_data[4],
+            WSTATION=header_data[5],
+            GENERAL_KWS=header_data[6],
         )
 
 

@@ -3,6 +3,15 @@ import traceback
 import numpy as np
 
 from python.data_types import Error_Json
+from python.header import (
+    GUI,
+    S4ICS,
+    TCS,
+    Focuser,
+    General_SPARC4_KWs,
+    Weather_Station,
+    iXon_Ultra,
+)
 from python.post_processor import Post_Processor
 from python.setup import Header_Class_Setup
 
@@ -19,7 +28,16 @@ def main(
         setup.create_setup(hdr_data, file_name)
         hdr = setup.hdr
 
-        for obj in setup.header_classes_list:
+        for obj in [
+            Focuser,
+            S4ICS,
+            GUI,
+            TCS,
+            Weather_Station,
+            General_SPARC4_KWs,
+            iXon_Ultra,
+        ]:
+            obj = obj()
             obj.write_header_all_apps(setup.hdr_data)
             obj.get_app_header_data()
             obj.fix_header_data()

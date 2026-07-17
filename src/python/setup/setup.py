@@ -1,10 +1,9 @@
 from datetime import datetime, timedelta, timezone
-from dis import Instruction
 from pathlib import Path
 
 import astropy.io.fits as fits
 
-from python.data_types import SPARC4_Applications
+from python.data_types import External_Applications
 from python.header import (
     EICS,
     GUI,
@@ -28,7 +27,7 @@ class Header_Class_Setup:
     def __init__(self, instrument: str) -> None:
         self.instrument = instrument
         self._hdr_cnt: Header_Content
-        self._hdr_data: SPARC4_Applications
+        self._hdr_data: External_Applications
         self._hdr: fits.Header
         self._file_name: Path
         self.acs_config = read_config_file(instrument)
@@ -43,7 +42,7 @@ class Header_Class_Setup:
             file_name (str): image file name
         """
         self._hdr_cnt = Header_Content(self._csv_folder)
-        self._hdr_data = SPARC4_Applications.from_tuple(hdr_data)
+        self._hdr_data = External_Applications.from_tuple(hdr_data)
         self._hdr = fits.Header(self._hdr_cnt.cards)
         self._file_name = self.verify_file_exists(
             self.acs_config.image_path / file_name
