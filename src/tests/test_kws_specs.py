@@ -7,7 +7,7 @@ from python.keywords_specs import Keywords_Specifications
 class Test_Kws_Specs(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.csv_folder = Path.cwd() / "csv" / "sparc4"
+        cls.csv_folder = Path.cwd() / "csv" / "tester"
         return super().setUpClass()
 
     def test_init(self) -> None:

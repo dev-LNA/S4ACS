@@ -3,25 +3,18 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from python.header import (
-    GUI,
-    S4ICS,
-    TCS,
-    Focuser,
-    General_SPARC4_KWs,
-    Weather_Station,
-    iXon_Ultra,
-)
+from python.header import Header_Tester
 from python.setup import Header_Class_Setup
 
 
 class Test_Setup(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.csv_folder = Path.cwd() / "csv" / "sparc4"
+        instrument = "tester"
+        cls.csv_folder = Path.cwd() / "csv" / instrument
         cls.image_path = Path.home() / "images" / "today"
-        cls.log_file_path = Path.home() / "sparc4" / "log" / "s4acs1"
-        cls.setup = Header_Class_Setup("sparc4")
+        cls.log_file_path = Path.home() / instrument / "log" / "s4acs1"
+        cls.setup = Header_Class_Setup(instrument)
         now = datetime.now(tz=timezone.utc)
         if now.hour < 12:
             now -= timedelta(1)
@@ -29,8 +22,8 @@ class Test_Setup(unittest.TestCase):
         return super().setUpClass()
 
     def test_init(self) -> None:
-        setup = Header_Class_Setup("sparc4")
-        assert setup.instrument == "sparc4"
+        setup = Header_Class_Setup("tester")
+        assert setup.instrument == "tester"
         assert setup.acs_config.acs_mode == 0
         assert setup.acs_config.channel == 1
         assert setup.acs_config.image_path == self.image_path
@@ -63,20 +56,12 @@ class Test_Setup(unittest.TestCase):
 
     def test_log_file(self) -> None:
         log_file = (
-            Path("/home/denis/sparc4/log/s4acs1") / f"{self.today_str}_keywords.log"
+            Path("/home/denis/tester/log/s4acs1") / f"{self.today_str}_keywords.log"
         )
         assert self.setup.log_file == log_file
 
     def test_hdr_cls_list(self) -> None:
-        _list = [
-            Focuser,
-            S4ICS,
-            GUI,
-            TCS,
-            Weather_Station,
-            General_SPARC4_KWs,
-            iXon_Ultra,
-        ]
+        _list = [Header_Tester]
         self.setup.create_setup((r"{}",) * 7, "00000000_s4cs1_000001.fits")
         for _cls1, _cls2 in zip(self.setup.header_classes_list, _list):
             assert isinstance(_cls1, _cls2)

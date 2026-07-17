@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+from dis import Instruction
 from pathlib import Path
 
 import astropy.io.fits as fits
@@ -12,6 +13,7 @@ from python.header import (
     Focuser,
     General_SPARC4_KWs,
     Header,
+    Header_Tester,
     Weather_Station,
     iXon_Ultra,
 )
@@ -125,6 +127,8 @@ class Header_Class_Setup:
                 General_ECHARPE_KWs,
                 iKon_L,
             ]
+        elif self.instrument == "tester":
+            _list = [Header_Tester]
         else:
             raise ValueError(f"Unkown instrument: {self.instrument}")
 
