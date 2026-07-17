@@ -78,4 +78,5 @@ class Test_Setup(unittest.TestCase):
             iXon_Ultra,
         ]
         self.setup.create_setup((r"{}",) * 7, "00000000_s4cs1_000001.fits")
-        self.setup.header_classes_list
+        for _cls1, _cls2 in zip(self.setup.header_classes_list, _list):
+            assert isinstance(_cls1, _cls2)
