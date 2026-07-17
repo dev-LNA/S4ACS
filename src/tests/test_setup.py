@@ -78,4 +78,4 @@ class Test_Setup(unittest.TestCase):
             iXon_Ultra,
         ]
         self.setup.create_setup((r"{}",) * 7, "00000000_s4cs1_000001.fits")
-        self.setup.header_classes_list  # TODO: voltar aqui e terminar
+        self.setup.header_classes_list

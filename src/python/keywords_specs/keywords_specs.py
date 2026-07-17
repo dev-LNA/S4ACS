@@ -12,17 +12,16 @@ class Keywords_Specifications:
         self.replace_comma: list | None = None
         self.any_val: list | None = None
         self.predefined_vals: list | None = None
+        self.to_bool_w_cond: dict | None = None
 
         self.kws_in_dict: list | None = None
-        self.dict_w_kws: dict[str, dict]
-
         self.empty_kws: list | None = None
-        self.empty_kws_vals: dict[str, str | int | float]
-
         self.regex: list | None = None
+
+        self.dict_w_kws: dict[str, dict]
+        self.empty_kws_vals: dict[str, str | int | float]
         self.regex_expressions: dict[str, tuple[str, str]]
 
-        self.to_bool_w_cond: dict | None = None
         self._csv_folder = csv_folder
         self.app_name = app_name
         self.kws_specs = pd.read_csv(
@@ -36,7 +35,7 @@ class Keywords_Specifications:
 
     def load_data(self) -> None:
 
-        self.keywords = self.kws_specs["Header Keywords"].values
+        self.keywords = self.kws_specs["Header Keywords"].to_list()
 
         if "to bool" in self.kws_specs.keys():
             self.to_bool = [
@@ -104,15 +103,14 @@ class Keywords_Specifications:
                 self._csv_folder / "keywords in dict" / f"{self.app_name}.csv", sep=";"
             )
             df["dict_parsed"] = df["dict"].apply(json.loads)
-            self.dict_w_kws = dict(zip(df["keywords"], df["dict_parsed"]))
+            self.dict_w_kws = dict(zip(df["keyword"], df["dict_parsed"]))
 
     def _get_empty_keywords(self) -> None:
         if "empty keywords" in self.kws_specs.keys():
-            self.kws_in_dict = [
+            self.empty_kws = [
                 val for val in self.kws_specs["empty keywords"].values if val != ""
             ]
             df = pd.read_csv(
                 self._csv_folder / "empty keywords" / f"{self.app_name}.csv"
             )
-            df["values_parsed"] = df["values"].apply(json.loads)
-            self.empty_kws_vals = dict(zip(df["keywords"], df["values_parsed"]))
+            self.empty_kws_vals = dict(zip(df["keyword"], df["values"]))

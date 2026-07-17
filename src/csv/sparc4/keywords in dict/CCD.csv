@@ -1,4 +1,4 @@
-keyword,dict
+keyword;dict
 TRIGGER;{"0": "Internal", "6": "External"}
 ACQMODE;{"1": "Single Scan", "3": "Kinetics"}
 SHUTTER;["Auto", "Open", "Closed"]

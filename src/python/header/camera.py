@@ -10,12 +10,16 @@ class CCD(Header):
 
     def __init__(self, kws_specs: Keywords_Specifications, *args, **kwargs) -> None:
         super().__init__(kws_specs, *args, **kwargs)
-        self.gain_values = pd.read_csv(kws_specs.csv_folder / "preamp_gains.csv")
-        self.rd_values = pd.read_csv(kws_specs.csv_folder / "read_noises.csv")
-        self.idx_tab = self._find_index_tab()
+        self.gain_values = pd.read_csv(
+            kws_specs.csv_folder / "camera" / "preamp_gains.csv"
+        )
+        self.rd_values = pd.read_csv(
+            kws_specs.csv_folder / "camera" / "read_noises.csv"
+        )
 
     def fix_keywords(self) -> None:
         super().fix_keywords()
+        self._find_index_tab()
         self._write_ccd_gain()
         self._write_read_noise()
         self._fix_EXPTIME()
@@ -39,10 +43,9 @@ class CCD(Header):
         except Exception as e:
             self._write_log_file(repr(e), "GAIN")
 
-    def _find_index_tab(self) -> int:
+    def _find_index_tab(self) -> None:
         _json = self.extracted_data
-        index = 2 * _json["READRATE"] + _json["PREAMP"]
-        return index
+        self.idx_tab = 2 * _json["READRATE"] + _json["PREAMP"]
 
     def _fix_EXPTIME(self) -> None:
         if 1e-5 > self.fixed_data["EXPTIME"] > 9.999999e-6:
@@ -63,9 +66,9 @@ class CCD(Header):
 
 
 class iXon_Ultra(CCD):
-    def _find_index_tab(self) -> int:
+    def _find_index_tab(self) -> None:
         _json = self.extracted_data
-        return 8 * _json["EMMODE"] + 2 * _json["READRATE"] + _json["PREAMP"]
+        self.idx_tab = 8 * _json["EMMODE"] + 2 * _json["READRATE"] + _json["PREAMP"]
 
     def fix_keywords(self) -> None:
         super().fix_keywords()
