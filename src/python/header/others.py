@@ -50,8 +50,8 @@ class Weather_Station(Header):
 class TCS(Header):
     name = "TCS"
 
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(self, kws_specs, hdr_cnt, log_file, file_name) -> None:
+        super().__init__(kws_specs, hdr_cnt, log_file, file_name)
         self.how_to_fix_regex = {
             k: self._fix_coordinates for k in ["RA", "DEC", "TCSHA"]
         }
@@ -79,12 +79,9 @@ class TCS(Header):
                     )
                     return
             date, time = self.original_hdr_data["DATE"], self.original_hdr_data["TIME"]
-            date = date.split("/")[::-1]
-            time = time.split(":")
-            tmp = [int(val) for val in date + time]
-            tmp[0] += 2000
-            tcsdate = Time(datetime(*tmp)).isot  # type: ignore
-            self.fixed_data["TCSDATE"] = tcsdate
+            tcs_date = datetime.strptime(date + " " + time, "%d/%m/%y %H:%M:%S")
+            tcs_date = Time(tcs_date, format="datetime")
+            self.fixed_data["TCSDATE"] = tcs_date.isot
         except Exception as e:
             self._write_log_file(repr(e), "TCSDATE")
 

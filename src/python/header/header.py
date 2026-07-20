@@ -103,7 +103,7 @@ class Header(ABC):
         now = str(datetime.now())
         _str = now + " - " + f"FILENAME= {self.file_name}, " + f"SUB-SYTEM={self.name}"
         if keyword is not None:
-            _str += ", KEYWORD={keyword}"
+            _str += f", KEYWORD={keyword}"
         _str += " - " + message + "\n"
         with open(self.log_file, "a") as file:
             file.write(_str)
@@ -172,15 +172,10 @@ class Header(ABC):
                 if re.match(regex_expr, kw_value) is not None:
                     self.fixed_data[kw] = kw_value
                     continue
-                self._write_log_file(
+                self._write_log_file(  # TODO: este log esta muito repetido
                     f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_val}.",
                     kw,
                 )
-                if self.how_to_fix_regex is None:
-                    self._write_log_file(
-                        "The method to fix this keyword was not implemented.", kw
-                    )
-                    continue
                 self._write_log_file("Trying to fix...", kw)
                 self._fix_regex_keyword(kw)
             except Exception as e:
@@ -190,11 +185,11 @@ class Header(ABC):
         try:
             kw_value = self.extracted_data[kw]
             regex_expr, _ = self.kws_specs.regex_expressions[kw]
-            # if kw not in self.how_to_fix_regex.keys():
-            #     self._write_log_file(
-            #         "The method to fix this keyword was not found.", kw
-            #     )
-            #     return
+            if kw not in self.how_to_fix_regex.keys():
+                self._write_log_file(
+                    "The method to fix this keyword was not implemented.", kw
+                )
+                return
             new_value = self.how_to_fix_regex[kw](kw_value)
             if re.match(regex_expr, new_value) is None:
                 self._write_log_file(
