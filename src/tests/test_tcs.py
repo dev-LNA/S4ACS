@@ -10,7 +10,7 @@ class Test_TCS(unittest.TestCase):
         self._dict_data = {
             "RAACQUIS": "00:00",
             "DECACQUIS": "00",
-            "HOURANGLE": "00:00:00.00",
+            "HOURANGLE": "00:00:00",
             "GUIDEANG": 0,
             "AIRMASS": 1,
             "DATE": "27/02/24",

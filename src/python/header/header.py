@@ -172,8 +172,8 @@ class Header(ABC):
                 if re.match(regex_expr, kw_value) is not None:
                     self.fixed_data[kw] = kw_value
                     continue
-                self._write_log_file(  # TODO: este log esta muito repetido
-                    f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_val}.",
+                self._write_log_file(
+                    f"The provided value '{kw_value}' does not match the expected format {ex_val}.",
                     kw,
                 )
                 self._write_log_file("Trying to fix...", kw)

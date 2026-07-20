@@ -107,7 +107,7 @@ class TCS(Header):
                 if kw_value == "" and self.obstype in ["ZERO", "FLAT", "DARK"]:
                     new_value = "00:00:00.00"
                     self._write_log_file(
-                        f"An empty string was found for the keyword {kw}. As OBSTYPE={self.obstype}, the keyword value was changed to {new_value}",
+                        f"An empty string was found. As OBSTYPE={self.obstype}, the keyword value was changed to {new_value}",
                         kw,
                     )
                     self.fixed_data[kw] = new_value
