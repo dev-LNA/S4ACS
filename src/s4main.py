@@ -47,7 +47,8 @@ def main(
             obj.fix_original_hdr_data()
             obj.extract_data()
             obj.fix_keywords()
-            obj.validate_info()
+            obj.check_kws_types()
+            obj.check_allowed_values()
             hdr = obj.fill_image_header(hdr)
 
         processor = Post_Processor(file_name, data, hdr)

@@ -1,16 +1,7 @@
 import json
 import unittest
-from pathlib import Path
 
-from python.header import (
-    GUI,
-    ICS,
-    General_ECHARPE_KWs,
-    General_KWs,
-    General_SPARC4_KWs,
-    Header_Tester,
-    Weather_Station,
-)
+from python.header import Header_Tester
 from python.setup import Header_Class_Setup
 
 
@@ -58,6 +49,7 @@ class Test_Header(unittest.TestCase):
         assert self.tester.original_hdr_data is None
         assert self.tester.extracted_data == {}
         assert self.tester.fixed_data == {k: "" for k in self.kws_specs.keywords}
+        assert self.tester.kws_types_checked == {k: "" for k in self.kws_specs.keywords}
         assert self.tester.checked_data == {k: "" for k in self.kws_specs.keywords}
 
     # ===================== Convertions ======================
@@ -109,71 +101,46 @@ class Test_Header(unittest.TestCase):
 
     # ========================== Validation  =======================================
 
-    # def test_check_str_in_allowed_values(self) -> None:
-    #     self.fixed_tester._check_string_in_allowed_values("INSTMODE")
-    #     assert self.fixed_tester.new_json["INSTMODE"] == "PHOT"
+    def test_check_type(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.check_kws_types()
+        assert self.extracted_tester.kws_types_checked["EMGAIN"] == 2
 
-    # def test_check_str_not_in_allowed_values(self) -> None:
-    #     tester_hdr_content = self.tester_hdr_content.copy()
-    #     tester_hdr_content["INSTMODE"] = "AAA"
-    #     dict_header_jsons = self.dict_header_jsons.copy()
-    #     dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
-    #     tester = Header_Tester(
-    #         dict_header_jsons, self.log_file, self.hdr_cnt, self.csv_folder
-    #     )
-    #     tester.extract_info()
-    #     tester.fix_keywords()
-    #     tester._check_string_in_allowed_values("INSTMODE")
-    #     assert tester.new_json["INSTMODE"] == ""
+    def test_check_wrong_type(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.fixed_data["EMGAIN"] = "2"
+        self.extracted_tester.check_kws_types()
+        assert self.extracted_tester.kws_types_checked["EMGAIN"] == ""
 
-    # def test_check_number_not_in_range(self) -> None:
-    #     tester_hdr_content = self.tester_hdr_content.copy()
-    #     tester_hdr_content["EMGAIN"] = 1
-    #     dict_header_jsons = self.dict_header_jsons.copy()
-    #     dict_header_jsons["TESTER"] = json.dumps(tester_hdr_content)
-    #     tester = Header_Tester(
-    #         dict_header_jsons, self.log_file, self.hdr_cnt, self.csv_folder
-    #     )
-    #     tester.extract_info()
-    #     tester.fix_keywords()
-    #     tester._check_number_in_range("EMGAIN")
-    #     assert tester.new_json["EMGAIN"] == ""
+    def test_check_str_in_allowed_values(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.check_kws_types()
+        self.extracted_tester._check_string_in_allowed_values("INSTMODE")
+        assert self.extracted_tester.checked_data["INSTMODE"] == "PHOT"
 
-    # def test_check_number_in_range(self) -> None:
-    #     self.fixed_tester._check_number_in_range("EMGAIN")
-    #     assert self.fixed_tester.new_json["EMGAIN"] == 2
+    def test_check_str_not_in_allowed_values(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.check_kws_types()
+        self.extracted_tester.kws_types_checked["INSTMODE"] = "PHOOT"
+        self.extracted_tester._check_string_in_allowed_values("INSTMODE")
+        assert self.extracted_tester.checked_data["INSTMODE"] == ""
 
-    # def test_check_allowed_values(self) -> None:
-    #     self.fixed_tester._check_allowed_values()
+    def test_check_number_in_range(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.check_kws_types()
+        self.extracted_tester._check_number_in_range("EMGAIN")
+        assert self.extracted_tester.checked_data["EMGAIN"] == 2
 
-    # def test_check_type(self) -> None:
-    #     self.fixed_tester._check_type()
+    def test_check_number_not_in_range(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.check_kws_types()
+        self.extracted_tester.kws_types_checked["EMGAIN"] = 1
+        self.extracted_tester._check_number_in_range("EMGAIN")
+        assert self.extracted_tester.checked_data["EMGAIN"] == ""
 
-    # def test_check_wrong_type(self) -> None:
-    #     tester = tester = Header_Tester(
-    #         self.dict_header_jsons.copy(),
-    #         self.log_file,
-    #         self.hdr_cnt,
-    #         self.csv_folder,
-    #     )
-    #     tester.extract_info()
-    #     tester.fix_keywords()
-    #     tester.new_json["EMGAIN"] = "1"
-    #     tester._check_type()
-    #     assert tester.new_json["EMGAIN"] == ""
-
-    # def test_validate_info(self) -> None:
-    #     self.fixed_tester.validate_info()
-
-    # def test_Weather_Station(self) -> None:
-    #     dict_header_jsons = self.dict_header_jsons.copy()
-    #     dict_header_jsons["WSTATION"] = json.dumps(self.tester_hdr_content)
-    #     tester = Weather_Station(
-    #         dict_header_jsons, self.log_file, self.hdr_cnt, self.csv_folder
-    #     )
-    #     tester.extract_info()
-    #     tester.fix_keywords()
-    #     assert tester.new_json["PRESSURE"] == 10.1
+    def test_check_allowed_values(self) -> None:
+        self.extracted_tester.fix_keywords()
+        self.extracted_tester.check_allowed_values()
 
     # ==========================================================================
 

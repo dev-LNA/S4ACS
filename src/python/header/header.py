@@ -37,6 +37,7 @@ class Header(ABC):
         self.fixed_original_hdr_data: dict = {}
         self.extracted_data: dict = {}
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
+        self.kws_types_checked: dict = {k: "" for k in self.kws_specs.keywords}
         self.checked_data: dict = {k: "" for k in self.kws_specs.keywords}
 
         return
@@ -258,27 +259,24 @@ class Header(ABC):
 
     # ===================== Validation ===================================
 
-    def validate_info(self) -> None:
-        self._check_type()
-        self._check_allowed_values()
-        return
-
-    def _check_type(self) -> None:
+    def check_kws_types(self) -> None:
         for hdr_kw in self.kws_specs.keywords:
             try:
                 val = self.fixed_data[hdr_kw]
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
+                if val == "":
+                    continue
                 if not isinstance(val, self.kw_types[_type]):
                     self._write_log_file(
                         f'Keyword value "{val}" is not an instance of {repr(_type)}.',
                         hdr_kw,
                     )
                     return
-                self.checked_data[hdr_kw] = val
+                self.kws_types_checked[hdr_kw] = val
             except Exception as e:
                 self._write_log_file(repr(e), hdr_kw)
 
-    def _check_allowed_values(self) -> None:
+    def check_allowed_values(self) -> None:
         for hdr_kw in self.kws_specs.keywords:
             try:
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
@@ -292,7 +290,7 @@ class Header(ABC):
         return
 
     def _check_number_in_range(self, hdr_kw) -> None:
-        val = self.fixed_data[hdr_kw]
+        val = self.kws_types_checked[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         min, *max = a_values
         if not min <= val <= max[-1]:
@@ -305,7 +303,7 @@ class Header(ABC):
         return
 
     def _check_string_in_allowed_values(self, hdr_kw) -> None:
-        val = self.fixed_data[hdr_kw]
+        val = self.kws_types_checked[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         if val not in a_values and a_values != "":
             self._write_log_file(
