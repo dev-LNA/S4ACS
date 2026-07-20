@@ -1,5 +1,10 @@
 Keyword;Expected name;Type;Allowed values;Comment
-SIMPLE;NAME;boolean;true,false;conforms to FITS standard
-SIMPLE1;NAME;integer;0,100;conforms to FITS standard
-SIMPLE2;NAME;float;-1,1;conforms to FITS standard
-SIMPLE3;NAME;float;1,inf;conforms to FITS standard
+VSHIFT;;float;0.6,1.13,2.2,4.33;Vertical shift speed (ms)
+PRESSURE;;float;0,inf;Barometric pressure (mb), weather tower
+FRAMETRF;;boolean;true,false;Frame transfer on: T or F
+GUIVRSN;;string;;S4GUI software version
+EMGAIN;;integer;2,300;Electron multiplier gain
+OBSERVER;;string;;Observer(s)
+INSTMODE;;string;PHOT,POLAR;Instrument mode: PHOT or POLAR
+WPROMODE;;boolean;true,false;Waveplate rotator: real (T) or simulated (F)
+EXPTIME;;float;0.00001,86400;Exposure time (s)

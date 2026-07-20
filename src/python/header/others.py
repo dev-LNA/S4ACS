@@ -1,8 +1,12 @@
 import json
 import re
 from datetime import datetime
+from pathlib import Path
 
 from astropy.time import Time
+
+from python.header_content import Header_Content
+from python.keywords_specs import Keywords_Specifications
 
 from .header import Header
 
@@ -36,7 +40,7 @@ class Focuser(Header):
 class Weather_Station(Header):
     name = "WSTATION"
 
-    def fix_header_data(self) -> None:
+    def fix_original_string(self) -> None:
         if self.original_string is None:
             return
         if "Weather" in self.original_string[:7]:
@@ -117,10 +121,25 @@ class TCS(Header):
 class Header_Tester(Header):
     name = "TESTER"
 
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        kws_specs: Keywords_Specifications,
+        hdr_cnt: Header_Content,
+        log_file: Path,
+        file_name: Path,
+    ) -> None:
+        super().__init__(kws_specs, hdr_cnt, log_file, file_name)
         self.how_to_fix_regex = {"GUIVRSN": self._fix_soft_version}
 
     @staticmethod
     def _fix_soft_version(kw_value: str) -> str:
         return "v" + kw_value
+
+    def fix_original_string(self) -> None:
+        if self.original_string is not None:
+            self.fixed_original_string = self.original_string.split(" ", 1)[1]
+
+    def fix_original_hdr_data(self) -> None:
+        if self.original_hdr_data is not None:
+            self.fixed_original_hdr_data = self.original_hdr_data
+            self.fixed_original_hdr_data["TEST1"] = True

@@ -32,7 +32,9 @@ class Header(ABC):
 
         self.header_all_apps: dict
         self.original_string: str | None = None
+        self.fixed_original_string: str | None = None
         self.original_hdr_data: dict | None = None
+        self.fixed_original_hdr_data: dict = {}
         self.extracted_data: dict = {}
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
         self.checked_data: dict = {k: "" for k in self.kws_specs.keywords}
@@ -49,38 +51,40 @@ class Header(ABC):
             return
         self.original_string = header_data
 
-    def fix_header_data(self) -> None:
-        pass
+    def fix_original_string(self) -> None:
+        self.fixed_original_string = self.original_string
 
     def load_json(self) -> None:
-        if self.original_string is None:
+        if self.fixed_original_string is None:
             return
         try:
-            _json: dict[str, Any] = json.loads(self.original_string)
+            _json: dict[str, Any] = json.loads(self.fixed_original_string)
             self.original_hdr_data = {k.upper(): v for k, v in _json.items()}
         except Exception as e:
             self._write_log_file(
-                f"There was an error when loading the JSON data --> {self.original_string}."
+                f"There was an error when loading the JSON data --> {self.fixed_original_string}."
                 + repr(e)
             )
 
-    def extract_data(self) -> None:
-        if self.original_hdr_data is None:
-            return
+    def fix_original_hdr_data(self) -> None:
+        if self.original_hdr_data is not None:
+            self.fixed_original_hdr_data = self.original_hdr_data
 
+    def extract_data(self) -> None:
         for hdr_kw in self.kws_specs.keywords:
             try:
                 kw = hdr_kw
                 expected_name = self.hdr_cnt.expected_kw_names[hdr_kw]
                 if expected_name != "":
                     kw = expected_name
-                self.extracted_data[hdr_kw] = self.original_hdr_data[kw]
+                self.extracted_data[hdr_kw] = self.fixed_original_hdr_data[kw]
             except Exception as e:
                 self._write_log_file(repr(e), hdr_kw)
 
     def fix_keywords(self) -> None:
         for func in [
             self._replace_comma,
+            # === preprocessing ===
             self._convert_to_boolean,
             self._convert_to_float,
             self._convert_to_int,
@@ -153,7 +157,7 @@ class Header(ABC):
         for kw in self.kws_specs.replace_comma:
             try:
                 self._search_unwanted_kw(kw, ",")
-                self.fixed_data[kw] = self.extracted_data[kw].replace(",", ".")
+                self.extracted_data[kw] = self.extracted_data[kw].replace(",", ".")
             except Exception as e:
                 self._write_log_file(repr(e), kw)
 
@@ -165,6 +169,7 @@ class Header(ABC):
                 kw_value = self.extracted_data[kw]
                 regex_expr, ex_val = self.kws_specs.regex_expressions[kw]
                 if re.match(regex_expr, kw_value) is not None:
+                    self.fixed_data[kw] = kw_value
                     continue
                 self._write_log_file(
                     f"The provided value for the keyword {kw} '{kw_value}' does not match the expected format {ex_val}.",
@@ -184,11 +189,11 @@ class Header(ABC):
         try:
             kw_value = self.extracted_data[kw]
             regex_expr, _ = self.kws_specs.regex_expressions[kw]
-            if kw not in self.how_to_fix_regex.keys():
-                self._write_log_file(
-                    "The method to fix this keyword was not found.", kw
-                )
-                return
+            # if kw not in self.how_to_fix_regex.keys():
+            #     self._write_log_file(
+            #         "The method to fix this keyword was not found.", kw
+            #     )
+            #     return
             new_value = self.how_to_fix_regex[kw](kw_value)
             if re.match(regex_expr, new_value) is None:
                 self._write_log_file(

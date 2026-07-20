@@ -5,12 +5,13 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-# class Tester(BaseModel):
-#     TESTER: str
 
-#     @classmethod
-#     def from_tuple(cls, header_data: tuple) -> Applications:
-#         return Applications()
+class Test_Applications(BaseModel):
+    TESTER: str
+
+    @classmethod
+    def from_tuple(cls, header_data: tuple) -> Test_Applications:
+        return Test_Applications(TESTER=header_data[0])
 
 
 class External_Applications(BaseModel):

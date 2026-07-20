@@ -17,16 +17,17 @@ from python.setup import Header_Class_Setup
 
 
 def main(
-    file_name: str,
+    _file_name: str,
     data: np.ndarray,
-    hdr_data: tuple,
+    _hdr_data: tuple,
 ) -> str:
     error_json = Error_Json.no_error()
 
     try:
         setup = Header_Class_Setup("sparc4")
-        setup.create_setup(hdr_data, file_name)
-        hdr = setup.hdr
+        hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
+            _hdr_data, _file_name
+        )
 
         for obj in [
             Focuser,
@@ -37,17 +38,19 @@ def main(
             General_SPARC4_KWs,
             iXon_Ultra,
         ]:
-            obj = obj()
-            obj.write_header_all_apps(setup.hdr_data)
+            kws_specs = setup.create_hdr_specs(obj.name)
+            obj = obj(kws_specs, hdr_cnt, log_file, file_name)
+            obj.write_header_all_apps(hdr_data)
             obj.get_app_header_data()
-            obj.fix_header_data()
+            obj.fix_original_string()
             obj.load_json()
+            obj.fix_original_hdr_data()
             obj.extract_data()
             obj.fix_keywords()
             obj.validate_info()
             hdr = obj.fill_image_header(hdr)
 
-        processor = Post_Processor(setup.file_name, data, hdr)
+        processor = Post_Processor(file_name, data, hdr)
         processor.process()
     except Exception:
         error_json.status = True

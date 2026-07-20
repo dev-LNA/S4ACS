@@ -22,7 +22,7 @@ class S4ICS(ICS):
         super().write_header_all_apps(header_data)
         self.inst_mode = json.loads(header_data["GUI"])["INSTMODE"]
 
-    def _create_s4ics_kws(self) -> None:
+    def fix_original_hdr_data(self) -> None:
         if self.original_hdr_data is None:
             return
         mechanisms = self._treat_s4ics_json()
@@ -58,7 +58,7 @@ class S4ICS(ICS):
         )
 
         try:
-            self.original_hdr_data["ICSVRSN"] = self.original_hdr_data["VERSION"]
+            self.fixed_original_hdr_data["ICSVRSN"] = self.original_hdr_data["VERSION"]
         except Exception as e:
             self._write_log_file(repr(e), "ICSVRSN")
 
@@ -71,7 +71,7 @@ class S4ICS(ICS):
             return
         for comp, ics_corresp in zip(components_list, s4ics_correspondents):
             try:
-                self.original_hdr_data[comp] = mechanisms[ics_corresp][st_param]
+                self.fixed_original_hdr_data[comp] = mechanisms[ics_corresp][st_param]
             except Exception as e:
                 self._write_log_file(repr(e), comp)
 
@@ -98,24 +98,20 @@ class S4ICS(ICS):
             return {}
 
     def _write_WPPOS(self, wppos) -> None:
-        if self.original_hdr_data is None:
+        if self.fixed_original_hdr_data is None:
             return
         kw: str = "WPPOS"
         try:
             wppos = int(wppos)
             if wppos == -1 and self.inst_mode == "PHOT":
-                self.original_hdr_data[kw] = 0
+                self.fixed_original_hdr_data[kw] = 0
             elif 1 <= wppos <= 16 and self.inst_mode == "POLAR":
-                self.original_hdr_data[kw] = wppos
+                self.fixed_original_hdr_data[kw] = wppos
             else:
                 self._write_log_file(f"The unexpected value {wppos} was found.", kw)
         except Exception as e:
             self._write_log_file(repr(e), kw)
         return
-
-    def extract_data(self) -> None:
-        self._create_s4ics_kws()
-        super().extract_data()
 
 
 class EICS(ICS):
