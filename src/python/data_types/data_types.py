@@ -38,7 +38,7 @@ class External_Applications(BaseModel):
 
 class S4ACS_Cfg_File(BaseModel):
     channel: int
-    acs_mode: int
+    acs_mode: bool
     image_path: Path
     log_file_path: Path
     log_level: Log_Level

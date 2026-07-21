@@ -2,7 +2,6 @@
 
 import configparser
 import logging
-from datetime import datetime
 from pathlib import Path
 
 from python.data_types import Log_Level, S4ACS_Cfg_File
@@ -30,12 +29,6 @@ _log_levels = {
 def format_string(string: str) -> str:
     string = str(string)[2:-1]
     return string
-
-
-def write_error_log(message: str, log_file: str) -> None:
-    with open(log_file, "a") as file:
-        now = str(datetime.now())
-        file.write(now + " - " + message + "\n")
 
 
 def read_config_file(
