@@ -6,9 +6,8 @@ from pathlib import Path
 from typing import Any
 
 import astropy.io.fits as fits
-
-from python.header_content import Header_Content
-from python.keywords_specs import Keywords_Specifications
+from header_formatter.header_content import Header_Content
+from header_formatter.keywords_specs import Keywords_Specifications
 
 
 class Header(ABC):

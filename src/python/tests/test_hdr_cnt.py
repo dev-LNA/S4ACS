@@ -1,13 +1,13 @@
 import unittest
 from pathlib import Path
 
-from python.header_content import Header_Content
+from header_formatter.header_content import Header_Content
 
 
 class Test_Hdr_Cnt(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.csv_folder = Path.cwd() / "csv" / "tester"
+        cls.csv_folder = Path.cwd() / ".." / "csv" / "tester"
         return super().setUpClass()
 
     def test_init(self) -> None:

@@ -1,9 +1,8 @@
 import traceback
 
 import numpy as np
-
-from python.data_types import Error_Json
-from python.header import (
+from header_formatter.data_types import Error_Json
+from header_formatter.header import (
     GUI,
     S4ICS,
     TCS,
@@ -12,8 +11,8 @@ from python.header import (
     Weather_Station,
     iXon_Ultra,
 )
-from python.post_processor import Post_Processor
-from python.setup import Header_Class_Setup
+from header_formatter.post_processor import Post_Processor
+from header_formatter.setup import Header_Class_Setup
 
 
 def main(

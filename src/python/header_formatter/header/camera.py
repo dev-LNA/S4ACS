@@ -1,9 +1,8 @@
 from pathlib import Path
 
 import pandas as pd
-
-from python.header_content import Header_Content
-from python.keywords_specs import Keywords_Specifications
+from header_formatter.header_content import Header_Content
+from header_formatter.keywords_specs import Keywords_Specifications
 
 from .header import Header
 

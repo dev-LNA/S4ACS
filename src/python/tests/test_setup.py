@@ -3,14 +3,14 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from python.setup import Header_Class_Setup
+from header_formatter.setup import Header_Class_Setup
 
 
 class Test_Setup(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         instrument = "tester"
-        cls.csv_folder = Path.cwd() / "csv" / instrument
+        cls.csv_folder = Path.cwd() / ".." / "csv" / instrument
         cls.image_path = Path.home() / "images" / "today"
         cls.log_file_path = Path.home() / instrument / "log" / "s4acs1"
         cls.setup = Header_Class_Setup(instrument)

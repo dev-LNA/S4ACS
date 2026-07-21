@@ -1,8 +1,8 @@
 import json
 import unittest
 
-from python.header import Header_Tester
-from python.setup import Header_Class_Setup
+from header_formatter.header import Header_Tester
+from header_formatter.setup import Header_Class_Setup
 
 
 class Test_Header(unittest.TestCase):

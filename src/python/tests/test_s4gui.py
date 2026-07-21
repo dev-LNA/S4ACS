@@ -2,8 +2,8 @@ import json
 import unittest
 from pathlib import Path
 
-from python.header import GUI
-from python.setup import Header_Class_Setup
+from header_formatter.header import GUI
+from header_formatter.setup import Header_Class_Setup
 
 
 class Test_S4GUI(unittest.TestCase):

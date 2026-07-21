@@ -1,8 +1,8 @@
 import json
 import unittest
 
-from python.header import TCS, Focuser, Weather_Station
-from python.setup import Header_Class_Setup
+from header_formatter.header import TCS, Focuser, Weather_Station
+from header_formatter.setup import Header_Class_Setup
 
 
 class Test_TCS(unittest.TestCase):

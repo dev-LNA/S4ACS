@@ -4,7 +4,7 @@ import configparser
 import logging
 from pathlib import Path
 
-from python.data_types import Log_Level, S4ACS_Cfg_File
+from header_formatter.data_types import Log_Level, S4ACS_Cfg_File
 
 SUB_SYSTEMS = [
     "CCD",

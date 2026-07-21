@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-from python.utils import format_string, read_config_file
+from header_formatter.utils import format_string, read_config_file
 
 
 def test_parameters() -> None:

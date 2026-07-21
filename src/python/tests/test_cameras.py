@@ -1,8 +1,8 @@
 import json
 import unittest
 
-from python.header import CCD, iXon_Ultra
-from python.setup import Header_Class_Setup
+from header_formatter.header import CCD, iXon_Ultra
+from header_formatter.setup import Header_Class_Setup
 
 
 class Test_Camera(unittest.TestCase):

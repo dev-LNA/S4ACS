@@ -2,11 +2,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import astropy.io.fits as fits
-
-from python.data_types import External_Applications, Test_Applications
-from python.header_content import Header_Content
-from python.keywords_specs import Keywords_Specifications
-from python.utils import read_config_file
+from header_formatter.data_types import External_Applications, Test_Applications
+from header_formatter.header_content import Header_Content
+from header_formatter.keywords_specs import Keywords_Specifications
+from header_formatter.utils import read_config_file
 
 
 class Header_Class_Setup:
@@ -22,7 +21,7 @@ class Header_Class_Setup:
         self.instrument = instrument
         self.acs_config = read_config_file(instrument)
         self.today_str = self._create_today_str()
-        self._csv_folder = Path().cwd() / "csv" / self.instrument
+        self._csv_folder = Path().cwd() / ".." / "csv" / self.instrument
 
     def create_setup(
         self, _hdr_data: tuple, _file_name: str

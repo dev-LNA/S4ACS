@@ -4,8 +4,7 @@ from pathlib import Path
 import astropy.io.fits as fits
 import numpy as np
 from freezegun import freeze_time
-
-from python.post_processor import Post_Processor
+from header_formatter.post_processor import Post_Processor
 
 
 class Test_Setup(unittest.TestCase):

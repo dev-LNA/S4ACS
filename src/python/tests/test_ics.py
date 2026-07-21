@@ -1,9 +1,9 @@
 import json
 import unittest
 
-from python.header import S4ICS
-from python.setup import Header_Class_Setup
-from python.utils import ics_kw
+from header_formatter.header import S4ICS
+from header_formatter.setup import Header_Class_Setup
+from header_formatter.utils import ics_kw
 
 
 class Test_S4ICS(unittest.TestCase):

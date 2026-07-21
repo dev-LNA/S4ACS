@@ -2,11 +2,11 @@ import json
 import unittest
 from pathlib import Path
 
-from python.header import (
+from header_formatter.header import (
     General_KWs,
     General_SPARC4_KWs,
 )
-from python.setup import Header_Class_Setup
+from header_formatter.setup import Header_Class_Setup
 
 
 class Test_General_Kws(unittest.TestCase):
