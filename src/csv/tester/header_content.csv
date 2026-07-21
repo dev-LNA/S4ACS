@@ -1,7 +1,7 @@
 Keyword;Expected name;Type;Allowed values;Comment
 VSHIFT;;float;0.6,1.13,2.2,4.33;Vertical shift speed (ms)
 PRESSURE;;float;0,inf;Barometric pressure (mb), weather tower
-FRAMETRF;;boolean;true,false;Frame transfer on: T or F
+FRAMETRF;FRAME;boolean;true,false;Frame transfer on: T or F
 GUIVRSN;;string;;S4GUI software version
 EMGAIN;;integer;2,300;Electron multiplier gain
 OBSERVER;;string;;Observer(s)

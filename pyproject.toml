@@ -24,8 +24,5 @@ open-cov = "brave htmlcov/index.html"
 
 [tool.coverage.run]
 branch = true
-relative_files = true
-omit = ["__init__.py", "*/__init__.py", "**/__init__.py","main.py", "src/tests.py",]
+omit = ["__init__.py", "python/echmain.py"]
 
-[tool.coverage.report]
-omit = ["*/__init__.py", "**/__init__.py", "__init__.py"]
