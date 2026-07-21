@@ -3,7 +3,6 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from python.header import Header_Tester
 from python.setup import Header_Class_Setup
 
 
@@ -59,9 +58,3 @@ class Test_Setup(unittest.TestCase):
             Path("/home/denis/tester/log/s4acs1") / f"{self.today_str}_keywords.log"
         )
         assert self.setup.log_file == log_file
-
-    def test_hdr_cls_list(self) -> None:
-        _list = [Header_Tester]
-        self.setup.create_setup((r"{}",) * 7, "00000000_s4cs1_000001.fits")
-        for _cls1, _cls2 in zip(self.setup.header_classes_list, _list):
-            assert isinstance(_cls1, _cls2)

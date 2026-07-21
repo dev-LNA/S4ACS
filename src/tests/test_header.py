@@ -8,7 +8,7 @@ from python.setup import Header_Class_Setup
 class Test_Header(unittest.TestCase):
     def setUp(self) -> None:
         self._dict_data = {
-            "FRAMETRF": 1,
+            "FRAME": 1,
             "EMGAIN": "2",
             "EXPTIME": "1",
             "OBSERVER": "Denis",
@@ -173,7 +173,7 @@ class Test_Header(unittest.TestCase):
         self.tester.load_json()
         self.tester.fix_original_hdr_data()
         assert self.tester.fixed_original_hdr_data["TEST1"] is True
-        assert self.tester.fixed_original_hdr_data["FRAMETRF"] == 1
+        assert self.tester.fixed_original_hdr_data["FRAME"] == 1
 
     def test_extract_data(self) -> None:
         self.tester.write_header_all_apps(self.hdr_data)
@@ -183,6 +183,7 @@ class Test_Header(unittest.TestCase):
         self.tester.fix_original_hdr_data()
         self.tester.extract_data()
         del self._dict_data["TEST0"]
+        self._dict_data["FRAMETRF"] = self._dict_data.pop("FRAME")
         assert self.tester.extracted_data == self._dict_data
 
     def test_fix_keywords(self) -> None:
