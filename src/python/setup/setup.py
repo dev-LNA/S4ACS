@@ -81,34 +81,3 @@ class Header_Class_Setup:
     @property
     def csv_folder(self) -> Path:
         return self._csv_folder
-
-    # @property
-    # def header_classes_list(self) -> list[Header]:
-    #     _list: list[type[Header]]
-    #     parameters = (self.hdr_cnt, self.log_file, self.file_name)
-    #     if self.instrument == "sparc4":
-    #         _list = [
-    #             Focuser,
-    #             S4ICS,
-    #             GUI,
-    #             TCS,
-    #             Weather_Station,
-    #             General_SPARC4_KWs,
-    #             iXon_Ultra,
-    #         ]
-    #     elif self.instrument == "echarpe":
-    #         _list = [
-    #             Focuser,
-    #             EICS,
-    #             GUI,
-    #             TCS,
-    #             Weather_Station,
-    #             General_ECHARPE_KWs,
-    #             iKon_L,
-    #         ]
-    #     elif self.instrument == "tester":
-    #         _list = [Header_Tester]
-    #     else:
-    #         raise ValueError(f"Unkown instrument: {self.instrument}")
-
-    #     return [_cls(self.create_hdr_specs(_cls.name), *parameters) for _cls in _list]
