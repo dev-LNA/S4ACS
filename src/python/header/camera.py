@@ -1,5 +1,8 @@
+from pathlib import Path
+
 import pandas as pd
 
+from python.header_content import Header_Content
 from python.keywords_specs import Keywords_Specifications
 
 from .header import Header
@@ -8,8 +11,14 @@ from .header import Header
 class CCD(Header):
     name = "CCD"
 
-    def __init__(self, kws_specs: Keywords_Specifications, *args, **kwargs) -> None:
-        super().__init__(kws_specs, *args, **kwargs)
+    def __init__(
+        self,
+        kws_specs: Keywords_Specifications,
+        hdr_cnt: Header_Content,
+        log_file: Path,
+        file_name: Path,
+    ) -> None:
+        super().__init__(kws_specs, hdr_cnt, log_file, file_name)
         self.gain_values = pd.read_csv(
             kws_specs.csv_folder / "camera" / "preamp_gains.csv"
         )

@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 
@@ -102,7 +103,9 @@ class Keywords_Specifications:
             df = pd.read_csv(
                 self._csv_folder / "keywords in dict" / f"{self.app_name}.csv", sep=";"
             )
-            df["dict_parsed"] = df["dict"].apply(json.loads)
+            df["dict_parsed"] = df["dict"].apply(
+                json.loads, object_hook=self.convert_keys_int
+            )
             self.dict_w_kws = dict(zip(df["keyword"], df["dict_parsed"]))
 
     def _get_empty_keywords(self) -> None:
@@ -114,3 +117,7 @@ class Keywords_Specifications:
                 self._csv_folder / "empty keywords" / f"{self.app_name}.csv"
             )
             self.empty_kws_vals = dict(zip(df["keyword"], df["values"]))
+
+    @staticmethod
+    def convert_keys_int(d) -> dict[int | Any, Any]:
+        return {int(k) if k.isdigit() else k: v for k, v in d.items()}
