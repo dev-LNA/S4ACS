@@ -180,7 +180,7 @@ ics_kw = {
                 "condition": "READY",
                 "position": "0",
                 "pos_name": "HOME",
-                "pos_id": "-1",
+                "pos_id": "1",
             },
         },
         {

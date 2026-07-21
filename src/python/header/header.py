@@ -101,7 +101,7 @@ class Header(ABC):
 
     def _write_log_file(self, message: str, keyword: str | None = None) -> None:
         now = str(datetime.now())
-        _str = now + " - " + f"FILENAME= {self.file_name}, " + f"SUB-SYTEM={self.name}"
+        _str = now + " - " + f"FILENAME= {self.file_name}, " + f"SUB-SYSTEM={self.name}"
         if keyword is not None:
             _str += f", KEYWORD={keyword}"
         _str += " - " + message + "\n"

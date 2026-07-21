@@ -1,4 +1,8 @@
 import json
+from pathlib import Path
+
+from python.header_content import Header_Content
+from python.keywords_specs import Keywords_Specifications
 
 from .header import Header
 
@@ -6,18 +10,23 @@ from .header import Header
 class ICS(Header):
     name = "ICS"
 
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
+
+class S4ICS(ICS):
+    def __init__(
+        self,
+        kws_specs: Keywords_Specifications,
+        hdr_cnt: Header_Content,
+        log_file: Path,
+        file_name: Path,
+    ) -> None:
+        super().__init__(kws_specs, hdr_cnt, log_file, file_name)
         self.inst_mode: str
-        return
+        self.how_to_fix_regex = {"ICSVRSN": self._fix_ICSVRSN}
 
     @staticmethod
     def _fix_ICSVRSN(kw_value: str) -> str:
         return "v" + kw_value
 
-
-class S4ICS(ICS):
     def write_header_all_apps(self, header_data: dict) -> None:
         super().write_header_all_apps(header_data)
         self.inst_mode = json.loads(header_data["GUI"])["INSTMODE"]
@@ -94,7 +103,7 @@ class S4ICS(ICS):
 
             return mechanisms
         except Exception as e:
-            self._write_log_file(repr(e), "")
+            self._write_log_file(repr(e))
             return {}
 
     def _write_WPPOS(self, wppos) -> None:

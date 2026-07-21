@@ -15,8 +15,8 @@ class Test_Applications(BaseModel):
 
 
 class External_Applications(BaseModel):
-    CCD: str = Field(min_length=2)
     GUI: str = Field(min_length=2)
+    CCD: str = Field(min_length=2)
     ICS: str
     TCS: str
     FOCUSER: str

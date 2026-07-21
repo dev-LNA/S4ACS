@@ -1,3 +1,4 @@
+# pragma: no cover
 from .data_types import (
     Error_Json,
     External_Applications,

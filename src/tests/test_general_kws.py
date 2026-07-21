@@ -3,7 +3,6 @@ import unittest
 from pathlib import Path
 
 from python.header import (
-    General_ECHARPE_KWs,
     General_KWs,
     General_SPARC4_KWs,
 )
