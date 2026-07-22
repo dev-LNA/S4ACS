@@ -36,7 +36,7 @@ def read_config_file(
 ) -> S4ACS_Cfg_File:
 
     section_name = "channel configuration"
-    cfg_file_folder = Path.home() / instrument.upper() / "ACS"
+    cfg_file_folder = Path(Path().resolve().anchor) / instrument.lower() / "config"
     cfg_file = cfg_file_folder / file_name
     cfg_file_content = {}
     if not cfg_file.exists():

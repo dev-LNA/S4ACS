@@ -21,7 +21,14 @@ class Header_Class_Setup:
         self.instrument = instrument
         self.acs_config = read_config_file(instrument)
         self.today_str = self._create_today_str()
-        self._csv_folder = Path().cwd() / ".." / "csv" / self.instrument
+        self._csv_folder = (
+            Path(__file__).resolve().parent
+            / ".."
+            / ".."
+            / ".."
+            / "csv"
+            / self.instrument
+        )
 
     def create_setup(
         self, _hdr_data: tuple, _file_name: str
@@ -38,7 +45,7 @@ class Header_Class_Setup:
         file_name = self.verify_file_exists(self.acs_config.image_path / _file_name)
         return (
             hdr,
-            hdr_data.model_dump(),
+            hdr_data.dict(),
             hdr_cnt,
             self.log_file,
             file_name,

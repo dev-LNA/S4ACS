@@ -57,4 +57,4 @@ def main(
         error_json.code = 1
         error_json.source = traceback.format_exc()
 
-    return error_json.model_dump_json()
+    return error_json.json()
