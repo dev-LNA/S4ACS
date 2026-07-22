@@ -1,26 +1,26 @@
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 import pandas as pd
 
 
 class Keywords_Specifications:
     def __init__(self, csv_folder: Path, app_name: str) -> None:
-        self.to_bool: list | None = None
-        self.to_int: list | None = None
-        self.to_float: list | None = None
-        self.replace_comma: list | None = None
-        self.any_val: list | None = None
-        self.predefined_vals: list | None = None
-        self.to_bool_w_cond: dict | None = None
+        self.to_bool: Union[list, None] = None
+        self.to_int: Union[list, None] = None
+        self.to_float: Union[list, None] = None
+        self.replace_comma: Union[list, None] = None
+        self.any_val: Union[list, None] = None
+        self.predefined_vals: Union[list, None] = None
+        self.to_bool_w_cond: Union[dict, None] = None
 
-        self.kws_in_dict: list | None = None
-        self.empty_kws: list | None = None
-        self.regex: list | None = None
+        self.kws_in_dict: Union[list, None] = None
+        self.empty_kws: Union[list, None] = None
+        self.regex: Union[list, None] = None
 
         self.dict_w_kws: dict[str, dict]
-        self.empty_kws_vals: dict[str, str | int | float]
+        self.empty_kws_vals: dict[str, Union[str, int, float]]
         self.regex_expressions: dict[str, tuple[str, str]]
 
         self._csv_folder = csv_folder
@@ -70,7 +70,7 @@ class Keywords_Specifications:
         self._get_keywords_in_dict()
         self._get_empty_keywords()
 
-    def _get_bool_w_cond_kws(self) -> dict | None:
+    def _get_bool_w_cond_kws(self) -> Union[dict, None]:
         if "to bool w cond" in self.kws_specs.keys():
             self.to_bool_w_cond = {
                 kw: condition.split(";")
@@ -119,5 +119,5 @@ class Keywords_Specifications:
             self.empty_kws_vals = dict(zip(df["keyword"], df["values"]))
 
     @staticmethod
-    def convert_keys_int(d) -> dict[int | Any, Any]:
+    def convert_keys_int(d) -> "dict[Union[int, Any], Any]":
         return {int(k) if k.isdigit() else k: v for k, v in d.items()}

@@ -23,7 +23,7 @@ class Post_Processor:
 
     def __init__(self, file_name: Path, data: np.ndarray, hdr: fits.Header) -> None:
         self.file_name = file_name
-        self.data = np.asarray(data, dtype=np.uint16)
+        self.data = np.array(data, dtype=np.uint16)  # type: ignore
         self.hdr = hdr
 
     def process(self) -> None:

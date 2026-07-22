@@ -25,7 +25,7 @@ class Header_Class_Setup:
 
     def create_setup(
         self, _hdr_data: tuple, _file_name: str
-    ) -> tuple[fits.Header, dict[str, str], Header_Content, Path, Path]:
+    ) -> "tuple[fits.Header, dict[str, str], Header_Content, Path, Path]":
         """Create the instances needed by the Header class.
 
         Args:

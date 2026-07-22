@@ -3,7 +3,7 @@ import re
 from abc import ABC
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Union
 
 import astropy.io.fits as fits
 from header_formatter.header_content import Header_Content
@@ -30,9 +30,9 @@ class Header(ABC):
         self.how_to_fix_regex: dict
 
         self.header_all_apps: dict
-        self.original_string: str | None = None
-        self.fixed_original_string: str | None = None
-        self.original_hdr_data: dict | None = None
+        self.original_string: Union[str, None] = None
+        self.fixed_original_string: Union[str, None] = None
+        self.original_hdr_data: Union[dict, None] = None
         self.fixed_original_hdr_data: dict = {}
         self.extracted_data: dict = {}
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
@@ -98,7 +98,7 @@ class Header(ABC):
             func()
         return
 
-    def _write_log_file(self, message: str, keyword: str | None = None) -> None:
+    def _write_log_file(self, message: str, keyword: Union[str, None] = None) -> None:
         now = str(datetime.now())
         _str = now + " - " + f"FILENAME= {self.file_name}, " + f"SUB-SYSTEM={self.name}"
         if keyword is not None:
