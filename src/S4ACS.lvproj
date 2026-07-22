@@ -118,6 +118,7 @@
 			</Item>
 			<Item Name="data types" Type="Folder">
 				<Item Name="GUI Resquest.lvclass" Type="LVClass" URL="../LabVIEW/gui request/GUI Resquest.lvclass"/>
+				<Item Name="Initial Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Initial Configuration/Initial Configuration.lvclass"/>
 			</Item>
 			<Item Name="Log File.lvclass" Type="LVClass" URL="../LabVIEW/Log File/Log File.lvclass"/>
 			<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../LabVIEW/Python Toolkit/Python Toolkit.lvclass"/>
