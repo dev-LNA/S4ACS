@@ -124,7 +124,6 @@
 		</Item>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
 		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
-		<Item Name="s4main.py" Type="Document" URL="../s4main.py"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
