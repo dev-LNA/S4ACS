@@ -22,6 +22,7 @@ class Test_Kws_Specs(unittest.TestCase):
         assert kws_specs.empty_kws is None
         assert kws_specs.regex is None
         assert kws_specs.to_bool_w_cond is None
+        assert kws_specs.remainder_keywords == []
         assert kws_specs.csv_folder == self.csv_folder
         assert kws_specs.app_name == "TESTER"
         assert (
@@ -66,3 +67,4 @@ class Test_Kws_Specs(unittest.TestCase):
         assert kws_specs.replace_comma == ["PRESSURE"]
         assert kws_specs.empty_kws == ["BITPIX"]
         assert kws_specs.empty_kws_vals == {"BITPIX": 16}
+        assert kws_specs.remainder_keywords == ["GAIN", "RDNOISE", "NAXIS1"]

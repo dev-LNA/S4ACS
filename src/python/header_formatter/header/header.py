@@ -36,8 +36,12 @@ class Header(ABC):
         self.fixed_original_hdr_data: dict = {}
         self.extracted_data: dict = {}
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
-        self.kws_types_checked: dict = {k: "" for k in self.kws_specs.keywords}
-        self.checked_data: dict = {k: "" for k in self.kws_specs.keywords}
+        self.kws_types_checked: dict = {
+            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
+        }
+        self.checked_data: dict = {
+            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
+        }
 
         return
 
@@ -97,6 +101,11 @@ class Header(ABC):
         ]:
             func()
         return
+
+    def fix_remainder_keywords(self) -> None:
+        for kw in self.kws_types_checked.keys():
+            if kw not in self.fixed_data.keys():
+                raise ValueError(f"The remainder kw {kw} was not fixed!")
 
     def _write_log_file(self, message: str, keyword: Union[str, None] = None) -> None:
         now = str(datetime.now())

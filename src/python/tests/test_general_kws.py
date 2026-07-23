@@ -1,6 +1,5 @@
 import json
 import unittest
-from pathlib import Path
 
 from header_formatter.header import (
     General_KWs,
@@ -49,7 +48,7 @@ class Test_General_Kws(unittest.TestCase):
 class Test_General_SPARC4_Kws(unittest.TestCase):
     def setUp(self) -> None:
         self._dict_data = {
-            "FILENAME": "",
+            "FILENAME": "00000000_s4c1_000000.fits",
             "NCYCLES": 1,
             "CYCLIND": 0,
             "ACSVRSN": "v0.0.0",

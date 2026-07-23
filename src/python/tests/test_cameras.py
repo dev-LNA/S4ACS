@@ -32,6 +32,7 @@ class Test_Camera(unittest.TestCase):
             "TEMPST": "TEMPERATURE_STABILIZED",
             "TGTEMP": -30,
             "COOLER": True,
+            "VSHIFT": 3,
         }
 
         self._hdr_data = dict.fromkeys(
@@ -39,7 +40,7 @@ class Test_Camera(unittest.TestCase):
         )
         self._hdr_data["CCD"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
-        hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
+        self.hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
             json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = setup.create_hdr_specs(CCD.name)
@@ -51,6 +52,7 @@ class Test_Camera(unittest.TestCase):
         self.tester.fix_original_hdr_data()
         self.tester.extract_data()
         self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
 
     def test_idx_tab(self) -> None:
         assert self.tester.idx_tab == 3
@@ -82,6 +84,12 @@ class Test_Camera(unittest.TestCase):
         assert self.tester.fixed_data["TGTEMP"] == -30
         assert self.tester.fixed_data["COOLER"] is True
 
+    def test_fix_remainder_keywords(self) -> None:
+        assert self.tester.fixed_data["NAXIS1"] == 1024
+        assert self.tester.fixed_data["NAXIS2"] == 1024
+        assert self.tester.fixed_data["GAIN"] == 4.39
+        assert self.tester.fixed_data["RDNOISE"] == 65.5
+
 
 class Test_iXon_Ultra(unittest.TestCase):
     def setUp(self) -> None:
@@ -111,6 +119,9 @@ class Test_iXon_Ultra(unittest.TestCase):
             "TGTEMP": -30,
             "COOLER": True,
             "EMMODE": 1,
+            "VSHIFT": 3,
+            "EMGAIN": 2,
+            "FRAMETRF": True,
         }
 
         self._hdr_data = dict.fromkeys(
@@ -118,7 +129,7 @@ class Test_iXon_Ultra(unittest.TestCase):
         )
         self._hdr_data["CCD"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
-        hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
+        self.hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
             json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
 
@@ -132,8 +143,9 @@ class Test_iXon_Ultra(unittest.TestCase):
         self.tester.fix_original_hdr_data()
         self.tester.extract_data()
         self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
 
-    def test_iXon_Ultra(self) -> None:
+    def test_init(self) -> None:
         assert self.tester.kws_specs.dict_w_kws["VSHIFT"] == [0.6, 1.13, 2.2, 4.33]
         assert self.tester.kws_specs.dict_w_kws["PREAMP"] == ["Gain 1", "Gain 2"]
         assert self.tester.kws_specs.dict_w_kws["EMMODE"] == [

@@ -49,8 +49,12 @@ class Test_Header(unittest.TestCase):
         assert self.tester.original_hdr_data is None
         assert self.tester.extracted_data == {}
         assert self.tester.fixed_data == {k: "" for k in self.kws_specs.keywords}
-        assert self.tester.kws_types_checked == {k: "" for k in self.kws_specs.keywords}
-        assert self.tester.checked_data == {k: "" for k in self.kws_specs.keywords}
+        assert self.tester.kws_types_checked == {
+            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
+        }
+        assert self.tester.checked_data == {
+            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
+        }
 
     # ===================== Convertions ======================
 
@@ -203,3 +207,16 @@ class Test_Header(unittest.TestCase):
         assert self.tester.fixed_data["GUIVRSN"] == "v0.0.0"
         assert self.tester.fixed_data["WPROMODE"] is True
         assert self.tester.fixed_data["PRESSURE"] == 10.1
+
+    def test_fix_remainder_keywords(self) -> None:
+        self.tester.write_header_all_apps(self.hdr_data)
+        self.tester.get_app_header_data()
+        self.tester.fix_original_string()
+        self.tester.load_json()
+        self.tester.fix_original_hdr_data()
+        self.tester.extract_data()
+        self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
+        assert self.tester.fixed_data["GAIN"] == 1
+        assert self.tester.fixed_data["RDNOISE"] == 2
+        assert self.tester.fixed_data["NAXIS1"] == 3

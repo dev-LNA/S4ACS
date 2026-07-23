@@ -27,15 +27,16 @@ class CCD(Header):
 
     def fix_keywords(self) -> None:
         super().fix_keywords()
+        self._fix_EXPTIME()
+        self.fixed_data["FRAMEIND"] += 1
+
+    def fix_remainder_keywords(self) -> None:
         self._find_index_tab()
         self._write_ccd_gain()
         self._write_read_noise()
-        self._fix_EXPTIME()
         self.calc_NAXIS1()
         self.calc_NAXIS2()
-        self.fixed_data["FRAMEIND"] += 1
-
-        return
+        return super().fix_remainder_keywords()
 
     def _write_read_noise(self) -> None:
         try:

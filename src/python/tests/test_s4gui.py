@@ -17,7 +17,7 @@ class Test_S4GUI(unittest.TestCase):
             "PROPID": 1,
             "TCSMODE": 1,
             "FILTER": 1,
-            "GUIVRSN": "0.0.0",
+            "GUIVRSN": "v0.0.0",
             "CTRLINTE": 1,
             "SYNCMODE": 1,
             "INSTMODE": 1,

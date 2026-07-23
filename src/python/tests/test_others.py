@@ -34,6 +34,7 @@ class Test_TCS(unittest.TestCase):
         self.tester.fix_original_hdr_data()
         self.tester.extract_data()
         self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
 
     def test_obstype(self) -> None:
         assert self.tester.obstype == "ZERO"
@@ -89,6 +90,7 @@ class Test_Focuser(unittest.TestCase):
         self.tester.fix_original_hdr_data()
         self.tester.extract_data()
         self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
 
     def test_fix_keywords(self) -> None:
         assert self.tester.fixed_data["TFOCSTAT"] == "BUSY"

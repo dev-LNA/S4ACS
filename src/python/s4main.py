@@ -46,6 +46,7 @@ def main(
             obj.fix_original_hdr_data()
             obj.extract_data()
             obj.fix_keywords()
+            obj.fix_remainder_keywords()
             obj.check_kws_types()
             obj.check_allowed_values()
             hdr = obj.fill_image_header(hdr)

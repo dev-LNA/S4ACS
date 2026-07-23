@@ -62,6 +62,7 @@ class Header_Class_Setup:
         """
         kws_specs = Keywords_Specifications(self._csv_folder, hdr_name)
         kws_specs.load_data()
+        kws_specs.validate_specifications()
         return kws_specs
 
     @staticmethod

@@ -30,10 +30,9 @@ class Focuser(Header):
             self._write_log_file(repr(e), "TFOCSTAT")
         return
 
-    def fix_keywords(self) -> None:
-        super().fix_keywords()
+    def fix_remainder_keywords(self) -> None:
         self._fix_tfocstat()
-        return
+        return super().fix_remainder_keywords()
 
 
 class Weather_Station(Header):
@@ -62,9 +61,12 @@ class TCS(Header):
 
     def fix_keywords(self) -> None:
         super().fix_keywords()
-        self._write_TCSDATE()
         self.fix_RA_DEC()
         return
+
+    def fix_remainder_keywords(self) -> None:
+        self._write_TCSDATE()
+        return super().fix_remainder_keywords()
 
     def _write_TCSDATE(self) -> None:
         if self.original_hdr_data is None:
@@ -139,3 +141,8 @@ class Header_Tester(Header):
         if self.original_hdr_data is not None:
             self.fixed_original_hdr_data = self.original_hdr_data
             self.fixed_original_hdr_data["TEST1"] = True
+
+    def fix_remainder_keywords(self) -> None:
+        self.fixed_data["GAIN"] = 1
+        self.fixed_data["RDNOISE"] = 2
+        self.fixed_data["NAXIS1"] = 3

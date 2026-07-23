@@ -14,6 +14,7 @@ class Keywords_Specifications:
         self.any_val: Union[list, None] = None
         self.predefined_vals: Union[list, None] = None
         self.to_bool_w_cond: Union[dict, None] = None
+        self.remainder_keywords: list = []
 
         self.kws_in_dict: Union[list, None] = None
         self.empty_kws: Union[list, None] = None
@@ -63,6 +64,11 @@ class Keywords_Specifications:
         if "predefined val" in self.kws_specs.keys():
             self.predefined_vals = [
                 val for val in self.kws_specs["predefined val"].values if val != ""
+            ]
+
+        if "remainder kws" in self.kws_specs.keys():
+            self.remainder_keywords = [
+                val for val in self.kws_specs["remainder kws"].values if val != ""
             ]
 
         self._get_bool_w_cond_kws()
@@ -121,3 +127,10 @@ class Keywords_Specifications:
     @staticmethod
     def convert_keys_int(d) -> "dict[Union[int, Any], Any]":
         return {int(k) if k.isdigit() else k: v for k, v in d.items()}
+
+    def validate_specifications(self) -> None:
+        for kw in self.remainder_keywords:
+            if kw in self.keywords:
+                raise ValueError(
+                    f"Keyword {kw} should not be in the main keywords list."
+                )
