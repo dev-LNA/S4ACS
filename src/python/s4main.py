@@ -18,7 +18,7 @@ from header_formatter.setup import Header_Class_Setup
 def main(
     _file_name: str,
     data: np.ndarray,
-    _hdr_data: tuple,
+    _hdr_data: str,
 ) -> str:
     error_json = Error_Json.no_error()
 

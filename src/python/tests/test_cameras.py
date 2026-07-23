@@ -34,10 +34,13 @@ class Test_Camera(unittest.TestCase):
             "COOLER": True,
         }
 
-        self._hdr_data = ("{}",) + (json.dumps(self._dict_data),) + ("{}",) * 5
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
+        )
+        self._hdr_data["CCD"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
         hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = setup.create_hdr_specs(CCD.name)
         self.tester = CCD(kws_specs, hdr_cnt, log_file, file_name)
@@ -110,10 +113,13 @@ class Test_iXon_Ultra(unittest.TestCase):
             "EMMODE": 1,
         }
 
-        self._hdr_data = ("{}",) + (json.dumps(self._dict_data),) + ("{}",) * 5
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
+        )
+        self._hdr_data["CCD"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
         hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
 
         kws_specs = setup.create_hdr_specs(iXon_Ultra.name)

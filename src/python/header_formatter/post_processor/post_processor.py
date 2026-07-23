@@ -30,7 +30,7 @@ class Post_Processor:
         self._rotate_image()
         hdu = fits.PrimaryHDU(self.data, self.hdr)
         hdu = self._fix_standard_keywords(hdu)
-        hdu.writeto(self.file_name, output_verify="ignore")
+        hdu.writeto(self.file_name)
 
     @staticmethod
     def _fix_standard_keywords(hdu: fits.PrimaryHDU) -> fits.PrimaryHDU:

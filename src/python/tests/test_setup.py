@@ -10,9 +10,11 @@ class Test_Setup(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         instrument = "tester"
-        cls.csv_folder = Path.cwd() / ".." / "csv" / instrument
-        cls.image_path = Path.home() / "images" / "today"
-        cls.log_file_path = Path.home() / instrument / "log" / "s4acs1"
+        cls.csv_folder = Path().resolve().parent / "csv" / instrument
+        cls.image_path = Path(Path(__file__).resolve().anchor) / "images" / "today"
+        cls.log_file_path = (
+            Path(Path(__file__).resolve().anchor) / instrument / "log" / "s4acs1"
+        )
         cls.setup = Header_Class_Setup(instrument)
         now = datetime.now(tz=timezone.utc)
         if now.hour < 12:
@@ -27,8 +29,8 @@ class Test_Setup(unittest.TestCase):
         assert setup.acs_config.channel == 1
         assert setup.acs_config.image_path == self.image_path
         assert setup.acs_config.log_file_path == self.log_file_path
-        assert setup.acs_config.log_level == 20
-        assert setup._csv_folder == self.csv_folder
+        assert setup.acs_config.log_level == 10
+        assert setup._csv_folder.resolve() == self.csv_folder.resolve()
         now = datetime.now(tz=timezone.utc)
         if now.hour < 12:
             now -= timedelta(1)
@@ -54,7 +56,5 @@ class Test_Setup(unittest.TestCase):
         assert self.setup._create_today_str() == self.today_str
 
     def test_log_file(self) -> None:
-        log_file = (
-            Path("/home/denis/tester/log/s4acs1") / f"{self.today_str}_keywords.log"
-        )
+        log_file = self.log_file_path / f"{self.today_str}_keywords.log"
         assert self.setup.log_file == log_file

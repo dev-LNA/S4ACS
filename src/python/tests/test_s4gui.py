@@ -1,6 +1,5 @@
 import json
 import unittest
-from pathlib import Path
 
 from header_formatter.header import GUI
 from header_formatter.setup import Header_Class_Setup
@@ -25,10 +24,13 @@ class Test_S4GUI(unittest.TestCase):
             "OBSTYPE": 1,
             "COMMENT": "It is a comment",
         }
-        self._hdr_data = (json.dumps(self._dict_data),) + ("{}",) * 6
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
+        )
+        self._hdr_data["GUI"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
         _, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = setup.create_hdr_specs(GUI.name)
         self.tester = GUI(kws_specs, hdr_cnt, log_file, file_name)

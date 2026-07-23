@@ -1,3 +1,4 @@
+import json
 import logging
 from enum import IntEnum
 from pathlib import Path
@@ -10,8 +11,9 @@ class Test_Applications(BaseModel):
     TESTER: str
 
     @classmethod
-    def from_tuple(cls, header_data: tuple) -> Any:
-        return Test_Applications(TESTER=header_data[0])
+    def from_dict(cls, _header_data: str) -> Any:
+        header_data = json.loads(_header_data)
+        return Test_Applications(TESTER=header_data["TESTER"])
 
 
 class External_Applications(BaseModel):
@@ -24,15 +26,16 @@ class External_Applications(BaseModel):
     GENERAL_KWS: str
 
     @classmethod
-    def from_tuple(cls, header_data: tuple) -> Any:
+    def from_dict(cls, _header_data: str) -> Any:
+        header_data = json.loads(_header_data)
         return External_Applications(
-            GUI=header_data[0],
-            CCD=header_data[1],
-            ICS=header_data[2],
-            TCS=header_data[3],
-            FOCUSER=header_data[4],
-            WSTATION=header_data[5],
-            GENERAL_KWS=header_data[6],
+            GUI=header_data["GUI"],
+            CCD=header_data["CCD"],
+            ICS=header_data["ICS"],
+            TCS=header_data["TCS"],
+            FOCUSER=header_data["FOCUSER"],
+            WSTATION=header_data["WSTATION"],
+            GENERAL_KWS=header_data["GENERAL KW"],
         )
 
 

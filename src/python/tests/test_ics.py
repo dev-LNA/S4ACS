@@ -8,15 +8,14 @@ from header_formatter.utils import ics_kw
 
 class Test_S4ICS(unittest.TestCase):
     def setUp(self) -> None:
-        self._hdr_data = (
-            (json.dumps({"INSTMODE": "POLAR"}),)
-            + ("{}",)
-            + (json.dumps(ics_kw),)
-            + ("{}",) * 4
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
         )
+        self._hdr_data["ICS"] = json.dumps(ics_kw)
+        self._hdr_data["GUI"] = json.dumps({"INSTMODE": "POLAR"})
         setup = Header_Class_Setup("sparc4")
         hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = setup.create_hdr_specs(S4ICS.name)
         self.tester = S4ICS(kws_specs, hdr_cnt, log_file, file_name)

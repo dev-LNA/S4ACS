@@ -23,10 +23,13 @@ class Test_General_Kws(unittest.TestCase):
             "SEQINDEX": 1,
             "NSEQ": 1,
         }
-        self._hdr_data = ("{}",) * 6 + (json.dumps(self._dict_data),)
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
+        )
+        self._hdr_data["GENERAL KW"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
         hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = setup.create_hdr_specs(General_KWs.name)
         self.tester = General_KWs(kws_specs, hdr_cnt, log_file, file_name)
@@ -57,10 +60,13 @@ class Test_General_SPARC4_Kws(unittest.TestCase):
             "SEQINDEX": 0,
             "NSEQ": 1,
         }
-        self._hdr_data = ("{}",) * 6 + (json.dumps(self._dict_data),)
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
+        )
+        self._hdr_data["GENERAL KW"] = json.dumps(self._dict_data)
         setup = Header_Class_Setup("sparc4")
         hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = setup.create_hdr_specs(General_KWs.name)
         self.tester = General_SPARC4_KWs(kws_specs, hdr_cnt, log_file, file_name)

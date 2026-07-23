@@ -16,16 +16,14 @@ class Test_TCS(unittest.TestCase):
             "DATE": "27/02/24",
             "TIME": "10:14:59",
         }
-
-        self._hdr_data = (
-            (json.dumps({"OBSTYPE": "ZERO"}),)
-            + ("{}",) * 2
-            + (json.dumps(self._dict_data),)
-            + ("{}",) * 3
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
         )
+        self._hdr_data["GUI"] = json.dumps({"OBSTYPE": "ZERO"})
+        self._hdr_data["TCS"] = json.dumps(self._dict_data)
         self.setup = Header_Class_Setup("sparc4")
         _, hdr_data, hdr_cnt, log_file, file_name = self.setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = self.setup.create_hdr_specs(TCS.name)
         self.tester = TCS(kws_specs, hdr_cnt, log_file, file_name)
@@ -52,10 +50,13 @@ class Test_TCS(unittest.TestCase):
 class Test_WStation(unittest.TestCase):
     def setUp(self) -> None:
 
-        self._hdr_data = ("{}",) * 5 + ("Weather " + json.dumps({}),) + ("{}",)
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
+        )
+        self._hdr_data["WSTATIONS"] = "Weather " + json.dumps({})
         self.setup = Header_Class_Setup("sparc4")
         _, hdr_data, hdr_cnt, log_file, file_name = self.setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = self.setup.create_hdr_specs(Weather_Station.name)
         self.tester = Weather_Station(kws_specs, hdr_cnt, log_file, file_name)
@@ -71,15 +72,13 @@ class Test_WStation(unittest.TestCase):
 
 class Test_Focuser(unittest.TestCase):
     def setUp(self) -> None:
-
-        self._hdr_data = (
-            ("{}",) * 4
-            + (json.dumps({"INITIALIZED": True, "ISMOVING": True}),)
-            + ("{}",) * 2
+        self._hdr_data = dict.fromkeys(
+            ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
         )
+        self._hdr_data["FOCUSER"] = json.dumps({"INITIALIZED": True, "ISMOVING": True})
         self.setup = Header_Class_Setup("sparc4")
         _, hdr_data, hdr_cnt, log_file, file_name = self.setup.create_setup(
-            self._hdr_data, "00000000_s4c1_000001.fits"
+            json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
         )
         kws_specs = self.setup.create_hdr_specs(Focuser.name)
         self.tester = Focuser(kws_specs, hdr_cnt, log_file, file_name)

@@ -19,7 +19,7 @@ class Test_Header(unittest.TestCase):
             "PRESSURE": "10,1",
             "TEST0": True,
         }
-        self._hdr_data = ("TESTER " + json.dumps(self._dict_data),)
+        self._hdr_data = json.dumps({"TESTER": "TESTER " + json.dumps(self._dict_data)})
         self.setup = Header_Class_Setup("tester")
         self.hdr, self.hdr_data, self.hdr_cnt, self.log_file, self.file_name = (
             self.setup.create_setup(self._hdr_data, "00000000_s4c1_000001.fits")
@@ -151,7 +151,7 @@ class Test_Header(unittest.TestCase):
     def test_get_app_header_data(self) -> None:
         self.tester.write_header_all_apps(self.hdr_data)
         self.tester.get_app_header_data()
-        assert self.tester.original_string == self._hdr_data[0]
+        assert self.tester.original_string == json.loads(self._hdr_data)["TESTER"]
 
     def test_fix_original_string(self) -> None:
         self.tester.write_header_all_apps(self.hdr_data)

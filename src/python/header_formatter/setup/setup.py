@@ -31,7 +31,7 @@ class Header_Class_Setup:
         )
 
     def create_setup(
-        self, _hdr_data: tuple, _file_name: str
+        self, _hdr_data: str, _file_name: str
     ) -> "tuple[fits.Header, dict[str, str], Header_Content, Path, Path]":
         """Create the instances needed by the Header class.
 
@@ -40,7 +40,7 @@ class Header_Class_Setup:
             file_name (str): image file name
         """
         hdr_cnt = Header_Content(self._csv_folder)
-        hdr_data = self.ext_app_classes[self.instrument].from_tuple(_hdr_data)
+        hdr_data = self.ext_app_classes[self.instrument].from_dict(_hdr_data)
         hdr = fits.Header(hdr_cnt.cards)
         file_name = self.verify_file_exists(self.acs_config.image_path / _file_name)
         return (
