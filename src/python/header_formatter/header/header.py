@@ -263,7 +263,7 @@ class Header(ABC):
     # ===================== Validation ===================================
 
     def check_kws_types(self) -> None:
-        for hdr_kw in self.kws_specs.keywords:
+        for hdr_kw in self.kws_types_checked.keys():
             try:
                 val = self.fixed_data[hdr_kw]
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
@@ -280,19 +280,29 @@ class Header(ABC):
                 self._write_log_file(repr(e), hdr_kw)
 
     def check_allowed_values(self) -> None:
-        for hdr_kw in self.kws_specs.keywords:
+        for hdr_kw in self.kws_types_checked.keys():
             try:
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
                 if _type in ["integer", "float"]:
                     self._check_number_in_range(hdr_kw)
                 elif _type == "string":
                     self._check_string_in_allowed_values(hdr_kw)
+                elif _type == "boolean":
+                    self._check_boolean(hdr_kw)
             except Exception as e:
                 self._write_log_file(repr(e), hdr_kw)
 
         return
 
-    def _check_number_in_range(self, hdr_kw) -> None:
+    def _check_boolean(self, hdr_kw: str) -> None:
+        val = self.kws_types_checked[hdr_kw]
+        if not isinstance(val, bool):
+            self._write_log_file(f"Provided value is not a boolean: {val}.", hdr_kw)
+            return
+        self.checked_data[hdr_kw] = val
+        return
+
+    def _check_number_in_range(self, hdr_kw: str) -> None:
         val = self.kws_types_checked[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         min, *max = a_values
@@ -305,7 +315,7 @@ class Header(ABC):
         self.checked_data[hdr_kw] = val
         return
 
-    def _check_string_in_allowed_values(self, hdr_kw) -> None:
+    def _check_string_in_allowed_values(self, hdr_kw: str) -> None:
         val = self.kws_types_checked[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         if val not in a_values and a_values != "":

@@ -33,6 +33,9 @@ class Test_Camera(unittest.TestCase):
             "TGTEMP": -30,
             "COOLER": True,
             "VSHIFT": 3,
+            "EMGAIN": 2,
+            "EMMODE": 1,
+            "FRAMETRF": True,
         }
 
         self._hdr_data = dict.fromkeys(
@@ -162,3 +165,22 @@ class Test_iXon_Ultra(unittest.TestCase):
 
     def test_write_readrate(self) -> None:
         assert self.tester.fixed_data["READRATE"] == 0.1
+
+    def test_fill_image_header(self) -> None:
+        self.tester.check_kws_types()
+        self.tester.check_allowed_values()
+        hdr = self.tester.fill_image_header(self.hdr)
+        assert hdr["SHUTTER"] == "Closed"
+        assert hdr["VCLKAMP"] == "Normal"
+        assert hdr["NFRAMES"] == 1
+        assert hdr["DATE-OBS"] == "0000-00-00T00:00:00.000000"
+        assert hdr["UTDATE"] == "0000-00-00"
+        assert hdr["UTTIME"] == "00:00:00.000000"
+        assert hdr["CCDTEMP"] == -30
+        assert hdr["TEMPST"] == "TEMPERATURE_STABILIZED"
+        assert hdr["TGTEMP"] == -30
+        assert hdr["COOLER"] is True
+        assert hdr["NAXIS1"] == 1024
+        assert hdr["NAXIS2"] == 1024
+        assert hdr["GAIN"] == 0.8
+        assert hdr["RDNOISE"] == 3.47
