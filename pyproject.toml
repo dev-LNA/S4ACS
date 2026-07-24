@@ -26,3 +26,6 @@ open-cov = "brave htmlcov/index.html"
 branch = true
 omit = ["__init__.py", "python/echmain.py"]
 
+[tool.pytest.ini_options]
+pythonpath = ["src/python"]
+testpaths = ["src/python/tests"]

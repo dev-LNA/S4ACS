@@ -3,8 +3,8 @@ tcs_json = {
     "version": "20240131",
     "cmd": "",
     "objectName": "NO_OBJ",
-    "raAcquis": "02:25:32,1",
-    "decAcquis": "+03:22:12,1",
+    "raAcquis": "02:25:32.1",
+    "decAcquis": "+03:22:12.1",
     "epochAcquis": "2000.0",
     "airMass": "1.000",
     "julianDate": "2460368.05207",
@@ -56,6 +56,7 @@ focuser_json = {
     "temperature": 0,
     "timestamp": "2024-02-27T10:15:48.255",
     "version": "1.0.0",
+    "telfocus": 5000,
 }
 
 WS_json = {
@@ -125,25 +126,26 @@ s4gui_json = {
 }
 
 general_kw = {
-    "ACSVRSN": "v1.56.0",
+    "ACSVRSN": "v1.56.3",
     "ACSMODE": False,
-    "filename": "20251223_s4c1_20251221.fits",
+    "filename": "20260723_s4c1_000001.fits",
     "ncycles": 1,
     "cyclind": 0,
     "channel": 1,
     "ACQERROR": False,
+    "SDKVRSN": "0.000.00000.0",
     "seqindex": 0,
     "nseq": 1,
 }
 ccd_kw = {
-    "FILENAME": "20251223_s4c1_20251221.fits",
+    "FILENAME": "20260723_s4c1_000001.fits",
     "FRAMEIND": 0,
     "CCDTEMP": 0,
     "TEMPST": "TEMPERATURE_OFF",
     "CCDSERN": 9914,
     "PREAMP": 0,
     "READRATE": 0,
-    "VSHIFT": 3,
+    "VSHIFT": 0,
     "VCLKAMP": 0,
     "ACQMODE": 3,
     "SHUTTER": 2,
@@ -158,9 +160,9 @@ ccd_kw = {
     "NFRAMES": 1,
     "COOLER": 0,
     "TGTEMP": 0,
-    "date-obs": "2025-12-23T18:35:10.271484",
-    "utdate": "2025-12-23",
-    "uttime": "18:35:10.271484",
+    "date-obs": "2026-07-23T18:47:59.719488",
+    "utdate": "2026-07-23",
+    "uttime": "18:47:59.719488",
     "EMGAIN": 2,
     "FRAMETRF": True,
     "EMMODE": 1,
@@ -170,7 +172,7 @@ ics_kw = {
     "version": "v0.0.0",
     "comment": "this is a comment",
     "tcpServerSocket": "192.168.1.170",
-    "tcpServerEnabled": "True",
+    "tcpServerEnabled": True,
     "timestamp": "0000-00-00T00:0:000.0",
     "mechanisms": [
         {
@@ -187,7 +189,7 @@ ics_kw = {
             "name": "WPSEL",
             "status": {
                 "mode": "ACTIVE",
-                "condition": "BUSY",
+                "condition": "READY",
                 "position": "50",
                 "pos_name": "OFF",
                 "pos_id": "2",
@@ -197,7 +199,7 @@ ics_kw = {
             "name": "CALW",
             "status": {
                 "mode": "ACTIVE",
-                "condition": "TIMEOUT",
+                "condition": "READY",
                 "position": "144",
                 "pos_name": "OFF",
                 "pos_id": "3",
@@ -207,7 +209,7 @@ ics_kw = {
             "name": "ASEL",
             "status": {
                 "mode": "ACTIVE",
-                "condition": "NONE",
+                "condition": "READY",
                 "position": "0",
                 "pos_name": "OFF",
                 "pos_id": "1",

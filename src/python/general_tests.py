@@ -58,6 +58,3 @@
 # file = os.path.join("C:\\", "images", "today", "test.fits")
 # fits.writeto(file, image, header=tcs.hdr, overwrite=True)
 
-from pathlib import Path
-
-print(Path(__file__).resolve().parent / ".." / "csv")

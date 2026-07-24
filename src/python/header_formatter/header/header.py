@@ -5,7 +5,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Union
 
-import astropy.io.fits as fits
+from astropy.io import fits
 from header_formatter.header_content import Header_Content
 from header_formatter.keywords_specs import Keywords_Specifications
 
@@ -43,8 +43,6 @@ class Header(ABC):
             k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
         }
 
-        return
-
     def write_header_all_apps(self, header_data: dict) -> None:
         self.header_all_apps = header_data
 
@@ -64,7 +62,7 @@ class Header(ABC):
         try:
             _json: dict[str, Any] = json.loads(self.fixed_original_string)
             self.original_hdr_data = {k.upper(): v for k, v in _json.items()}
-        except Exception as e:
+        except Exception as e:  # type:ignore
             self._write_log_file(
                 f"There was an error when loading the JSON data --> {self.fixed_original_string}."
                 + repr(e)
@@ -82,7 +80,7 @@ class Header(ABC):
                 if expected_name != "":
                     kw = expected_name
                 self.extracted_data[hdr_kw] = self.fixed_original_hdr_data[kw]
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), hdr_kw)
 
     def fix_keywords(self) -> None:
@@ -124,7 +122,7 @@ class Header(ABC):
         for kw in self.kws_specs.to_float:
             try:
                 self.fixed_data[kw] = float(self.extracted_data[kw])
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_int(self) -> None:
@@ -133,7 +131,7 @@ class Header(ABC):
         for kw in self.kws_specs.to_int:
             try:
                 self.fixed_data[kw] = int(self.extracted_data[kw])
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_boolean(self) -> None:
@@ -142,7 +140,7 @@ class Header(ABC):
         for kw in self.kws_specs.to_bool:
             try:
                 self.fixed_data[kw] = bool(self.extracted_data[kw])
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _convert_to_bool_with_condition(self) -> None:
@@ -157,7 +155,7 @@ class Header(ABC):
                     self.fixed_data[kw] = True
                 else:
                     self._write_log_file(f"Invalid keyword value: {val}", kw)
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _replace_comma(self) -> None:
@@ -167,7 +165,7 @@ class Header(ABC):
             try:
                 self._search_unwanted_kw(kw, ",")
                 self.extracted_data[kw] = self.extracted_data[kw].replace(",", ".")
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _verify_regex(self) -> None:
@@ -186,14 +184,14 @@ class Header(ABC):
                 )
                 self._write_log_file("Trying to fix...", kw)
                 self._fix_regex_keyword(kw)
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _fix_regex_keyword(self, kw) -> None:
         try:
             kw_value = self.extracted_data[kw]
             regex_expr, _ = self.kws_specs.regex_expressions[kw]
-            if kw not in self.how_to_fix_regex.keys():
+            if kw not in self.how_to_fix_regex:
                 self._write_log_file(
                     "The method to fix this keyword was not implemented.", kw
                 )
@@ -205,7 +203,7 @@ class Header(ABC):
                 )
                 return
             self.fixed_data[kw] = new_value
-        except Exception as e:
+        except Exception as e:  # type:ignore
             self._write_log_file(repr(e), kw)
         return
 
@@ -215,7 +213,7 @@ class Header(ABC):
         for kw, val in self.kws_specs.empty_kws_vals.items():
             try:
                 self.fixed_data[kw] = val
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _write_any_value(self) -> None:
@@ -224,7 +222,7 @@ class Header(ABC):
         for kw in self.kws_specs.any_val:
             try:
                 self.fixed_data[kw] = self.extracted_data[kw]
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _write_predefined_value(self) -> None:
@@ -241,7 +239,7 @@ class Header(ABC):
                     )
                     return
                 self.fixed_data[kw] = self.extracted_data[kw]
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _kw_in_dict(self) -> None:
@@ -251,7 +249,7 @@ class Header(ABC):
             try:
                 data = self.extracted_data[kw]
                 self.fixed_data[kw] = val[data]
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
     def _search_unwanted_kw(self, kw, _str) -> None:
@@ -263,7 +261,7 @@ class Header(ABC):
     # ===================== Validation ===================================
 
     def check_kws_types(self) -> None:
-        for hdr_kw in self.kws_types_checked.keys():
+        for hdr_kw in self.kws_types_checked:
             try:
                 val = self.fixed_data[hdr_kw]
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
@@ -276,11 +274,11 @@ class Header(ABC):
                     )
                     return
                 self.kws_types_checked[hdr_kw] = val
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), hdr_kw)
 
     def check_allowed_values(self) -> None:
-        for hdr_kw in self.kws_types_checked.keys():
+        for hdr_kw in self.kws_types_checked:
             try:
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
                 if _type in ["integer", "float"]:
@@ -289,10 +287,8 @@ class Header(ABC):
                     self._check_string_in_allowed_values(hdr_kw)
                 elif _type == "boolean":
                     self._check_boolean(hdr_kw)
-            except Exception as e:
+            except Exception as e:  # type: ignore
                 self._write_log_file(repr(e), hdr_kw)
-
-        return
 
     def _check_boolean(self, hdr_kw: str) -> None:
         val = self.kws_types_checked[hdr_kw]
@@ -331,6 +327,6 @@ class Header(ABC):
         for kw, val in self.checked_data.items():
             try:
                 hdr[kw] = val
-            except Exception as e:
+            except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
         return hdr
