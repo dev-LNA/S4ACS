@@ -6,13 +6,13 @@ class General_KWs(Header):
 
     def fix_keywords(self) -> None:
         super().fix_keywords()
-        self.fixed_data["CYCLIND"] = self.extracted_data["CYCLIND"] + 1
+        self.fixed_data["CYCLIND"] = self.fixed_data["CYCLIND"] + 1
 
 
 class General_SPARC4_KWs(General_KWs):
     def fix_keywords(self) -> None:
         super().fix_keywords()
-        self.fixed_data["SEQINDEX"] = self.extracted_data["SEQINDEX"] + 1
+        self.fixed_data["SEQINDEX"] = self.fixed_data["SEQINDEX"] + 1
 
 
 class General_ECHARPE_KWs(General_KWs):

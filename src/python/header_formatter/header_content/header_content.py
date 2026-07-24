@@ -12,25 +12,21 @@ class Header_Content:
         self.get_keyword_types()
         self.get_allowed_kw_vals()
 
-        return
-
     def read_hdr_ctnt_csv(self) -> None:
         self.hdr_cnt = pd.read_csv(
             self.csv_folder / "header_content.csv", delimiter=";", keep_default_na=False
         )
         self.keywords = [kw for kw in self.hdr_cnt["Keyword"]]
         self.comments = [comment for comment in self.hdr_cnt["Comment"]]
-        return
 
     def get_keyword_types(self) -> None:
         self.keyword_types = {
             k: v for (k, v) in zip(self.hdr_cnt["Keyword"], self.hdr_cnt["Type"])
         }
-        return
 
     def get_expected_kw_names(self) -> None:
         self.expected_kw_names = {
-            k: v
+            k.upper(): v
             for (k, v) in zip(self.hdr_cnt["Keyword"], self.hdr_cnt["Expected name"])
         }
 
@@ -50,7 +46,6 @@ class Header_Content:
                     val = [v == "true" for v in val]
                 allowed_kw_values[kw] = val
         self.allowed_kw_values = allowed_kw_values
-        return
 
     @property
     def cards(self) -> list:

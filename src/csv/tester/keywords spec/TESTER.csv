@@ -1,4 +1,4 @@
-Header Keywords,to bool,to int,to float,any val,kws in dict,predefined val,regex,to bool w cond,to bool condition,replace comma,empty keywords,remainder kws
+Header Keywords,to bool,to int,to float,any val,kws in dict,predefined val,regex,to bool w cond,to bool condition,replace comma,empty keywords,deducted kws
 FRAMETRF,FRAMETRF,EMGAIN,EXPTIME,OBSERVER,VSHIFT,INSTMODE,GUIVRSN,WPROMODE,SIMULATED;ACTIVE,PRESSURE,BITPIX,GAIN
 EMGAIN,,,PRESSURE,,,,,,,,,RDNOISE
 EXPTIME,,,,,,,,,,,,NAXIS1

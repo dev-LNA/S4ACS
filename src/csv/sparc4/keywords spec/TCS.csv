@@ -1,4 +1,4 @@
-Header Keywords,to float,regex,replace comma,remainder kws
+Header Keywords,to float,regex,replace comma,deducted kws
 RA,AIRMASS,RA,RA,TCSDATE
 DEC,INSTROT,DEC,DEC,
 TCSHA,,TCSHA,TCSHA,

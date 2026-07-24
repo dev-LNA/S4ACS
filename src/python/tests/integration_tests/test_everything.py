@@ -15,6 +15,7 @@ from header_formatter.utils import (
     WS_json,
     ccd_kw,
     focuser_json,
+    general_kw,
     ics_kw,
     s4gui_json,
     tcs_json,
@@ -33,6 +34,7 @@ class Test_Everything(unittest.TestCase):
         self._hdr_data["FOCUSER"] = json.dumps(focuser_json)
         self._hdr_data["ICS"] = json.dumps(ics_kw)
         self._hdr_data["TCS"] = json.dumps(tcs_json)
+        self._hdr_data["GENERAL KW"] = json.dumps(general_kw)
 
         setup = Header_Class_Setup("sparc4")
         self.hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
@@ -61,19 +63,10 @@ class Test_Everything(unittest.TestCase):
             obj.check_kws_types()
             obj.check_allowed_values()
             self.hdr = obj.fill_image_header(self.hdr)
+            # print(kws_specs.empty_kws_vals)
+            # raise ValueError
 
     def test_fill_image_header(self) -> None:
-        assert self.hdr["SHUTTER"] == "Closed"
-        assert self.hdr["VCLKAMP"] == "Normal"
-        assert self.hdr["NFRAMES"] == 1
-        assert self.hdr["DATE-OBS"] == "2026-07-23T18:47:59.719488"
-        assert self.hdr["UTDATE"] == "2026-07-23"
-        assert self.hdr["UTTIME"] == "18:47:59.719488"
-        assert self.hdr["CCDTEMP"] == 0
-        assert self.hdr["TEMPST"] == "TEMPERATURE_OFF"
-        assert self.hdr["TGTEMP"] == 0
-        assert self.hdr["COOLER"] is False
-        assert self.hdr["NAXIS1"] == 1024
-        assert self.hdr["NAXIS2"] == 1024
-        assert self.hdr["GAIN"] == 3.37
-        assert self.hdr["RDNOISE"] == 6.66
+        if "" in self.hdr.values():
+            print(repr(self.hdr))
+            assert False

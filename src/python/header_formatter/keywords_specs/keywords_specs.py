@@ -1,4 +1,5 @@
 import json
+from ast import literal_eval
 from pathlib import Path
 from typing import Any, Union
 
@@ -14,7 +15,7 @@ class Keywords_Specifications:
         self.any_val: Union[list, None] = None
         self.predefined_vals: Union[list, None] = None
         self.to_bool_w_cond: Union[dict, None] = None
-        self.remainder_keywords: list = []
+        self.deducted_keywords: Union[list, None] = None
 
         self.kws_in_dict: Union[list, None] = None
         self.empty_kws: Union[list, None] = None
@@ -29,46 +30,56 @@ class Keywords_Specifications:
         self.kws_specs = pd.read_csv(
             self._csv_folder / "keywords spec" / f"{self.app_name}.csv"
         ).fillna("")
-        return
 
     @property
     def csv_folder(self) -> Path:
         return self._csv_folder
 
+    @property
+    def all_keywords(self) -> list:
+        _list = self.keywords.copy()
+        if self.deducted_keywords is not None:
+            _list += self.deducted_keywords.copy()
+        if self.empty_kws is not None:
+            _list += self.empty_kws.copy()
+        return _list
+
     def load_data(self) -> None:
 
-        self.keywords = self.kws_specs["Header Keywords"].to_list()
+        self.keywords = [
+            val for val in self.kws_specs["Header Keywords"].values if val != ""
+        ]
 
-        if "to bool" in self.kws_specs.keys():
+        if "to bool" in self.kws_specs:
             self.to_bool = [
                 val for val in self.kws_specs["to bool"].values if val != ""
             ]
 
-        if "to int" in self.kws_specs.keys():
+        if "to int" in self.kws_specs:
             self.to_int = [val for val in self.kws_specs["to int"].values if val != ""]
 
-        if "to float" in self.kws_specs.keys():
+        if "to float" in self.kws_specs:
             self.to_float = [
                 val for val in self.kws_specs["to float"].values if val != ""
             ]
 
-        if "replace comma" in self.kws_specs.keys():
+        if "replace comma" in self.kws_specs:
             self.replace_comma = [
                 val for val in self.kws_specs["replace comma"].values if val != ""
             ]
 
-        if "any val" in self.kws_specs.keys():
+        if "any val" in self.kws_specs:
             self.any_val = [
                 val for val in self.kws_specs["any val"].values if val != ""
             ]
-        if "predefined val" in self.kws_specs.keys():
+        if "predefined val" in self.kws_specs:
             self.predefined_vals = [
                 val for val in self.kws_specs["predefined val"].values if val != ""
             ]
 
-        if "remainder kws" in self.kws_specs.keys():
-            self.remainder_keywords = [
-                val for val in self.kws_specs["remainder kws"].values if val != ""
+        if "deducted kws" in self.kws_specs:
+            self.deducted_keywords = [
+                val for val in self.kws_specs["deducted kws"].values if val != ""
             ]
 
         self._get_bool_w_cond_kws()
@@ -77,7 +88,7 @@ class Keywords_Specifications:
         self._get_empty_keywords()
 
     def _get_bool_w_cond_kws(self) -> Union[dict, None]:
-        if "to bool w cond" in self.kws_specs.keys():
+        if "to bool w cond" in self.kws_specs:
             self.to_bool_w_cond = {
                 kw: condition.split(";")
                 for (kw, condition) in zip(
@@ -89,7 +100,7 @@ class Keywords_Specifications:
         return
 
     def _get_regex_keywords(self) -> None:
-        if "regex" in self.kws_specs.keys():
+        if "regex" in self.kws_specs:
             self.regex = [val for val in self.kws_specs["regex"].values if val != ""]
             df = pd.read_csv(
                 self._csv_folder / "regex expressions" / f"{self.app_name}.csv"
@@ -102,7 +113,7 @@ class Keywords_Specifications:
             )  # type: ignore
 
     def _get_keywords_in_dict(self) -> None:
-        if "kws in dict" in self.kws_specs.keys():
+        if "kws in dict" in self.kws_specs:
             self.kws_in_dict = [
                 val for val in self.kws_specs["kws in dict"].values if val != ""
             ]
@@ -115,21 +126,33 @@ class Keywords_Specifications:
             self.dict_w_kws = dict(zip(df["keyword"], df["dict_parsed"]))
 
     def _get_empty_keywords(self) -> None:
-        if "empty keywords" in self.kws_specs.keys():
+        if "empty keywords" in self.kws_specs:
             self.empty_kws = [
                 val for val in self.kws_specs["empty keywords"].values if val != ""
             ]
             df = pd.read_csv(
                 self._csv_folder / "empty keywords" / f"{self.app_name}.csv"
             )
+            df["values"] = df["values"].apply(self.converte_type)
             self.empty_kws_vals = dict(zip(df["keyword"], df["values"]))
 
     @staticmethod
     def convert_keys_int(d) -> "dict[Union[int, Any], Any]":
         return {int(k) if k.isdigit() else k: v for k, v in d.items()}
 
+    @staticmethod
+    def converte_type(value) -> Union[Any, str]:
+        try:
+            return literal_eval(value)
+        except SyntaxError:
+            return value
+        except ValueError:
+            return value
+
     def validate_specifications(self) -> None:
-        for kw in self.remainder_keywords:
+        if self.deducted_keywords is None:
+            return
+        for kw in self.deducted_keywords:
             if kw in self.keywords:
                 raise ValueError(
                     f"Keyword {kw} should not be in the main keywords list."

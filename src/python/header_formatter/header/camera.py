@@ -59,19 +59,16 @@ class CCD(Header):
     def _fix_EXPTIME(self) -> None:
         if 1e-5 > self.fixed_data["EXPTIME"] > 9.999999e-6:
             self.fixed_data["EXPTIME"] = 1e-5
-        return
 
     def calc_NAXIS1(self) -> None:
         self.fixed_data["NAXIS1"] = (
             self.fixed_data["FINALLIN"] - self.fixed_data["INITLIN"]
         ) // self.fixed_data["VBIN"] + 1
-        return
 
     def calc_NAXIS2(self) -> None:
         self.fixed_data["NAXIS2"] = (
             self.fixed_data["FINALCOL"] - self.fixed_data["INITCOL"]
         ) // self.fixed_data["HBIN"] + 1
-        return
 
 
 class iXon_Ultra(CCD):

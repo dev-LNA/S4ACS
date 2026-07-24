@@ -3,6 +3,7 @@ import unittest
 
 from header_formatter.header import TCS, Focuser, Weather_Station
 from header_formatter.setup import Header_Class_Setup
+from header_formatter.utils import WS_json
 
 
 class Test_TCS(unittest.TestCase):
@@ -54,7 +55,7 @@ class Test_WStation(unittest.TestCase):
         self._hdr_data = dict.fromkeys(
             ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
         )
-        self._hdr_data["WSTATIONS"] = "Weather " + json.dumps({})
+        self._hdr_data["WSTATION"] = "Weather " + json.dumps(WS_json)
         self.setup = Header_Class_Setup("sparc4")
         _, hdr_data, hdr_cnt, log_file, file_name = self.setup.create_setup(
             json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"
@@ -65,18 +66,27 @@ class Test_WStation(unittest.TestCase):
         self.tester.get_app_header_data()
         self.tester.fix_original_string()
         self.tester.load_json()
+        self.tester.fix_original_hdr_data()
+        self.tester.extract_data()
+        self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
 
     def test_fix_original_string(self) -> None:
         if self.tester.original_string is not None:
-            assert "Weather" not in self.tester.original_string
+            assert "Weather" not in self.tester.fixed_original_string
 
 
 class Test_Focuser(unittest.TestCase):
     def setUp(self) -> None:
+        self._dcit_data = {
+            "INITIALIZED": True,
+            "ISMOVING": True,
+            "POSITION": 100,
+        }
         self._hdr_data = dict.fromkeys(
             ["CCD", "GUI", "ICS", "FOCUSER", "WSTATION", "GENERAL KW", "TCS"], "{}"
         )
-        self._hdr_data["FOCUSER"] = json.dumps({"INITIALIZED": True, "ISMOVING": True})
+        self._hdr_data["FOCUSER"] = json.dumps(self._dcit_data)
         self.setup = Header_Class_Setup("sparc4")
         _, hdr_data, hdr_cnt, log_file, file_name = self.setup.create_setup(
             json.dumps(self._hdr_data), "00000000_s4c1_000001.fits"

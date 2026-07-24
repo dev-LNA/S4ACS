@@ -42,7 +42,10 @@ class Weather_Station(Header):
         if self.original_string is None:
             return
         if "Weather" in self.original_string[:7]:
-            self.original_string = self.original_string.replace("Weather", "")
+            self.fixed_original_string = self.original_string.replace("Weather", "")
+            return
+        else:
+            return super().fix_original_string()
 
 
 class TCS(Header):

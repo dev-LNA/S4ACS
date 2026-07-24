@@ -111,7 +111,7 @@ s4gui_json = {
     "CTRLINTE": "S4GEI",
     "PROJID": "ENG",
     "SYNCMODE": "ASYNC",
-    "INSTMODE": "PHOT",
+    "INSTMODE": "POLAR",
     "FILTER": "CLEAR",
     "OBSTYPE": "OBJECT",
     "GUIVRSN": "v0.0.0",

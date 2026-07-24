@@ -27,7 +27,7 @@ class Header(ABC):
         self.log_file = log_file
         self.file_name = file_name
 
-        self.how_to_fix_regex: dict
+        self.how_to_fix_regex: Union[dict, None] = None
 
         self.header_all_apps: dict
         self.original_string: Union[str, None] = None
@@ -36,12 +36,8 @@ class Header(ABC):
         self.fixed_original_hdr_data: dict = {}
         self.extracted_data: dict = {}
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
-        self.kws_types_checked: dict = {
-            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
-        }
-        self.checked_data: dict = {
-            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
-        }
+        self.kws_types_checked: dict = {k: "" for k in self.kws_specs.all_keywords}
+        self.checked_data: dict = {k: "" for k in self.kws_specs.all_keywords}
 
     def write_header_all_apps(self, header_data: dict) -> None:
         self.header_all_apps = header_data
@@ -95,21 +91,20 @@ class Header(ABC):
             self._write_predefined_value,
             self._verify_regex,
             self._kw_in_dict,
-            self._replace_empty_kws,
         ]:
             func()
-        return
 
     def fix_remainder_keywords(self) -> None:
-        for kw in self.kws_types_checked.keys():
-            if kw not in self.fixed_data.keys():
+        self._replace_empty_kws()
+        for kw in self.kws_types_checked:
+            if kw not in self.fixed_data:
                 raise ValueError(f"The remainder kw {kw} was not fixed!")
 
     def _write_log_file(self, message: str, keyword: Union[str, None] = None) -> None:
         now = str(datetime.now())
         _str = now + " - " + f"FILENAME= {self.file_name}, " + f"SUB-SYSTEM={self.name}"
         if keyword is not None:
-            _str += f", KEYWORD={keyword}"
+            _str += f", KEYWORD={keyword:8}"
         _str += " - " + message + "\n"
         with open(self.log_file, "a") as file:
             file.write(_str)
@@ -191,7 +186,7 @@ class Header(ABC):
         try:
             kw_value = self.extracted_data[kw]
             regex_expr, _ = self.kws_specs.regex_expressions[kw]
-            if kw not in self.how_to_fix_regex:
+            if self.how_to_fix_regex is None:
                 self._write_log_file(
                     "The method to fix this keyword was not implemented.", kw
                 )

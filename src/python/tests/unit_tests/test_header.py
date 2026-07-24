@@ -38,6 +38,7 @@ class Test_Header(unittest.TestCase):
         self.extracted_tester.load_json()
         self.extracted_tester.fix_original_hdr_data()
         self.extracted_tester.extract_data()
+        print(self.tester.kws_specs.keywords)
 
     def test_init(self) -> None:
         assert self.tester.kws_specs == self.kws_specs
@@ -50,11 +51,9 @@ class Test_Header(unittest.TestCase):
         assert self.tester.extracted_data == {}
         assert self.tester.fixed_data == {k: "" for k in self.kws_specs.keywords}
         assert self.tester.kws_types_checked == {
-            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
+            k: "" for k in self.kws_specs.all_keywords
         }
-        assert self.tester.checked_data == {
-            k: "" for k in self.kws_specs.keywords + self.kws_specs.remainder_keywords
-        }
+        assert self.tester.checked_data == {k: "" for k in self.kws_specs.all_keywords}
 
     # ===================== Convertions ======================
 
