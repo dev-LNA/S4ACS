@@ -228,8 +228,8 @@ class Test_Header(unittest.TestCase):
         self.tester.extract_data()
         self.tester.fix_keywords()
         self.tester.fix_remainder_keywords()
-        self.tester.fixed_data["VSHIFT"] = 3
         self.tester.check_kws_types()
+        self.tester.kws_types_checked["VSHIFT"] = 3
         self.tester.check_allowed_values()
         assert self.tester.checked_data["VSHIFT"] == ""
 

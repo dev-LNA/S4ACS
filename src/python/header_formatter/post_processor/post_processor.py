@@ -1,8 +1,8 @@
 from datetime import datetime
 from pathlib import Path
 
-import astropy.io.fits as fits
 import numpy as np
+from astropy.io import fits
 
 
 class Post_Processor:

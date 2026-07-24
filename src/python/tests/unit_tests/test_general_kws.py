@@ -33,7 +33,6 @@ class Test_General_Kws(unittest.TestCase):
         self.tester.check_kws_types()
         self.tester.check_allowed_values()
         self.hdr = self.tester.fill_image_header(self.hdr)
-        print(self.tester.kws_specs.empty_kws_vals)
 
     def test_fixed_keywords(self) -> None:
         assert self.tester.fixed_data["CYCLIND"] == 1
@@ -67,3 +66,6 @@ class Test_General_SPARC4_Kws(unittest.TestCase):
     def test_fixed_keywords(self) -> None:
         assert self.tester.fixed_data["CYCLIND"] == 1
         assert self.tester.fixed_data["SEQINDEX"] == 1
+
+    def test_num_kws_predefined_vals(self) -> None:
+        assert "BITPIX" in self.tester.num_kws_predefined_vals

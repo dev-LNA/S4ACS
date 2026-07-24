@@ -8,6 +8,10 @@ class General_KWs(Header):
         super().fix_keywords()
         self.fixed_data["CYCLIND"] = self.fixed_data["CYCLIND"] + 1
 
+    def _get_numeric_kws_predefined_vals(self) -> None:
+        super()._get_numeric_kws_predefined_vals()
+        self.num_kws_predefined_vals.append("BITPIX")
+
 
 class General_SPARC4_KWs(General_KWs):
     def fix_keywords(self) -> None:

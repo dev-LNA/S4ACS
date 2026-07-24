@@ -1,6 +1,8 @@
 import json
 import unittest
 
+import numpy as np
+from astropy.io import fits
 from header_formatter.header import (
     GUI,
     S4ICS,
@@ -10,6 +12,7 @@ from header_formatter.header import (
     Weather_Station,
     iXon_Ultra,
 )
+from header_formatter.post_processor import Post_Processor
 from header_formatter.setup import Header_Class_Setup
 from header_formatter.utils import (
     WS_json,
@@ -63,8 +66,10 @@ class Test_Everything(unittest.TestCase):
             obj.check_kws_types()
             obj.check_allowed_values()
             self.hdr = obj.fill_image_header(self.hdr)
-            # print(kws_specs.empty_kws_vals)
-            # raise ValueError
+
+        hdu = fits.PrimaryHDU(np.zeros((1, 1), dtype=np.uint16), self.hdr)
+        hdu = Post_Processor._fix_standard_keywords(hdu)
+        self.hdr = hdu.header
 
     def test_fill_image_header(self) -> None:
         if "" in self.hdr.values():
