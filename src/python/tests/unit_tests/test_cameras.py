@@ -184,3 +184,4 @@ class Test_iXon_Ultra(unittest.TestCase):
         assert hdr["NAXIS2"] == 1024
         assert hdr["GAIN"] == 0.8
         assert hdr["RDNOISE"] == 3.47
+        assert hdr["VSHIFT"] == 4.33

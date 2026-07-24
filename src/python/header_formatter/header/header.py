@@ -28,6 +28,7 @@ class Header(ABC):
         self.file_name = file_name
 
         self.how_to_fix_regex: Union[dict, None] = None
+        self.num_kws_predefined_vals: list = []
 
         self.header_all_apps: dict
         self.original_string: Union[str, None] = None
@@ -38,6 +39,8 @@ class Header(ABC):
         self.fixed_data: dict = {k: "" for k in self.kws_specs.keywords}
         self.kws_types_checked: dict = {k: "" for k in self.kws_specs.all_keywords}
         self.checked_data: dict = {k: "" for k in self.kws_specs.all_keywords}
+
+        self._get_numeric_kws_predefined_vals()
 
     def write_header_all_apps(self, header_data: dict) -> None:
         self.header_all_apps = header_data
@@ -108,6 +111,17 @@ class Header(ABC):
         _str += " - " + message + "\n"
         with open(self.log_file, "a") as file:
             file.write(_str)
+
+    def _get_numeric_kws_predefined_vals(self) -> None:
+        dict_w_kws = self.kws_specs.kws_in_dict
+        dict_w_kws = dict_w_kws.copy() if dict_w_kws is not None else []
+        kws_predefined_vals = self.kws_specs.predefined_vals
+        kws_predefined_vals = (
+            kws_predefined_vals.copy() if kws_predefined_vals is not None else []
+        )
+        for kw in dict_w_kws + kws_predefined_vals:
+            if self.hdr_cnt.keyword_types[kw] in ["integer", "float"]:
+                self.num_kws_predefined_vals.append(kw)
 
     # ========================= Convertions =========================
 
@@ -276,10 +290,11 @@ class Header(ABC):
         for hdr_kw in self.kws_types_checked:
             try:
                 _type = self.hdr_cnt.keyword_types[hdr_kw]
-                if _type in ["integer", "float"]:
+                if hdr_kw in self.num_kws_predefined_vals or _type == "string":
+                    self._check_kw_in_allowed_values(hdr_kw)
+                    continue
+                elif _type in ["integer", "float"]:
                     self._check_number_in_range(hdr_kw)
-                elif _type == "string":
-                    self._check_string_in_allowed_values(hdr_kw)
                 elif _type == "boolean":
                     self._check_boolean(hdr_kw)
             except Exception as e:  # type: ignore
@@ -306,7 +321,7 @@ class Header(ABC):
         self.checked_data[hdr_kw] = val
         return
 
-    def _check_string_in_allowed_values(self, hdr_kw: str) -> None:
+    def _check_kw_in_allowed_values(self, hdr_kw: str) -> None:
         val = self.kws_types_checked[hdr_kw]
         a_values = self.hdr_cnt.allowed_kw_values[hdr_kw]
         if val not in a_values and a_values != "":

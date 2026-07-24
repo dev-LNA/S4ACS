@@ -38,7 +38,6 @@ class Test_Header(unittest.TestCase):
         self.extracted_tester.load_json()
         self.extracted_tester.fix_original_hdr_data()
         self.extracted_tester.extract_data()
-        print(self.tester.kws_specs.keywords)
 
     def test_init(self) -> None:
         assert self.tester.kws_specs == self.kws_specs
@@ -118,14 +117,14 @@ class Test_Header(unittest.TestCase):
     def test_check_str_in_allowed_values(self) -> None:
         self.extracted_tester.fix_keywords()
         self.extracted_tester.check_kws_types()
-        self.extracted_tester._check_string_in_allowed_values("INSTMODE")
+        self.extracted_tester._check_kw_in_allowed_values("INSTMODE")
         assert self.extracted_tester.checked_data["INSTMODE"] == "PHOT"
 
     def test_check_str_not_in_allowed_values(self) -> None:
         self.extracted_tester.fix_keywords()
         self.extracted_tester.check_kws_types()
         self.extracted_tester.kws_types_checked["INSTMODE"] = "PHOOT"
-        self.extracted_tester._check_string_in_allowed_values("INSTMODE")
+        self.extracted_tester._check_kw_in_allowed_values("INSTMODE")
         assert self.extracted_tester.checked_data["INSTMODE"] == ""
 
     def test_check_number_in_range(self) -> None:
@@ -219,3 +218,20 @@ class Test_Header(unittest.TestCase):
         assert self.tester.fixed_data["GAIN"] == 1
         assert self.tester.fixed_data["RDNOISE"] == 2
         assert self.tester.fixed_data["NAXIS1"] == 3
+
+    def test_get_num_kws_predefined_vals_error(self) -> None:
+        self.tester.write_header_all_apps(self.hdr_data)
+        self.tester.get_app_header_data()
+        self.tester.fix_original_string()
+        self.tester.load_json()
+        self.tester.fix_original_hdr_data()
+        self.tester.extract_data()
+        self.tester.fix_keywords()
+        self.tester.fix_remainder_keywords()
+        self.tester.fixed_data["VSHIFT"] = 3
+        self.tester.check_kws_types()
+        self.tester.check_allowed_values()
+        assert self.tester.checked_data["VSHIFT"] == ""
+
+    def test_get_num_kws_predefined_vals(self) -> None:
+        assert self.tester.num_kws_predefined_vals == ["VSHIFT"]

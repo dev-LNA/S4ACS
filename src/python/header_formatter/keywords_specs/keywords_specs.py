@@ -133,7 +133,7 @@ class Keywords_Specifications:
             df = pd.read_csv(
                 self._csv_folder / "empty keywords" / f"{self.app_name}.csv"
             )
-            df["values"] = df["values"].apply(self.converte_type)
+            df["values"] = df["values"].apply(self.loads)
             self.empty_kws_vals = dict(zip(df["keyword"], df["values"]))
 
     @staticmethod
@@ -148,6 +148,15 @@ class Keywords_Specifications:
             return value
         except ValueError:
             return value
+
+    @staticmethod
+    def loads(valor) -> Any:
+        try:
+            return json.loads(valor)
+        except json.JSONDecodeError:
+            return valor
+        except TypeError:
+            return valor
 
     def validate_specifications(self) -> None:
         if self.deducted_keywords is None:
