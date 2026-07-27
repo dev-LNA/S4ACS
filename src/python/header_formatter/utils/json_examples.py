@@ -137,6 +137,7 @@ general_kw = {
     "seqindex": 0,
     "nseq": 1,
     "HWSYNC": False,
+    "WPPOSSEQ": "1,2,3,4,9,10,11,12,13,14,15,16",
 }
 ccd_kw = {
     "FILENAME": "20260723_s4c1_000001.fits",

@@ -103,7 +103,7 @@ class Keywords_Specifications:
         if "regex" in self.kws_specs:
             self.regex = [val for val in self.kws_specs["regex"].values if val != ""]
             df = pd.read_csv(
-                self._csv_folder / "regex expressions" / f"{self.app_name}.csv"
+                self._csv_folder / "regex expressions" / f"{self.app_name}.csv", sep=";"
             )
             self.regex_expressions = (
                 df

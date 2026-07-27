@@ -72,6 +72,6 @@ class Test_Everything(unittest.TestCase):
         self.hdr = hdu.header
 
     def test_fill_image_header(self) -> None:
-        if "" in self.hdr.values():
+        if "" not in self.hdr.values():
             print(repr(self.hdr))
             assert False

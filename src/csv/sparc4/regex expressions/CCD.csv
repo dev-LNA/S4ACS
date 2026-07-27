@@ -1,4 +1,4 @@
-keyword,expression,example
-DATE-OBS,\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6},YYYY-MM-DDTHH:MM:SS.ssssss
-UTTIME,\d{2}:\d{2}:\d{2}\.\d{6},HH:MM:SS.ssssss
-UTDATE,\d{4}-\d{2}-\d{2},YYYY-MM-DD
+keyword;expression;example
+DATE-OBS;\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6};YYYY-MM-DDTHH:MM:SS.ssssss
+UTTIME;\d{2}:\d{2}:\d{2}\.\d{6};HH:MM:SS.ssssss
+UTDATE;\d{4}-\d{2}-\d{2};YYYY-MM-DD

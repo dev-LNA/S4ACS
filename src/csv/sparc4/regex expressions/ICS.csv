@@ -1,2 +1,2 @@
-keyword,expression,example
-ICSVRSN,v\d+\.\d+\.\d+,v0.0.0
+keyword;expression;example
+ICSVRSN;v\d+\.\d+\.\d+;v0.0.0
