@@ -101,7 +101,7 @@ class Header(ABC):
         self._replace_empty_kws()
         for kw in self.kws_types_checked:
             if kw not in self.fixed_data:
-                raise ValueError(f"The remainder kw {kw} was not fixed!")
+                self._write_log_file(f"The remainder kw {kw} was not fixed!")
 
     def _write_log_file(self, message: str, keyword: Union[str, None] = None) -> None:
         now = str(datetime.now())

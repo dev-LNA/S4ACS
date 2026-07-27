@@ -126,16 +126,17 @@ s4gui_json = {
 }
 
 general_kw = {
-    "ACSVRSN": "v1.56.3",
+    "ACSVRSN": "sparc4",
     "ACSMODE": False,
-    "filename": "20260723_s4c1_000001.fits",
+    "filename": "20260727_s4c1_000006.fits",
     "ncycles": 1,
     "cyclind": 0,
     "channel": 1,
     "ACQERROR": False,
-    "SDKVRSN": "0.000.00000.0",
+    "SDKVRSN": "",
     "seqindex": 0,
     "nseq": 1,
+    "HWSYNC": False,
 }
 ccd_kw = {
     "FILENAME": "20260723_s4c1_000001.fits",
