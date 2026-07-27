@@ -104,4 +104,4 @@ DATEFILE;;string;;File creation date
 CHECKSUM;;string;;HDU checksum
 DATASUM;;string;;Data unit checksum
 HWSYNC;;boolean;true,false;Acquisition synchronization by hardware
-WPPOSSEQ;;string;[None] or [1,2,3,....,16];Set of selected WP positions
+WPPOSSEQ;;string;[None] or [1,2,3,....,16];Selected WP positions
