@@ -11,6 +11,6 @@ sub_systems = [
 ]
 
 
-def main(night_dir, file, data, tuple_header_jsons, log_file):
+def main(file, data, tuple_header_jsons) -> str:
     error_json = {"status": False, "code": 0, "source": ""}
     return json.dumps(error_json)

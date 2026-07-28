@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [tool.taskipy.tasks]
-test = "pytest tests -vs --cov=header_formatter  --cov-report=term-missing   --cov-report=html"
+test = "pytest tests -s --cov=header_formatter  --cov-report=term-missing   --cov-report=html"
 open-cov = "brave htmlcov/index.html"
 
 
