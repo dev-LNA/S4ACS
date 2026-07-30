@@ -594,6 +594,7 @@
 			<Item Name="calculate #pixels.vi" Type="VI" URL="../LabVIEW/Camera Simulated/calculate #pixels.vi"/>
 			<Item Name="verify unique parameter in range - SET.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify unique parameter in range - SET.vi"/>
 			<Item Name="verify cooler.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify cooler.vi"/>
+			<Item Name="verify temperature.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify temperature.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
