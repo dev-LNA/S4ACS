@@ -121,6 +121,7 @@
 				<Item Name="Initial Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Initial Configuration/Initial Configuration.lvclass"/>
 				<Item Name="Camera Operation Mode.lvclass" Type="LVClass" URL="../LabVIEW/Camera Operation Mode/Camera Operation Mode.lvclass"/>
 				<Item Name="SPARC4 Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Cam OpMode/SPARC4 Cam OpMode.lvclass"/>
+				<Item Name="Camera Acquisition Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Camera Acquisition Configuration/Camera Acquisition Configuration.lvclass"/>
 			</Item>
 			<Item Name="Log File.lvclass" Type="LVClass" URL="../LabVIEW/Log File/Log File.lvclass"/>
 			<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../LabVIEW/Python Toolkit/Python Toolkit.lvclass"/>
@@ -590,6 +591,8 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../LabVIEW/Channel ECHARPE/choose firs acquisition state.vi"/>
+			<Item Name="verify related shutter parameters.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify related shutter parameters.vi"/>
+			<Item Name="verify related subimage parameters.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify related subimage parameters.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
