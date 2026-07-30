@@ -597,6 +597,8 @@
 			<Item Name="verify cooler.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify cooler.vi"/>
 			<Item Name="verify temperature.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify temperature.vi"/>
 			<Item Name="verify #cycles.vi" Type="VI" URL="../LabVIEW/Channel/verify #cycles.vi"/>
+			<Item Name="Read New Camera Operation Mode.lvclass.vi" Type="VI" URL="../LabVIEW/Camera Simulated/Read New Camera Operation Mode.lvclass.vi"/>
+			<Item Name="Write New Camera Operation Mode.lvclass.vi" Type="VI" URL="../LabVIEW/Camera Simulated/Write New Camera Operation Mode.lvclass.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
