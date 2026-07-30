@@ -591,8 +591,7 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../LabVIEW/Channel ECHARPE/choose firs acquisition state.vi"/>
-			<Item Name="verify related shutter parameters.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify related shutter parameters.vi"/>
-			<Item Name="verify related subimage parameters.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify related subimage parameters.vi"/>
+			<Item Name="calculate #pixels.vi" Type="VI" URL="../LabVIEW/Camera Simulated/calculate #pixels.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
