@@ -123,6 +123,7 @@
 				<Item Name="SPARC4 Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Cam OpMode/SPARC4 Cam OpMode.lvclass"/>
 				<Item Name="Camera Acquisition Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Camera Acquisition Configuration/Camera Acquisition Configuration.lvclass"/>
 				<Item Name="Channel Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Channel Configuration/Channel Configuration.lvclass"/>
+				<Item Name="SPARC4 Channel Config.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Channel Config/SPARC4 Channel Config.lvclass"/>
 			</Item>
 			<Item Name="Log File.lvclass" Type="LVClass" URL="../LabVIEW/Log File/Log File.lvclass"/>
 			<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../LabVIEW/Python Toolkit/Python Toolkit.lvclass"/>
@@ -597,8 +598,6 @@
 			<Item Name="verify cooler.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify cooler.vi"/>
 			<Item Name="verify temperature.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify temperature.vi"/>
 			<Item Name="verify #cycles.vi" Type="VI" URL="../LabVIEW/Channel/verify #cycles.vi"/>
-			<Item Name="Read New Camera Operation Mode.lvclass.vi" Type="VI" URL="../LabVIEW/Camera Simulated/Read New Camera Operation Mode.lvclass.vi"/>
-			<Item Name="Write New Camera Operation Mode.lvclass.vi" Type="VI" URL="../LabVIEW/Camera Simulated/Write New Camera Operation Mode.lvclass.vi"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
