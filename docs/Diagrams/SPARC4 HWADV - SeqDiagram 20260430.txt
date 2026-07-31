@@ -35,6 +35,19 @@ Detalhes
 // 4. Mensagens Assíncronas (Sinal)
 // Para eventos baseados em tempo ou ocorrências externas aleatórias, use mensagens assíncronas (seta com ponta aberta). 
 // Como usar: O evento pode vir de um "ator" externo (ex: "Sensor de Incêndio") ou do sistema operando de forma autônoma. 
+
+// ======================================
+// Para o ACS
+// Input  PIN 1 = 0 -> DONE ON
+// Output PIN 0 = 1 -> ADV ON
+// ======================================
+// Para o S4DMX
+// Input  DI2 = 0 -> ADV ON
+// Output DO2 = 0 -> DONE ON
+// ======================================
+
+
+
 //
 // DESCRIÇÃO DO CASO DE USO DO AVANÇO DA LÂMINA COMANDADO POR HARDWARE
 // -------------------------------------------------------------------
