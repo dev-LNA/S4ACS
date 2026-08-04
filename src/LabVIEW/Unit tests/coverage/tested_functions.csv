@@ -1,5 +1,105 @@
 node names
 Define Test.vi
+Merge Errors
+Assert.vi
+Read errors.vi
+Read last update.vi
+Read new acq config.vi
+Read prev acq config.vi
+Write errors.vi
+write instrument.vi
+Write new acq config.vi
+Write prev acq config.vi
+Assert.vi
+Assert.vi
+Read instrument.vi
+Write last update.vi
+Assert.vi
+Assert.vi
+Get Date/Time In Seconds
+merge errors.vi
+Write errors.vi
+Assert.vi
+Read csv folder path.vi
+Assert.vi
+Application Directory.vi
+Build Path
+read maximun number of frames.vi
+write instrument.vi
+Array Subset
+Assert.vi
+update previous config.vi
+Read prev acq config.vi
+Write new acq config.vi
+Assert.vi
+update timestamp.vi
+Read last update.vi
+Assert.vi
+verify parameter in range.vi
+write instrument.vi
+Write new acq config.vi
+Assert.vi
+Read errors.vi
+Unbundle By Name
+Define Test.vi
+Merge Errors
+Assert.vi
+Read error.vi
+Read new operation mode.vi
+Read prev operation mode.vi
+Read readout time.vi
+Write error.vi
+Write new operation mode.vi
+Write prev operation mode.vi
+Write readout time.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Read csv folder path.vi
+Read limit vals file name.vi
+Read readout_times file name.vi
+Write instrument.vi
+Assert.vi
+Assert.vi
+Read instrument.vi
+Assert.vi
+Application Directory.vi
+Build Path
+Assert.vi
+Read last update.vi
+update time stamp.vi
+Assert.vi
+verify sub image.vi
+Write new operation mode.vi
+Read error.vi
+Assert.vi
+verify shutter.vi
+Read error.vi
+Assert.vi
+verify parameters range.vi
+Read error.vi
+Assert.vi
+Write instrument.vi
+get parameters limit values.vi
+Write instrument.vi
+Assert.vi
+Array Subset
+update operation mode.vi
+Write new operation mode.vi
+Read prev operation mode.vi
+Assert.vi
+calculate number of pixels.vi
+Write new operation mode.vi
+Assert.vi
+get readout time.vi
+Assert.vi
+Read readout time.vi
+Write instrument.vi
+from json str.vi
+Flatten To JSON
+Assert.vi
+Read new operation mode.vi
+Define Test.vi
 read initial config.vi
 Read ACSVRSN.vi
 Read Acquisition control.vi
@@ -684,6 +784,43 @@ Read prev ixon op mode.vi
 Assert.vi
 read image.vi
 Write Camera Operation Mode.lvclass.vi
+Define Test.vi
+Assert.vi
+Merge Errors
+Read new ixon op mode.vi
+Read prev ixon op mode.vi
+Assert.vi
+Write new ixon op mode.vi
+Write prev ixon op mode.vi
+verify parameters range.vi
+Write new operation mode.vi
+Write new ixon op mode.vi
+Read error.vi
+Assert.vi
+Write instrument.vi
+verify readout rate.vi
+Write new ixon op mode.vi
+Read error.vi
+Assert.vi
+update operation mode.vi
+Read prev ixon op mode.vi
+Write new ixon op mode.vi
+Assert.vi
+verify parameters in list.vi
+Assert.vi
+Read error.vi
+from json str.vi
+join array jsons.vi
+Flatten To JSON
+Flatten To JSON
+Build Array
+Read new ixon op mode.vi
+Assert.vi
+get readout time.vi
+Write new ixon op mode.vi
+Read readout time.vi
+Write new operation mode.vi
+Assert.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi
