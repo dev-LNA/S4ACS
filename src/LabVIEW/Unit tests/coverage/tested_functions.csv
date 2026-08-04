@@ -1,7 +1,6 @@
 node names
 Define Test.vi
 read initial config.vi
-Read Setup file.vi
 Read ACSVRSN.vi
 Read Acquisition control.vi
 Read Classes.vi
@@ -13,12 +12,9 @@ Read status message.vi
 read new acq config.vi
 Read channel status.vi
 Read csv path.vi
-Read parameters limits file.vi
 Read GUI request.vi
 Read VIs Ref.vi
 Read prev acq config.vi
-Read acquisition config errors.vi
-Write acquisition config errors.vi
 Write Acquisition control.vi
 Write ACSVRSN.vi
 Write channel status.vi
@@ -27,18 +23,13 @@ Write csv path.vi
 Write execution error.vi
 Write GUI request.vi
 Write new acq config.vi
-Write parameters limits file.vi
 Write prev acq config.vi
 Write RxTx.lvclass.vi
 Write s4acs init config.vi
 Write Save_Header_RxTx.lvclass.vi
-Write Setup file.vi
 Write Sim_CCD class.vi
 Write status message.vi
 Write VIs Ref.vi
-Assert.vi
-Assert.vi
-Assert.vi
 Assert.vi
 Assert.vi
 Assert.vi
@@ -113,6 +104,9 @@ Log info message.vi
 Log message.vi
 Log status message.vi
 Log warning message.vi
+Application Directory.vi
+Build Path
+Write instrument.vi
 Define Test.vi
 Merge Errors
 Write directory.vi
@@ -464,6 +458,8 @@ Write prev acq config.vi
 Write channel status.vi
 write prev operation mode.vi
 Replace Array Subset
+get sdk version.vi
+Write SDKVRSN.vi
 Define Test.vi
 Merge Errors
 Write loss of comm.vi
@@ -593,10 +589,6 @@ Unbundle By Name
 Assert.vi
 Abort Acquisition.vi
 Assert.vi
-calc exptime diff.vi
-Tick Count (ms)
-Add
-Assert.vi
 Assert.vi
 Start Acquisition.vi
 Assert.vi
@@ -611,12 +603,10 @@ Unbundle By Name
 Unbundle By Name
 Assert.vi
 Merge Errors
-Assert.vi
 calculate current exp time.vi
 Unbundle By Name
 Assert.vi
 Unbundle By Name
-Bundle By Name
 Read class timings.vi
 Read class timings.vi
 Read Camera Status.vi
@@ -627,13 +617,10 @@ read prev acquisition config.vi
 write new acquisition config.vi
 read new acquisition config.vi
 Read Camera Status.vi
-Read class timings.vi
-Write class timings.vi
 read new operation mode.vi
 write new operation mode.vi
 End.vi
 read prev operation mode.vi
-find idx smaller than.vi
 Write class timings.vi
 Read class timings.vi
 write acquisition config errors.vi
@@ -659,7 +646,6 @@ Bundle By Name
 read acquisition config errors.vi
 Assert.vi
 Unbundle By Name
-Write csvs path.vi
 Verify Acquisition.vi
 Bundle By Name
 Read Camera Status.vi
@@ -671,16 +657,6 @@ Assert.vi
 Assert.vi
 read prev acquisition config.vi
 write prev acquisition config.vi
-verify cooler.vi
-write new acquisition config.vi
-read acquisition config errors.vi
-Assert.vi
-Unbundle By Name
-verify expouse time.vi
-write new acquisition config.vi
-read acquisition config errors.vi
-Assert.vi
-Unbundle By Name
 Verify new image.vi
 Bundle By Name
 Read Camera Status.vi
@@ -689,44 +665,12 @@ Bundle By Name
 read prev acquisition config.vi
 write prev acquisition config.vi
 Assert.vi
-verify parameters in a list.vi
-Assert.vi
-verify parameters in range.vi
-write new operation mode.vi
-read operation mode errors.vi
-Assert.vi
-Merge Errors
-verify related shutter parameters.vi
-write new operation mode.vi
-read operation mode errors.vi
-Index Array
-Assert.vi
-verify related subimage parameters.vi
-write new operation mode.vi
-read operation mode errors.vi
-Merge Errors
-Assert.vi
-verify temperature.vi
-write new acquisition config.vi
-Assert.vi
-read acquisition config errors.vi
-Unbundle By Name
-verify unique parameter in range - SET.vi
-Assert.vi
-read acquisition config errors.vi
-Unbundle By Name
-Read csvs path.vi
-Assert.vi
+write instrument.vi
 Define Test.vi
 Merge Errors
-Assert.vi
-Assert.vi
-Assert.vi
 Get Acquired Data.vi
 Assert.vi
 Initialize Array
-Assert.vi
-Write prev ixon op mode.vi
 Write prev ixon op mode.vi
 Read prev ixon op mode.vi
 Write prev ixon op mode.vi
@@ -739,7 +683,7 @@ set operation mode.vi
 Read prev ixon op mode.vi
 Assert.vi
 read image.vi
-calculate #pixels.vi
+Write Camera Operation Mode.lvclass.vi
 Define Test.vi
 Compare PrevState_State.vi
 Write Previous State.vi

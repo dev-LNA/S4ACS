@@ -240,4 +240,5 @@ cython_debug/
 
 #my ignored files
 .vscode/
+.env14/
 uv.lock
