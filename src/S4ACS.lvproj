@@ -593,7 +593,6 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../LabVIEW/Channel ECHARPE/choose firs acquisition state.vi"/>
-			<Item Name="verify unique parameter in range - SET.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify unique parameter in range - SET.vi"/>
 			<Item Name="verify cooler.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify cooler.vi"/>
 			<Item Name="verify temperature.vi" Type="VI" URL="../LabVIEW/Camera Simulated/verify temperature.vi"/>
 			<Item Name="verify #cycles.vi" Type="VI" URL="../LabVIEW/Channel/verify #cycles.vi"/>

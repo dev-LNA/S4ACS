@@ -100,6 +100,19 @@ Flatten To JSON
 Assert.vi
 Read new operation mode.vi
 Define Test.vi
+Assert.vi
+Read csv folder path.vi
+Read errors.vi
+Read limit vals file name.vi
+Read new config.vi
+Read prev config.vi
+Write errors.vi
+Write instrument.vi
+Write new config.vi
+Write prev config.vi
+Assert.vi
+Assert.vi
+Define Test.vi
 read initial config.vi
 Read ACSVRSN.vi
 Read Acquisition control.vi
@@ -207,6 +220,42 @@ Log warning message.vi
 Application Directory.vi
 Build Path
 Write instrument.vi
+Define Test.vi
+Assert.vi
+Merge Errors
+Write gui request.vi
+Read gui request.vi
+set request.vi
+Read gui request.vi
+Assert.vi
+Define Test.vi
+Assert.vi
+Merge Errors
+Read config.vi
+Write config.vi
+Read error.vi
+Write instrument.vi
+Read instrument.vi
+Write error.vi
+Assert.vi
+Assert.vi
+verify image path.vi
+Write config.vi
+Assert.vi
+Read error.vi
+get config file path.vi
+Read config_file_path.vi
+Write config_file_path.vi
+Assert.vi
+Read config_file_path.vi
+Assert.vi
+Write instrument.vi
+read config file.vi
+Write config_file_path.vi
+Application Directory.vi
+Build Path
+Read config.vi
+Assert.vi
 Define Test.vi
 Merge Errors
 Write directory.vi
@@ -560,6 +609,7 @@ write prev operation mode.vi
 Replace Array Subset
 get sdk version.vi
 Write SDKVRSN.vi
+Write channel status.vi
 Define Test.vi
 Merge Errors
 Write loss of comm.vi
@@ -784,6 +834,12 @@ Read prev ixon op mode.vi
 Assert.vi
 read image.vi
 Write Camera Operation Mode.lvclass.vi
+read done signal.vi
+read advance signal.vi
+write done signal.vi
+write advance signal.vi
+Assert.vi
+Assert.vi
 Define Test.vi
 Assert.vi
 Merge Errors
@@ -820,6 +876,141 @@ get readout time.vi
 Write new ixon op mode.vi
 Read readout time.vi
 Write new operation mode.vi
+Assert.vi
+Define Test.vi
+Assert.vi
+Merge Errors
+Read #SEQS.vi
+Read new channel config.vi
+Read prev channel config.vi
+Read sparc4 errors.vi
+Read Waveplate positions.vi
+Write #SEQS.vi
+Write new channel config.vi
+Write prev channel config.vi
+Write sparc4 errors.vi
+Write Waveplate positions.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+verify parameter range.vi
+Write instrument.vi
+Write new channel config.vi
+Assert.vi
+Read sparc4 errors.vi
+Unbundle By Name
+merge errors.vi
+Assert.vi
+parse wppos.vi
+Read #SEQS.vi
+Assert.vi
+Read Waveplate positions.vi
+Assert.vi
+Write prev channel config.vi
+Define Test.vi
+Assert.vi
+Read new s4 acq config.vi
+Read prev s4 acq config.vi
+Read s4 ch config errors.vi
+Read s4 channel status.vi
+read Sim_iXon Class.vi
+Write new s4 acq config.vi
+Write prev s4 acq config.vi
+Write s4 acq config errors.vi
+Write s4 channel status.vi
+write simulated ixon class.vi
+Merge Errors
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+write done signal.vi
+Write Channel Configuration.lvclass.vi
+Read s4 acq config class.vi
+Read sync mode.vi
+Write sync mode.vi
+Assert.vi
+Assert.vi
+write acquisition configuration.vi
+Read status message.vi
+Unbundle By Name
+Unflatten From JSON
+Assert.vi
+write simulated ixon class.vi
+Assert.vi
+Unflatten From JSON
+Assert.vi
+Unflatten From JSON
+Assert.vi
+Unflatten From JSON
+write ccd configuration.vi
+Read status message.vi
+Unbundle By Name
+Unflatten From JSON
+Assert.vi
+Unflatten From JSON
+Assert.vi
+Write Camera Operation Mode.lvclass.vi
+write ccd status.vi
+Read status message.vi
+Unbundle By Name
+Unflatten From JSON
+Assert.vi
+write channel config.vi
+Read status message.vi
+Unbundle By Name
+Unflatten From JSON
+Assert.vi
+write comm status.vi
+Read status message.vi
+Unbundle By Name
+Unflatten From JSON
+Assert.vi
+Assert.vi
+create image name.vi
+Read channel status.vi
+Unbundle By Name
+Assert.vi
+Match Pattern
+find index of the image name.vi
+Write s4acs init config.vi
+Bundle By Name
+Application Directory.vi
+Build Path
+Read channel status.vi
+Unbundle By Name
+Assert.vi
+get instrument mode.vi
+Write Classes.vi
+Write communication.vi
+Write RxTx.lvclass.vi
+Read RxTx.lvclass.vi
+Write Rx Message.vi
+Flatten To JSON
+Build Array
+Read Classes.vi
+Bundle By Name
+Assert.vi
+get waveplate status.vi
+Write RxTx.lvclass.vi
+Read RxTx.lvclass.vi
+Write Rx Message.vi
+Flatten To JSON
+Assert.vi
+Concatenate Strings
+Write s4 channel status.vi
+Write channel status.vi
+reset acquisition indicators.vi
+Read s4 channel status.vi
+Assert.vi
+Unbundle By Name
+Read channel status.vi
+Assert.vi
+Unbundle By Name
+update prev ch config.vi
+Write new s4 acq config.vi
+Read prev s4 acq config.vi
 Assert.vi
 Define Test.vi
 Compare PrevState_State.vi
@@ -880,3 +1071,24 @@ Write Timer.vi
 Read Next State.vi
 Write Next State.vi
 Assert Equal Value_Variant.vi
+find idx smaller than.vi
+find row in array.vi
+get parameter min and max.vi
+join array jsons.vi
+read csv file.vi
+split string.vi
+verify parameter in range.vi
+Define Test.vi
+Assert.vi
+verify parameter in list.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Application Directory.vi
+Build Path
+Assert.vi
+Assert.vi
+Assert.vi
+Assert.vi
+Merge Errors
