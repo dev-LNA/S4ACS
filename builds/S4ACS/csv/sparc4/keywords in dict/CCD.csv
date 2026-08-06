@@ -1,0 +1,9 @@
+keyword;dict
+TRIGGER;{"0": "Internal", "6": "External"}
+ACQMODE;{"1": "Single Scan", "3": "Kinetics"}
+SHUTTER;["Auto", "Open", "Closed"]
+VCLKAMP;["Normal", "+1", "+2", "+3", "+4"]
+VSHIFT;[0.6, 1.13, 2.2, 4.33]
+EMMODE;["Electron Multiplying", "Conventional"]
+PREAMP;["Gain 1", "Gain 2"]
+READRATE;{"0": [30.0, 20.0, 10.0, 1.0], "1": [1.0, 0.1]}

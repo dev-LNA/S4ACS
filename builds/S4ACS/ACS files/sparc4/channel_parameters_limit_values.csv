@@ -1,4 +1,0 @@
-parameter,lower limit,upper limit
-#CYCLES,1,10000
-#SEQS,1,10000
-WAVEPLATE_POS,0,65535
