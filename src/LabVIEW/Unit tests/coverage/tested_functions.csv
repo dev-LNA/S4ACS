@@ -112,6 +112,20 @@ Write new config.vi
 Write prev config.vi
 Assert.vi
 Assert.vi
+Assert.vi
+Build Path
+Application Directory.vi
+Write limit vals file name.vi
+Assert.vi
+Merge Errors
+merge errors.vi
+verify parameter range.vi
+Write errors.vi
+Assert.vi
+Write instrument.vi
+Write new config.vi
+Assert.vi
+merge errors.vi
 Define Test.vi
 read initial config.vi
 Read ACSVRSN.vi

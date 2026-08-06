@@ -3,6 +3,8 @@ import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import numpy as np
+from astropy.io import fits
 from header_formatter.setup import Header_Class_Setup
 
 
@@ -38,6 +40,7 @@ class Test_Setup(unittest.TestCase):
 
     def test_verify_file_exists(self) -> None:
         file_path = self.image_path / "00000000_s4c1_000000.fits"
+        fits.writeto(file_path, np.zeros((1, 1)))
         assert (
             re.match(
                 r"^00000000_h\d{2}m\d{2}s\d{2}ms\d{6}_s4c1_000000.fits$",
@@ -45,6 +48,7 @@ class Test_Setup(unittest.TestCase):
             )
             is not None
         )
+        file_path.unlink()
 
         file_path = self.image_path / "00000000_s4cs1_000001.fits"
         assert self.setup.verify_file_exists(file_path).name == file_path.name

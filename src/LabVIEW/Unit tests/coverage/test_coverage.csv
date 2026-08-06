@@ -1,5 +1,5 @@
 Class,method,covered,Percent covered
-Camera Acquisition Configuration,merge errors.vi,x,82.60
+Camera Acquisition Configuration,merge errors.vi,x,82.64
 Camera Acquisition Configuration,Read csv folder path.vi,x,
 Camera Acquisition Configuration,Read errors.vi,x,
 Camera Acquisition Configuration,Read instrument.vi,x,
@@ -189,6 +189,7 @@ Channel Configuration,Read prev config.vi,x,
 Channel Configuration,verify parameter range.vi,x,
 Channel Configuration,Write errors.vi,x,
 Channel Configuration,Write instrument.vi,x,
+Channel Configuration,Write limit vals file name.vi,x,
 Channel Configuration,Write new config.vi,x,
 Channel Configuration,Write prev config.vi,x,
 Channel ECHARPE,choose firs acquisition state.vi,,
