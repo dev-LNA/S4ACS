@@ -126,67 +126,16 @@
 				<Item Name="SPARC4 Channel Config.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Channel Config/SPARC4 Channel Config.lvclass"/>
 			</Item>
 			<Item Name="zeromq" Type="Folder">
-				<Item Name="lib" Type="Folder">
-					<Item Name="win32" Type="Folder">
-						<Item Name="libsodium.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/libsodium.dll"/>
-						<Item Name="libzmq-v120-mt-4_3_2.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/libzmq-v120-mt-4_3_2.dll"/>
-						<Item Name="libzmq-v120-mt-4_3_2.lib" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/libzmq-v120-mt-4_3_2.lib"/>
-						<Item Name="lvzmq32.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/lvzmq32.dll"/>
-						<Item Name="lvzmq32.exp" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/lvzmq32.exp"/>
-						<Item Name="lvzmq32.lib" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/lvzmq32.lib"/>
-						<Item Name="msvcp120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/msvcp120.dll"/>
-						<Item Name="msvcr120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/msvcr120.dll"/>
-						<Item Name="zmq.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win32/zmq.h"/>
-					</Item>
-					<Item Name="win64" Type="Folder">
-						<Item Name="IO pins.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/IO pins.vi"/>
-						<Item Name="libsodium.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/libsodium.dll"/>
-						<Item Name="libzmq-v120-mt-4_3_2.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/libzmq-v120-mt-4_3_2.dll"/>
-						<Item Name="libzmq-v120-mt-4_3_2.lib" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/libzmq-v120-mt-4_3_2.lib"/>
-						<Item Name="lvzmq64.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/lvzmq64.dll"/>
-						<Item Name="lvzmq64.exp" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/lvzmq64.exp"/>
-						<Item Name="lvzmq64.lib" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/lvzmq64.lib"/>
-						<Item Name="msvcp120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcp120.dll"/>
-						<Item Name="msvcr120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcr120.dll"/>
-						<Item Name="zmq.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/zmq.h"/>
-					</Item>
-					<Item Name="bonzai.c" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/bonzai.c"/>
-					<Item Name="bonzai.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/bonzai.h"/>
-					<Item Name="debug.c" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/debug.c"/>
-					<Item Name="debug.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/debug.h"/>
-					<Item Name="makefile" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/makefile"/>
-					<Item Name="parse_errnos.py" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/parse_errnos.py"/>
-					<Item Name="rename_calls.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/lib/rename_calls.vi"/>
-					<Item Name="rename_lib2.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/lib/rename_lib2.vi"/>
-					<Item Name="zmq-errors.txt" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/zmq-errors.txt"/>
-					<Item Name="zmq_labview.c" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/zmq_labview.c"/>
-				</Item>
-				<Item Name="tests" Type="Folder">
-					<Item Name="multi_run.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/multi_run.vi"/>
-					<Item Name="test_curve.py" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_curve.py"/>
-					<Item Name="test_curve.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_curve.vi"/>
-					<Item Name="test_curve_pubsub.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_curve_pubsub.vi"/>
-					<Item Name="test_pubsub.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_pubsub.vi"/>
-					<Item Name="test_radio.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_radio.vi"/>
-					<Item Name="test_reqrep.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_reqrep.vi"/>
-					<Item Name="test_term2.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_term2.vi"/>
-					<Item Name="test_z85.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_z85.vi"/>
-					<Item Name="test_zap.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_zap.vi"/>
-					<Item Name="test_zap0.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_zap0.vi"/>
-					<Item Name="test_zap2.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/tests/test_zap2.vi"/>
-				</Item>
-				<Item Name=".hgignore" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/.hgignore"/>
-				<Item Name="AUTHORS.txt" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/AUTHORS.txt"/>
 				<Item Name="zeromq.lvlib" Type="Library" URL="/&lt;vilib&gt;/addons/zeromq/zeromq.lvlib"/>
-				<Item Name="GPL.txt" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/GPL.txt"/>
-				<Item Name="LICENSE.txt" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/LICENSE.txt"/>
-				<Item Name="README.txt" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/README.txt"/>
-				<Item Name="zmq_zap_example_globals.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/zmq_zap_example_globals.vi"/>
-				<Item Name="zmq_zap_example_template.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/zmq_zap_example_template.vi"/>
-				<Item Name="zmq_zap_init.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/zmq_zap_init.vi"/>
-				<Item Name="zmq_zap_thread.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/zmq_zap_thread.vi"/>
-				<Item Name="zmq_zap_thread_basic.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/zmq_zap_thread_basic.vi"/>
-				<Item Name="zmq_zap_verify.vi" Type="VI" URL="/&lt;vilib&gt;/addons/zeromq/zmq_zap_verify.vi"/>
+				<Item Name="libsodium.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/libsodium.dll"/>
+				<Item Name="libzmq-v120-mt-4_3_2.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/libzmq-v120-mt-4_3_2.dll"/>
+				<Item Name="libzmq-v120-mt-4_3_2.lib" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/libzmq-v120-mt-4_3_2.lib"/>
+				<Item Name="lvzmq64.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/lvzmq64.dll"/>
+				<Item Name="lvzmq64.exp" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/lvzmq64.exp"/>
+				<Item Name="lvzmq64.lib" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/lvzmq64.lib"/>
+				<Item Name="msvcp120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcp120.dll"/>
+				<Item Name="msvcr120.dll" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/msvcr120.dll"/>
+				<Item Name="zmq.h" Type="Document" URL="/&lt;vilib&gt;/addons/zeromq/lib/win64/zmq.h"/>
 			</Item>
 			<Item Name="Log File.lvclass" Type="LVClass" URL="../LabVIEW/Log File/Log File.lvclass"/>
 			<Item Name="Python Toolkit.lvclass" Type="LVClass" URL="../LabVIEW/Python Toolkit/Python Toolkit.lvclass"/>
@@ -650,7 +599,6 @@
 				<Item Name="System Directory Type.ctl" Type="VI" URL="/&lt;vilib&gt;/Utility/sysdir.llb/System Directory Type.ctl"/>
 				<Item Name="Get System Directory.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/sysdir.llb/Get System Directory.vi"/>
 				<Item Name="Dflt Data Dir.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/file.llb/Dflt Data Dir.vi"/>
-				<Item Name="Simple Error Handler.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Simple Error Handler.vi"/>
 			</Item>
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
@@ -663,6 +611,7 @@
 				<Property Name="App_INI_aliasGUID" Type="Str">{5ADE022D-8E10-4FD3-B918-9CCB5BBDA3D1}</Property>
 				<Property Name="App_INI_GUID" Type="Str">{76FB2D52-4F12-4B99-A1C1-C384EB8F3D40}</Property>
 				<Property Name="App_serverConfig.httpPort" Type="Int">8002</Property>
+				<Property Name="App_waitDebugging" Type="Bool">true</Property>
 				<Property Name="Bld_autoIncrement" Type="Bool">true</Property>
 				<Property Name="Bld_buildCacheID" Type="Str">{B2388A00-72D2-4541-8F38-36E796A90EA1}</Property>
 				<Property Name="Bld_buildSpecName" Type="Str">ACS</Property>
@@ -673,7 +622,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">70</Property>
+				<Property Name="Bld_version.build" Type="Int">76</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
@@ -700,6 +649,18 @@
 				<Property Name="Source[1].propertiesCount" Type="Int">1</Property>
 				<Property Name="Source[1].sourceInclusion" Type="Str">TopLevel</Property>
 				<Property Name="Source[1].type" Type="Str">VI</Property>
+				<Property Name="Source[10].Container.applyInclusion" Type="Bool">true</Property>
+				<Property Name="Source[10].Container.depDestIndex" Type="Int">0</Property>
+				<Property Name="Source[10].destinationIndex" Type="Int">0</Property>
+				<Property Name="Source[10].itemID" Type="Ref">/My Computer/LabVIEW/Comm VIs</Property>
+				<Property Name="Source[10].sourceInclusion" Type="Str">Include</Property>
+				<Property Name="Source[10].type" Type="Str">Container</Property>
+				<Property Name="Source[11].Container.applyInclusion" Type="Bool">true</Property>
+				<Property Name="Source[11].Container.depDestIndex" Type="Int">0</Property>
+				<Property Name="Source[11].destinationIndex" Type="Int">0</Property>
+				<Property Name="Source[11].itemID" Type="Ref">/My Computer/utils</Property>
+				<Property Name="Source[11].sourceInclusion" Type="Str">Include</Property>
+				<Property Name="Source[11].type" Type="Str">Container</Property>
 				<Property Name="Source[2].Container.applyDestination" Type="Bool">true</Property>
 				<Property Name="Source[2].Container.applyInclusion" Type="Bool">true</Property>
 				<Property Name="Source[2].Container.depDestIndex" Type="Int">0</Property>
@@ -716,13 +677,10 @@
 				<Property Name="Source[3].type" Type="Str">Container</Property>
 				<Property Name="Source[4].destinationIndex" Type="Int">3</Property>
 				<Property Name="Source[4].itemID" Type="Ref">/My Computer/utils/acs_config_TEMPLATE.cfg</Property>
-				<Property Name="Source[4].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[5].destinationIndex" Type="Int">3</Property>
 				<Property Name="Source[5].itemID" Type="Ref">/My Computer/utils/socket_TEMPLATE.cfg</Property>
-				<Property Name="Source[5].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[6].destinationIndex" Type="Int">4</Property>
 				<Property Name="Source[6].itemID" Type="Ref">/My Computer/utils/atmcd64d.dll</Property>
-				<Property Name="Source[6].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[7].Container.applyDestination" Type="Bool">true</Property>
 				<Property Name="Source[7].Container.applyInclusion" Type="Bool">true</Property>
 				<Property Name="Source[7].Container.depDestIndex" Type="Int">0</Property>
@@ -732,13 +690,12 @@
 				<Property Name="Source[7].type" Type="Str">Container</Property>
 				<Property Name="Source[8].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[8].itemID" Type="Ref">/My Computer/LabVIEW/Comm VIs/communication manager.vi</Property>
-				<Property Name="Source[8].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[8].type" Type="Str">VI</Property>
 				<Property Name="Source[9].destinationIndex" Type="Int">0</Property>
 				<Property Name="Source[9].itemID" Type="Ref">/My Computer/LabVIEW/Comm VIs/save sparc4 image.vi</Property>
-				<Property Name="Source[9].sourceInclusion" Type="Str">Include</Property>
 				<Property Name="Source[9].type" Type="Str">VI</Property>
-				<Property Name="SourceCount" Type="Int">10</Property>
+				<Property Name="SourceCount" Type="Int">12</Property>
+				<Property Name="TgtF_enableDebugging" Type="Bool">true</Property>
 				<Property Name="TgtF_fileDescription" Type="Str">ACS</Property>
 				<Property Name="TgtF_internalName" Type="Str">ACS</Property>
 				<Property Name="TgtF_legalCopyright" Type="Str">Copyright © 2025 </Property>
