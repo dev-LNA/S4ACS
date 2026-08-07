@@ -611,7 +611,6 @@
 				<Property Name="App_INI_aliasGUID" Type="Str">{5ADE022D-8E10-4FD3-B918-9CCB5BBDA3D1}</Property>
 				<Property Name="App_INI_GUID" Type="Str">{76FB2D52-4F12-4B99-A1C1-C384EB8F3D40}</Property>
 				<Property Name="App_serverConfig.httpPort" Type="Int">8002</Property>
-				<Property Name="App_waitDebugging" Type="Bool">true</Property>
 				<Property Name="Bld_autoIncrement" Type="Bool">true</Property>
 				<Property Name="Bld_buildCacheID" Type="Str">{B2388A00-72D2-4541-8F38-36E796A90EA1}</Property>
 				<Property Name="Bld_buildSpecName" Type="Str">ACS</Property>
@@ -695,7 +694,6 @@
 				<Property Name="Source[9].itemID" Type="Ref">/My Computer/LabVIEW/Comm VIs/save sparc4 image.vi</Property>
 				<Property Name="Source[9].type" Type="Str">VI</Property>
 				<Property Name="SourceCount" Type="Int">12</Property>
-				<Property Name="TgtF_enableDebugging" Type="Bool">true</Property>
 				<Property Name="TgtF_fileDescription" Type="Str">ACS</Property>
 				<Property Name="TgtF_internalName" Type="Str">ACS</Property>
 				<Property Name="TgtF_legalCopyright" Type="Str">Copyright © 2025 </Property>
