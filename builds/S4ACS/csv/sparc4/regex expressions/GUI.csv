@@ -1,2 +1,5 @@
 keyword;expression;example
 GUIVRSN;v\d+\.\d+\.\d+;v0.0.0
+OBJECT;[\w\s,.:]+;abc123
+OBSERVER;[\w\s,.:]+;abc123
+PROPID;[\w\s,.:]+;abc123
