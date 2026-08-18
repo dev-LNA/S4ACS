@@ -1,0 +1,5 @@
+keyword;expression;example
+ACSVRSN;v\d+\.\d+\.\d+;v0.0.0
+SDKVRSN;^\d[.]\d{3}[.]\d{5}[.]\d$;0.000.00000.0
+FILENAME;\d{8}_s4c[1-4]_\d{6}(_[a-z0-9]+)?\.fits;YYYYMMDD_s4c1_000000.fits
+WPPOSSEQ;^(?:None|\d+(?:,\d{1,2})*)$;None or 1,2,...,16

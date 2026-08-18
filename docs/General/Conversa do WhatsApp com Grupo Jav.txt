@@ -1,0 +1,106 @@
+13/07/2026 09:29 - Esta empresa usa um serviço seguro da Meta para gerenciar esta conversa. Toque para saber mais.
+13/07/2026 09:29 - denis bernardes099: Bom dia
+13/07/2026 09:29 - Grupo Jav: Seja bem-vindo ao sistema de atendimento do Grupo JAV.
+13/07/2026 09:29 - Grupo Jav: Por favor, digite o número da opção desejada para prosseguir com seu atendimento
+
+
+1 - Vendas
+2 - Suporte Técnico
+0 - Finalizar
+13/07/2026 09:29 - denis bernardes099: 2
+13/07/2026 09:30 - Grupo Jav: Aguarde que você será atendido por um dos nossos agentes.
+13/07/2026 09:30 - Grupo Jav: O seu atendimento será iniciado agora por Helder
+13/07/2026 09:30 - Grupo Jav: *Helder:* Bom dia Denis, tudo bem?! Como posso te ajudar
+13/07/2026 09:31 - denis bernardes099: Bom dia, Helder
+
+Meu nome é Denis Bernardes. 
+Sou um dos colaboradores do Laboratório Nacional de Astrofísica (LNA), MG.
+
+Tentei contato diretamento com a National Instruments, mas eles me encaminharam para vocês.
+
+Atualmente, nossa equipe de desenvolvimento utiliza a linguagem LabVIEW 2018 junto do sistema operacional Windows como plataforma para o desenvolvimento de nossas aplicações. Contudo, estamos migrando nossa infraestrutura computacional para o sistema Linux. Logo, gostaria de saber se seria possível disponibilizar um link para download do instalador LabVIEW 2018 versão 64 bits que seja compatível com este sistema operacional.
+
+O número de série da nossa licença é M84X01350.
+13/07/2026 09:35 - Grupo Jav: *Helder:* Denis, no site oficial da national voce pode baixar o gerenciador de software https://www.ni.com/en/support/downloads/software-products/download.package-manager.html#322516
+13/07/2026 09:35 - Grupo Jav: *Helder:* atraves deste gerenciador voce pode baixar o labview compativel com o seu sistema operacional
+13/07/2026 09:49 - denis bernardes099: Utilizando este link, eu consegui baixar o LV2019.
+Pelo visto, LV2018 parece não estar mais disponivel
+13/07/2026 09:51 - Grupo Jav: *Helder:* voce pode tentar baixar diretamente do site tambem
+13/07/2026 09:51 - Grupo Jav: <Mídia oculta>
+13/07/2026 09:51 - Grupo Jav: *Helder:* so fique atento a versão do Linux recomendada para trabalhar
+13/07/2026 09:56 - denis bernardes099: <Mídia oculta>
+13/07/2026 10:02 - Grupo Jav: *Helder:* A licença que voce possui é perpetua?
+13/07/2026 10:02 - denis bernardes099: Sim, acredito que este foi o último ano que isso aconteceu
+13/07/2026 10:04 - Grupo Jav: *Helder:* voce so consegue baixar a versão que voce adquiriu no caso entao, nao consegue fazer o download de outras por conta do serviço nao estar ativo
+13/07/2026 10:04 - Grupo Jav: *Helder:* na seleção da versao procure qual esta disponivel para download
+13/07/2026 10:17 - denis bernardes099: Entendo
+Tentei selecionar entre as opções disponveis, mas nenhuma liberou para download, com exceção dos patchs
+13/07/2026 10:19 - Grupo Jav: *Helder:* e voce consegue instalar algumas das opções de 2018?
+13/07/2026 10:20 - denis bernardes099: Eu tenho uma versão 2018 windows instalada e ativa
+13/07/2026 10:24 - Grupo Jav: *Helder:* Entendi, precisamos saber entao se a sua licença é compativel com o Linux
+13/07/2026 10:25 - Grupo Jav: *Helder:* eu posso tentar passar um instalador pra voce testar, se nao funcionar ai teremos que entrar em contato com o time da NI para provavelmente fazer uma atualização na sua licença
+13/07/2026 10:26 - denis bernardes099: Certo, esta informação consta na licença física que recebemos?
+13/07/2026 10:29 - Grupo Jav: *Helder:* Voce tem o " NI license Manager" instalado na maquina
+13/07/2026 10:29 - Grupo Jav: *Helder:* é o software de ativação da sua chave
+13/07/2026 10:29 - denis bernardes099: Sim
+13/07/2026 10:29 - Grupo Jav: *Helder:* Ok
+13/07/2026 10:30 - Grupo Jav: *Helder:* abra o NI License Manager e me envie um print mostrando os produtos instalados e licenciados do LabVIEW. Também preciso saber quais módulos e drivers estão em uso para validar a migração para Linux.
+13/07/2026 10:30 - Grupo Jav: <Mídia oculta>
+13/07/2026 10:30 - Grupo Jav: *Helder:* aqui vai um exemplo
+13/07/2026 10:35 - denis bernardes099: <Mídia oculta>
+13/07/2026 10:37 - Grupo Jav: *Helder:* entendi
+13/07/2026 10:37 - Grupo Jav: *Helder:* LabVIEW 2018 SP1 Patch - Linux
+13/07/2026 10:37 - Grupo Jav: *Helder:* essa versão voce consegue baixar no site?
+13/07/2026 10:39 - denis bernardes099: Sim, essa eu consegui
+13/07/2026 10:39 - Grupo Jav: *Helder:* Então pode testar no novo sistema (linux) voce nao tera problemas
+13/07/2026 10:42 - denis bernardes099: <Mídia oculta>
+13/07/2026 10:43 - Grupo Jav: *Helder:* Isso
+13/07/2026 10:44 - Grupo Jav: *Helder:* esse serve pra corrigir /atualizar
+13/07/2026 10:44 - Grupo Jav: *Helder:* precisa baixar o 2018 SP1
+13/07/2026 10:45 - Grupo Jav: *Helder:* consegue baixar esse tambem, certo?
+13/07/2026 10:47 - denis bernardes099: <Mídia oculta>
+13/07/2026 10:48 - Grupo Jav: *Helder:* voce esta logado na conta NI do site correta?
+13/07/2026 10:51 - Grupo Jav: *Helder:* as tres opções 'Full', 'professional' e ' runtime' dão a mesma coisa?
+13/07/2026 10:51 - denis bernardes099: <Mídia oculta>
+13/07/2026 10:52 - denis bernardes099: mesma coisa
+13/07/2026 10:54 - Grupo Jav: *Helder:* entendi, entao realmente a sua licença nao te da suporte para outro sistema operacional
+13/07/2026 10:54 - Grupo Jav: *Helder:* mas nao tem problema
+13/07/2026 10:54 - Grupo Jav: *Helder:* eu vou tentar compartilhar com voce o instalador para o Linux, é pra funcionar
+13/07/2026 10:54 - Grupo Jav: *Helder:* se nao funcionar eu abro um chamado para o time NI pra resolvermos, tudo bem?
+13/07/2026 10:55 - Grupo Jav: *Helder:* qual seu e-mail
+13/07/2026 10:57 - denis bernardes099: <Mídia oculta>
+13/07/2026 10:58 - denis bernardes099: Segue meu email: dbernardes@lna.br
+13/07/2026 10:58 - denis bernardes099: Obrigado pelo suporte!
+13/07/2026 10:58 - Grupo Jav: *Helder:* Tranquilo, Denis, é que funciona assim
+13/07/2026 10:59 - Grupo Jav: *Helder:* quando voce adiquiri uma licença, se voce nao fizer o contrato de serviço ( que é feito anualmente)
+13/07/2026 10:59 - Grupo Jav: *Helder:* voce nao tem direito a outra versões( antigas e novas) e atualizações
+13/07/2026 11:01 - denis bernardes099: Entendi
+13/07/2026 11:01 - Grupo Jav: *Helder:* Mas como eu disse, sem problemas
+13/07/2026 11:01 - Grupo Jav: *Helder:* eu ja baixei os arquivos
+13/07/2026 11:01 - Grupo Jav: *Helder:* irei tentar compartilhar com voce
+13/07/2026 11:03 - Grupo Jav: *Helder:* Compartilhei no oneDrive Denis
+13/07/2026 11:03 - Grupo Jav: *Helder:* veja se consegue abrir e baixar
+13/07/2026 11:09 - denis bernardes099: consegui baixar!
+13/07/2026 11:09 - denis bernardes099: Eh um .iso certo?
+13/07/2026 11:10 - Grupo Jav: *Helder:* Exato
+13/07/2026 11:10 - denis bernardes099: vou precisar de um pen-drive para instalar?
+13/07/2026 11:11 - Grupo Jav: *Helder:* provavelmente, voce cria um pendrive botavel e realiza a instalação
+13/07/2026 11:11 - Grupo Jav: *Helder:* voce instala primeiro a ISO
+13/07/2026 11:11 - Grupo Jav: *Helder:* depois, se preferir, instale o Patch
+13/07/2026 11:11 - Grupo Jav: *Helder:* que são as atualização/correções
+13/07/2026 11:12 - denis bernardes099: Certo.
+Creio que isto seja o suficiente
+13/07/2026 11:12 - denis bernardes099: Obrigado pelo apoio
+13/07/2026 11:12 - Grupo Jav: *Helder:* Perfeito
+13/07/2026 11:14 - Grupo Jav: *Helder:* Denis, 47 9157-6590, esse é meu numero direto corporativo
+13/07/2026 11:14 - Grupo Jav: *Helder:* se voce tiver outras duvidas
+13/07/2026 11:14 - Grupo Jav: *Helder:* pode entrar em contato direto nesse numero
+13/07/2026 11:15 - denis bernardes099: Ok, obrigado
+13/07/2026 11:16 - Grupo Jav: *Helder:* Disponha! Irei encerrar o chamado mas fique a vontade para entrar em contato comigo no numero citado acima. Tenha um Bom dia Danis!
+13/07/2026 11:17 - Grupo Jav: Agradecemos seu contato Denis Bernardes.
+Aqui esta o número de protocolo do seu atendimento
+2026071300006
+13/07/2026 11:17 - Grupo Jav: Antes de encerrarmos, gostaríamos de saber: você ficou satisfeito com o atendimento? 
+Por favor, avalie de 1 a 5, sendo 5 a melhor nota.
+13/07/2026 11:18 - denis bernardes099: 5
+13/07/2026 11:18 - Grupo Jav: Sua opinião é importante para nós. O Grupo JAV Agradece!

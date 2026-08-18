@@ -6,9 +6,26 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "astropy>=7.2.0",
+    "coverage>=7.15.2",
+    "freezegun>=1.5.5",
     "numpy>=2.4.2",
     "pandas>=3.0.1",
+    "pydantic>=2.13.4",
     "pytest>=9.0.3",
+    "pytest-cov>=7.1.0",
     "ruff>=0.15.6",
     "taskipy>=1.14.1",
 ]
+
+[tool.taskipy.tasks]
+test = "pytest tests -vs --cov=header_formatter  --cov-report=term-missing   --cov-report=html"
+open-cov = "brave htmlcov/index.html"
+
+
+[tool.coverage.run]
+branch = true
+omit = ["__init__.py", "python/echmain.py"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src/python"]
+testpaths = ["src/python/tests"]
