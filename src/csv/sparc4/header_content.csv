@@ -30,13 +30,13 @@ FILENAME;;string;;File name
 DATE-OBS;;string;;UTC at start of observation (isot)
 UTTIME;;string;;UTC time at start of observation
 UTDATE;;string;;UTC date at start of observation
-NCYCLES;;integer;1,inf;Number of cycles
-CYCLIND;;integer;1,inf;Cycle index
+NCYCLES;;integer;1,10000;Number of cycles
+CYCLIND;;integer;1,10000;Cycle index
 NSEQ;;integer;1,16;Number of sequences in one cycle
 SEQINDEX;;integer;1,16;Sequence index in the cycle
 NFRAMES;;integer;1,91500;Number of frames in sequence
 FRAMEIND;;integer;1,91500;Frame index in sequence
-EXPTIME;;float;0.00001,86400;Exposure time (s)
+EXPTIME;;float;0.00001,3600;Exposure time (s)
 ACQMODE;;string;Single Scan,Kinetics;Acquisition mode
 PREAMP;;string;Gain 1,Gain 2;Pre-amplifier gain
 READRATE;;float;0.1,1,10,20,30;Readout rate (MHz)
@@ -44,16 +44,16 @@ VSHIFT;;float;0.6,1.13,2.2,4.33;Vertical shift speed (ms)
 TRIGGER;;string;Internal,External;Trigger mode
 EMMODE;;string;Electron Multiplying,Conventional;Output amplifier mode
 EMGAIN;;integer;2,300;Electron multiplier gain
-VBIN;;integer;1,1024;Vertical binning (pix)
-HBIN;;integer;1,1024;Horizontal binning (pix)
+VBIN;;integer;1,8;Vertical binning (pix)
+HBIN;;integer;1,8;Horizontal binning (pix)
 INITLIN;;integer;1,1024;Initial line (pix)
 INITCOL;;integer;1,1024;Initial column (pix)
 FINALLIN;;integer;1,1024;Final line (pix)
 FINALCOL;;integer;1,1024;Final column (pix)
 SHUTTER;;string;Open,Closed;Shutter mode
 COOLER;;boolean;true,false;CCD cooler on: T or F
-CCDTEMP;;integer;-80,25;CCD temperature (deg C)
-TGTEMP;;integer;-80,25;CCD target temperature (deg C)
+CCDTEMP;;integer;-80,10;CCD temperature (deg C)
+TGTEMP;;integer;-80,10;CCD target temperature (deg C)
 TEMPST;;string;TEMPERATURE_OFF,TEMPERATURE_NOT_REACHED,TEMPERATURE_NOT_STABILIZED,TEMPERATURE_STABILIZED;CCD temperature status
 FRAMETRF;;boolean;true,false;Frame transfer on: T or F
 VCLKAMP;;string;Normal,+1,+2,+3,+4;Clock amplitude: Normal, +1, +2, +3, +4
