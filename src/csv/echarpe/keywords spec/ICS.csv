@@ -1,2 +1,1 @@
-Header Keywords,regex strings
-ICSVRSN,ICSVRSN
+Header Keywords,to int,to float,to bool w cond,to bool condition,regex,kws in dict,predefined val
