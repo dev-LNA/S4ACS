@@ -121,6 +121,7 @@
 				<Item Name="Initial Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Initial Configuration/Initial Configuration.lvclass"/>
 				<Item Name="Camera Operation Mode.lvclass" Type="LVClass" URL="../LabVIEW/Camera Operation Mode/Camera Operation Mode.lvclass"/>
 				<Item Name="SPARC4 Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Cam OpMode/SPARC4 Cam OpMode.lvclass"/>
+				<Item Name="ECHARPE Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE Cam OpMode/ECHARPE Cam OpMode.lvclass"/>
 				<Item Name="Camera Acquisition Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Camera Acquisition Configuration/Camera Acquisition Configuration.lvclass"/>
 				<Item Name="Channel Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Channel Configuration/Channel Configuration.lvclass"/>
 				<Item Name="SPARC4 Channel Config.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Channel Config/SPARC4 Channel Config.lvclass"/>
@@ -493,6 +494,7 @@
 				<Item Name="Waveform Subtype Enum__ogtk.ctl" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Waveform Subtype Enum__ogtk.ctl"/>
 				<Item Name="Get Waveform Type Enum from TD__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Get Waveform Type Enum from TD__ogtk.vi"/>
 				<Item Name="Resolve Timestamp Format__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/string/string.llb/Resolve Timestamp Format__ogtk.vi"/>
+				<Item Name="SetHighCapacity.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetHighCapacity.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
