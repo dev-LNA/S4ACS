@@ -51,6 +51,7 @@ def main(
             obj.check_allowed_values()
             hdr = obj.fill_image_header(hdr)
 
+        data = np.array(data, dtype=np.uint16)  # type: ignore
         hdu = fits.PrimaryHDU(data, hdr)
         hdu.writeto(file_name)
     except Exception:

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
@@ -37,7 +37,7 @@ class Post_Processor:
         hdu.header["BSCALE"] = (1, "Linear factor in scaling equation")
         hdu.header["NAXIS1"] = (hdu.header["NAXIS1"], "Number of columns")
         hdu.header["NAXIS2"] = (hdu.header["NAXIS2"], "Number of rows")
-        hdu.header["DATEFILE"] = datetime.now().isoformat()
+        hdu.header["DATEFILE"] = datetime.now(timezone.utc).isoformat()
         hdu.add_datasum(when="Data unit checksum")
         hdu.add_checksum(when="HDU checksum", override_datasum=True)
         return hdu
