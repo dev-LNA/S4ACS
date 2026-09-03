@@ -1,59 +1,61 @@
-import json
 import traceback
-from os.path import dirname, join, realpath
 
-import astropy.io.fits as fits
 import numpy as np
-from header import (
-    ICS,
-    S4GUI,
+from astropy.io import fits
+from header_formatter.data_types import Error_Json
+from header_formatter.header import (
+    EICS,
+    GUI,
     TCS,
     Focuser,
     General_ECHARPE_KWs,
-    Header_Parameters,
     Weather_Station,
     iKon_L,
 )
-from utils import (
-    SUB_SYSTEMS,
-    fix_standard_keywords,
-    verify_file_already_exists,
-    write_error_log,
-)
+from header_formatter.setup import Header_Class_Setup
 
 
-def main(night_dir, file, data, tuple_header_jsons, log_file):
-    error_json = {"status": False, "code": 0, "source": ""}
+def main(
+    _file_name: str,
+    data: np.ndarray,
+    _hdr_data: str,
+) -> str:
+    error_json = Error_Json.no_error()
+
     try:
-        dict_header_jsons = {k: v for (k, v) in zip(SUB_SYSTEMS, tuple_header_jsons)}
-        data = np.asarray(data, dtype=np.uint16)
-        file = join(night_dir, file)
+        setup = Header_Class_Setup("echarpe")
+        hdr, hdr_data, hdr_cnt, log_file, file_name = setup.create_setup(
+            _hdr_data, _file_name
+        )
 
-        csv_folder = join(dirname(realpath(__file__)), "csvs", "echarpe")
-        hdr_params = Header_Parameters(csv_folder)
-        hdr = fits.Header(hdr_params.cards)
-
-        for cls in [
+        for obj in [
             Focuser,
-            S4GUI,
+            EICS,
+            GUI,
             TCS,
             Weather_Station,
             General_ECHARPE_KWs,
             iKon_L,
-            ICS,
         ]:
-            obj = cls(dict_header_jsons, log_file, hdr_params, csv_folder)
-            obj.extract_info()
+            kws_specs = setup.create_hdr_specs(obj.name)
+            obj = obj(kws_specs, hdr_cnt, log_file, file_name)
+            obj.write_header_all_apps(hdr_data)
+            obj.get_app_header_data()
+            obj.fix_original_string()
+            obj.load_json()
+            obj.fix_original_hdr_data()
+            obj.extract_data()
             obj.fix_keywords()
-            obj.validate_info()
+            obj.fix_remainder_keywords()
+            obj.check_kws_types()
+            obj.check_allowed_values()
             hdr = obj.fill_image_header(hdr)
-        file = verify_file_already_exists(file)
+
         hdu = fits.PrimaryHDU(data, hdr)
-        hdu = fix_standard_keywords(hdu)
-        hdu.writeto(file, output_verify="ignore")
-        return json.dumps(error_json)
+        hdu.writeto(file_name)
     except Exception:
-        error_json["status"] = True
-        error_json["code"] = 1
-        error_json["source"] = traceback.format_exc()
-        return json.dumps(error_json)
+        error_json.status = True
+        error_json.code = 1
+        error_json.source = traceback.format_exc()
+
+    return error_json.json()

@@ -109,6 +109,7 @@
 			</Item>
 			<Item Name="ECHARPE" Type="Folder">
 				<Item Name="Channel ECHARPE.lvclass" Type="LVClass" URL="../LabVIEW/Channel ECHARPE/Channel ECHARPE.lvclass"/>
+				<Item Name="Camera Simulated iKon.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iKon/Camera Simulated iKon.lvclass"/>
 				<Item Name="Camera iKon L.lvclass" Type="LVClass" URL="../LabVIEW/Camera iKon L/Camera iKon L.lvclass"/>
 			</Item>
 			<Item Name="ABSTRACT" Type="Folder">
@@ -118,6 +119,7 @@
 			</Item>
 			<Item Name="data types" Type="Folder">
 				<Item Name="GUI Resquest.lvclass" Type="LVClass" URL="../LabVIEW/gui request/GUI Resquest.lvclass"/>
+				<Item Name="ECHARPE Request.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE Request/ECHARPE Request.lvclass"/>
 				<Item Name="Initial Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Initial Configuration/Initial Configuration.lvclass"/>
 				<Item Name="Camera Operation Mode.lvclass" Type="LVClass" URL="../LabVIEW/Camera Operation Mode/Camera Operation Mode.lvclass"/>
 				<Item Name="SPARC4 Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Cam OpMode/SPARC4 Cam OpMode.lvclass"/>
