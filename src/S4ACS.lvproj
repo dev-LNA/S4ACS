@@ -107,12 +107,6 @@
 				<Item Name="Camera Simulated iXon Ultra.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iXon Ultra/Camera Simulated iXon Ultra.lvclass"/>
 				<Item Name="Channel SPARC4.lvclass" Type="LVClass" URL="../LabVIEW/Channel SPARC4/Channel SPARC4.lvclass"/>
 			</Item>
-			<Item Name="ECHARPE" Type="Folder">
-				<Item Name="Channel ECHARPE.lvclass" Type="LVClass" URL="../LabVIEW/Channel ECHARPE/Channel ECHARPE.lvclass"/>
-				<Item Name="Camera Simulated iKon.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iKon/Camera Simulated iKon.lvclass"/>
-				<Item Name="Camera iKon L.lvclass" Type="LVClass" URL="../LabVIEW/Camera iKon L/Camera iKon L.lvclass"/>
-				<Item Name="Save Image ECHARPE.lvclass" Type="LVClass" URL="../../../EGEI/EGEI/Save Image ECHARPE/Save Image ECHARPE.lvclass"/>
-			</Item>
 			<Item Name="ABSTRACT" Type="Folder">
 				<Item Name="Save Image.lvclass" Type="LVClass" URL="../LabVIEW/Save Image/Save Image.lvclass"/>
 				<Item Name="Channel.lvclass" Type="LVClass" URL="../LabVIEW/Channel/Channel.lvclass"/>
@@ -120,7 +114,6 @@
 			</Item>
 			<Item Name="data types" Type="Folder">
 				<Item Name="GUI Resquest.lvclass" Type="LVClass" URL="../LabVIEW/gui request/GUI Resquest.lvclass"/>
-				<Item Name="ECHARPE Request.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE Request/ECHARPE Request.lvclass"/>
 				<Item Name="Initial Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Initial Configuration/Initial Configuration.lvclass"/>
 				<Item Name="Camera Operation Mode.lvclass" Type="LVClass" URL="../LabVIEW/Camera Operation Mode/Camera Operation Mode.lvclass"/>
 				<Item Name="SPARC4 Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Cam OpMode/SPARC4 Cam OpMode.lvclass"/>
@@ -148,7 +141,6 @@
 			<Item Name="State Machine.lvclass" Type="LVClass" URL="../LabVIEW/State Machine/State Machine.lvclass"/>
 		</Item>
 		<Item Name="S4ACS.vi" Type="VI" URL="../S4ACS.vi"/>
-		<Item Name="EACS.vi" Type="VI" URL="../EACS.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="user.lib" Type="Folder">
 				<Item Name="SetShutter.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetShutter.vi"/>
@@ -609,6 +601,10 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../LabVIEW/Channel ECHARPE/choose firs acquisition state.vi"/>
+			<Item Name="Channel ECHARPE.lvclass" Type="LVClass" URL="../LabVIEW/Channel ECHARPE/Channel ECHARPE.lvclass"/>
+			<Item Name="Camera Simulated iKon.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iKon/Camera Simulated iKon.lvclass"/>
+			<Item Name="Camera iKon L.lvclass" Type="LVClass" URL="../LabVIEW/Camera iKon L/Camera iKon L.lvclass"/>
+			<Item Name="Save Image ECHARPE.lvclass" Type="LVClass" URL="../../../EGEI/EGEI/Save Image ECHARPE/Save Image ECHARPE.lvclass"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
