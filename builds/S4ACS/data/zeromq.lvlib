@@ -4,7 +4,6 @@
 	<Property Name="NI.Lib.SourceVersion" Type="Int">402685952</Property>
 	<Property Name="NI.Lib.Version" Type="Str">1.5.2.0</Property>
 	<Property Name="NI.LV.All.SourceOnly" Type="Bool">false</Property>
-	<Property Name="NI.SortType" Type="Int">3</Property>
 	<Item Name="errors" Type="Folder">
 		<Item Name="error_type.ctl" Type="VI" URL="../error_type.ctl"/>
 		<Item Name="zmq_check_term.vi" Type="VI" URL="../zmq_check_term.vi"/>
@@ -19,12 +18,12 @@
 		<Item Name="socket_type.ctl" Type="VI" URL="../socket_type.ctl"/>
 	</Item>
 	<Item Name="zmq_context.lvclass" Type="LVClass" URL="../zmq_context.lvclass"/>
-	<Item Name="zmq_socket.lvclass" Type="LVClass" URL="../zmq_socket.lvclass"/>
 	<Item Name="zmq_curve_pair.vi" Type="VI" URL="../zmq_curve_pair.vi"/>
 	<Item Name="zmq_endpoint_build.vi" Type="VI" URL="../zmq_endpoint_build.vi"/>
 	<Item Name="zmq_endpoint_split.vi" Type="VI" URL="../zmq_endpoint_split.vi"/>
 	<Item Name="zmq_has.vi" Type="VI" URL="../zmq_has.vi"/>
 	<Item Name="zmq_libpath.vi" Type="VI" URL="../zmq_libpath.vi"/>
+	<Item Name="zmq_socket.lvclass" Type="LVClass" URL="../zmq_socket.lvclass"/>
 	<Item Name="zmq_version.vi" Type="VI" URL="../zmq_version.vi"/>
 	<Item Name="zmq_z85_decode.vi" Type="VI" URL="../zmq_z85_decode.vi"/>
 	<Item Name="zmq_z85_encode.vi" Type="VI" URL="../zmq_z85_encode.vi"/>
