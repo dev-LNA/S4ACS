@@ -1,8 +1,0 @@
-keyword;dict
-TRIGGER;{"0": "Internal", "6": "External"}
-ACQMODE;{"1": "Single Scan", "3": "Kinetics"}
-SHUTTER;["Auto", "Open", "Closed"]
-VCLKAMP;["Normal", "+1", "+2", "+3", "+4"]
-VSHIFT;[38.55, 76.95]
-PREAMP;["Gain 1", "Gain 2", "Gain 4"]
-READRATE;[0.05, 1.0, 3.0, 5.0]

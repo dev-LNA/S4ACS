@@ -1,4 +1,0 @@
-keyword;expression;example
-ACSVRSN;^v\d+\.\d+\.\d+$;v0.0.0
-SDKVRSN;^\d[.]\d{3}[.]\d{5}[.]\d$;0.000.00000.0
-FILENAME;^\d{8}_ech[12]_\d{6}_[fcbdoa]\.fits$;YYYYMMDD_echblu_000000_o.fits
