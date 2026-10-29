@@ -117,7 +117,6 @@
 				<Item Name="Initial Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Initial Configuration/Initial Configuration.lvclass"/>
 				<Item Name="Camera Operation Mode.lvclass" Type="LVClass" URL="../LabVIEW/Camera Operation Mode/Camera Operation Mode.lvclass"/>
 				<Item Name="SPARC4 Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Cam OpMode/SPARC4 Cam OpMode.lvclass"/>
-				<Item Name="ECHARPE Cam OpMode.lvclass" Type="LVClass" URL="../LabVIEW/ECHARPE Cam OpMode/ECHARPE Cam OpMode.lvclass"/>
 				<Item Name="Camera Acquisition Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Camera Acquisition Configuration/Camera Acquisition Configuration.lvclass"/>
 				<Item Name="Channel Configuration.lvclass" Type="LVClass" URL="../LabVIEW/Channel Configuration/Channel Configuration.lvclass"/>
 				<Item Name="SPARC4 Channel Config.lvclass" Type="LVClass" URL="../LabVIEW/SPARC4 Channel Config/SPARC4 Channel Config.lvclass"/>
@@ -197,7 +196,6 @@
 				<Item Name="SetIOLevel.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetIOLevel.vi"/>
 				<Item Name="SetIODirection.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetIODirection.vi"/>
 				<Item Name="Join Strings.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d_internal.llb/Join Strings.vi"/>
-				<Item Name="SetHorizontalSpeed.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetHorizontalSpeed.vi"/>
 				<Item Name="GetSoftwareVersion.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/GetSoftwareVersion.vi"/>
 				<Item Name="Unwrap VVariant__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Unwrap VVariant__ogtk.vi"/>
 				<Item Name="Variant to Header Info__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Variant to Header Info__ogtk.vi"/>
@@ -489,7 +487,6 @@
 				<Item Name="Waveform Subtype Enum__ogtk.ctl" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Waveform Subtype Enum__ogtk.ctl"/>
 				<Item Name="Get Waveform Type Enum from TD__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/lvdata/lvdata.llb/Get Waveform Type Enum from TD__ogtk.vi"/>
 				<Item Name="Resolve Timestamp Format__ogtk.vi" Type="VI" URL="/&lt;userlib&gt;/_OpenG.lib/string/string.llb/Resolve Timestamp Format__ogtk.vi"/>
-				<Item Name="SetHighCapacity.vi" Type="VI" URL="/&lt;userlib&gt;/atmcd64d.llb/SetHighCapacity.vi"/>
 			</Item>
 			<Item Name="vi.lib" Type="Folder">
 				<Item Name="Trim Whitespace.vi" Type="VI" URL="/&lt;vilib&gt;/Utility/error.llb/Trim Whitespace.vi"/>
@@ -600,11 +597,6 @@
 			<Item Name="atmcd64d.dll" Type="Document" URL="atmcd64d.dll">
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
-			<Item Name="choose firs acquisition state.vi" Type="VI" URL="../LabVIEW/Channel ECHARPE/choose firs acquisition state.vi"/>
-			<Item Name="Channel ECHARPE.lvclass" Type="LVClass" URL="../LabVIEW/Channel ECHARPE/Channel ECHARPE.lvclass"/>
-			<Item Name="Camera Simulated iKon.lvclass" Type="LVClass" URL="../LabVIEW/Camera Simulated iKon/Camera Simulated iKon.lvclass"/>
-			<Item Name="Camera iKon L.lvclass" Type="LVClass" URL="../LabVIEW/Camera iKon L/Camera iKon L.lvclass"/>
-			<Item Name="Save Image ECHARPE.lvclass" Type="LVClass" URL="../../../EGEI/EGEI/Save Image ECHARPE/Save Image ECHARPE.lvclass"/>
 		</Item>
 		<Item Name="Build Specifications" Type="Build">
 			<Item Name="ACS" Type="EXE">
@@ -622,7 +614,7 @@
 				<Property Name="Bld_localDestDirType" Type="Str">relativeToCommon</Property>
 				<Property Name="Bld_modifyLibraryFile" Type="Bool">true</Property>
 				<Property Name="Bld_previewCacheID" Type="Str">{4B72D823-97E4-4F55-A103-EC19C8B7E8AB}</Property>
-				<Property Name="Bld_version.build" Type="Int">98</Property>
+				<Property Name="Bld_version.build" Type="Int">99</Property>
 				<Property Name="Bld_version.major" Type="Int">1</Property>
 				<Property Name="Destination[0].destName" Type="Str">S4ACS.exe</Property>
 				<Property Name="Destination[0].path" Type="Path">../builds/NI_AB_PROJECTNAME/S4ACS.exe</Property>
