@@ -86,10 +86,3 @@ class iXon_Ultra(CCD):
             ][_json["READRATE"]]
         except ValueError as e:
             self._write_log_file(repr(e), "READRATE")
-
-
-class iKon_L(CCD):
-    def _find_index_tab(self) -> None:
-        super()._find_index_tab()
-        if not self.extracted_data["HIGHCAP"]:
-            self.idx_tab += 1
