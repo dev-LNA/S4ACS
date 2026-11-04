@@ -130,7 +130,7 @@ class Header(ABC):
             return
         for kw in self.kws_specs.to_float:
             try:
-                self.fixed_data[kw] = float(self.extracted_data[kw])
+                self.fixed_data[kw] = float(self.extracted_data[kw]) + 0
             except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 
@@ -139,7 +139,7 @@ class Header(ABC):
             return
         for kw in self.kws_specs.to_int:
             try:
-                self.fixed_data[kw] = int(self.extracted_data[kw])
+                self.fixed_data[kw] = int(self.extracted_data[kw]) + 0
             except Exception as e:  # type:ignore
                 self._write_log_file(repr(e), kw)
 

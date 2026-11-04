@@ -244,7 +244,7 @@ ics_kw = {
             "status": {
                 "mode": "ACTIVE",
                 "condition": "READY",
-                "position": "0",
+                "position": "-0",
                 "pos_name": "HOME",
                 "pos_id": "1",
             },
