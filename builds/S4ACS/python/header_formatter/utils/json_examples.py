@@ -246,7 +246,7 @@ ics_kw = {
                 "condition": "READY",
                 "position": "0",
                 "pos_name": "HOME",
-                "pos_id": "1",
+                "pos_id": "-1",
             },
         },
         {
@@ -301,6 +301,7 @@ ics_kw = {
         },
     ],
 }
+
 
 everthing_json = {
     "CYCLIND": 0,

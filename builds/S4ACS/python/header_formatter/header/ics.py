@@ -121,7 +121,3 @@ class S4ICS(ICS):
         except Exception as e:
             self._write_log_file(repr(e), kw)
         return
-
-
-class EICS(ICS):
-    pass
