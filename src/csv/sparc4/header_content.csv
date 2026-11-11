@@ -52,8 +52,8 @@ FINALLIN;;integer;1,1024;Final line (pix)
 FINALCOL;;integer;1,1024;Final column (pix)
 SHUTTER;;string;Open,Closed;Shutter mode
 COOLER;;boolean;true,false;CCD cooler on: T or F
-CCDTEMP;;integer;-80,10;CCD temperature (deg C)
-TGTEMP;;integer;-80,10;CCD target temperature (deg C)
+CCDTEMP;;integer;-80,20;CCD temperature (deg C)
+TGTEMP;;integer;-80,20;CCD target temperature (deg C)
 TEMPST;;string;TEMPERATURE_OFF,TEMPERATURE_NOT_REACHED,TEMPERATURE_NOT_STABILIZED,TEMPERATURE_STABILIZED;CCD temperature status
 FRAMETRF;;boolean;true,false;Frame transfer on: T or F
 VCLKAMP;;string;Normal,+1,+2,+3,+4;Clock amplitude: Normal, +1, +2, +3, +4
