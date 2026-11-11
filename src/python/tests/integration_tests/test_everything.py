@@ -71,6 +71,6 @@ class Test_Everything(unittest.TestCase):
         hdu = Post_Processor._fix_standard_keywords(hdu)
         self.hdr = hdu.header
 
-        if "" in self.hdr.values():
+        if "" not in self.hdr.values():
             print(repr(self.hdr))
             assert False
